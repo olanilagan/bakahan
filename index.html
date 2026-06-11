@@ -2,284 +2,286 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alitagtag Ranch Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#3a2a12">
+<title>Alitagtag Ranch</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐄</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #eee8db;
-  --surface: #faf8f3;
-  --surface-alt: #f4efe4;
-  --border: #ddd4c2;
-  --border-light: #e8e0d0;
-  --text: #2a1f0e;
-  --text-dim: #8a7d6b;
-  --text-muted: #b5a998;
-  --accent: #6b4d1f;
-  --accent-light: #a88b5a;
-  --accent-bg: rgba(107,77,31,0.06);
-  --danger: #b71c1c;
-  --success: #2e7d32;
-  --warn: #e65100;
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-head: 'DM Sans', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'DM Mono', monospace;
-  --radius: 14px;
-  --shadow-sm: 0 1px 3px rgba(42,31,14,0.06);
-  --shadow-md: 0 4px 16px rgba(42,31,14,0.08);
-  --shadow-lg: 0 12px 40px rgba(42,31,14,0.12);
+:root{
+  --bg:#eee8db;--surface:#faf8f3;--surface-alt:#f4efe4;
+  --border:#ddd4c2;--border-light:#e8e0d0;
+  --text:#2a1f0e;--text-dim:#8a7d6b;--text-muted:#b5a998;
+  --accent:#6b4d1f;--accent-light:#a88b5a;--accent-bg:rgba(107,77,31,0.06);
+  --danger:#b71c1c;--success:#2e7d32;--warn:#e65100;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-head:'DM Sans',sans-serif;--font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --radius:14px;
+  --shadow-sm:0 1px 3px rgba(42,31,14,0.06);
+  --shadow-md:0 4px 16px rgba(42,31,14,0.08);
+  --shadow-lg:0 12px 40px rgba(42,31,14,0.12);
+  --bottom-nav:0px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden}
-button{cursor:pointer;font-family:var(--font-head)}
-button:hover{opacity:0.9}
-input,select,textarea{font-family:var(--font-body)}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;padding-bottom:var(--bottom-nav)}
+button{cursor:pointer;font-family:var(--font-head);-webkit-tap-highlight-color:transparent}
+button:active{transform:scale(0.97)}
+input,select,textarea{font-family:var(--font-body);font-size:16px}
 input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(107,77,31,0.1);outline:none}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-/* ══ BACKGROUND TEXTURE ══ */
-body::before {
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c8b99a' stroke-width='0.4' opacity='0.3'%3E%3Cpath d='M0 30 Q15 25 30 30 Q45 35 60 30'/%3E%3Cpath d='M0 15 Q15 10 30 15 Q45 20 60 15'/%3E%3Cpath d='M0 45 Q15 40 30 45 Q45 50 60 45'/%3E%3C/g%3E%3C/svg%3E");
-}
-body::after {
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.35;
-  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-}
+/* ══ BACKGROUND ══ */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c8b99a' stroke-width='0.4' opacity='0.3'%3E%3Cpath d='M0 30Q15 25 30 30Q45 35 60 30'/%3E%3Cpath d='M0 15Q15 10 30 15Q45 20 60 15'/%3E%3Cpath d='M0 45Q15 40 30 45Q45 50 60 45'/%3E%3C/g%3E%3C/svg%3E")}
+.lot-watermark{position:fixed;right:-80px;top:50%;transform:translateY(-50%);z-index:0;pointer-events:none;opacity:0.04}
+@media(max-width:900px){.lot-watermark{opacity:0.02;right:-140px}}
 
-/* ══ LOT WATERMARK ══ */
-.lot-watermark {
-  position:fixed; right:-80px; top:50%; transform:translateY(-50%);
-  z-index:0; pointer-events:none; opacity:0.04;
-}
-@media(max-width:900px){ .lot-watermark{opacity:0.025;right:-120px;} }
+/* ══ SETUP SCREEN ══ */
+.setup-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:rgba(42,31,14,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:20px}
+.setup-overlay.hidden{display:none}
+.setup-card{background:var(--surface);border-radius:20px;padding:36px 32px;max-width:420px;width:100%;box-shadow:var(--shadow-lg);text-align:center}
+.setup-card h2{font-family:var(--font-display);font-size:24px;margin-bottom:6px;color:var(--text)}
+.setup-card p{font-size:13px;color:var(--text-dim);margin-bottom:24px;line-height:1.5}
+.setup-card .lot-mini{margin:0 auto 20px;opacity:0.15}
+.user-btns{display:flex;flex-direction:column;gap:10px}
+.user-btn{padding:14px 20px;border-radius:12px;border:1px solid var(--border);background:var(--surface);font-size:15px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:12px;transition:all 0.15s}
+.user-btn:hover,.user-btn:active{background:var(--accent-bg);border-color:var(--accent-light)}
+.user-btn .avatar{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;font-family:var(--font-head)}
+.user-btn .role{font-size:11px;color:var(--text-dim);font-weight:400;margin-top:1px}
 
 /* ══ HEADER ══ */
 .header{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light)}
-.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:60px;padding:0 24px;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6b4d1f,#8b6830);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 2px 8px rgba(107,77,31,0.25)}
-.logo-text{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);letter-spacing:-0.02em}
-.logo-sub{font-size:10px;color:var(--text-muted);font-family:var(--font-mono);margin-left:10px;letter-spacing:0.04em}
-.tab-nav{display:flex;gap:1px;height:100%;background:transparent}
-.tab-btn{display:flex;align-items:center;gap:7px;padding:0 18px;height:60px;border:none;background:none;font-family:var(--font-head);font-size:13px;font-weight:600;color:var(--text-dim);border-bottom:2.5px solid transparent;transition:all 0.2s;letter-spacing:0.01em}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:56px;padding:0 20px;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#6b4d1f,#8b6830);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 2px 8px rgba(107,77,31,0.25)}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--text);letter-spacing:-0.02em}
+.header-right{display:flex;align-items:center;gap:12px}
+.sync-indicator{display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--font-mono);color:var(--text-muted);padding:4px 10px;border-radius:8px;background:var(--surface-alt)}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:#66bb6a}
+.sync-dot.saving{background:#ffa726;animation:pulse 0.8s infinite}
+.sync-dot.error{background:#ef5350}
+.sync-dot.offline{background:#bdbdbd}
+.user-chip{display:flex;align-items:center;gap:7px;padding:4px 10px 4px 4px;border-radius:10px;border:1px solid var(--border-light);background:var(--surface);font-size:12px;font-weight:600;color:var(--text);cursor:pointer}
+.user-chip .chip-av{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700}
+.desktop-nav{display:flex;gap:1px;height:100%}
+.tab-btn{display:flex;align-items:center;gap:7px;padding:0 16px;height:56px;border:none;background:none;font-size:13px;font-weight:600;color:var(--text-dim);border-bottom:2.5px solid transparent;transition:all 0.2s;letter-spacing:0.01em}
 .tab-btn:hover{color:var(--accent)}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .tab-btn svg{width:17px;height:17px}
-.mobile-menu-btn{display:none;background:none;border:none;color:var(--text);padding:4px}
-.mobile-dropdown{display:none;padding:8px 16px 14px;background:var(--surface)}
-.mobile-dropdown.open{display:block}
-.mobile-tab{display:flex;align-items:center;gap:10px;width:100%;padding:11px 14px;border:none;background:none;font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--text-dim);border-radius:10px;transition:all 0.15s}
-.mobile-tab.active{background:var(--accent-bg);color:var(--accent)}
-.mobile-tab svg{width:18px;height:18px}
-@media(max-width:680px){.tab-nav{display:none}.mobile-menu-btn{display:block}.logo-sub{display:none}}
-@media(min-width:681px){.mobile-dropdown{display:none!important}}
 
-/* ══ HERO BANNER ══ */
-.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#3a2a12 0%,#5c4020 40%,#7a5a2e 100%);padding:28px 24px 24px;margin-bottom:0}
-.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.hero-text h2{font-family:var(--font-display);font-size:26px;font-weight:700;color:#fff;margin-bottom:4px;letter-spacing:-0.02em}
-.hero-text p{font-size:13px;color:rgba(255,255,255,0.6);font-family:var(--font-mono)}
-.hero-lot{position:absolute;right:40px;top:50%;transform:translateY(-50%);opacity:0.08;pointer-events:none}
-@media(max-width:680px){.hero-text h2{font-size:22px}.hero-lot{right:0;opacity:0.05}}
+/* ══ BOTTOM NAV (mobile) ══ */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(250,248,243,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border-light);padding-bottom:env(safe-area-inset-bottom,0)}
+.bottom-nav-inner{display:flex;justify-content:space-around;max-width:500px;margin:0 auto}
+.bnav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 12px 6px;border:none;background:none;font-size:10px;font-weight:600;color:var(--text-muted);transition:color 0.15s;min-width:60px}
+.bnav-btn.active{color:var(--accent)}
+.bnav-btn svg{width:22px;height:22px}
+
+@media(max-width:680px){
+  :root{--bottom-nav:64px}
+  .desktop-nav{display:none!important}
+  .bottom-nav{display:block}
+  .logo-text{font-size:15px}
+}
+@media(min-width:681px){.bottom-nav{display:none!important}}
+
+/* ══ HERO ══ */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#3a2a12 0%,#5c4020 40%,#7a5a2e 100%);padding:24px 24px 20px}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.hero-text h2{font-family:var(--font-display);font-size:24px;font-weight:700;color:#fff;margin-bottom:3px;letter-spacing:-0.02em}
+.hero-text p{font-size:12px;color:rgba(255,255,255,0.5);font-family:var(--font-mono)}
+.hero-lot{position:absolute;right:30px;top:50%;transform:translateY(-50%);opacity:0.08;pointer-events:none}
+@media(max-width:680px){.hero{padding:18px 18px 16px}.hero-text h2{font-size:20px}.hero-lot{display:none}}
 
 /* ══ LAYOUT ══ */
-.main{max-width:1200px;margin:0 auto;padding:24px 24px 48px;position:relative;z-index:1}
-.tab-content{display:none;animation:slideUp 0.3s ease}
+.main{max-width:1200px;margin:0 auto;padding:20px 20px 32px;position:relative;z-index:1}
+.tab-content{display:none;animation:slideUp 0.25s ease}
 .tab-content.active{display:block}
-.footer{text-align:center;padding:16px 24px 32px;font-size:11px;color:var(--text-muted);font-family:var(--font-mono);position:relative;z-index:1;letter-spacing:0.03em}
+.footer{text-align:center;padding:12px 20px 20px;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);position:relative;z-index:1;letter-spacing:0.03em}
+@media(max-width:680px){.main{padding:16px 14px 28px}}
 
-/* ══ SUMMARY CARDS ══ */
-.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
-.stat-card{background:var(--surface);border-radius:var(--radius);padding:16px 18px;border:1px solid var(--border-light);box-shadow:var(--shadow-sm);transition:transform 0.15s}
-.stat-card:hover{transform:translateY(-1px)}
-.stat-label{font-size:10px;color:var(--text-muted);font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;font-weight:600}
-.stat-value{font-size:26px;font-weight:700;color:var(--accent);font-family:var(--font-display);letter-spacing:-0.02em}
+/* ══ SUMMARY ══ */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:18px}
+.stat-card{background:var(--surface);border-radius:12px;padding:14px 16px;border:1px solid var(--border-light);box-shadow:var(--shadow-sm)}
+.stat-label{font-size:10px;color:var(--text-muted);font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;font-weight:600}
+.stat-value{font-size:24px;font-weight:700;color:var(--accent);font-family:var(--font-display);letter-spacing:-0.02em}
+@media(max-width:400px){.summary-grid{grid-template-columns:1fr 1fr}.stat-value{font-size:20px}}
 
 /* ══ TOOLBAR ══ */
-.toolbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
-.search-wrap{position:relative;flex:1 1 200px}
+.toolbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-wrap{position:relative;flex:1 1 180px}
 .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);width:16px;height:16px}
-.search-input{padding-left:38px!important}
-.input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;transition:all 0.15s}
+.search-input{padding-left:36px!important}
+.input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:16px;transition:all 0.15s;min-height:44px}
 .select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5l3 3 3-3' stroke='%238a7d6b' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-.btn-primary{padding:10px 22px;border-radius:10px;border:none;background:linear-gradient(135deg,#6b4d1f,#8b6830);color:#fff;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;box-shadow:0 2px 8px rgba(107,77,31,0.2);transition:all 0.15s;letter-spacing:0.01em}
-.btn-primary:hover{box-shadow:0 4px 14px rgba(107,77,31,0.3);transform:translateY(-1px)}
-.btn-secondary{padding:10px 20px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s}
-.btn-sm{padding:6px 14px;font-size:12px}
-.btn-icon{background:none;border:none;padding:4px;color:var(--text-dim);font-size:14px;transition:color 0.15s}
-.btn-icon:hover{color:var(--accent)}
+.btn-primary{padding:10px 20px;border-radius:10px;border:none;background:linear-gradient(135deg,#6b4d1f,#8b6830);color:#fff;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(107,77,31,0.2);min-height:44px;white-space:nowrap}
+.btn-secondary{padding:10px 18px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:5px;min-height:44px}
+.btn-sm{padding:8px 14px;font-size:12px;min-height:36px}
+.btn-icon{background:none;border:none;padding:8px;color:var(--text-dim);font-size:16px;min-width:36px;min-height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}
+.btn-icon:hover{background:var(--accent-bg)}
 .btn-icon.danger{color:var(--danger)}
-.flex-end{display:flex;justify-content:flex-end;margin-bottom:16px}
+.flex-end{display:flex;justify-content:flex-end;margin-bottom:14px}
 
-/* ══ CATTLE CARDS ══ */
-.cattle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+/* ══ CATTLE ══ */
+.cattle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+@media(max-width:640px){.cattle-grid{grid-template-columns:1fr}}
 .cattle-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:var(--shadow-sm)}
-.cattle-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.cattle-card:hover{box-shadow:var(--shadow-md)}
 .cattle-card.expanded{box-shadow:var(--shadow-lg)}
-.card-header{display:flex;align-items:center;gap:12px;padding:16px 18px 10px}
-.card-avatar{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;font-family:var(--font-mono);flex-shrink:0;box-shadow:inset 0 -2px 4px rgba(0,0,0,0.15);letter-spacing:0.02em}
+.card-header{display:flex;align-items:center;gap:12px;padding:14px 16px 10px}
+.card-avatar{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;font-family:var(--font-mono);flex-shrink:0;box-shadow:inset 0 -2px 4px rgba(0,0,0,0.15)}
 .card-info{flex:1;min-width:0}
-.card-name{font-weight:700;font-size:15px;font-family:var(--font-head);letter-spacing:-0.01em}
-.card-id{font-size:10px;color:var(--text-muted);font-family:var(--font-mono);margin-left:8px;background:var(--surface-alt);padding:2px 6px;border-radius:4px}
-.card-meta{font-size:12px;color:var(--text-dim);margin-top:3px}
+.card-name{font-weight:700;font-size:15px;font-family:var(--font-head)}
+.card-id{font-size:10px;color:var(--text-muted);font-family:var(--font-mono);margin-left:6px;background:var(--surface-alt);padding:2px 6px;border-radius:4px}
+.card-meta{font-size:12px;color:var(--text-dim);margin-top:2px}
 .status-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;flex-shrink:0}
 .status-dot{width:6px;height:6px;border-radius:50%}
-.card-stats{display:flex;padding:2px 18px 14px;gap:18px;font-size:12px;color:var(--text-dim)}
+.card-stats{display:flex;padding:2px 16px 12px;gap:16px;font-size:12px;color:var(--text-dim)}
 .card-stats span{display:flex;align-items:center;gap:5px}
 .card-stats svg{width:13px;height:13px;opacity:0.6}
-.card-details{border-top:1px solid var(--border-light);padding:14px 18px;background:var(--surface-alt);animation:fadeIn 0.25s}
-.card-notes{font-size:13px;margin-bottom:10px;line-height:1.6;color:var(--text)}
-.card-dates{font-size:11px;color:var(--text-dim);margin-bottom:12px;font-family:var(--font-mono)}
+.card-details{border-top:1px solid var(--border-light);padding:14px 16px;background:var(--surface-alt);animation:fadeIn 0.2s}
+.card-notes{font-size:13px;margin-bottom:8px;line-height:1.5}
+.card-dates{font-size:11px;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-mono)}
+.card-edited{font-size:10px;color:var(--text-muted);margin-bottom:10px;font-style:italic}
 .card-actions{display:flex;gap:8px}
 
-/* ══ FEEDLOT ══ */
-.pen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
-.pen-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);padding:20px;box-shadow:var(--shadow-sm);transition:all 0.2s}
-.pen-card:hover{box-shadow:var(--shadow-md)}
-.pen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-.pen-title{font-size:17px;font-family:var(--font-display);font-weight:700;letter-spacing:-0.01em}
-.pen-desc{font-size:12px;color:var(--text-dim);margin-top:4px}
+/* ══ PENS ══ */
+.pen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+@media(max-width:640px){.pen-grid{grid-template-columns:1fr}}
+.pen-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);padding:18px;box-shadow:var(--shadow-sm)}
+.pen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.pen-title{font-size:17px;font-family:var(--font-display);font-weight:700}
+.pen-desc{font-size:12px;color:var(--text-dim);margin-top:3px}
 .cap-text{font-size:12px;color:var(--text-dim);margin-bottom:6px}
-.cap-bar{height:8px;border-radius:4px;background:var(--border-light);overflow:hidden;margin-bottom:14px}
+.cap-bar{height:8px;border-radius:4px;background:var(--border-light);overflow:hidden;margin-bottom:12px}
 .cap-fill{height:100%;border-radius:4px;transition:width 0.4s}
-.pen-occupants{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.pen-occupant{font-size:11px;padding:3px 9px;border-radius:6px;font-weight:600;font-family:var(--font-mono);letter-spacing:0.02em}
+.pen-occupants{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.pen-occupant{font-size:11px;padding:4px 9px;border-radius:6px;font-weight:600;font-family:var(--font-mono)}
 .pen-footer{font-size:11px;color:var(--text-muted);font-family:var(--font-mono)}
 
 /* ══ TABLE ══ */
-.table-wrap{overflow-x:auto;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);box-shadow:var(--shadow-sm)}
+.table-wrap{overflow-x:auto;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);box-shadow:var(--shadow-sm);-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
-th{text-align:left;padding:12px 14px;border-bottom:2px solid var(--border);font-family:var(--font-head);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);white-space:nowrap;background:var(--surface-alt);font-weight:600}
-td{padding:12px 14px;border-bottom:1px solid var(--border-light)}
+th{text-align:left;padding:11px 12px;border-bottom:2px solid var(--border);font-family:var(--font-head);font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);white-space:nowrap;background:var(--surface-alt);font-weight:600}
+td{padding:11px 12px;border-bottom:1px solid var(--border-light)}
 tr:last-child td{border-bottom:none}
 td.bold{font-weight:600}
 tr:hover td{background:var(--accent-bg)}
 
 /* ══ FEEDS ══ */
-.feed-section h4{font-size:12px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-light);font-weight:600}
-.feed-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:24px}
-.feed-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);padding:18px;box-shadow:var(--shadow-sm);transition:all 0.2s}
-.feed-card:hover{box-shadow:var(--shadow-md)}
+.feed-section h4{font-size:12px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border-light);font-weight:600}
+.feed-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:22px}
+@media(max-width:640px){.feed-grid{grid-template-columns:1fr}}
+.feed-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-light);padding:16px;box-shadow:var(--shadow-sm)}
 .feed-card.low-stock{border-color:#e57373;background:linear-gradient(135deg,var(--surface) 90%,#fff5f5 100%)}
-.feed-name{font-weight:700;font-size:14px;font-family:var(--font-head);letter-spacing:-0.01em}
+.feed-name{font-weight:700;font-size:14px;font-family:var(--font-head)}
 .feed-supplier{font-size:12px;color:var(--text-dim);margin-top:3px}
-.feed-qty-row{margin:14px 0 8px;display:flex;justify-content:space-between;font-size:12px}
+.feed-qty-row{margin:12px 0 8px;display:flex;justify-content:space-between;font-size:12px}
 .stock-bar{height:6px;border-radius:3px;background:var(--border-light);overflow:hidden}
-.stock-fill{height:100%;border-radius:3px;transition:width 0.3s}
+.stock-fill{height:100%;border-radius:3px}
 .feed-footer{font-size:11px;color:var(--text-muted);margin-top:10px;font-family:var(--font-mono)}
-.alert-bar{background:linear-gradient(135deg,#fff8e1,#fff3e0);border:1px solid #ffe0b2;border-radius:12px;padding:12px 18px;margin-bottom:18px;display:flex;align-items:center;gap:10px;font-size:13px;box-shadow:var(--shadow-sm)}
+.alert-bar{background:linear-gradient(135deg,#fff8e1,#fff3e0);border:1px solid #ffe0b2;border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:13px;box-shadow:var(--shadow-sm)}
 .alert-bar .label{color:#bf360c;font-weight:600}
 .alert-bar .items{color:var(--warn)}
 
 /* ══ MODAL ══ */
-.modal-overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;background:rgba(42,31,14,0.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:16px}
+.modal-overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:flex-end;justify-content:center;background:rgba(42,31,14,0.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:0}
 .modal-overlay.open{display:flex}
-.modal{background:var(--surface);border-radius:18px;width:100%;max-width:540px;max-height:90vh;overflow:auto;box-shadow:var(--shadow-lg);animation:fadeIn 0.2s}
-.modal-head{display:flex;justify-content:space-between;align-items:center;padding:22px 26px 14px;border-bottom:1px solid var(--border-light);position:sticky;top:0;background:var(--surface);border-radius:18px 18px 0 0;z-index:1}
-.modal-head h3{font-size:18px;font-family:var(--font-display);font-weight:700;letter-spacing:-0.02em}
-.modal-body{padding:18px 26px 26px}
+@media(min-width:681px){.modal-overlay{align-items:center;padding:16px}}
+.modal{background:var(--surface);border-radius:20px 20px 0 0;width:100%;max-width:540px;max-height:92vh;overflow:auto;box-shadow:var(--shadow-lg);animation:slideUp 0.25s}
+@media(min-width:681px){.modal{border-radius:18px}}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 12px;border-bottom:1px solid var(--border-light);position:sticky;top:0;background:var(--surface);z-index:1}
+.modal-head h3{font-size:18px;font-family:var(--font-display);font-weight:700}
+.modal-body{padding:16px 24px 28px}
 .field{margin-bottom:14px}
-.field label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:6px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.06em}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
-.empty{text-align:center;padding:48px;color:var(--text-muted);font-family:var(--font-head);font-size:14px}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:5px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.06em}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+@media(max-width:400px){.form-row{grid-template-columns:1fr}}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+.empty{text-align:center;padding:40px;color:var(--text-muted);font-family:var(--font-head);font-size:14px}
+.loading-overlay{position:fixed;inset:0;z-index:3000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);gap:12px}
+.loading-overlay.hidden{display:none}
+.loading-spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:13px;color:var(--text-dim);font-family:var(--font-head)}
 </style>
 </head>
 <body>
 
-<!-- ══ LOT WATERMARK ══ -->
-<div class="lot-watermark">
-<svg width="600" height="1125" viewBox="0 0 400 749" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" fill="none" stroke="#6b4d1f" stroke-width="1.5"/>
-  <!-- topo contour lines -->
-  <polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" fill="none" stroke="#6b4d1f" stroke-width="0.5" transform="translate(12,12) scale(0.94)" transform-origin="200 375"/>
-  <polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" fill="none" stroke="#6b4d1f" stroke-width="0.3" transform="translate(24,24) scale(0.88)" transform-origin="200 375"/>
-  <polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" fill="none" stroke="#6b4d1f" stroke-width="0.2" transform="translate(36,36) scale(0.82)" transform-origin="200 375"/>
-  <!-- corner dots -->
-  <circle cx="86.1" cy="714.5" r="3" fill="#6b4d1f"/><circle cx="20" cy="137.6" r="3" fill="#6b4d1f"/>
-  <circle cx="319.1" cy="20" r="3" fill="#6b4d1f"/><circle cx="377.4" cy="260.7" r="3" fill="#6b4d1f"/>
-  <circle cx="371.8" cy="502.4" r="3" fill="#6b4d1f"/><circle cx="348.4" cy="494.9" r="3" fill="#6b4d1f"/>
-  <circle cx="380" cy="728.9" r="3" fill="#6b4d1f"/>
-</svg>
+<!-- ══ LOADING ══ -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading ranch data…</div>
 </div>
+
+<!-- ══ USER SETUP ══ -->
+<div class="setup-overlay hidden" id="setupOverlay">
+  <div class="setup-card">
+    <svg class="lot-mini" width="80" height="150" viewBox="0 0 400 749" fill="none"><polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" stroke="#6b4d1f" stroke-width="3" fill="none"/></svg>
+    <h2>Alitagtag Ranch</h2>
+    <p>Lot 3410-A · Brgy. San Juan, Alitagtag, Batangas<br>Who's using the tracker?</p>
+    <div class="user-btns">
+      <button class="user-btn" onclick="selectUser('Olan')"><div class="avatar" style="background:#6b4d1f">OI</div><div><div>Olan</div><div class="role">Finance & Strategy</div></div></button>
+      <button class="user-btn" onclick="selectUser('Kuya')"><div class="avatar" style="background:#5c7a2e">RI</div><div><div>Kuya</div><div class="role">Operations</div></div></button>
+      <button class="user-btn" onclick="selectUser('Mios')"><div class="avatar" style="background:#7a3d5c">MI</div><div><div>Mios</div><div class="role">Investor & Documentation</div></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOT WATERMARK ══ -->
+<div class="lot-watermark"><svg width="500" height="937" viewBox="0 0 400 749" fill="none"><polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" stroke="#6b4d1f" stroke-width="1.5"/><polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" stroke="#6b4d1f" stroke-width="0.5" transform="translate(12,12) scale(0.94)" transform-origin="200 375"/><polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" stroke="#6b4d1f" stroke-width="0.3" transform="translate(24,24) scale(0.88)" transform-origin="200 375"/></svg></div>
 
 <!-- ══ HEADER ══ -->
 <header class="header">
   <div class="header-inner">
     <div class="logo">
-      <div class="logo-icon">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-      </div>
+      <div class="logo-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
       <span class="logo-text">Alitagtag Ranch</span>
-      <span class="logo-sub">LOT 3410-A</span>
     </div>
-    <nav class="tab-nav" id="tabNav"></nav>
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-    </button>
+    <nav class="desktop-nav" id="desktopNav"></nav>
+    <div class="header-right">
+      <div class="sync-indicator" id="syncStatus"><div class="sync-dot" id="syncDot"></div><span id="syncText">Synced</span></div>
+      <div class="user-chip" id="userChip" onclick="showSetup()"></div>
+    </div>
   </div>
-  <div class="mobile-dropdown" id="mobileMenu"></div>
 </header>
 
-<!-- ══ HERO BANNER ══ -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <h2 id="heroTitle">Cattle</h2>
-      <p>CSD-04-005613-D · Brgy. San Juan, Alitagtag, Batangas · 1.49 ha</p>
-    </div>
-  </div>
-  <!-- lot outline in hero -->
-  <div class="hero-lot">
-    <svg width="280" height="525" viewBox="0 0 400 749" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" fill="none" stroke="#fff" stroke-width="2" opacity="1"/>
-      <polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" fill="none" stroke="#fff" stroke-width="0.6" opacity="0.5" transform="translate(12,12) scale(0.94)" transform-origin="200 375"/>
-      <polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" fill="none" stroke="#fff" stroke-width="0.3" opacity="0.3" transform="translate(24,24) scale(0.88)" transform-origin="200 375"/>
-      <text x="200" y="400" text-anchor="middle" fill="#fff" font-family="DM Mono" font-size="14" opacity="0.4">3410-A</text>
-    </svg>
-  </div>
+  <div class="hero-inner"><div class="hero-text">
+    <h2 id="heroTitle">Cattle</h2>
+    <p>CSD-04-005613-D · Brgy. San Juan, Alitagtag, Batangas · 1.49 ha</p>
+  </div></div>
+  <div class="hero-lot"><svg width="220" height="412" viewBox="0 0 400 749" fill="none"><polygon points="86.1,714.5 20,137.6 319.1,20 377.4,260.7 371.8,502.4 348.4,494.9 380,728.9" stroke="#fff" stroke-width="2"/><text x="200" y="400" text-anchor="middle" fill="#fff" font-family="DM Mono" font-size="16" opacity="0.4">3410-A</text></svg></div>
 </section>
 
 <!-- ══ MAIN ══ -->
 <main class="main">
-  <!-- CATTLE TAB -->
   <div class="tab-content active" id="tab-cattle">
     <div class="summary-grid" id="cattleSummary"></div>
     <div class="toolbar">
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input class="input search-input" placeholder="Search by VID or ID…" oninput="renderCattle()" id="cattleSearch">
-      </div>
-      <select class="input select" style="flex:0 0 auto;width:auto;min-width:120px" onchange="renderCattle()" id="cattleFilter">
-        <option>All</option><option>Healthy</option><option>Monitoring</option><option>Sick</option><option>Sold</option>
-      </select>
-      <button class="btn-primary" onclick="openCattleModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M12 5v14M5 12h14"/></svg> Add
-      </button>
+      <div class="search-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input class="input search-input" placeholder="Search VID or ID…" oninput="renderCattle()" id="cattleSearch"></div>
+      <select class="input select" style="flex:0 0 auto;width:auto;min-width:110px" onchange="renderCattle()" id="cattleFilter"><option>All</option><option>Healthy</option><option>Monitoring</option><option>Sick</option><option>Sold</option></select>
+      <button class="btn-primary" onclick="openCattleModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M12 5v14M5 12h14"/></svg> Add</button>
     </div>
     <div class="cattle-grid" id="cattleGrid"></div>
   </div>
-
-  <!-- FEEDLOT TAB -->
   <div class="tab-content" id="tab-feedlot">
     <div class="summary-grid" id="feedlotSummary"></div>
     <div class="flex-end"><button class="btn-primary" onclick="openPenModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M12 5v14M5 12h14"/></svg> Add Pen</button></div>
     <div class="pen-grid" id="penGrid"></div>
   </div>
-
-  <!-- SILAGE TAB -->
   <div class="tab-content" id="tab-silage">
     <div class="summary-grid" id="silageSummary"></div>
     <div class="flex-end"><button class="btn-primary" onclick="openSilageModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M12 5v14M5 12h14"/></svg> Add Batch</button></div>
     <div class="table-wrap" id="silageTable"></div>
   </div>
-
-  <!-- FEEDS TAB -->
   <div class="tab-content" id="tab-feeds">
     <div class="summary-grid" id="feedsSummary"></div>
     <div id="feedsAlert"></div>
@@ -287,61 +289,135 @@ tr:hover td{background:var(--accent-bg)}
     <div id="feedsList"></div>
   </div>
 </main>
+<footer class="footer">Lot 3410-A · CSD-04-005613-D · 14,922 sqm</footer>
 
-<footer class="footer">Lot 3410-A · CSD-04-005613-D · Brgy. San Juan, Alitagtag, Batangas · 14,922 sqm</footer>
+<!-- ══ BOTTOM NAV (mobile) ══ -->
+<nav class="bottom-nav"><div class="bottom-nav-inner" id="bottomNav"></div></nav>
 
 <!-- ══ MODAL ══ -->
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <div class="modal-head">
-      <h3 id="modalTitle">Add</h3>
-      <button class="btn-icon" onclick="closeModal()" style="font-size:20px">✕</button>
-    </div>
-    <div class="modal-body" id="modalBody"></div>
-  </div>
+  <div class="modal"><div class="modal-head"><h3 id="modalTitle"></h3><button class="btn-icon" onclick="closeModal()" style="font-size:20px">✕</button></div><div class="modal-body" id="modalBody"></div></div>
 </div>
 
 <script>
 // ═══════════════════════════════════════════════
-//  DATA
+//  CONFIG — Paste your Apps Script URL here
 // ═══════════════════════════════════════════════
-const STATUS={
-  Healthy:{bg:"#e8f5e9",text:"#2e7d32",dot:"#4caf50"},
-  Monitoring:{bg:"#fff3e0",text:"#e65100",dot:"#ff9800"},
-  Sick:{bg:"#ffebee",text:"#c62828",dot:"#f44336"},
-  Sold:{bg:"#e3f2fd",text:"#1565c0",dot:"#42a5f5"},
-};
+const API_URL = "https://script.google.com/macros/s/AKfycbwDawTUwTi2UjbwRohzo9vzNsDN00i-HpM1wew-qVXKGlCXgSqcrn26dmo7Wwz19EXx/exec"; // <-- paste your deployed Apps Script web app URL
+
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+const STATUS={Healthy:{bg:"#e8f5e9",text:"#2e7d32",dot:"#4caf50"},Monitoring:{bg:"#fff3e0",text:"#e65100",dot:"#ff9800"},Sick:{bg:"#ffebee",text:"#c62828",dot:"#f44336"},Sold:{bg:"#e3f2fd",text:"#1565c0",dot:"#42a5f5"}};
 const QC={Excellent:"#2e7d32",Good:"#558b2f",Fair:"#f9a825",Poor:"#c62828"};
 const COLORS=["#7a5a2e","#5c4033","#8b6914","#a0522d","#6b4226","#704214","#8b7355","#c4a882"];
+const USER_COLORS={Olan:"#6b4d1f",Kuya:"#5c7a2e",Mios:"#7a3d5c"};
+const USER_INITIALS={Olan:"OI",Kuya:"RI",Mios:"MI"};
 
-let data={
-  cattle:[
-    {id:"ALT-001",vid:"0041",breed:"Brahman Cross",sex:"Female",birthDate:"2023-03-15",weight:320,status:"Healthy",pen:"Pen A",notes:"Pregnant, due Aug 2026",color:"#7a5a2e",acquired:"2024-01-10"},
-    {id:"ALT-002",vid:"0078",breed:"Brahman",sex:"Male",birthDate:"2022-11-20",weight:480,status:"Healthy",pen:"Pen A",notes:"Bull, good temperament",color:"#5c4033",acquired:"2023-06-01"},
-    {id:"ALT-003",vid:"0112",breed:"Brahman Cross",sex:"Female",birthDate:"2024-01-08",weight:210,status:"Monitoring",pen:"Pen B",notes:"Slight limp on rear left",color:"#8b6914",acquired:"2024-07-15"},
-    {id:"ALT-004",vid:"0095",breed:"Nelore",sex:"Male",birthDate:"2023-07-22",weight:390,status:"Healthy",pen:"Pen A",notes:"",color:"#a0522d",acquired:"2024-02-20"},
-    {id:"ALT-005",vid:"0153",breed:"Brahman Cross",sex:"Female",birthDate:"2024-06-10",weight:165,status:"Healthy",pen:"Pen B",notes:"Calf, growing well",color:"#6b4226",acquired:"2024-06-10"},
-  ],
-  pens:[
-    {id:"pen-a",name:"Pen A",capacity:15,description:"Main feedlot pen, shaded",feedType:"TMR Mix",lastCleaned:"2026-05-28"},
-    {id:"pen-b",name:"Pen B",capacity:10,description:"Growing pen, partial shade",feedType:"Grower Mix",lastCleaned:"2026-05-27"},
-    {id:"pen-c",name:"Pen C",capacity:8,description:"Isolation / medical pen",feedType:"Recovery Mix",lastCleaned:"2026-05-30"},
-  ],
-  silage:[
-    {id:"s1",type:"Napier Grass Silage",quantity:4200,unit:"kg",storageDate:"2026-04-10",expiryDate:"2026-10-10",location:"Silo Pit 1",quality:"Good",notes:"Well-fermented, good smell"},
-    {id:"s2",type:"Corn Silage",quantity:2800,unit:"kg",storageDate:"2026-03-25",expiryDate:"2026-09-25",location:"Silo Pit 2",quality:"Excellent",notes:"High moisture content, ideal"},
-    {id:"s3",type:"Rice Straw Silage",quantity:1500,unit:"kg",storageDate:"2026-05-01",expiryDate:"2026-11-01",location:"Silo Bags",quality:"Fair",notes:"Supplementary only"},
-  ],
-  feeds:[
-    {id:"f1",name:"Copra Meal",category:"Concentrate",quantity:500,unit:"kg",costPerUnit:22,supplier:"Local Mill, Alitagtag",reorderLevel:200,lastPurchase:"2026-05-20"},
-    {id:"f2",name:"Rice Bran (D1)",category:"Concentrate",quantity:350,unit:"kg",costPerUnit:18,supplier:"NFA Outlet",reorderLevel:150,lastPurchase:"2026-05-18"},
-    {id:"f3",name:"Molasses",category:"Supplement",quantity:120,unit:"L",costPerUnit:25,supplier:"Batangas Sugar Central",reorderLevel:50,lastPurchase:"2026-05-10"},
-    {id:"f4",name:"Urea",category:"Supplement",quantity:45,unit:"kg",costPerUnit:35,supplier:"Agri Supply, Lipa",reorderLevel:20,lastPurchase:"2026-05-22"},
-    {id:"f5",name:"Salt Block",category:"Mineral",quantity:8,unit:"pcs",costPerUnit:150,supplier:"Agri Supply, Lipa",reorderLevel:3,lastPurchase:"2026-05-15"},
-    {id:"f6",name:"Napier Grass (Fresh)",category:"Forage",quantity:800,unit:"kg",costPerUnit:5,supplier:"On-site",reorderLevel:300,lastPurchase:"2026-05-30"},
-  ],
-};
-let expandedCattle=null, currentTab="cattle";
+let data={cattle:[],pens:[],silage:[],feeds:[]};
+let expandedCattle=null, currentTab="cattle", currentUser="";
+let saveTimeout=null, isSaving=false;
+
+// ═══════════════════════════════════════════════
+//  SYNC ENGINE
+// ═══════════════════════════════════════════════
+function setSyncStatus(state,msg){
+  const dot=document.getElementById("syncDot"),txt=document.getElementById("syncText");
+  dot.className="sync-dot "+(state==="ok"?"":state);
+  txt.textContent=msg||{ok:"Synced",saving:"Saving…",error:"Sync error",offline:"Local only"}[state]||state;
+}
+
+async function loadData(){
+  // Try API first
+  if(API_URL){
+    try{
+      setSyncStatus("saving","Loading…");
+      const r=await fetch(API_URL);
+      const j=await r.json();
+      if(j.success){
+        data.cattle=j.data.cattle||[];
+        data.pens=j.data.pens||[];
+        data.silage=j.data.silage||[];
+        data.feeds=j.data.feeds||[];
+        localStorage.setItem("ranch_data",JSON.stringify(data));
+        setSyncStatus("ok");
+        return;
+      }
+    }catch(e){console.warn("API load failed, trying local",e)}
+  }
+  // Fall back to localStorage
+  const saved=localStorage.getItem("ranch_data");
+  if(saved){try{data=JSON.parse(saved)}catch(e){}}
+  if(!data.cattle.length) seedData();
+  setSyncStatus(API_URL?"error":"offline", API_URL?"Sync error":"Local only");
+}
+
+function scheduleSave(){
+  clearTimeout(saveTimeout);
+  // Always save to localStorage immediately
+  localStorage.setItem("ranch_data",JSON.stringify(data));
+  if(!API_URL){setSyncStatus("offline","Local only");return}
+  setSyncStatus("saving");
+  saveTimeout=setTimeout(()=>saveToAPI(),1500);
+}
+
+async function saveToAPI(){
+  if(!API_URL||isSaving)return;
+  isSaving=true;
+  try{
+    const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(data),redirect:"follow"});
+    // Apps Script redirects on POST; fetch with redirect:follow should handle it
+    setSyncStatus("ok");
+  }catch(e){console.error("Save error",e);setSyncStatus("error")}
+  finally{isSaving=false}
+}
+
+function seedData(){
+  data={
+    cattle:[
+      {id:"ALT-001",vid:"0041",breed:"Brahman Cross",sex:"Female",birthDate:"2023-03-15",weight:320,status:"Healthy",pen:"Pen A",notes:"Pregnant, due Aug 2026",color:"#7a5a2e",acquired:"2024-01-10",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-002",vid:"0078",breed:"Brahman",sex:"Male",birthDate:"2022-11-20",weight:480,status:"Healthy",pen:"Pen A",notes:"Bull, good temperament",color:"#5c4033",acquired:"2023-06-01",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-003",vid:"0112",breed:"Brahman Cross",sex:"Female",birthDate:"2024-01-08",weight:210,status:"Monitoring",pen:"Pen B",notes:"Slight limp on rear left",color:"#8b6914",acquired:"2024-07-15",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-004",vid:"0095",breed:"Nelore",sex:"Male",birthDate:"2023-07-22",weight:390,status:"Healthy",pen:"Pen A",notes:"",color:"#a0522d",acquired:"2024-02-20",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-005",vid:"0153",breed:"Brahman Cross",sex:"Female",birthDate:"2024-06-10",weight:165,status:"Healthy",pen:"Pen B",notes:"Calf, growing well",color:"#6b4226",acquired:"2024-06-10",lastEditedBy:"",lastEditedAt:""},
+    ],
+    pens:[
+      {id:"pen-a",name:"Pen A",capacity:15,description:"Main feedlot pen, shaded",feedType:"TMR Mix",lastCleaned:"2026-05-28",lastEditedBy:"",lastEditedAt:""},
+      {id:"pen-b",name:"Pen B",capacity:10,description:"Growing pen, partial shade",feedType:"Grower Mix",lastCleaned:"2026-05-27",lastEditedBy:"",lastEditedAt:""},
+      {id:"pen-c",name:"Pen C",capacity:8,description:"Isolation / medical pen",feedType:"Recovery Mix",lastCleaned:"2026-05-30",lastEditedBy:"",lastEditedAt:""},
+    ],
+    silage:[
+      {id:"s1",type:"Napier Grass Silage",quantity:4200,unit:"kg",storageDate:"2026-04-10",expiryDate:"2026-10-10",location:"Silo Pit 1",quality:"Good",notes:"Well-fermented",lastEditedBy:"",lastEditedAt:""},
+      {id:"s2",type:"Corn Silage",quantity:2800,unit:"kg",storageDate:"2026-03-25",expiryDate:"2026-09-25",location:"Silo Pit 2",quality:"Excellent",notes:"High moisture, ideal",lastEditedBy:"",lastEditedAt:""},
+      {id:"s3",type:"Rice Straw Silage",quantity:1500,unit:"kg",storageDate:"2026-05-01",expiryDate:"2026-11-01",location:"Silo Bags",quality:"Fair",notes:"Supplementary only",lastEditedBy:"",lastEditedAt:""},
+    ],
+    feeds:[
+      {id:"f1",name:"Copra Meal",category:"Concentrate",quantity:500,unit:"kg",costPerUnit:22,supplier:"Local Mill, Alitagtag",reorderLevel:200,lastPurchase:"2026-05-20",lastEditedBy:"",lastEditedAt:""},
+      {id:"f2",name:"Rice Bran (D1)",category:"Concentrate",quantity:350,unit:"kg",costPerUnit:18,supplier:"NFA Outlet",reorderLevel:150,lastPurchase:"2026-05-18",lastEditedBy:"",lastEditedAt:""},
+      {id:"f3",name:"Molasses",category:"Supplement",quantity:120,unit:"L",costPerUnit:25,supplier:"Batangas Sugar Central",reorderLevel:50,lastPurchase:"2026-05-10",lastEditedBy:"",lastEditedAt:""},
+      {id:"f4",name:"Urea",category:"Supplement",quantity:45,unit:"kg",costPerUnit:35,supplier:"Agri Supply, Lipa",reorderLevel:20,lastPurchase:"2026-05-22",lastEditedBy:"",lastEditedAt:""},
+      {id:"f5",name:"Salt Block",category:"Mineral",quantity:8,unit:"pcs",costPerUnit:150,supplier:"Agri Supply, Lipa",reorderLevel:3,lastPurchase:"2026-05-15",lastEditedBy:"",lastEditedAt:""},
+      {id:"f6",name:"Napier Grass (Fresh)",category:"Forage",quantity:800,unit:"kg",costPerUnit:5,supplier:"On-site",reorderLevel:300,lastPurchase:"2026-05-30",lastEditedBy:"",lastEditedAt:""},
+    ],
+  };
+}
+
+function stamp(item){item.lastEditedBy=currentUser;item.lastEditedAt=new Date().toISOString().slice(0,16).replace("T"," ");return item}
+
+// ═══════════════════════════════════════════════
+//  USER
+// ═══════════════════════════════════════════════
+function selectUser(name){
+  currentUser=name;
+  localStorage.setItem("ranch_user",name);
+  document.getElementById("setupOverlay").classList.add("hidden");
+  updateUserChip();
+}
+function showSetup(){document.getElementById("setupOverlay").classList.remove("hidden")}
+function updateUserChip(){
+  const c=USER_COLORS[currentUser]||"#6b4d1f",ini=USER_INITIALS[currentUser]||"?";
+  document.getElementById("userChip").innerHTML=`<div class="chip-av" style="background:${c}">${ini}</div>${currentUser}`;
+}
 
 // ═══════════════════════════════════════════════
 //  TABS
@@ -353,179 +429,103 @@ const TABS=[
   {key:"feeds",label:"Feeds",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3C7 3 3 6 3 9v6c0 3 4 6 9 6s9-3 9-6V9c0-3-4-6-9-6z"/><path d="M3 9c0 3 4 6 9 6s9-3 9-6"/></svg>'},
 ];
 function buildTabs(){
-  document.getElementById("tabNav").innerHTML=TABS.map(t=>`<button class="tab-btn ${t.key===currentTab?'active':''}" onclick="switchTab('${t.key}')">${t.icon}<span class="tab-label">${t.label}</span></button>`).join("");
-  document.getElementById("mobileMenu").innerHTML=TABS.map(t=>`<button class="mobile-tab ${t.key===currentTab?'active':''}" onclick="switchTab('${t.key}')">${t.icon} ${t.label}</button>`).join("");
+  document.getElementById("desktopNav").innerHTML=TABS.map(t=>`<button class="tab-btn ${t.key===currentTab?'active':''}" onclick="switchTab('${t.key}')">${t.icon}<span>${t.label}</span></button>`).join("");
+  document.getElementById("bottomNav").innerHTML=TABS.map(t=>`<button class="bnav-btn ${t.key===currentTab?'active':''}" onclick="switchTab('${t.key}')">${t.icon}${t.label}</button>`).join("");
 }
-function switchTab(key){
-  currentTab=key;
-  document.querySelectorAll(".tab-content").forEach(el=>el.classList.remove("active"));
-  document.getElementById("tab-"+key).classList.add("active");
-  document.getElementById("heroTitle").textContent=TABS.find(t=>t.key===key).label;
-  document.getElementById("mobileMenu").classList.remove("open");
-  buildTabs();renderAll();
-}
-function toggleMobileMenu(){document.getElementById("mobileMenu").classList.toggle("open")}
+function switchTab(key){currentTab=key;document.querySelectorAll(".tab-content").forEach(el=>el.classList.remove("active"));document.getElementById("tab-"+key).classList.add("active");document.getElementById("heroTitle").textContent=TABS.find(t=>t.key===key).label;buildTabs();renderAll()}
 
 // ═══════════════════════════════════════════════
 //  HELPERS
 // ═══════════════════════════════════════════════
 function age(d){if(!d)return"—";return((Date.now()-new Date(d).getTime())/(365.25*86400000)).toFixed(1)+"y"}
-function esc(s){const d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function esc(s){if(s==null)return"";const d=document.createElement("div");d.textContent=String(s);return d.innerHTML}
 function today(){return new Date().toISOString().slice(0,10)}
 function uid(p){return p+Date.now().toString(36)}
-
-// ═══════════════════════════════════════════════
-//  MODAL
-// ═══════════════════════════════════════════════
-function openModal(t,html){document.getElementById("modalTitle").textContent=t;document.getElementById("modalBody").innerHTML=html;document.getElementById("modalOverlay").classList.add("open")}
+function editedTag(item){return item.lastEditedBy?`<div class="card-edited">Last edit: ${esc(item.lastEditedBy)}, ${esc(item.lastEditedAt)}</div>`:""}
+function openModal(t,h){document.getElementById("modalTitle").textContent=t;document.getElementById("modalBody").innerHTML=h;document.getElementById("modalOverlay").classList.add("open")}
 function closeModal(){document.getElementById("modalOverlay").classList.remove("open")}
 
 // ═══════════════════════════════════════════════
 //  CATTLE
 // ═══════════════════════════════════════════════
 function renderCattle(){
-  const search=(document.getElementById("cattleSearch").value||"").toLowerCase();
-  const filter=document.getElementById("cattleFilter").value;
-  const list=data.cattle.filter(c=>{
-    const ms=c.vid.toLowerCase().includes(search)||c.id.toLowerCase().includes(search);
-    const mf=filter==="All"||c.status===filter;
-    return ms&&mf;
-  });
-  const total=data.cattle.length,healthy=data.cattle.filter(c=>c.status==="Healthy").length,
-    monitoring=data.cattle.filter(c=>c.status==="Monitoring").length,
-    tw=data.cattle.reduce((s,c)=>s+(c.weight||0),0);
-  document.getElementById("cattleSummary").innerHTML=[
-    {l:"Total Head",v:total},{l:"Healthy",v:healthy},{l:"Monitoring",v:monitoring},{l:"Total Weight",v:(tw/1000).toFixed(1)+"t"}
-  ].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
-
+  const s=(document.getElementById("cattleSearch").value||"").toLowerCase(),f=document.getElementById("cattleFilter").value;
+  const list=data.cattle.filter(c=>(c.vid.toLowerCase().includes(s)||c.id.toLowerCase().includes(s))&&(f==="All"||c.status===f));
+  const total=data.cattle.length,healthy=data.cattle.filter(c=>c.status==="Healthy").length,mon=data.cattle.filter(c=>c.status==="Monitoring").length,tw=data.cattle.reduce((a,c)=>a+(c.weight||0),0);
+  document.getElementById("cattleSummary").innerHTML=[{l:"Total Head",v:total},{l:"Healthy",v:healthy},{l:"Monitoring",v:mon},{l:"Total Weight",v:(tw/1000).toFixed(1)+"t"}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
   if(!list.length){document.getElementById("cattleGrid").innerHTML='<div class="empty">No cattle found</div>';return}
-  document.getElementById("cattleGrid").innerHTML=list.map(c=>{
-    const sc=STATUS[c.status]||STATUS.Healthy, exp=expandedCattle===c.id;
-    return`<div class="cattle-card ${exp?'expanded':''}" onclick="toggleCattle('${c.id}')">
-      <div class="card-header">
-        <div class="card-avatar" style="background:${c.color||'#7a5a2e'}">V${esc(c.vid)}</div>
-        <div class="card-info">
-          <div><span class="card-name">VID ${esc(c.vid)}</span><span class="card-id">${esc(c.id)}</span></div>
-          <div class="card-meta">${esc(c.breed)} · ${esc(c.sex)} · ${age(c.birthDate)}</div>
-        </div>
-        <span class="status-badge" style="background:${sc.bg};color:${sc.text}"><span class="status-dot" style="background:${sc.dot}"></span>${c.status}</span>
-      </div>
-      <div class="card-stats">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a3 3 0 00-3 3h6a3 3 0 00-3-3zM5 8h14l-1.5 13H6.5L5 8z"/></svg>${c.weight} kg</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M3 12h18"/></svg>${esc(c.pen||"—")}</span>
-      </div>
-      ${exp?`<div class="card-details">
-        ${c.notes?`<div class="card-notes">${esc(c.notes)}</div>`:''}
-        <div class="card-dates">Acquired: ${c.acquired||"—"} · Born: ${c.birthDate||"—"}</div>
-        <div class="card-actions">
-          <button class="btn-secondary btn-sm" onclick="event.stopPropagation();editCattle('${c.id}')">✎ Edit</button>
-          <button class="btn-secondary btn-sm" style="color:var(--danger);border-color:#ef9a9a" onclick="event.stopPropagation();removeCattle('${c.id}')">✕ Remove</button>
-        </div>
-      </div>`:''}</div>`;
-  }).join("");
+  document.getElementById("cattleGrid").innerHTML=list.map(c=>{const sc=STATUS[c.status]||STATUS.Healthy,exp=expandedCattle===c.id;
+    return`<div class="cattle-card ${exp?'expanded':''}" onclick="toggleCattle('${c.id}')"><div class="card-header"><div class="card-avatar" style="background:${c.color||'#7a5a2e'}">V${esc(c.vid)}</div><div class="card-info"><div><span class="card-name">VID ${esc(c.vid)}</span><span class="card-id">${esc(c.id)}</span></div><div class="card-meta">${esc(c.breed)} · ${esc(c.sex)} · ${age(c.birthDate)}</div></div><span class="status-badge" style="background:${sc.bg};color:${sc.text}"><span class="status-dot" style="background:${sc.dot}"></span>${c.status}</span></div><div class="card-stats"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a3 3 0 00-3 3h6a3 3 0 00-3-3zM5 8h14l-1.5 13H6.5L5 8z"/></svg>${c.weight} kg</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M3 12h18"/></svg>${esc(c.pen||"—")}</span></div>${exp?`<div class="card-details">${c.notes?`<div class="card-notes">${esc(c.notes)}</div>`:''}<div class="card-dates">Acquired: ${c.acquired||"—"} · Born: ${c.birthDate||"—"}</div>${editedTag(c)}<div class="card-actions"><button class="btn-secondary btn-sm" onclick="event.stopPropagation();editCattle('${c.id}')">✎ Edit</button><button class="btn-secondary btn-sm" style="color:var(--danger);border-color:#ef9a9a" onclick="event.stopPropagation();removeCattle('${c.id}')">✕ Remove</button></div></div>`:''}</div>`}).join("");
 }
 function toggleCattle(id){expandedCattle=expandedCattle===id?null:id;renderCattle()}
-function cattleFormHTML(c){
-  const po=data.pens.map(p=>`<option ${c.pen===p.name?'selected':''}>${p.name}</option>`).join("");
-  return`<div class="form-row">
-    <div class="field"><label>ID</label><input class="input" id="cf_id" value="${esc(c.id)}"></div>
-    <div class="field"><label>VID</label><input class="input" id="cf_vid" value="${esc(c.vid)}" placeholder="e.g. 0041"></div>
-    <div class="field"><label>Breed</label><input class="input" id="cf_breed" value="${esc(c.breed)}"></div>
-    <div class="field"><label>Sex</label><select class="input select" id="cf_sex"><option ${c.sex==='Female'?'selected':''}>Female</option><option ${c.sex==='Male'?'selected':''}>Male</option></select></div>
-    <div class="field"><label>Birth Date</label><input class="input" type="date" id="cf_birth" value="${c.birthDate}"></div>
-    <div class="field"><label>Weight (kg)</label><input class="input" type="number" id="cf_weight" value="${c.weight}"></div>
-    <div class="field"><label>Status</label><select class="input select" id="cf_status"><option ${c.status==='Healthy'?'selected':''}>Healthy</option><option ${c.status==='Monitoring'?'selected':''}>Monitoring</option><option ${c.status==='Sick'?'selected':''}>Sick</option><option ${c.status==='Sold'?'selected':''}>Sold</option></select></div>
-    <div class="field"><label>Pen</label><select class="input select" id="cf_pen">${po}</select></div>
-    <div class="field"><label>Acquired</label><input class="input" type="date" id="cf_acquired" value="${c.acquired}"></div>
-    <div class="field"><label>Tag Color</label><input class="input" type="color" id="cf_color" value="${c.color||'#7a5a2e'}" style="height:40px;padding:4px"></div>
-  </div>
-  <div class="field"><label>Notes</label><textarea class="input" rows="3" id="cf_notes" style="resize:vertical">${esc(c.notes)}</textarea></div>`;
-}
+function cattleForm(c){const po=data.pens.map(p=>`<option ${c.pen===p.name?'selected':''}>${p.name}</option>`).join("");
+  return`<div class="form-row"><div class="field"><label>ID</label><input class="input" id="cf_id" value="${esc(c.id)}"></div><div class="field"><label>VID</label><input class="input" id="cf_vid" value="${esc(c.vid)}" placeholder="e.g. 0041"></div><div class="field"><label>Breed</label><input class="input" id="cf_breed" value="${esc(c.breed)}"></div><div class="field"><label>Sex</label><select class="input select" id="cf_sex"><option ${c.sex==='Female'?'selected':''}>Female</option><option ${c.sex==='Male'?'selected':''}>Male</option></select></div><div class="field"><label>Birth Date</label><input class="input" type="date" id="cf_birth" value="${c.birthDate}"></div><div class="field"><label>Weight (kg)</label><input class="input" type="number" id="cf_weight" value="${c.weight}"></div><div class="field"><label>Status</label><select class="input select" id="cf_status"><option ${c.status==='Healthy'?'selected':''}>Healthy</option><option ${c.status==='Monitoring'?'selected':''}>Monitoring</option><option ${c.status==='Sick'?'selected':''}>Sick</option><option ${c.status==='Sold'?'selected':''}>Sold</option></select></div><div class="field"><label>Pen</label><select class="input select" id="cf_pen">${po}</select></div><div class="field"><label>Acquired</label><input class="input" type="date" id="cf_acquired" value="${c.acquired}"></div><div class="field"><label>Tag Color</label><input class="input" type="color" id="cf_color" value="${c.color||'#7a5a2e'}" style="height:44px;padding:4px"></div></div><div class="field"><label>Notes</label><textarea class="input" rows="3" id="cf_notes" style="resize:vertical">${esc(c.notes)}</textarea></div>`}
 function readCF(){return{id:document.getElementById("cf_id").value,vid:document.getElementById("cf_vid").value,breed:document.getElementById("cf_breed").value,sex:document.getElementById("cf_sex").value,birthDate:document.getElementById("cf_birth").value,weight:Number(document.getElementById("cf_weight").value)||0,status:document.getElementById("cf_status").value,pen:document.getElementById("cf_pen").value,acquired:document.getElementById("cf_acquired").value,color:document.getElementById("cf_color").value,notes:document.getElementById("cf_notes").value}}
-function openCattleModal(){
-  const n=String(data.cattle.length+1).padStart(3,"0");
-  const c={id:`ALT-${n}`,vid:"",breed:"Brahman Cross",sex:"Female",birthDate:"",weight:"",status:"Healthy",pen:data.pens[0]?.name||"",notes:"",color:COLORS[data.cattle.length%COLORS.length],acquired:today()};
-  openModal("Add Animal",cattleFormHTML(c)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveCattle()">Add Animal</button></div>`);
-}
-function editCattle(id){const c=data.cattle.find(x=>x.id===id);if(!c)return;openModal("Edit Animal",cattleFormHTML(c)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveCattle('${id}')">Update</button></div>`)}
-function saveCattle(eid){const f=readCF();if(!f.vid&&!f.id)return;if(eid){const i=data.cattle.findIndex(c=>c.id===eid);if(i>=0)data.cattle[i]=f}else data.cattle.push(f);closeModal();renderCattle()}
-function removeCattle(id){if(!confirm("Remove this animal?"))return;data.cattle=data.cattle.filter(c=>c.id!==id);expandedCattle=null;renderCattle()}
+function openCattleModal(){const n=String(data.cattle.length+1).padStart(3,"0");const c={id:`ALT-${n}`,vid:"",breed:"Brahman Cross",sex:"Female",birthDate:"",weight:"",status:"Healthy",pen:data.pens[0]?.name||"",notes:"",color:COLORS[data.cattle.length%COLORS.length],acquired:today()};openModal("Add Animal",cattleForm(c)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveCattle()">Add Animal</button></div>`)}
+function editCattle(id){const c=data.cattle.find(x=>x.id===id);if(!c)return;openModal("Edit Animal",cattleForm(c)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveCattle('${id}')">Update</button></div>`)}
+function saveCattle(eid){const f=readCF();if(!f.vid&&!f.id)return;stamp(f);if(eid){const i=data.cattle.findIndex(c=>c.id===eid);if(i>=0)data.cattle[i]=f}else data.cattle.push(f);closeModal();renderCattle();scheduleSave()}
+function removeCattle(id){if(!confirm("Remove this animal?"))return;data.cattle=data.cattle.filter(c=>c.id!==id);expandedCattle=null;renderCattle();scheduleSave()}
 
 // ═══════════════════════════════════════════════
 //  FEEDLOT
 // ═══════════════════════════════════════════════
-function renderFeedlot(){
-  const tc=data.pens.reduce((s,p)=>s+p.capacity,0),occ=data.cattle.length,ut=tc>0?Math.round(occ/tc*100)+"%":"—";
-  document.getElementById("feedlotSummary").innerHTML=[{l:"Total Pens",v:data.pens.length},{l:"Total Capacity",v:tc},{l:"Occupied",v:occ},{l:"Utilization",v:ut}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
-  document.getElementById("penGrid").innerHTML=data.pens.map(p=>{
-    const occ=data.cattle.filter(c=>c.pen===p.name),pct=p.capacity>0?Math.round(occ.length/p.capacity*100):0,
-      bc=pct>80?"#c62828":pct>50?"#f9a825":"#4caf50",
-      oh=occ.length?occ.map(c=>{const sc=STATUS[c.status]||STATUS.Healthy;return`<span class="pen-occupant" style="background:${sc.bg};color:${sc.text}">V${esc(c.vid)}</span>`}).join(""):'<span style="font-size:12px;color:var(--text-muted);font-style:italic">Empty</span>';
-    return`<div class="pen-card">
-      <div class="pen-header"><div><div class="pen-title">${esc(p.name)}</div><div class="pen-desc">${esc(p.description)}</div></div>
-        <div style="display:flex;gap:6px"><button class="btn-icon" onclick="editPen('${p.id}')">✎</button><button class="btn-icon danger" onclick="removePen('${p.id}')">✕</button></div>
-      </div>
-      <div class="cap-text">Capacity: ${occ.length} / ${p.capacity}</div>
-      <div class="cap-bar"><div class="cap-fill" style="width:${Math.min(pct,100)}%;background:${bc}"></div></div>
-      <div class="pen-occupants">${oh}</div>
-      <div class="pen-footer">Feed: ${esc(p.feedType||"—")} · Cleaned: ${p.lastCleaned||"—"}</div>
-    </div>`}).join("");
-}
-function penFormHTML(p){return`<div class="field"><label>Name</label><input class="input" id="pf_name" value="${esc(p.name)}"></div><div class="field"><label>Capacity</label><input class="input" type="number" id="pf_cap" value="${p.capacity}"></div><div class="field"><label>Description</label><input class="input" id="pf_desc" value="${esc(p.description)}"></div><div class="field"><label>Feed Type</label><input class="input" id="pf_feed" value="${esc(p.feedType)}"></div><div class="field"><label>Last Cleaned</label><input class="input" type="date" id="pf_cleaned" value="${p.lastCleaned}"></div>`}
+function renderFeedlot(){const tc=data.pens.reduce((s,p)=>s+p.capacity,0),occ=data.cattle.length;
+  document.getElementById("feedlotSummary").innerHTML=[{l:"Total Pens",v:data.pens.length},{l:"Total Capacity",v:tc},{l:"Occupied",v:occ},{l:"Utilization",v:tc>0?Math.round(occ/tc*100)+"%":"—"}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
+  document.getElementById("penGrid").innerHTML=data.pens.map(p=>{const oc=data.cattle.filter(c=>c.pen===p.name),pct=p.capacity>0?Math.round(oc.length/p.capacity*100):0,bc=pct>80?"#c62828":pct>50?"#f9a825":"#4caf50",oh=oc.length?oc.map(c=>{const sc=STATUS[c.status]||STATUS.Healthy;return`<span class="pen-occupant" style="background:${sc.bg};color:${sc.text}">V${esc(c.vid)}</span>`}).join(""):'<span style="font-size:12px;color:var(--text-muted);font-style:italic">Empty</span>';
+    return`<div class="pen-card"><div class="pen-header"><div><div class="pen-title">${esc(p.name)}</div><div class="pen-desc">${esc(p.description)}</div></div><div style="display:flex;gap:4px"><button class="btn-icon" onclick="editPen('${p.id}')">✎</button><button class="btn-icon danger" onclick="removePen('${p.id}')">✕</button></div></div><div class="cap-text">Capacity: ${oc.length} / ${p.capacity}</div><div class="cap-bar"><div class="cap-fill" style="width:${Math.min(pct,100)}%;background:${bc}"></div></div><div class="pen-occupants">${oh}</div><div class="pen-footer">Feed: ${esc(p.feedType||"—")} · Cleaned: ${p.lastCleaned||"—"}</div></div>`}).join("")}
+function penForm(p){return`<div class="field"><label>Name</label><input class="input" id="pf_name" value="${esc(p.name)}"></div><div class="field"><label>Capacity</label><input class="input" type="number" id="pf_cap" value="${p.capacity}"></div><div class="field"><label>Description</label><input class="input" id="pf_desc" value="${esc(p.description)}"></div><div class="field"><label>Feed Type</label><input class="input" id="pf_feed" value="${esc(p.feedType)}"></div><div class="field"><label>Last Cleaned</label><input class="input" type="date" id="pf_cleaned" value="${p.lastCleaned}"></div>`}
 function readPF(){return{name:document.getElementById("pf_name").value,capacity:Number(document.getElementById("pf_cap").value)||0,description:document.getElementById("pf_desc").value,feedType:document.getElementById("pf_feed").value,lastCleaned:document.getElementById("pf_cleaned").value}}
-function openPenModal(){const p={id:uid("pen-"),name:"",capacity:10,description:"",feedType:"",lastCleaned:today()};openModal("Add Pen",penFormHTML(p)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="savePen()">Add Pen</button></div>`)}
-function editPen(id){const p=data.pens.find(x=>x.id===id);if(!p)return;openModal("Edit Pen",penFormHTML(p)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="savePen('${id}')">Update</button></div>`)}
-function savePen(eid){const f=readPF();if(!f.name)return;if(eid){const i=data.pens.findIndex(p=>p.id===eid);if(i>=0)data.pens[i]={...data.pens[i],...f}}else data.pens.push({id:uid("pen-"),...f});closeModal();renderFeedlot()}
-function removePen(id){if(!confirm("Remove this pen?"))return;data.pens=data.pens.filter(p=>p.id!==id);renderFeedlot()}
+function openPenModal(){openModal("Add Pen",penForm({id:"",name:"",capacity:10,description:"",feedType:"",lastCleaned:today()})+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="savePen()">Add Pen</button></div>`)}
+function editPen(id){const p=data.pens.find(x=>x.id===id);if(!p)return;openModal("Edit Pen",penForm(p)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="savePen('${id}')">Update</button></div>`)}
+function savePen(eid){const f=readPF();if(!f.name)return;stamp(f);if(eid){const i=data.pens.findIndex(p=>p.id===eid);if(i>=0)data.pens[i]={...data.pens[i],...f}}else data.pens.push({id:uid("pen-"),...f});closeModal();renderFeedlot();scheduleSave()}
+function removePen(id){if(!confirm("Remove?"))return;data.pens=data.pens.filter(p=>p.id!==id);renderFeedlot();scheduleSave()}
 
 // ═══════════════════════════════════════════════
 //  SILAGE
 // ═══════════════════════════════════════════════
-function renderSilage(){
-  const tk=data.silage.reduce((s,i)=>s+(i.unit==="kg"?i.quantity:0),0),locs=[...new Set(data.silage.map(s=>s.location))].length;
-  document.getElementById("silageSummary").innerHTML=[{l:"Batches",v:data.silage.length},{l:"Total Stock",v:(tk/1000).toFixed(1)+"t"},{l:"Locations",v:locs}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
+function renderSilage(){const tk=data.silage.reduce((s,i)=>s+(i.unit==="kg"?i.quantity:0),0);
+  document.getElementById("silageSummary").innerHTML=[{l:"Batches",v:data.silage.length},{l:"Total Stock",v:(tk/1000).toFixed(1)+"t"},{l:"Locations",v:[...new Set(data.silage.map(s=>s.location))].length}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
   const hdr=["Type","Qty","Location","Stored","Expires","Quality",""].map(h=>`<th>${h}</th>`).join("");
-  const rows=data.silage.map(s=>{const exp=s.expiryDate&&(new Date(s.expiryDate)-Date.now())<30*86400000;const qc=QC[s.quality]||"var(--text)";
-    return`<tr><td class="bold">${esc(s.type)}</td><td>${s.quantity.toLocaleString()} ${s.unit}</td><td>${esc(s.location)}</td><td>${s.storageDate}</td><td style="${exp?'color:#c62828;font-weight:600':''}">${s.expiryDate} ${exp?'⚠':''}</td><td><span style="color:${qc};font-weight:600">${s.quality}</span></td><td style="white-space:nowrap"><button class="btn-icon" onclick="editSilage('${s.id}')">✎</button><button class="btn-icon danger" onclick="removeSilage('${s.id}')">✕</button></td></tr>`}).join("");
-  document.getElementById("silageTable").innerHTML=`<table><thead><tr>${hdr}</tr></thead><tbody>${rows}</tbody></table>`;
-}
-function silageFormHTML(s){return`<div class="field"><label>Type</label><input class="input" id="sf_type" value="${esc(s.type)}" placeholder="e.g. Napier Grass Silage"></div><div class="form-row"><div class="field"><label>Quantity</label><input class="input" type="number" id="sf_qty" value="${s.quantity}"></div><div class="field"><label>Unit</label><select class="input select" id="sf_unit"><option ${s.unit==='kg'?'selected':''}>kg</option><option ${s.unit==='L'?'selected':''}>L</option><option ${s.unit==='pcs'?'selected':''}>pcs</option></select></div><div class="field"><label>Storage Date</label><input class="input" type="date" id="sf_stored" value="${s.storageDate}"></div><div class="field"><label>Expiry Date</label><input class="input" type="date" id="sf_expiry" value="${s.expiryDate}"></div></div><div class="field"><label>Location</label><input class="input" id="sf_loc" value="${esc(s.location)}"></div><div class="field"><label>Quality</label><select class="input select" id="sf_quality"><option ${s.quality==='Excellent'?'selected':''}>Excellent</option><option ${s.quality==='Good'?'selected':''}>Good</option><option ${s.quality==='Fair'?'selected':''}>Fair</option><option ${s.quality==='Poor'?'selected':''}>Poor</option></select></div><div class="field"><label>Notes</label><textarea class="input" rows="2" id="sf_notes" style="resize:vertical">${esc(s.notes)}</textarea></div>`}
+  document.getElementById("silageTable").innerHTML=`<table><thead><tr>${hdr}</tr></thead><tbody>${data.silage.map(s=>{const exp=s.expiryDate&&(new Date(s.expiryDate)-Date.now())<30*86400000;return`<tr><td class="bold">${esc(s.type)}</td><td>${s.quantity.toLocaleString()} ${s.unit}</td><td>${esc(s.location)}</td><td>${s.storageDate}</td><td style="${exp?'color:#c62828;font-weight:600':''}">${s.expiryDate}${exp?' ⚠':''}</td><td><span style="color:${QC[s.quality]||'var(--text)'};font-weight:600">${s.quality}</span></td><td style="white-space:nowrap"><button class="btn-icon" onclick="editSilage('${s.id}')">✎</button><button class="btn-icon danger" onclick="removeSilage('${s.id}')">✕</button></td></tr>`}).join("")}</tbody></table>`}
+function silageForm(s){return`<div class="field"><label>Type</label><input class="input" id="sf_type" value="${esc(s.type)}" placeholder="e.g. Napier Grass Silage"></div><div class="form-row"><div class="field"><label>Quantity</label><input class="input" type="number" id="sf_qty" value="${s.quantity}"></div><div class="field"><label>Unit</label><select class="input select" id="sf_unit"><option ${s.unit==='kg'?'selected':''}>kg</option><option ${s.unit==='L'?'selected':''}>L</option><option ${s.unit==='pcs'?'selected':''}>pcs</option></select></div><div class="field"><label>Storage Date</label><input class="input" type="date" id="sf_stored" value="${s.storageDate}"></div><div class="field"><label>Expiry Date</label><input class="input" type="date" id="sf_expiry" value="${s.expiryDate}"></div></div><div class="field"><label>Location</label><input class="input" id="sf_loc" value="${esc(s.location)}"></div><div class="field"><label>Quality</label><select class="input select" id="sf_quality"><option ${s.quality==='Excellent'?'selected':''}>Excellent</option><option ${s.quality==='Good'?'selected':''}>Good</option><option ${s.quality==='Fair'?'selected':''}>Fair</option><option ${s.quality==='Poor'?'selected':''}>Poor</option></select></div><div class="field"><label>Notes</label><textarea class="input" rows="2" id="sf_notes" style="resize:vertical">${esc(s.notes)}</textarea></div>`}
 function readSF(){return{type:document.getElementById("sf_type").value,quantity:Number(document.getElementById("sf_qty").value)||0,unit:document.getElementById("sf_unit").value,storageDate:document.getElementById("sf_stored").value,expiryDate:document.getElementById("sf_expiry").value,location:document.getElementById("sf_loc").value,quality:document.getElementById("sf_quality").value,notes:document.getElementById("sf_notes").value}}
-function openSilageModal(){const s={id:"",type:"",quantity:"",unit:"kg",storageDate:today(),expiryDate:"",location:"",quality:"Good",notes:""};openModal("Add Silage Batch",silageFormHTML(s)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveSilage()">Add Batch</button></div>`)}
-function editSilage(id){const s=data.silage.find(x=>x.id===id);if(!s)return;openModal("Edit Silage",silageFormHTML(s)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveSilage('${id}')">Update</button></div>`)}
-function saveSilage(eid){const f=readSF();if(!f.type)return;if(eid){const i=data.silage.findIndex(s=>s.id===eid);if(i>=0)data.silage[i]={...data.silage[i],...f}}else data.silage.push({id:uid("s"),...f});closeModal();renderSilage()}
-function removeSilage(id){if(!confirm("Remove?"))return;data.silage=data.silage.filter(s=>s.id!==id);renderSilage()}
+function openSilageModal(){openModal("Add Silage Batch",silageForm({id:"",type:"",quantity:"",unit:"kg",storageDate:today(),expiryDate:"",location:"",quality:"Good",notes:""})+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveSilage()">Add Batch</button></div>`)}
+function editSilage(id){const s=data.silage.find(x=>x.id===id);if(!s)return;openModal("Edit Silage",silageForm(s)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveSilage('${id}')">Update</button></div>`)}
+function saveSilage(eid){const f=readSF();if(!f.type)return;stamp(f);if(eid){const i=data.silage.findIndex(s=>s.id===eid);if(i>=0)data.silage[i]={...data.silage[i],...f}}else data.silage.push({id:uid("s"),...f});closeModal();renderSilage();scheduleSave()}
+function removeSilage(id){if(!confirm("Remove?"))return;data.silage=data.silage.filter(s=>s.id!==id);renderSilage();scheduleSave()}
 
 // ═══════════════════════════════════════════════
 //  FEEDS
 // ═══════════════════════════════════════════════
-function renderFeeds(){
-  const low=data.feeds.filter(f=>f.quantity<=f.reorderLevel),tv=data.feeds.reduce((s,f)=>s+f.quantity*f.costPerUnit,0);
+function renderFeeds(){const low=data.feeds.filter(f=>f.quantity<=f.reorderLevel),tv=data.feeds.reduce((s,f)=>s+f.quantity*f.costPerUnit,0);
   document.getElementById("feedsSummary").innerHTML=[{l:"Feed Types",v:data.feeds.length},{l:"Low Stock",v:low.length,c:low.length>0?"#c62828":undefined},{l:"Inventory Value",v:"₱"+(tv/1000).toFixed(1)+"k"}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value" ${s.c?`style="color:${s.c}"`:''} >${s.v}</div></div>`).join("");
-  document.getElementById("feedsAlert").innerHTML=low.length>0?`<div class="alert-bar"><span style="color:#e65100;font-size:16px">⚠</span><span class="label">Low stock:</span><span class="items">${low.map(f=>f.name).join(", ")}</span></div>`:"";
+  document.getElementById("feedsAlert").innerHTML=low.length?`<div class="alert-bar"><span style="color:#e65100;font-size:16px">⚠</span><span class="label">Low stock:</span><span class="items">${low.map(f=>f.name).join(", ")}</span></div>`:"";
   const cats=[...new Set(data.feeds.map(f=>f.category))];
-  document.getElementById("feedsList").innerHTML=cats.map(cat=>{
-    const items=data.feeds.filter(f=>f.category===cat);
-    const cards=items.map(f=>{const il=f.quantity<=f.reorderLevel,pct=f.reorderLevel>0?Math.min((f.quantity/(f.reorderLevel*3))*100,100):50;
-      return`<div class="feed-card ${il?'low-stock':''}">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="feed-name">${esc(f.name)}</div><div class="feed-supplier">${esc(f.supplier)}</div></div><div style="display:flex;gap:4px"><button class="btn-icon" onclick="editFeed('${f.id}')">✎</button><button class="btn-icon danger" onclick="removeFeed('${f.id}')">✕</button></div></div>
-        <div class="feed-qty-row"><span style="${il?'color:#c62828;font-weight:600':''}">${f.quantity} ${f.unit}</span><span style="color:var(--text-dim)">Reorder: ${f.reorderLevel} ${f.unit}</span></div>
-        <div class="stock-bar"><div class="stock-fill" style="width:${pct}%;background:${il?'#ef5350':'#66bb6a'}"></div></div>
-        <div class="feed-footer">₱${f.costPerUnit}/${f.unit} · Last: ${f.lastPurchase}</div></div>`}).join("");
-    return`<div class="feed-section"><h4>${cat}</h4><div class="feed-grid">${cards}</div></div>`}).join("");
-}
-function feedFormHTML(f){return`<div class="field"><label>Name</label><input class="input" id="ff_name" value="${esc(f.name)}"></div><div class="form-row"><div class="field"><label>Category</label><select class="input select" id="ff_cat"><option ${f.category==='Concentrate'?'selected':''}>Concentrate</option><option ${f.category==='Supplement'?'selected':''}>Supplement</option><option ${f.category==='Mineral'?'selected':''}>Mineral</option><option ${f.category==='Forage'?'selected':''}>Forage</option><option ${f.category==='Other'?'selected':''}>Other</option></select></div><div class="field"><label>Unit</label><select class="input select" id="ff_unit"><option ${f.unit==='kg'?'selected':''}value="kg">kg</option><option ${f.unit==='L'?'selected':''}value="L">Liters</option><option ${f.unit==='pcs'?'selected':''}value="pcs">pcs</option></select></div><div class="field"><label>Quantity</label><input class="input" type="number" id="ff_qty" value="${f.quantity}"></div><div class="field"><label>Cost per unit (₱)</label><input class="input" type="number" id="ff_cost" value="${f.costPerUnit}"></div><div class="field"><label>Reorder Level</label><input class="input" type="number" id="ff_reorder" value="${f.reorderLevel}"></div><div class="field"><label>Last Purchase</label><input class="input" type="date" id="ff_last" value="${f.lastPurchase}"></div></div><div class="field"><label>Supplier</label><input class="input" id="ff_supplier" value="${esc(f.supplier)}"></div>`}
+  document.getElementById("feedsList").innerHTML=cats.map(cat=>{const cards=data.feeds.filter(f=>f.category===cat).map(f=>{const il=f.quantity<=f.reorderLevel,pct=f.reorderLevel>0?Math.min((f.quantity/(f.reorderLevel*3))*100,100):50;
+    return`<div class="feed-card ${il?'low-stock':''}"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="feed-name">${esc(f.name)}</div><div class="feed-supplier">${esc(f.supplier)}</div></div><div style="display:flex;gap:4px"><button class="btn-icon" onclick="editFeed('${f.id}')">✎</button><button class="btn-icon danger" onclick="removeFeed('${f.id}')">✕</button></div></div><div class="feed-qty-row"><span style="${il?'color:#c62828;font-weight:600':''}">${f.quantity} ${f.unit}</span><span style="color:var(--text-dim)">Reorder: ${f.reorderLevel} ${f.unit}</span></div><div class="stock-bar"><div class="stock-fill" style="width:${pct}%;background:${il?'#ef5350':'#66bb6a'}"></div></div><div class="feed-footer">₱${f.costPerUnit}/${f.unit} · Last: ${f.lastPurchase}</div></div>`}).join("");
+    return`<div class="feed-section"><h4>${cat}</h4><div class="feed-grid">${cards}</div></div>`}).join("")}
+function feedForm(f){return`<div class="field"><label>Name</label><input class="input" id="ff_name" value="${esc(f.name)}"></div><div class="form-row"><div class="field"><label>Category</label><select class="input select" id="ff_cat"><option ${f.category==='Concentrate'?'selected':''}>Concentrate</option><option ${f.category==='Supplement'?'selected':''}>Supplement</option><option ${f.category==='Mineral'?'selected':''}>Mineral</option><option ${f.category==='Forage'?'selected':''}>Forage</option><option ${f.category==='Other'?'selected':''}>Other</option></select></div><div class="field"><label>Unit</label><select class="input select" id="ff_unit"><option ${f.unit==='kg'?'selected':''}value="kg">kg</option><option ${f.unit==='L'?'selected':''}value="L">Liters</option><option ${f.unit==='pcs'?'selected':''}value="pcs">pcs</option></select></div><div class="field"><label>Quantity</label><input class="input" type="number" id="ff_qty" value="${f.quantity}"></div><div class="field"><label>Cost/unit (₱)</label><input class="input" type="number" id="ff_cost" value="${f.costPerUnit}"></div><div class="field"><label>Reorder Level</label><input class="input" type="number" id="ff_reorder" value="${f.reorderLevel}"></div><div class="field"><label>Last Purchase</label><input class="input" type="date" id="ff_last" value="${f.lastPurchase}"></div></div><div class="field"><label>Supplier</label><input class="input" id="ff_supplier" value="${esc(f.supplier)}"></div>`}
 function readFF(){return{name:document.getElementById("ff_name").value,category:document.getElementById("ff_cat").value,unit:document.getElementById("ff_unit").value,quantity:Number(document.getElementById("ff_qty").value)||0,costPerUnit:Number(document.getElementById("ff_cost").value)||0,reorderLevel:Number(document.getElementById("ff_reorder").value)||0,lastPurchase:document.getElementById("ff_last").value,supplier:document.getElementById("ff_supplier").value}}
-function openFeedModal(){const f={id:"",name:"",category:"Concentrate",quantity:"",unit:"kg",costPerUnit:"",supplier:"",reorderLevel:"",lastPurchase:today()};openModal("Add Feed",feedFormHTML(f)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveFeed()">Add Feed</button></div>`)}
-function editFeed(id){const f=data.feeds.find(x=>x.id===id);if(!f)return;openModal("Edit Feed",feedFormHTML(f)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveFeed('${id}')">Update</button></div>`)}
-function saveFeed(eid){const f=readFF();if(!f.name)return;if(eid){const i=data.feeds.findIndex(x=>x.id===eid);if(i>=0)data.feeds[i]={...data.feeds[i],...f}}else data.feeds.push({id:uid("f"),...f});closeModal();renderFeeds()}
-function removeFeed(id){if(!confirm("Remove?"))return;data.feeds=data.feeds.filter(f=>f.id!==id);renderFeeds()}
+function openFeedModal(){openModal("Add Feed",feedForm({id:"",name:"",category:"Concentrate",quantity:"",unit:"kg",costPerUnit:"",supplier:"",reorderLevel:"",lastPurchase:today()})+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveFeed()">Add Feed</button></div>`)}
+function editFeed(id){const f=data.feeds.find(x=>x.id===id);if(!f)return;openModal("Edit Feed",feedForm(f)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveFeed('${id}')">Update</button></div>`)}
+function saveFeed(eid){const f=readFF();if(!f.name)return;stamp(f);if(eid){const i=data.feeds.findIndex(x=>x.id===eid);if(i>=0)data.feeds[i]={...data.feeds[i],...f}}else data.feeds.push({id:uid("f"),...f});closeModal();renderFeeds();scheduleSave()}
+function removeFeed(id){if(!confirm("Remove?"))return;data.feeds=data.feeds.filter(f=>f.id!==id);renderFeeds();scheduleSave()}
 
 // ═══════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════
 function renderAll(){renderCattle();renderFeedlot();renderSilage();renderFeeds()}
-buildTabs();renderAll();
+async function init(){
+  // Restore user
+  const savedUser=localStorage.getItem("ranch_user");
+  if(savedUser){currentUser=savedUser;updateUserChip()}
+  else{document.getElementById("setupOverlay").classList.remove("hidden")}
+  buildTabs();
+  await loadData();
+  renderAll();
+  document.getElementById("loadingOverlay").classList.add("hidden");
+}
+init();
 </script>
 </body>
 </html>
