@@ -183,6 +183,24 @@ tr:hover td{background:var(--accent-bg)}
 .txn-desc{font-size:12px;color:var(--text-dim);max-width:280px}
 .txn-who{font-size:11px;color:var(--text-muted);font-family:var(--font-mono)}
 
+/* ══ PHOTOS ══ */
+.photo-grid{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.photo-thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;cursor:pointer;border:1px solid var(--border-light);transition:transform 0.15s}
+.photo-thumb:hover{transform:scale(1.05)}
+.photo-add-btn{width:56px;height:56px;border-radius:8px;border:2px dashed var(--border);background:none;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:20px;cursor:pointer;transition:all 0.15s;flex-shrink:0}
+.photo-add-btn:hover{border-color:var(--accent);color:var(--accent)}
+.photo-upload-wrap{margin:8px 0}
+.photo-upload-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.photo-preview{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.photo-preview img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--border)}
+.photo-uploading{font-size:11px;color:var(--accent);font-family:var(--font-mono);display:flex;align-items:center;gap:6px}
+.photo-uploading .spin{width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.6s linear infinite;display:inline-block}
+.lightbox{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;padding:20px;cursor:pointer}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:90vh;border-radius:8px;object-fit:contain}
+.lightbox-close{position:absolute;top:16px;right:20px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;opacity:0.7}
+.lightbox-close:hover{opacity:1}
+
 /* ══ FEEDS ══ */
 .feed-section h4{font-size:12px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border-light);font-weight:600}
 .feed-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:22px}
@@ -320,11 +338,20 @@ tr:hover td{background:var(--accent-bg)}
   <div class="modal"><div class="modal-head"><h3 id="modalTitle"></h3><button class="btn-icon" onclick="closeModal()" style="font-size:20px">✕</button></div><div class="modal-body" id="modalBody"></div></div>
 </div>
 
+<!-- ══ LIGHTBOX ══ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="Photo">
+</div>
+
+<!-- Hidden file input for photo capture -->
+<input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoSelected(event)">
+
 <script>
 // ═══════════════════════════════════════════════
 //  CONFIG — Paste your Apps Script URL here
 // ═══════════════════════════════════════════════
-const API_URL = "https://script.google.com/macros/s/AKfycbzIWwCTGbceHA5QM00xN_eF8_fQlaW2CMJ8H9i7SfJzcWqt0QD1NyPhneHazgREUqtV/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbypqjmrbQ39hGj23Sei1kJ7XHkIyjsMCPKgYbqs1Ckqk56RJBplpHTv4_CyL7JxEeuWjQ/exec";
 
 // ═══════════════════════════════════════════════
 //  STATE
@@ -335,7 +362,8 @@ const COLORS=["#7a5a2e","#5c4033","#8b6914","#a0522d","#6b4226","#704214","#8b73
 const USER_COLORS={Olan:"#6b4d1f",Kuya:"#5c7a2e",Mios:"#7a3d5c"};
 const USER_INITIALS={Olan:"O",Kuya:"K",Mios:"M"};
 
-let data={cattle:[],pens:[],silage:[],feeds:[],finance:[]};
+let data={cattle:[],pens:[],silage:[],feeds:[],cashbook:{entries:[],summary:{totalBalance:0,bankBalance:0,cashOnHand:0}}};
+let pendingCashbookEntries=[]; // new entries queued for append
 let expandedCattle=null, currentTab="cattle", currentUser="";
 let saveTimeout=null, isSaving=false;
 
@@ -364,11 +392,17 @@ async function loadData(){
       const text=await r.text();
       const j=JSON.parse(text);
       if(j.success){
-        data.cattle=(j.data.cattle||[]).map(c=>({...c,id:String(c.id||""),vid:String(c.vid||""),breed:String(c.breed||""),sex:String(c.sex||""),pen:String(c.pen||""),notes:String(c.notes||""),color:String(c.color||""),status:String(c.status||"Healthy"),birthDate:String(c.birthDate||""),acquired:String(c.acquired||""),weight:Number(c.weight)||0}));
+        data.cattle=(j.data.cattle||[]).map(c=>({...c,id:String(c.id||""),vid:String(c.vid||""),breed:String(c.breed||""),sex:String(c.sex||""),pen:String(c.pen||""),notes:String(c.notes||""),color:String(c.color||""),status:String(c.status||"Healthy"),birthDate:String(c.birthDate||""),acquired:String(c.acquired||""),photos:String(c.photos||""),weight:Number(c.weight)||0}));
         data.pens=(j.data.pens||[]).map(p=>({...p,id:String(p.id||""),name:String(p.name||""),capacity:Number(p.capacity)||0}));
-        data.silage=(j.data.silage||[]).map(s=>({...s,id:String(s.id||""),type:String(s.type||""),quantity:Number(s.quantity)||0}));
+        data.silage=(j.data.silage||[]).map(s=>({...s,id:String(s.id||""),type:String(s.type||""),photos:String(s.photos||""),quantity:Number(s.quantity)||0}));
         data.feeds=(j.data.feeds||[]).map(f=>({...f,id:String(f.id||""),name:String(f.name||""),quantity:Number(f.quantity)||0,costPerUnit:Number(f.costPerUnit)||0,reorderLevel:Number(f.reorderLevel)||0}));
-        data.finance=(j.data.finance||[]).map(t=>({...t,id:String(t.id||""),date:String(t.date||""),type:String(t.type||"expense"),amount:Number(t.amount)||0,category:String(t.category||""),description:String(t.description||""),recordedBy:String(t.recordedBy||"")}));
+        // Cash Book comes as {entries:[], summary:{}}
+        const cb=j.data.cashbook||{};
+        data.cashbook={
+          entries:(cb.entries||[]).map(t=>({...t,date:String(t.date||""),description:String(t.description||""),category:String(t.category||""),moneyIn:Number(t.moneyIn)||0,moneyOut:Number(t.moneyOut)||0,bankCash:String(t.bankCash||""),bankBalance:Number(t.bankBalance)||0,cashOnHand:Number(t.cashOnHand)||0,totalBalance:Number(t.totalBalance)||0,notes:String(t.notes||"")})),
+          summary:cb.summary||{totalBalance:0,bankBalance:0,cashOnHand:0}
+        };
+        pendingCashbookEntries=[];
         localStorage.setItem("ranch_data",JSON.stringify(data));
         setSyncStatus("ok");
         return;
@@ -395,25 +429,31 @@ async function saveToAPI(){
   if(!API_URL||isSaving)return;
   isSaving=true;
   try{
-    // Apps Script returns 302 on POST. Browser changes POST→GET on redirect,
-    // but doPost() still executes server-side before the redirect is sent.
-    // We use no-cors to avoid preflight issues; we won't get the response
-    // body but the write still happens on the server.
+    // Build payload: managed sheets (full replace) + cashbook append
+    const payload={
+      cattle:data.cattle,
+      pens:data.pens,
+      silage:data.silage,
+      feeds:data.feeds,
+    };
+    // Only include pending cashbook entries (append, not replace)
+    if(pendingCashbookEntries.length>0){
+      payload.cashbook_append=pendingCashbookEntries;
+    }
     await fetchWithTimeout(API_URL,{
       method:"POST",
-      body:JSON.stringify(data),
+      body:JSON.stringify(payload),
       mode:"no-cors",
       redirect:"follow"
     },15000);
-    // With no-cors we get an opaque response (status 0), but the server
-    // received and processed the POST. Verify with a GET.
+    // Clear pending entries after successful send
+    pendingCashbookEntries=[];
     try{
       const check=await fetchWithTimeout(API_URL,{redirect:"follow"},10000);
       const j=JSON.parse(await check.text());
       if(j.success) setSyncStatus("ok");
       else setSyncStatus("error");
     }catch(e){
-      // GET verify failed but POST likely succeeded
       setSyncStatus("ok","Saved");
     }
   }catch(e){console.error("Save error:",e.message||e);setSyncStatus("error")}
@@ -423,39 +463,37 @@ async function saveToAPI(){
 function seedData(){
   data={
     cattle:[
-      {id:"ALT-001",vid:"0041",breed:"Brahman Cross",sex:"Female",birthDate:"2023-03-15",weight:320,status:"Healthy",pen:"Pen A",notes:"Pregnant, due Aug 2026",color:"#7a5a2e",acquired:"2024-01-10",lastEditedBy:"",lastEditedAt:""},
-      {id:"ALT-002",vid:"0078",breed:"Brahman",sex:"Male",birthDate:"2022-11-20",weight:480,status:"Healthy",pen:"Pen A",notes:"Bull, good temperament",color:"#5c4033",acquired:"2023-06-01",lastEditedBy:"",lastEditedAt:""},
-      {id:"ALT-003",vid:"0112",breed:"Brahman Cross",sex:"Female",birthDate:"2024-01-08",weight:210,status:"Monitoring",pen:"Pen B",notes:"Slight limp on rear left",color:"#8b6914",acquired:"2024-07-15",lastEditedBy:"",lastEditedAt:""},
-      {id:"ALT-004",vid:"0095",breed:"Nelore",sex:"Male",birthDate:"2023-07-22",weight:390,status:"Healthy",pen:"Pen A",notes:"",color:"#a0522d",acquired:"2024-02-20",lastEditedBy:"",lastEditedAt:""},
-      {id:"ALT-005",vid:"0153",breed:"Brahman Cross",sex:"Female",birthDate:"2024-06-10",weight:165,status:"Healthy",pen:"Pen B",notes:"Calf, growing well",color:"#6b4226",acquired:"2024-06-10",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-001",vid:"0041",breed:"Brahman Cross",sex:"Female",birthDate:"2023-03-15",weight:320,status:"Healthy",pen:"Pen A",notes:"Pregnant, due Aug 2026",color:"#7a5a2e",acquired:"2024-01-10",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-002",vid:"0078",breed:"Brahman",sex:"Male",birthDate:"2022-11-20",weight:480,status:"Healthy",pen:"Pen A",notes:"Bull, good temperament",color:"#5c4033",acquired:"2023-06-01",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-003",vid:"0112",breed:"Brahman Cross",sex:"Female",birthDate:"2024-01-08",weight:210,status:"Monitoring",pen:"Pen B",notes:"Slight limp on rear left",color:"#8b6914",acquired:"2024-07-15",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-004",vid:"0095",breed:"Nelore",sex:"Male",birthDate:"2023-07-22",weight:390,status:"Healthy",pen:"Pen A",notes:"",color:"#a0522d",acquired:"2024-02-20",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"ALT-005",vid:"0153",breed:"Brahman Cross",sex:"Female",birthDate:"2024-06-10",weight:165,status:"Healthy",pen:"Pen B",notes:"Calf, growing well",color:"#6b4226",acquired:"2024-06-10",photos:"",lastEditedBy:"",lastEditedAt:""},
     ],
     pens:[
-      {id:"pen-a",name:"Pen A",capacity:15,description:"Main feedlot pen, shaded",feedType:"TMR Mix",lastCleaned:"2026-05-28",lastEditedBy:"",lastEditedAt:""},
-      {id:"pen-b",name:"Pen B",capacity:10,description:"Growing pen, partial shade",feedType:"Grower Mix",lastCleaned:"2026-05-27",lastEditedBy:"",lastEditedAt:""},
-      {id:"pen-c",name:"Pen C",capacity:8,description:"Isolation / medical pen",feedType:"Recovery Mix",lastCleaned:"2026-05-30",lastEditedBy:"",lastEditedAt:""},
+      {id:"pen-a",name:"Pen A",capacity:15,description:"Main feedlot pen, shaded",feedType:"TMR Mix",lastCleaned:"2026-05-28",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"pen-b",name:"Pen B",capacity:10,description:"Growing pen, partial shade",feedType:"Grower Mix",lastCleaned:"2026-05-27",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"pen-c",name:"Pen C",capacity:8,description:"Isolation / medical pen",feedType:"Recovery Mix",lastCleaned:"2026-05-30",photos:"",lastEditedBy:"",lastEditedAt:""},
     ],
     silage:[
-      {id:"s1",type:"Napier Grass Silage",quantity:4200,unit:"kg",storageDate:"2026-04-10",expiryDate:"2026-10-10",location:"Silo Pit 1",quality:"Good",notes:"Well-fermented",lastEditedBy:"",lastEditedAt:""},
-      {id:"s2",type:"Corn Silage",quantity:2800,unit:"kg",storageDate:"2026-03-25",expiryDate:"2026-09-25",location:"Silo Pit 2",quality:"Excellent",notes:"High moisture, ideal",lastEditedBy:"",lastEditedAt:""},
-      {id:"s3",type:"Rice Straw Silage",quantity:1500,unit:"kg",storageDate:"2026-05-01",expiryDate:"2026-11-01",location:"Silo Bags",quality:"Fair",notes:"Supplementary only",lastEditedBy:"",lastEditedAt:""},
+      {id:"s1",type:"Napier Grass Silage",quantity:4200,unit:"kg",storageDate:"2026-04-10",expiryDate:"2026-10-10",location:"Silo Pit 1",quality:"Good",notes:"Well-fermented",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"s2",type:"Corn Silage",quantity:2800,unit:"kg",storageDate:"2026-03-25",expiryDate:"2026-09-25",location:"Silo Pit 2",quality:"Excellent",notes:"High moisture, ideal",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"s3",type:"Rice Straw Silage",quantity:1500,unit:"kg",storageDate:"2026-05-01",expiryDate:"2026-11-01",location:"Silo Bags",quality:"Fair",notes:"Supplementary only",photos:"",lastEditedBy:"",lastEditedAt:""},
     ],
     feeds:[
-      {id:"f1",name:"Copra Meal",category:"Concentrate",quantity:500,unit:"kg",costPerUnit:22,supplier:"Local Mill, Alitagtag",reorderLevel:200,lastPurchase:"2026-05-20",lastEditedBy:"",lastEditedAt:""},
-      {id:"f2",name:"Rice Bran (D1)",category:"Concentrate",quantity:350,unit:"kg",costPerUnit:18,supplier:"NFA Outlet",reorderLevel:150,lastPurchase:"2026-05-18",lastEditedBy:"",lastEditedAt:""},
-      {id:"f3",name:"Molasses",category:"Supplement",quantity:120,unit:"L",costPerUnit:25,supplier:"Batangas Sugar Central",reorderLevel:50,lastPurchase:"2026-05-10",lastEditedBy:"",lastEditedAt:""},
-      {id:"f4",name:"Urea",category:"Supplement",quantity:45,unit:"kg",costPerUnit:35,supplier:"Agri Supply, Lipa",reorderLevel:20,lastPurchase:"2026-05-22",lastEditedBy:"",lastEditedAt:""},
-      {id:"f5",name:"Salt Block",category:"Mineral",quantity:8,unit:"pcs",costPerUnit:150,supplier:"Agri Supply, Lipa",reorderLevel:3,lastPurchase:"2026-05-15",lastEditedBy:"",lastEditedAt:""},
-      {id:"f6",name:"Napier Grass (Fresh)",category:"Forage",quantity:800,unit:"kg",costPerUnit:5,supplier:"On-site",reorderLevel:300,lastPurchase:"2026-05-30",lastEditedBy:"",lastEditedAt:""},
+      {id:"f1",name:"Copra Meal",category:"Concentrate",quantity:500,unit:"kg",costPerUnit:22,supplier:"Local Mill, Alitagtag",reorderLevel:200,lastPurchase:"2026-05-20",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"f2",name:"Rice Bran (D1)",category:"Concentrate",quantity:350,unit:"kg",costPerUnit:18,supplier:"NFA Outlet",reorderLevel:150,lastPurchase:"2026-05-18",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"f3",name:"Molasses",category:"Supplement",quantity:120,unit:"L",costPerUnit:25,supplier:"Batangas Sugar Central",reorderLevel:50,lastPurchase:"2026-05-10",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"f4",name:"Urea",category:"Supplement",quantity:45,unit:"kg",costPerUnit:35,supplier:"Agri Supply, Lipa",reorderLevel:20,lastPurchase:"2026-05-22",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"f5",name:"Salt Block",category:"Mineral",quantity:8,unit:"pcs",costPerUnit:150,supplier:"Agri Supply, Lipa",reorderLevel:3,lastPurchase:"2026-05-15",photos:"",lastEditedBy:"",lastEditedAt:""},
+      {id:"f6",name:"Napier Grass (Fresh)",category:"Forage",quantity:800,unit:"kg",costPerUnit:5,supplier:"On-site",reorderLevel:300,lastPurchase:"2026-05-30",photos:"",lastEditedBy:"",lastEditedAt:""},
     ],
-    finance:[
-      {id:"txn1",date:"2024-01-10",type:"expense",amount:85000,category:"Cattle Purchase",description:"5 head Brahman Cross from Lipa market",recordedBy:"Olan",lastEditedBy:"",lastEditedAt:""},
-      {id:"txn2",date:"2024-02-20",type:"expense",amount:32000,category:"Cattle Purchase",description:"1 Nelore bull",recordedBy:"Olan",lastEditedBy:"",lastEditedAt:""},
-      {id:"txn3",date:"2026-04-15",type:"expense",amount:11000,category:"Feed",description:"Copra meal + rice bran bulk purchase",recordedBy:"Kuya",lastEditedBy:"",lastEditedAt:""},
-      {id:"txn4",date:"2026-05-01",type:"expense",amount:8500,category:"Infrastructure",description:"Fencing materials — barbed wire and posts",recordedBy:"Kuya",lastEditedBy:"",lastEditedAt:""},
-      {id:"txn5",date:"2026-05-10",type:"expense",amount:3200,category:"Veterinary",description:"Deworming + vitamins, all head",recordedBy:"Kuya",lastEditedBy:"",lastEditedAt:""},
-      {id:"txn6",date:"2026-05-20",type:"income",amount:45000,category:"Cattle Sale",description:"Sold 1 fattened steer to Batangas buyer",recordedBy:"Olan",lastEditedBy:"",lastEditedAt:""},
-      {id:"txn7",date:"2026-06-01",type:"expense",amount:5000,category:"Labor",description:"Grass cutting and pen cleaning — May",recordedBy:"Kuya",lastEditedBy:"",lastEditedAt:""},
-    ],
+    cashbook:{
+      entries:[
+        {date:"2026-04-06",description:"Shareholder Contribution - Olan",category:"Capital",moneyIn:30000,moneyOut:0,bankCash:"Cash",bankBalance:0,cashOnHand:30000,totalBalance:30000,notes:"For land survey"},
+        {date:"2026-04-08",description:"Land Survey Payment",category:"Infrastructure",moneyIn:0,moneyOut:30000,bankCash:"Cash",bankBalance:0,cashOnHand:0,totalBalance:0,notes:""},
+      ],
+      summary:{totalBalance:0,bankBalance:0,cashOnHand:0}
+    },
   };
 }
 
@@ -503,6 +541,125 @@ function openModal(t,h){document.getElementById("modalTitle").textContent=t;docu
 function closeModal(){document.getElementById("modalOverlay").classList.remove("open")}
 
 // ═══════════════════════════════════════════════
+//  PHOTOS
+// ═══════════════════════════════════════════════
+let pendingPhotoCallback=null;
+
+function openLightbox(url){document.getElementById("lightboxImg").src=url;document.getElementById("lightbox").classList.add("open")}
+function closeLightbox(){document.getElementById("lightbox").classList.remove("open");document.getElementById("lightboxImg").src=""}
+
+// Parse photos field — comma-separated URLs or empty
+function parsePhotos(s){if(!s)return[];if(Array.isArray(s))return s;return String(s).split(",").map(u=>u.trim()).filter(u=>u)}
+function serializePhotos(arr){return(arr||[]).join(",")}
+
+// Resize image client-side to max dimension, return base64 jpeg
+function resizeImage(file,maxDim=1200){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=function(e){
+      const img=new Image();
+      img.onload=function(){
+        let w=img.width,h=img.height;
+        if(w>maxDim||h>maxDim){
+          if(w>h){h=Math.round(h*maxDim/w);w=maxDim}
+          else{w=Math.round(w*maxDim/h);h=maxDim}
+        }
+        const canvas=document.createElement("canvas");
+        canvas.width=w;canvas.height=h;
+        canvas.getContext("2d").drawImage(img,0,0,w,h);
+        resolve(canvas.toDataURL("image/jpeg",0.82));
+      };
+      img.onerror=reject;
+      img.src=e.target.result;
+    };
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// Upload base64 image to Apps Script → Google Drive
+async function uploadPhoto(base64,filename){
+  if(!API_URL)return null;
+  try{
+    const r=await fetchWithTimeout(API_URL,{
+      method:"POST",
+      body:JSON.stringify({action:"upload_image",base64:base64,filename:filename,mimeType:"image/jpeg"}),
+      redirect:"follow"
+    },30000);
+    const text=await r.text();
+    const j=JSON.parse(text);
+    if(j.success) return j.url||j.thumbnail||null;
+  }catch(e){
+    console.error("Photo upload error:",e);
+    // Fallback: try no-cors (upload happens but we can't read URL)
+    try{
+      await fetchWithTimeout(API_URL,{
+        method:"POST",
+        body:JSON.stringify({action:"upload_image",base64:base64,filename:filename,mimeType:"image/jpeg"}),
+        mode:"no-cors",redirect:"follow"
+      },30000);
+    }catch(e2){console.error("Photo upload fallback error:",e2)}
+  }
+  return null;
+}
+
+// Trigger file input for a specific record
+function triggerPhotoCapture(recordType,recordId){
+  pendingPhotoCallback={type:recordType,id:recordId};
+  document.getElementById("photoInput").click();
+}
+
+// Handle file selected
+async function handlePhotoSelected(e){
+  const file=e.target.files[0];
+  if(!file||!pendingPhotoCallback)return;
+  const {type,id}=pendingPhotoCallback;
+  pendingPhotoCallback=null;
+  e.target.value="";
+
+  // Show uploading indicator
+  const indicator=document.getElementById("photoStatus_"+id);
+  if(indicator)indicator.innerHTML='<span class="photo-uploading"><span class="spin"></span>Uploading…</span>';
+
+  try{
+    const base64=await resizeImage(file);
+    const filename=type+"_"+id+"_"+Date.now()+".jpg";
+    const url=await uploadPhoto(base64,filename);
+
+    if(url){
+      // Add URL to the record's photos
+      const collection=type==="cattle"?data.cattle:type==="silage"?data.silage:null;
+      if(collection){
+        const rec=collection.find(r=>r.id===id);
+        if(rec){
+          const photos=parsePhotos(rec.photos);
+          photos.push(url);
+          rec.photos=serializePhotos(photos);
+          stamp(rec);
+          scheduleSave();
+        }
+      }
+      if(indicator)indicator.innerHTML='<span style="color:var(--success);font-size:11px">✓ Uploaded</span>';
+      setTimeout(()=>renderAll(),800);
+    }else{
+      if(indicator)indicator.innerHTML='<span style="color:var(--warn);font-size:11px">Upload sent — refresh to see photo</span>';
+      // Reload data to pick up the photo if it was saved via no-cors
+      setTimeout(async()=>{try{await loadData();renderAll()}catch(e){}},3000);
+    }
+  }catch(err){
+    console.error("Photo process error:",err);
+    if(indicator)indicator.innerHTML='<span style="color:var(--danger);font-size:11px">Failed — try again</span>';
+  }
+}
+
+// Render photo thumbnails for a record
+function photoThumbs(photos,recordType,recordId){
+  const urls=parsePhotos(photos);
+  const thumbs=urls.map(u=>`<img class="photo-thumb" src="${esc(u)}" onclick="event.stopPropagation();openLightbox('${esc(u)}')" loading="lazy" onerror="this.style.display='none'">`).join("");
+  return`<div class="photo-grid">${thumbs}<button class="photo-add-btn" onclick="event.stopPropagation();triggerPhotoCapture('${recordType}','${recordId}')" title="Add photo">📷</button><span id="photoStatus_${recordId}"></span></div>`;
+}
+
+// ═══════════════════════════════════════════════
 //  CATTLE
 // ═══════════════════════════════════════════════
 function renderCattle(){
@@ -512,7 +669,7 @@ function renderCattle(){
   document.getElementById("cattleSummary").innerHTML=[{l:"Total Head",v:total},{l:"Healthy",v:healthy},{l:"Monitoring",v:mon},{l:"Total Weight",v:(tw/1000).toFixed(1)+"t"}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
   if(!list.length){document.getElementById("cattleGrid").innerHTML='<div class="empty">No cattle found</div>';return}
   document.getElementById("cattleGrid").innerHTML=list.map(c=>{const sc=STATUS[c.status]||STATUS.Healthy,exp=expandedCattle===c.id;
-    return`<div class="cattle-card ${exp?'expanded':''}" onclick="toggleCattle('${c.id}')"><div class="card-header"><div class="card-avatar" style="background:${c.color||'#7a5a2e'}">V${esc(c.vid)}</div><div class="card-info"><div><span class="card-name">VID ${esc(c.vid)}</span><span class="card-id">${esc(c.id)}</span></div><div class="card-meta">${esc(c.breed)} · ${esc(c.sex)} · ${age(c.birthDate)}</div></div><span class="status-badge" style="background:${sc.bg};color:${sc.text}"><span class="status-dot" style="background:${sc.dot}"></span>${c.status}</span></div><div class="card-stats"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a3 3 0 00-3 3h6a3 3 0 00-3-3zM5 8h14l-1.5 13H6.5L5 8z"/></svg>${c.weight} kg</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M3 12h18"/></svg>${esc(c.pen||"—")}</span></div>${exp?`<div class="card-details">${c.notes?`<div class="card-notes">${esc(c.notes)}</div>`:''}<div class="card-dates">Acquired: ${c.acquired||"—"} · Born: ${c.birthDate||"—"}</div><div class="card-actions"><button class="btn-secondary btn-sm" onclick="event.stopPropagation();editCattle('${c.id}')">✎ Edit</button><button class="btn-secondary btn-sm" style="color:var(--danger);border-color:#ef9a9a" onclick="event.stopPropagation();removeCattle('${c.id}')">✕ Remove</button></div></div>`:''}</div>`}).join("");
+    return`<div class="cattle-card ${exp?'expanded':''}" onclick="toggleCattle('${c.id}')"><div class="card-header"><div class="card-avatar" style="background:${c.color||'#7a5a2e'}">V${esc(c.vid)}</div><div class="card-info"><div><span class="card-name">VID ${esc(c.vid)}</span><span class="card-id">${esc(c.id)}</span></div><div class="card-meta">${esc(c.breed)} · ${esc(c.sex)} · ${age(c.birthDate)}</div></div><span class="status-badge" style="background:${sc.bg};color:${sc.text}"><span class="status-dot" style="background:${sc.dot}"></span>${c.status}</span></div><div class="card-stats"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a3 3 0 00-3 3h6a3 3 0 00-3-3zM5 8h14l-1.5 13H6.5L5 8z"/></svg>${c.weight} kg</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M3 12h18"/></svg>${esc(c.pen||"—")}</span></div>${exp?`<div class="card-details">${c.notes?`<div class="card-notes">${esc(c.notes)}</div>`:''}<div class="card-dates">Acquired: ${c.acquired||"—"} · Born: ${c.birthDate||"—"}</div>${photoThumbs(c.photos,"cattle",c.id)}<div class="card-actions"><button class="btn-secondary btn-sm" onclick="event.stopPropagation();editCattle('${c.id}')">✎ Edit</button><button class="btn-secondary btn-sm" style="color:var(--danger);border-color:#ef9a9a" onclick="event.stopPropagation();removeCattle('${c.id}')">✕ Remove</button></div></div>`:''}</div>`}).join("");
 }
 function toggleCattle(id){expandedCattle=expandedCattle===id?null:id;renderCattle()}
 function cattleForm(c){const po=data.pens.map(p=>`<option ${c.pen===p.name?'selected':''}>${p.name}</option>`).join("");
@@ -543,7 +700,7 @@ function removePen(id){if(!confirm("Remove?"))return;data.pens=data.pens.filter(
 function renderSilage(){const tk=data.silage.reduce((s,i)=>s+(i.unit==="kg"?i.quantity:0),0);
   document.getElementById("silageSummary").innerHTML=[{l:"Batches",v:data.silage.length},{l:"Total Stock",v:(tk/1000).toFixed(1)+"t"},{l:"Locations",v:[...new Set(data.silage.map(s=>s.location))].length}].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value">${s.v}</div></div>`).join("");
   const hdr=["Type","Qty","Location","Stored","Expires","Quality",""].map(h=>`<th>${h}</th>`).join("");
-  document.getElementById("silageTable").innerHTML=`<table><thead><tr>${hdr}</tr></thead><tbody>${data.silage.map(s=>{const exp=s.expiryDate&&(new Date(s.expiryDate)-Date.now())<30*86400000;return`<tr><td class="bold">${esc(s.type)}</td><td>${s.quantity.toLocaleString()} ${s.unit}</td><td>${esc(s.location)}</td><td>${s.storageDate}</td><td style="${exp?'color:#c62828;font-weight:600':''}">${s.expiryDate}${exp?' ⚠':''}</td><td><span style="color:${QC[s.quality]||'var(--text)'};font-weight:600">${s.quality}</span></td><td style="white-space:nowrap"><button class="btn-icon" onclick="editSilage('${s.id}')">✎</button><button class="btn-icon danger" onclick="removeSilage('${s.id}')">✕</button></td></tr>`}).join("")}</tbody></table>`}
+  document.getElementById("silageTable").innerHTML=`<table><thead><tr>${hdr}</tr></thead><tbody>${data.silage.map(s=>{const exp=s.expiryDate&&(new Date(s.expiryDate)-Date.now())<30*86400000;const pc=parsePhotos(s.photos).length;return`<tr><td class="bold">${esc(s.type)}</td><td>${s.quantity.toLocaleString()} ${s.unit}</td><td>${esc(s.location)}</td><td>${s.storageDate}</td><td style="${exp?'color:#c62828;font-weight:600':''}">${s.expiryDate}${exp?' ⚠':''}</td><td><span style="color:${QC[s.quality]||'var(--text)'};font-weight:600">${s.quality}</span></td><td style="white-space:nowrap"><button class="btn-icon" onclick="triggerPhotoCapture('silage','${s.id}')" title="Add photo">📷${pc?'<sup>'+pc+'</sup>':''}</button><span id="photoStatus_${s.id}"></span><button class="btn-icon" onclick="editSilage('${s.id}')">✎</button><button class="btn-icon danger" onclick="removeSilage('${s.id}')">✕</button></td></tr>`}).join("")}</tbody></table>`}
 function silageForm(s){return`<div class="field"><label>Type</label><input class="input" id="sf_type" value="${esc(s.type)}" placeholder="e.g. Napier Grass Silage"></div><div class="form-row"><div class="field"><label>Quantity</label><input class="input" type="number" id="sf_qty" value="${s.quantity}"></div><div class="field"><label>Unit</label><select class="input select" id="sf_unit"><option ${s.unit==='kg'?'selected':''}>kg</option><option ${s.unit==='L'?'selected':''}>L</option><option ${s.unit==='pcs'?'selected':''}>pcs</option></select></div><div class="field"><label>Storage Date</label><input class="input" type="date" id="sf_stored" value="${s.storageDate}"></div><div class="field"><label>Expiry Date</label><input class="input" type="date" id="sf_expiry" value="${s.expiryDate}"></div></div><div class="field"><label>Location</label><input class="input" id="sf_loc" value="${esc(s.location)}"></div><div class="field"><label>Quality</label><select class="input select" id="sf_quality"><option ${s.quality==='Excellent'?'selected':''}>Excellent</option><option ${s.quality==='Good'?'selected':''}>Good</option><option ${s.quality==='Fair'?'selected':''}>Fair</option><option ${s.quality==='Poor'?'selected':''}>Poor</option></select></div><div class="field"><label>Notes</label><textarea class="input" rows="2" id="sf_notes" style="resize:vertical">${esc(s.notes)}</textarea></div>`}
 function readSF(){return{type:document.getElementById("sf_type").value,quantity:Number(document.getElementById("sf_qty").value)||0,unit:document.getElementById("sf_unit").value,storageDate:document.getElementById("sf_stored").value,expiryDate:document.getElementById("sf_expiry").value,location:document.getElementById("sf_loc").value,quality:document.getElementById("sf_quality").value,notes:document.getElementById("sf_notes").value}}
 function openSilageModal(){openModal("Add Silage Batch",silageForm({id:"",type:"",quantity:"",unit:"kg",storageDate:today(),expiryDate:"",location:"",quality:"Good",notes:""})+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveSilage()">Add Batch</button></div>`)}
@@ -569,75 +726,95 @@ function saveFeed(eid){const f=readFF();if(!f.name)return;stamp(f);if(eid){const
 function removeFeed(id){if(!confirm("Remove?"))return;data.feeds=data.feeds.filter(f=>f.id!==id);renderFeeds();scheduleSave()}
 
 // ═══════════════════════════════════════════════
-//  FINANCE
+//  FINANCE (reads from Cash Book sheet)
 // ═══════════════════════════════════════════════
-const FIN_CATS=["Cattle Purchase","Cattle Sale","Feed","Infrastructure","Labor","Veterinary","Transport","Equipment","Shareholder Contribution","Land Lease","Utilities","Other"];
+const FIN_CATS=["Capital","Cattle Purchase","Cattle Sale","Feed","Infrastructure","Labor","Veterinary","Transport","Equipment","Land Lease","Withdraw","Utilities","Other"];
 
 function renderFinance(){
   const tf=document.getElementById("financeFilter").value;
   const cf=document.getElementById("financeCatFilter").value;
+  const entries=data.cashbook.entries||[];
+  const summary=data.cashbook.summary||{};
 
-  // populate category filter dynamically
+  // populate category filter
   const catSelect=document.getElementById("financeCatFilter");
   const curCat=catSelect.value;
-  const usedCats=[...new Set(data.finance.map(t=>t.category))].sort();
+  const usedCats=[...new Set(entries.map(t=>t.category).filter(Boolean))].sort();
   catSelect.innerHTML='<option value="All">All Categories</option>'+usedCats.map(c=>`<option ${c===curCat?'selected':''}>${c}</option>`).join("");
 
-  const list=data.finance.filter(t=>{
-    const mt=tf==="All"||t.type===tf;
+  const list=entries.filter(t=>{
+    const mt=tf==="All"||(tf==="income"?t.moneyIn>0:t.moneyOut>0);
     const mc=cf==="All"||t.category===cf;
     return mt&&mc;
   }).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
 
-  const totalIn=data.finance.filter(t=>t.type==="income").reduce((s,t)=>s+t.amount,0);
-  const totalOut=data.finance.filter(t=>t.type==="expense").reduce((s,t)=>s+t.amount,0);
-  const net=totalIn-totalOut;
+  const totalIn=entries.reduce((s,t)=>s+(t.moneyIn||0),0);
+  const totalOut=entries.reduce((s,t)=>s+(t.moneyOut||0),0);
 
   document.getElementById("financeSummary").innerHTML=[
-    {l:"Total Income",v:"₱"+totalIn.toLocaleString(),c:"#2e7d32"},
-    {l:"Total Expenses",v:"₱"+totalOut.toLocaleString(),c:"#b71c1c"},
-    {l:"Net",v:(net>=0?"₱":"-₱")+Math.abs(net).toLocaleString(),c:net>=0?"#2e7d32":"#b71c1c"},
-    {l:"Transactions",v:data.finance.length},
+    {l:"Total Balance",v:"₱"+(summary.totalBalance||0).toLocaleString(),c:"var(--accent)"},
+    {l:"Bank",v:"₱"+(summary.bankBalance||0).toLocaleString()},
+    {l:"Cash on Hand",v:"₱"+(summary.cashOnHand||0).toLocaleString()},
+    {l:"Money In",v:"₱"+totalIn.toLocaleString(),c:"#2e7d32"},
+    {l:"Money Out",v:"₱"+totalOut.toLocaleString(),c:"#b71c1c"},
+    {l:"Entries",v:entries.length},
   ].map(s=>`<div class="stat-card"><div class="stat-label">${s.l}</div><div class="stat-value" ${s.c?`style="color:${s.c}"`:''} >${s.v}</div></div>`).join("");
 
   if(!list.length){document.getElementById("financeTable").innerHTML='<div class="empty">No transactions found</div>';return}
-  const hdr=["Date","Type","Amount","Category","Description","By",""].map(h=>`<th>${h}</th>`).join("");
+  const hdr=["Date","Description","Category","In","Out","Via","Notes"].map(h=>`<th>${h}</th>`).join("");
   const rows=list.map(t=>{
+    const isIn=t.moneyIn>0;
     return`<tr>
       <td style="white-space:nowrap;font-family:var(--font-mono);font-size:12px">${esc(t.date)}</td>
-      <td><span class="txn-type ${t.type}">${t.type==="income"?"IN":"OUT"}</span></td>
-      <td class="txn-amount ${t.type}">${t.type==="income"?"+":"−"}₱${t.amount.toLocaleString()}</td>
+      <td class="bold" style="max-width:220px">${esc(t.description)}</td>
       <td><span class="txn-cat">${esc(t.category)}</span></td>
-      <td class="txn-desc">${esc(t.description)}</td>
-      <td class="txn-who">${esc(t.recordedBy)}</td>
-      <td style="white-space:nowrap"><button class="btn-icon" onclick="editFinance('${t.id}')">✎</button><button class="btn-icon danger" onclick="removeFinance('${t.id}')">✕</button></td>
+      <td class="txn-amount income" style="font-size:13px">${t.moneyIn?"+₱"+t.moneyIn.toLocaleString():""}</td>
+      <td class="txn-amount expense" style="font-size:13px">${t.moneyOut?"−₱"+t.moneyOut.toLocaleString():""}</td>
+      <td class="txn-who">${esc(t.bankCash)}</td>
+      <td class="txn-desc">${esc(t.notes)}</td>
     </tr>`;
   }).join("");
   document.getElementById("financeTable").innerHTML=`<table><thead><tr>${hdr}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function financeForm(t){
-  const catOpts=FIN_CATS.map(c=>`<option ${t.category===c?'selected':''}>${c}</option>`).join("");
+function financeForm(){
+  const catOpts=FIN_CATS.map(c=>`<option>${c}</option>`).join("");
   return`<div class="form-row">
-    <div class="field"><label>Date</label><input class="input" type="date" id="tf_date" value="${t.date}"></div>
-    <div class="field"><label>Type</label><select class="input select" id="tf_type"><option value="expense" ${t.type==='expense'?'selected':''}>Expense (money out)</option><option value="income" ${t.type==='income'?'selected':''}>Income (money in)</option></select></div>
-  </div>
-  <div class="form-row">
-    <div class="field"><label>Amount (₱)</label><input class="input" type="number" id="tf_amount" value="${t.amount}" min="0" step="0.01"></div>
+    <div class="field"><label>Date</label><input class="input" type="date" id="tf_date" value="${today()}"></div>
     <div class="field"><label>Category</label><select class="input select" id="tf_cat">${catOpts}</select></div>
   </div>
-  <div class="field"><label>Description</label><textarea class="input" rows="2" id="tf_desc" style="resize:vertical" placeholder="What was this for?">${esc(t.description)}</textarea></div>`;
+  <div class="field"><label>Description</label><input class="input" id="tf_desc" placeholder="What was this for?"></div>
+  <div class="form-row">
+    <div class="field"><label>Money In (₱)</label><input class="input" type="number" id="tf_in" value="" min="0" step="0.01" placeholder="0"></div>
+    <div class="field"><label>Money Out (₱)</label><input class="input" type="number" id="tf_out" value="" min="0" step="0.01" placeholder="0"></div>
+  </div>
+  <div class="form-row">
+    <div class="field"><label>Bank / Cash</label><select class="input select" id="tf_via"><option>Cash</option><option>Bank</option><option>Transfer</option></select></div>
+    <div class="field"><label>Notes</label><input class="input" id="tf_notes" placeholder="Optional"></div>
+  </div>`;
 }
-
-function readTF(){return{date:document.getElementById("tf_date").value,type:document.getElementById("tf_type").value,amount:Number(document.getElementById("tf_amount").value)||0,category:document.getElementById("tf_cat").value,description:document.getElementById("tf_desc").value,recordedBy:currentUser}}
 
 function openFinanceModal(){
-  const t={id:"",date:today(),type:"expense",amount:"",category:"Feed",description:"",recordedBy:currentUser};
-  openModal("Log Transaction",financeForm(t)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveFinance()">Log</button></div>`);
+  openModal("Log Transaction",financeForm()+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveFinance()">Log</button></div>`);
 }
-function editFinance(id){const t=data.finance.find(x=>x.id===id);if(!t)return;openModal("Edit Transaction",financeForm(t)+`<div class="form-actions"><button class="btn-secondary" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveFinance('${id}')">Update</button></div>`)}
-function saveFinance(eid){const f=readTF();if(!f.amount)return;stamp(f);if(eid){const i=data.finance.findIndex(t=>t.id===eid);if(i>=0)data.finance[i]={...data.finance[i],...f}}else data.finance.push({id:uid("txn"),...f});closeModal();renderFinance();scheduleSave()}
-function removeFinance(id){if(!confirm("Remove this transaction?"))return;data.finance=data.finance.filter(t=>t.id!==id);renderFinance();scheduleSave()}
+
+function saveFinance(){
+  const entry={
+    date:document.getElementById("tf_date").value,
+    description:document.getElementById("tf_desc").value,
+    category:document.getElementById("tf_cat").value,
+    moneyIn:Number(document.getElementById("tf_in").value)||0,
+    moneyOut:Number(document.getElementById("tf_out").value)||0,
+    bankCash:document.getElementById("tf_via").value,
+    notes:document.getElementById("tf_notes").value,
+  };
+  if(!entry.description&&!entry.moneyIn&&!entry.moneyOut)return;
+  // Add to local display
+  data.cashbook.entries.push({...entry,bankBalance:0,cashOnHand:0,totalBalance:0});
+  // Queue for append to sheet
+  pendingCashbookEntries.push(entry);
+  closeModal();renderFinance();scheduleSave();
+}
 
 // ═══════════════════════════════════════════════
 //  INIT
