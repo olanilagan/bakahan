@@ -1,0 +1,12 @@
+# Search engines may index the public pages; member-only pages are excluded.
+User-agent: *
+Disallow: /en/account/
+Disallow: /fil/account/
+Disallow: /en/admin/
+Disallow: /fil/admin/
+Disallow: /en/login/
+Disallow: /fil/login/
+Disallow: /en/signup/
+Disallow: /fil/signup/
+
+Sitemap: https://bakahan.com/sitemap.xml

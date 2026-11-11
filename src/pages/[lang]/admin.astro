@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { formatDate, useT } from '../../i18n/utils';
 import type { UIKey } from '../../i18n/ui';
 import { pageLang, notFound } from '../../lib/page';
+import { hashPassword } from '../../lib/auth';
 
 export const prerender = false;
 
@@ -14,6 +15,15 @@ const user = Astro.locals.user;
 // Non-admins get a 404 rather than "forbidden", so the page's existence isn't advertised.
 if (!user?.isAdmin) return notFound();
 
+// Temporary passwords avoid look-alike characters (0/O, 1/l/I) so they can be read out over the phone.
+function tempPassword(): string {
+  const alphabet = 'abcdefghjkmnpqrstuvwxyz23456789';
+  const bytes = crypto.getRandomValues(new Uint8Array(10));
+  return [...bytes].map((b) => alphabet[b % alphabet.length]).join('');
+}
+
+let resetNotice: { name: string; email: string; password: string } | null = null;
+
 if (Astro.request.method === 'POST') {
   const form = await Astro.request.formData();
   const id = Number(form.get('id'));
@@ -22,13 +32,26 @@ if (Astro.request.method === 'POST') {
     await env.DB.prepare('UPDATE businesses SET status = ? WHERE id = ?')
       .bind(action === 'approve' ? 'approved' : 'rejected', id)
       .run();
+    return Astro.redirect(Astro.url.pathname, 303);
   }
-  return Astro.redirect(Astro.url.pathname, 303);
+  if (Number.isInteger(id) && action === 'reset-password') {
+    // No email on the free plan, so the admin resets the password and tells the member directly.
+    const member = await env.DB.prepare('SELECT name, email FROM users WHERE id = ?').bind(id).first<{ name: string; email: string }>();
+    if (member) {
+      const password = tempPassword();
+      await env.DB.batch([
+        env.DB.prepare('UPDATE users SET password_hash = ? WHERE id = ?').bind(await hashPassword(password), id),
+        env.DB.prepare('DELETE FROM sessions WHERE user_id = ?').bind(id), // log them out everywhere
+      ]);
+      resetNotice = { ...member, password };
+      Astro.response.headers.set('Cache-Control', 'no-store');
+    }
+  }
 }
 
 // D1 batch: several queries in one round trip to the database.
 const now = new Date().toISOString();
-const [pending, users, listings, prices, waitlist] = await env.DB.batch([
+const [pending, users, listings, prices, waitlist, members] = await env.DB.batch([
   env.DB.prepare(
     `SELECT b.*, u.name AS submitted_by, u.email AS submitter_email FROM businesses b
        LEFT JOIN users u ON u.id = b.user_id WHERE b.status = 'pending' ORDER BY b.created_at`,
@@ -37,7 +60,10 @@ const [pending, users, listings, prices, waitlist] = await env.DB.batch([
   env.DB.prepare("SELECT COUNT(*) AS n FROM listings WHERE status = 'active' AND expires_at > ?").bind(now),
   env.DB.prepare('SELECT COUNT(*) AS n FROM price_reports'),
   env.DB.prepare('SELECT COUNT(*) AS n FROM waitlist'),
+  env.DB.prepare('SELECT id, name, email, region, role, phone, created_at FROM users ORDER BY created_at DESC LIMIT 200'),
 ]);
+type Member = { id: number; name: string; email: string; region: string | null; role: string; phone: string | null; created_at: string };
+const memberRows = (members?.results ?? []) as Member[];
 
 type Pending = {
   id: number;
@@ -68,6 +94,15 @@ const stats = [
   </section>
   <section class="section">
     <div class="container" style="display:grid; gap:36px">
+      {
+        resetNotice && (
+          <p class="alert alert--ok">
+            New temporary password for {resetNotice.name} ({resetNotice.email}): <strong style="font-family:monospace; font-size:1.2rem">{resetNotice.password}</strong>
+            <br />
+            <span class="small">Give this to the member directly. It is shown only once. They can log in with it now.</span>
+          </p>
+        )
+      }
       <div>
         <h2>{t('admin.stats')}</h2>
         <div class="grid">
@@ -112,6 +147,36 @@ const stats = [
               </div>
             ))
           }
+        </div>
+      </div>
+
+      <div>
+        <h2>{t('admin.users')}</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Region</th><th>Role</th><th>Joined</th><th></th></tr>
+            </thead>
+            <tbody>
+              {
+                memberRows.map((m) => (
+                  <tr>
+                    <td>{m.name}</td>
+                    <td>{m.email}</td>
+                    <td>{m.region}</td>
+                    <td>{t(`role.${m.role}` as UIKey)}</td>
+                    <td style="white-space:nowrap">{formatDate(lang, m.created_at)}</td>
+                    <td>
+                      <form method="post" onsubmit="return confirm('Reset this member’s password? They will be logged out.')">
+                        <input type="hidden" name="id" value={m.id} />
+                        <button class="btn btn--ghost btn--small" name="action" value="reset-password">Reset password</button>
+                      </form>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

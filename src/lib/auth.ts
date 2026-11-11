@@ -25,14 +25,14 @@ const enc = new TextEncoder();
 function toB64(bytes: ArrayBuffer | Uint8Array): string {
   return btoa(String.fromCharCode(...new Uint8Array(bytes)));
 }
-function fromB64(text: string): Uint8Array {
+function fromB64(text: string): Uint8Array<ArrayBuffer> {
   return Uint8Array.from(atob(text), (c) => c.charCodeAt(0));
 }
 function toB64Url(bytes: Uint8Array): string {
   return toB64(bytes).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-async function pbkdf2(password: string, salt: Uint8Array, iterations: number): Promise<ArrayBuffer> {
+async function pbkdf2(password: string, salt: Uint8Array<ArrayBuffer>, iterations: number): Promise<ArrayBuffer> {
   const key = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
   return crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations }, key, 256);
 }
@@ -50,7 +50,9 @@ export async function verifyPassword(password: string, stored: string): Promise<
   const actual = new Uint8Array(await pbkdf2(password, fromB64(saltB64), Number(iter)));
   if (actual.byteLength !== expected.byteLength) return false;
   // Constant-time compare, so response timing doesn't leak how many bytes matched.
-  return crypto.subtle.timingSafeEqual(actual, expected);
+  // timingSafeEqual is a Workers extension to Web Crypto, missing from the standard DOM types.
+  const subtle = crypto.subtle as SubtleCrypto & { timingSafeEqual(a: ArrayBufferView, b: ArrayBufferView): boolean };
+  return subtle.timingSafeEqual(actual, expected);
 }
 
 async function sha256Hex(text: string): Promise<string> {

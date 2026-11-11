@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import ListingCard, { type ListingRow } from '../../components/ListingCard.astro';
 import { formatDate, href, useT } from '../../i18n/utils';
 import { loginUrl, pageLang, notFound } from '../../lib/page';
+import { allowAttempt, hashPassword, verifyPassword } from '../../lib/auth';
 
 export const prerender = false;
 
@@ -12,6 +13,23 @@ if (!lang) return notFound();
 const t = useT(lang);
 const user = Astro.locals.user;
 if (!user) return Astro.redirect(loginUrl(lang, Astro));
+
+// Change password: requires the current password, so a borrowed phone left logged in can't lock the owner out.
+let pwMessage = '';
+let pwError = '';
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const current = (form.get('current') as string | null) ?? '';
+  const next = (form.get('new') as string | null) ?? '';
+  const row = await env.DB.prepare('SELECT password_hash FROM users WHERE id = ?').bind(user.id).first<{ password_hash: string }>();
+  if (!(await allowAttempt(Astro.request, 'password'))) pwError = t('auth.tooMany');
+  else if (!row || !(await verifyPassword(current, row.password_hash))) pwError = t('account.pw.wrong');
+  else if (next.length < 8 || next.length > 200) pwError = t('auth.signup.weak');
+  else {
+    await env.DB.prepare('UPDATE users SET password_hash = ? WHERE id = ?').bind(await hashPassword(next), user.id).run();
+    pwMessage = t('account.pw.done');
+  }
+}
 
 const { results: listings } = await env.DB.prepare(
   `SELECT id, intent, animal_type, breed, head_count, weight_kg, price, price_unit, title, region, location, status, created_at
@@ -54,6 +72,23 @@ const { results: listings } = await env.DB.prepare(
           </div>
         )
       }
+
+      <div style="margin-top:48px; max-width:560px" id="password">
+        <h2>{t('account.pw.title')}</h2>
+        <form method="post" action="#password" class="form">
+          {pwMessage && <p class="alert alert--ok">{pwMessage}</p>}
+          {pwError && <p class="alert alert--error">{pwError}</p>}
+          <label>
+            {t('account.pw.current')}
+            <input name="current" type="password" required autocomplete="current-password" maxlength="200" />
+          </label>
+          <label>
+            {t('account.pw.new')} <span class="hint">{t('form.passwordHint')}</span>
+            <input name="new" type="password" required minlength="8" maxlength="200" autocomplete="new-password" />
+          </label>
+          <div><button class="btn btn--primary" type="submit">{t('account.pw.submit')}</button></div>
+        </form>
+      </div>
     </div>
   </section>
 </Base>
