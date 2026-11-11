@@ -45,7 +45,7 @@ const price =
   </p>
   <p class="listing__price">{price}</p>
   <p class="listing__where small muted">
-    📍 {row.location ? `${row.location}, ` : ''}{row.region} · {formatDate(lang, row.created_at)}
+    {row.location ? `${row.location}, ` : ''}{row.region} · {formatDate(lang, row.created_at)}
   </p>
 </a>
 

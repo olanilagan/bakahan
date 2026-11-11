@@ -131,7 +131,7 @@ Good records turn guesses into decisions. For each animal, write down:
 
 A notebook works. After each batch, compare total costs with sales to know your real profit per head.
 
-## Key takeaways
+## Summary
 
 - Buy healthy, alert feeder stock, ideally around 2 to 3 years old; steers are generally preferred.
 - Rest, isolate and check new animals; deworm based on a fecal exam and vaccinate with advice from your vet or agriculture office.

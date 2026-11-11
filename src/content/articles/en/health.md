@@ -92,7 +92,7 @@ Bloat happens when gas gets trapped in the rumen (the big first stomach). Watch 
 
 Bloat can kill within hours, so **call a vet immediately**. To prevent it, change rations slowly. University of Nebraska guidance advises moving cattle from forage-based to grain-based rations gradually, over a period of at least three weeks.
 
-### Foot-and-mouth disease (FMD): the one we must keep out
+### Foot-and-mouth disease (FMD)
 
 The Philippines has kept its status as **FMD-free without vaccination** since May 2015, as recognized by WOAH. This is a big deal: it protects our herds and our trade.
 
@@ -100,7 +100,7 @@ According to WOAH, FMD causes fever, blisters on the tongue, lips, nose, between
 
 If you ever see **blisters in the mouth or on the feet together with drooling and limping**, do not move any animals. Report it right away to your municipal or provincial veterinarian or to the Bureau of Animal Industry (BAI).
 
-## Bringing in new animals: quarantine
+## Quarantine for new animals
 
 Most diseases enter a farm walking in on four legs. Before adding new animals:
 
@@ -149,7 +149,7 @@ Call right away if you see:
 
 When in doubt, call. A vet visit costs far less than losing an animal.
 
-## Key takeaways
+## Summary
 
 - Check your animals twice a day; a healthy animal is alert, bright-eyed, smooth-coated and has a moist muzzle.
 - Hemorrhagic septicemia, internal parasites, liver fluke, ticks and bloat are common causes of loss; prevention is cheaper than cure.

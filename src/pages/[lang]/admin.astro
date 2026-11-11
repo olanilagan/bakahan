@@ -93,11 +93,11 @@ const stats = [
                 <h3 style="margin-top:8px">{b.name}</h3>
                 {b.description && <p class="muted">{b.description}</p>}
                 <p class="small">
-                  📍 {b.location ? `${b.location}, ` : ''}
+                  {b.location ? `${b.location}, ` : ''}
                   {b.region}
                   <br />
-                  {b.phone && <>📞 {b.phone}<br /></>}
-                  {b.website && <>🌐 {b.website}<br /></>}
+                  {b.phone && <>{b.phone}<br /></>}
+                  {b.website && <>{b.website}<br /></>}
                   {formatDate(lang, b.created_at)} · {b.submitted_by} ({b.submitter_email})
                 </p>
                 <form method="post" class="btn-row">

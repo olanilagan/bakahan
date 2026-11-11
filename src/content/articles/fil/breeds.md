@@ -91,7 +91,7 @@ Kung gatas ang target mo at hindi karne, ginamit ng DA program ang **Holstein** 
 | Wagyu × Brahman | Katamtaman | Maganda | Premium beef, kailangan ng mas matagal at mas magandang pakain |
 | Holstein, Sahiwal at crossbreed | Iba-iba | Sahiwal napakaganda, Holstein mas mahina | Dairy |
 
-## Paano pumili: pang-fattening o pang-breeding
+## Pagpili ng breed para sa fattening o breeding
 
 ### Para sa pagpapataba
 
@@ -110,7 +110,7 @@ Tandaan: madalas, mas mahalaga ang tamang pakain kaysa sa breed.
 - Gumamit ng **magandang bulugan o AI** para gumanda ang lahi ng kawan mo sa paglipas ng panahon. Magtanong sa Municipal o Provincial Agriculture Office tungkol sa AI services at breeding programs ng gobyerno.
 - Bumili sa **mapagkakatiwalaang breeder farm**, ayon sa payo ng DA.
 
-## Mga dapat tandaan
+## Buod
 
 - Ang tropical (zebu) breeds at mga crossbreed nito ang pinakabagay sa init, garapata, at pakain dito sa atin.
 - Maliit pero matibay ang native (Ilocos, Batangas, Iloilo, Batanes), at magandang base para sa upgrading.

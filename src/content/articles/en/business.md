@@ -44,7 +44,7 @@ The buyer and seller agree on one price for the whole animal, usually by estimat
 
 Some buyers, especially slaughterhouses and meat traders, pay based on the weight of the **carcass**: the body after slaughter, with the head, hide, feet and internal organs removed. The price per kilo is higher than liveweight, because you are paying only for the meat-and-bone part.
 
-## Dressing percentage: the link between live and carcass
+## Dressing percentage
 
 **Dressing percentage** tells you how much of the live animal ends up as carcass:
 
@@ -60,7 +60,7 @@ How high is it, typically?
 
 Why this matters: if a buyer offers a carcass price, convert it to liveweight before comparing it with other offers. A high carcass price on an animal that dresses poorly may be worth less than a fair liveweight price.
 
-## Where your money goes: main cost items
+## Main costs
 
 | Cost item | What it includes |
 |---|---|
@@ -123,7 +123,7 @@ The lessons: margins per head can be thin, **weight gain and the buy–sell pric
 
 **Insurance helps.** The Philippine Crop Insurance Corporation (PCIC) offers mortality insurance cover for cattle and carabao, both for non-commercial and commercial raisers. Ask your local PCIC office or agriculture office about current terms and what is covered.
 
-## Keep records: your business memory
+## Keeping records
 
 Without records, you are guessing. For every animal, write down:
 
@@ -147,7 +147,7 @@ If you need puhunan, here are government-linked options to ask about. Terms chan
 
 A first step for almost all of these: **register in the RSBSA** through your city or municipal agriculture office.
 
-## Key takeaways
+## Summary
 
 - Know how you are being paid: per kilo liveweight, per head, or per kilo carcass. Convert everything to a per-kilo liveweight basis to compare.
 - Dressing % = carcass weight ÷ liveweight × 100. PSA uses 50% for cattle in national statistics; grain-fed cattle can go higher.

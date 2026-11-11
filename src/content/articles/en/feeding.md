@@ -34,7 +34,7 @@ Feed is where most of your money goes in cattle raising, and it is also where yo
 
 As a rough guide, DA material cited by Edge Davao says cattle eat about **3% of their body weight** in air-dry feed per day. For a 250 kg animal, that is around 7.5 kg of dry feed. Fresh grass is mostly water, so the actual weight of fresh forage you cut will be several times more. Watch your animals: if the trough is always empty early and they look hungry, give more; if a lot is left over and wasted, give less.
 
-## Grasses: the foundation
+## Grasses
 
 Grass should make up most of the diet. Common grasses for cut-and-carry or grazing in the Philippines include:
 
@@ -44,7 +44,7 @@ Grass should make up most of the diet. Common grasses for cut-and-carry or grazi
 
 Cut grass young and leafy, chop it so less is wasted, and plant enough area so you do not run short in the dry season.
 
-## Legumes: the protein boost
+## Legumes
 
 Legume trees and shrubs give protein that grass alone often lacks. Two of the most common in Filipino farms:
 
@@ -60,14 +60,14 @@ Often planted as a living fence. Feedipedia describes it as best used as a **pro
 - **Wilting the leaves for about a day** can make them more acceptable.
 - Avoid sudden large amounts of very young, lush leaves.
 
-## Crop residues: cheap, but low in nutrients
+## Crop residues
 
 - **Rice straw (*dayami*)**: plentiful after harvest but low in protein and hard to digest. It works best when combined with green forage, legumes or a supplement. Philippine studies have tested treating straw with urea or spraying it with urea-molasses to improve it, but get training before doing this because of urea's dangers (see below).
 - **Corn stover**: the stalks and leaves left after harvesting corn. Like straw, it is low in quality on its own. In a Tarlac trial, cattle fed corn stover alone gained only about 85 to 130 grams a day.
 - **Sugarcane tops (*pang-ibabaw ng tubo*)**: widely used in sugar areas. A UPLB study in Negros Occidental found farm diets were about three-fourths roughage, mostly cane tops with fresh ipil-ipil, plus about one-fourth concentrate.
 - **Sweet potato vines (*talbos ng kamote*)**: in a PCARRD-supported project in Paniqui, Tarlac, sweet potato vines and leaves were the main feed in an improved fattening system that raised daily gains well above what farmers saw before.
 
-## Silage: storing feed for the dry season
+## Silage
 
 Silage is chopped green forage, often corn, packed tightly without air so it ferments and keeps for months. It helps you feed well when grass is scarce.
 
@@ -86,7 +86,7 @@ Introduce silage gradually, and once a bag is opened, use it up quickly before i
 
 **Urea-molasses mineral blocks** are hard licks made with molasses, urea, minerals and a binder. Urea gives rumen microbes nitrogen to build protein, which helps animals on poor roughage.
 
-### Urea safety: read this
+### Urea safety
 
 Urea can **kill cattle** if they take in too much at once. FAO guidance says:
 
@@ -130,7 +130,7 @@ The table below is only an **example** to show how feeds can fit together for a 
 
 Weigh your animals regularly and adjust.
 
-## Key takeaways
+## Summary
 
 - Grass and legumes from your own farm should be the base of the diet; buy concentrates to support, not replace, forage.
 - Keep ipil-ipil as a supplement; Feedipedia notes problems above about 30% of the diet over long periods. Introduce kakawate gradually and wilt it.

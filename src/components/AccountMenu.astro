@@ -18,7 +18,7 @@ const user = Astro.locals.user;
         </a>
       )}
       <a class="btn btn--ghost btn--small" href={href(lang, '/account')}>
-        <span aria-hidden="true">👤</span> {user.name.split(' ')[0]}
+        {user.name.split(' ')[0]}
       </a>
     </div>
   ) : (

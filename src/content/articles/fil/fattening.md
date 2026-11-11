@@ -133,7 +133,7 @@ Ang maayos na tala ang nagpapalit ng hula sa tamang desisyon. Sa bawat baka, isu
 
 Puwede na ang notebook. Pagkatapos ng bawat batch, kuwentahin ang gastos at ikumpara sa benta para alam mo ang totoong kita bawat ulo.
 
-## Mga dapat tandaan
+## Buod
 
 - Bumili ng malusog at alistong feeder, mainam kung mga 2 hanggang 3 taong gulang; mas gusto kadalasan ang kinapong toro.
 - Pagpahingahin, ihiwalay at bantayan ang bagong dating; purgahin batay sa fecal exam at magpabakuna ayon sa payo ng beterinaryo o agriculture office.

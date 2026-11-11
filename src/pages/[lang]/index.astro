@@ -1,8 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import HeroArt from '../../components/HeroArt.astro';
 import LatestListings from '../../components/LatestListings.astro';
 import { href, langStaticPaths, useT, type Lang } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
 
 export const prerender = true;
 export const getStaticPaths = langStaticPaths;
@@ -10,11 +12,14 @@ export const getStaticPaths = langStaticPaths;
 const lang = Astro.params.lang as Lang;
 const t = useT(lang);
 
-const pillars = [
-  { icon: '📚', title: t('home.learn.title'), body: t('home.learn.body'), link: '/learn' },
-  { icon: '🐂', title: t('home.market.title'), body: t('home.market.body'), link: '/market' },
-  { icon: '📈', title: t('home.prices.title'), body: t('home.prices.body'), link: '/prices' },
-  { icon: '🤝', title: t('home.directory.title'), body: t('home.directory.body'), link: '/directory' },
+const guides = (await getCollection('articles', (a) => a.id.startsWith(`${lang}/`)))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 5);
+
+const more = [
+  { title: t('home.prices.title'), body: t('home.prices.body'), link: '/prices', label: t('nav.prices') },
+  { title: t('home.directory.title'), body: t('home.directory.body'), link: '/directory', label: t('nav.directory') },
+  { title: t('home.app.title'), body: t('home.app.body'), link: '/app', label: t('home.app.cta') },
 ];
 ---
 
@@ -22,7 +27,6 @@ const pillars = [
   <section class="hero">
     <div class="container hero__grid">
       <div class="hero__text">
-        <span class="kicker">{t('home.hero.kicker')}</span>
         <h1>{t('home.hero.title')}</h1>
         <p class="lead">{t('home.hero.lead')}</p>
         <div class="btn-row">
@@ -37,57 +41,74 @@ const pillars = [
   </section>
 
   <section class="section">
-    <div class="container">
-      <h2>{t('home.pillars.title')}</h2>
-      <div class="grid pillars">
-        {
-          pillars.map((p) => (
-            <a class="card pillar" href={href(lang, p.link)}>
-              <span class="pillar__icon" aria-hidden="true">
-                {p.icon}
-              </span>
-              <h3>{p.title}</h3>
-              <p class="muted">{p.body}</p>
-            </a>
-          ))
-        }
+    <div class="container columns">
+      <div>
+        <div class="col-head">
+          <h2>{t('learn.title')}</h2>
+          <a class="more" href={href(lang, '/learn')}>{t('learn.back')} →</a>
+        </div>
+        <ul class="rule-list">
+          {
+            guides.map((g) => (
+              <li>
+                <span class="tag">{t(`cat.${g.data.category}` as UIKey)}</span>
+                <h3>
+                  <a href={href(lang, `/learn/${g.id.split('/')[1]}`)}>{g.data.title}</a>
+                </h3>
+                <p class="muted">{g.data.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <div class="col-head">
+          <h2>{t('home.latest.title')}</h2>
+          <a class="more" href={href(lang, '/market')}>{t('home.latest.all')} →</a>
+        </div>
+        <LatestListings server:defer lang={lang}>
+          <p slot="fallback" class="muted">…</p>
+        </LatestListings>
+        <p style="margin-top:16px">
+          <a class="btn btn--primary btn--small" href={href(lang, '/market/new')}>{t('market.post')}</a>
+        </p>
       </div>
     </div>
   </section>
 
   <section class="section section--tint">
-    <div class="container">
-      <div class="page-head__row" style="margin-bottom:18px">
-        <h2 style="margin:0">{t('home.latest.title')}</h2>
-        <a href={href(lang, '/market')}>{t('home.latest.all')} →</a>
-      </div>
-      <LatestListings server:defer lang={lang}>
-        <p slot="fallback" class="muted">…</p>
-      </LatestListings>
+    <div class="container trio">
+      {
+        more.map((m) => (
+          <div>
+            <h2>{m.title}</h2>
+            <p>{m.body}</p>
+            <a class="more" href={href(lang, m.link)}>
+              {m.label} →
+            </a>
+          </div>
+        ))
+      }
     </div>
   </section>
 
   <section class="section">
-    <div class="container split">
-      <div class="card feature feature--farm">
-        <span class="kicker">{t('home.farm.kicker')}</span>
+    <div class="container farm">
+      <div>
         <h2>{t('home.farm.title')}</h2>
-        <p>{t('home.farm.body')}</p>
-        <a class="btn btn--primary" href={href(lang, '/farm')}>{t('home.farm.cta')}</a>
-      </div>
-      <div class="card feature feature--app">
-        <span class="kicker">{t('home.app.kicker')}</span>
-        <h2>{t('home.app.title')}</h2>
-        <p>{t('home.app.body')}</p>
-        <a class="btn btn--straw" href={href(lang, '/app')}>{t('home.app.cta')}</a>
+        <p class="lead">{t('home.farm.body')}</p>
+        <a class="btn btn--ghost" href={href(lang, '/farm')}>{t('home.farm.cta')}</a>
       </div>
     </div>
   </section>
 
-  <section class="section join">
+  <section class="join">
     <div class="container join__inner">
-      <h2>{t('home.join.title')}</h2>
-      <p class="lead">{t('home.join.body')}</p>
+      <div>
+        <h2>{t('home.join.title')}</h2>
+        <p>{t('home.join.body')}</p>
+      </div>
       <a class="btn btn--straw" href={href(lang, '/signup')}>{t('nav.signup')}</a>
     </div>
   </section>
@@ -95,15 +116,17 @@ const pillars = [
 
 <style>
   .hero {
-    background: linear-gradient(180deg, var(--green-50) 0%, var(--cream) 100%);
-    padding: 36px 0 48px;
+    background: var(--green-50);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0 40px;
   }
   .hero__grid {
     display: grid;
-    gap: 32px;
+    gap: 28px;
     align-items: center;
   }
   .hero h1 {
+    font-size: clamp(2.1rem, 5.2vw, 3.4rem);
     margin-bottom: 0.35em;
   }
   .hero .lead {
@@ -111,51 +134,74 @@ const pillars = [
   }
   @media (min-width: 900px) {
     .hero {
-      padding: 64px 0 72px;
+      padding: 56px 0;
     }
     .hero__grid {
-      grid-template-columns: 1.05fr 1fr;
+      grid-template-columns: 1.1fr 1fr;
       gap: 48px;
     }
   }
-  .pillar__icon {
+  .columns {
     display: grid;
-    place-items: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    background: var(--green-100);
-    font-size: 1.6rem;
-    margin-bottom: 12px;
+    gap: 40px;
   }
-  .split {
-    display: grid;
-    gap: 18px;
-  }
-  @media (min-width: 820px) {
-    .split {
-      grid-template-columns: 1fr 1fr;
+  @media (min-width: 900px) {
+    .columns {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 56px;
     }
   }
-  .feature {
-    padding: 28px;
+  .col-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
   }
-  .feature--farm {
-    background: linear-gradient(160deg, #ffffff, var(--green-50));
+  .col-head h2 {
+    margin: 0;
   }
-  .feature--app {
-    background: linear-gradient(160deg, #ffffff, var(--straw-100));
+  .trio {
+    display: grid;
+    gap: 28px;
+  }
+  .trio h2 {
+    font-size: 1.5rem;
+  }
+  @media (min-width: 820px) {
+    .trio {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .trio > div {
+      padding: 0 28px;
+      border-left: 1px solid var(--green-200);
+    }
+    .trio > div:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+  .farm {
+    max-width: 760px;
   }
   .join {
     background: var(--green-800);
-    color: #e6f2e8;
-    text-align: center;
+    color: #dcebdf;
+    padding: 36px 0;
+  }
+  .join__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
   }
   .join h2 {
     color: #fff;
+    margin-bottom: 0.2em;
   }
-  .join .lead {
-    color: #cfe6d3;
-    margin: 0 auto 1.4em;
+  .join p {
+    margin: 0;
   }
 </style>

@@ -26,9 +26,9 @@ sources:
     url: "https://citizenscharter.manolofortich.gov.ph/client-office/1/service-details/343"
 ---
 
-Kalahati lang ng trabaho ang pagpapalaki ng magandang baka. Ang kalahati pa ay ang maibenta ito sa tamang presyo — o makabili ng tamang hayop nang hindi naloloko. Dito sa atin, karamihan ng bentahan ng baka ay harapan pa rin: sa mga oksyunan, sa mga viajero, at sa pagitan ng magkakapitbahay. Ipapaliwanag ng gabay na ito kung paano ito tumatakbo, anong papeles ang kailangan, at paano mo mapoprotektahan ang sarili mo.
+Kalahati lang ng trabaho ang pagpapalaki ng magandang baka. Ang kalahati pa ay ang maibenta ito sa tamang presyo, o makabili ng tamang hayop nang hindi naloloko. Dito sa atin, karamihan ng bentahan ng baka ay harapan pa rin: sa mga oksyunan, sa mga viajero, at sa pagitan ng magkakapitbahay. Ipapaliwanag ng gabay na ito kung paano ito tumatakbo, anong papeles ang kailangan, at paano mo mapoprotektahan ang sarili mo.
 
-## Padre Garcia: ang pinakakilalang bakahan sa bansa
+## Padre Garcia, Batangas
 
 Kapag nagtanong ka sa kahit sinong nasa negosyo ng baka kung saan ang bentahan, malamang ang sagot ay **Padre Garcia, Batangas**. Tinatawag ng bayan ang sarili nitong "Cattle Trading Capital of the Philippines," at ang oksyunan nila ang dahilan.
 
@@ -58,9 +58,9 @@ May mga oksyunang muling binubuhay. Binuksan ulit ng Batac City sa Ilocos Norte 
 
 ## Mga trader at viajero
 
-Malaking bahagi ng baka ay binibili ng mga **trader** o **viajero** — mga buyer na umiikot sa mga bukid, bayan at oksyunan, tapos ibinebenta ulit sa ibang raiser, fattener o magkakarne.
+Malaking bahagi ng baka ay binibili ng mga **trader** o **viajero**, mga buyer na umiikot sa mga bukid, bayan at oksyunan, tapos ibinebenta ulit sa ibang raiser, fattener o magkakarne.
 
-Malaking tulong ang mga viajero: sila ang nagdadala ng buyer sa malalayong bukid at nakakatipid ka sa hakot. Kumikita sila sa pagitan ng ibinayad sa iyo at ng presyong mabebenta nila. Patas iyon — basta alam mo muna ang tunay na halaga ng hayop mo.
+Malaking tulong ang mga viajero: sila ang nagdadala ng buyer sa malalayong bukid at nakakatipid ka sa hakot. Kumikita sila sa pagitan ng ibinayad sa iyo at ng presyong mabebenta nila. Patas iyon, basta alam mo muna ang tunay na halaga ng hayop mo.
 
 Sa ilalim ng PD 533 (Anti-Cattle Rustling Law), kailangan ng permit ang sinumang **nagnenegosyo** ng pagbili at pagbenta ng malalaking hayop, at kailangan din ng lisensya mula sa BAI ang mga livestock handler na nagbibiyahe ng hayop sa ibang probinsya. Hindi dapat mag-alangan ang lehitimong trader na ipakita ang papeles nila.
 
@@ -75,7 +75,7 @@ Dalawa ang karaniwang paraan ng pagpepresyo:
 | **Liveweight (per kilo)** | Tinitimbang sa scale; presyo = timbang × napagkasunduang presyo kada kilo | Malinaw, madaling i-check, patas sa dalawang panig | Dapat tama ang timbangan; huwag busugin o painumin nang sobra bago timbangin |
 | **Mata-mata (sa tingin)** | Isang presyo para sa buong hayop, napag-usapan lang | Mabilis; karaniwan sa mataong oksyunan | Mas magaling tumantiya ang beteranong viajero kaysa sa maliit na magsasaka |
 
-Kung baguhan ka, **kakampi mo ang liveweight**. Sa mata-mata, kung sino ang mas magaling tumantiya — kadalasan ang beteranong viajero — siya ang panalo.
+Kung baguhan ka, **kakampi mo ang liveweight**. Sa mata-mata, kung sino ang mas magaling tumantiya (kadalasan ang beteranong viajero) siya ang panalo.
 
 ### Mga tip para sa patas na bentahan
 
@@ -94,7 +94,7 @@ Ayon sa PD 533, kailangang **iparehistro ang malalaking hayop sa city o municipa
 
 ### Certificate of transfer
 
-Kapag naibenta ang hayop, itinatala ang paglipat at binibigyan ng **certificate of transfer** ang bagong may-ari, kadalasan sa opisina ng municipal treasurer. Gumagawa rin ng transfer certificate ang mga accredited na oksyunan. Lokal ang singil — alamin sa munisipyo ninyo.
+Kapag naibenta ang hayop, itinatala ang paglipat at binibigyan ng **certificate of transfer** ang bagong may-ari, kadalasan sa opisina ng municipal treasurer. Gumagawa rin ng transfer certificate ang mga accredited na oksyunan. Lokal ang singil, alamin sa munisipyo ninyo.
 
 ### Veterinary health certificate (VHC)
 
@@ -120,11 +120,11 @@ Ang mga trader na nagbibiyahe ng hayop sa ibang probinsya ay kailangan ding may 
 - **Suriin ang kalusugan ng hayop** bago magbayad. Hingin ang VHC. Puwedeng mahawa ang buong kawan mo sa isang may-sakit na hayop.
 - **Pagkasunduan ang lahat bago magkarga:** presyo, paraan ng pagtimbang, sino ang sasagot sa hakot at permit, at kailan ang bayad.
 
-## Mga dapat tandaan
+## Buod
 
 - Ang Padre Garcia, Batangas ang pinakakilalang bakahan sa bansa; ayon sa bayan, Huwebes at Biyernes ang pinakamaraming bentahan, pero kumpirmahin muna ang iskedyul bago pumunta.
-- Maraming bentahan ang "mata-mata." Kung hindi ka pa sanay, ipilit ang pagtimbang — proteksyon mo ang liveweight.
+- Maraming bentahan ang "mata-mata." Kung hindi ka pa sanay, ipilit ang pagtimbang, proteksyon mo ang liveweight.
 - Tingnan ang farmgate price sa PSA at magtanong-tanong sa inyong lugar para alam mo ang halaga ng hayop mo.
 - Iparehistro ang baka sa municipal treasurer bago mag-anim na buwan at itago nang maayos ang certificate of ownership.
 - Para magbiyahe ng hayop, karaniwang kailangan ang VHC, shipping o transport permit, at PNP clearance para sa malalaking hayop. Iba-iba ang patakaran kada lugar, kaya magtanong sa LGU at provincial vet.
-- Huwag bumili ng baka nang walang maayos na papeles ng pagmamay-ari — sa batas, puwedeng ituring na palatandaan ng nakaw ang kawalan ng papeles.
+- Huwag bumili ng baka nang walang maayos na papeles ng pagmamay-ari, sa batas, puwedeng ituring na palatandaan ng nakaw ang kawalan ng papeles.

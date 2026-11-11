@@ -47,7 +47,6 @@ const isActive = (p: string) => path.startsWith(`/${lang}${p}`);
         data-set-lang={other}
         title={t('lang.switchLabel')}
       >
-        <span aria-hidden="true">🌐</span>
         {t('lang.switch')}
       </a>
       <div class="acct-slot">
@@ -90,8 +89,7 @@ const isActive = (p: string) => path.startsWith(`/${lang}${p}`);
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(251, 248, 240, 0.94);
-    backdrop-filter: blur(8px);
+    background: var(--white);
     border-bottom: 1px solid var(--border);
   }
   .site-header__bar {
@@ -110,27 +108,26 @@ const isActive = (p: string) => path.startsWith(`/${lang}${p}`);
   .brand__name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.45rem;
+    font-size: 1.6rem;
     color: var(--green-900);
-    letter-spacing: -0.02em;
   }
   .nav-desktop {
     display: none;
     gap: 4px;
   }
   .nav-desktop a {
-    padding: 8px 11px;
-    border-radius: 999px;
+    padding: 22px 10px 19px;
+    border-bottom: 3px solid transparent;
     color: var(--text);
     font-weight: 700;
     text-decoration: none;
     white-space: nowrap;
   }
   .nav-desktop a:hover {
-    background: var(--green-100);
+    color: var(--green-700);
   }
   .nav-desktop a[aria-current='page'] {
-    background: var(--green-100);
+    border-bottom-color: var(--straw-500);
     color: var(--green-800);
   }
   .site-header__tools {
@@ -143,18 +140,10 @@ const isActive = (p: string) => path.startsWith(`/${lang}${p}`);
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-weight: 800;
-    font-size: 0.9rem;
-    text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--straw-100);
-    color: var(--soil-700);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--green-700);
     white-space: nowrap;
-  }
-  .lang-toggle:hover {
-    background: var(--straw-300);
-    color: var(--green-950);
   }
   .acct-slot {
     display: none;

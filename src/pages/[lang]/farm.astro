@@ -13,15 +13,15 @@ const t = useT(lang);
 
 const copy = {
   en: {
-    lead: 'Bakahan began with our own cattle fattening farm. We are building it now, and we will share the whole journey here, honestly.',
+    lead: 'Bakahan began with our own cattle fattening farm. It is being built now, and we will post progress and real numbers here.',
     whyTitle: 'Why we started',
-    why: 'We believe cattle raising can be a good, steady business for Filipino families, if it is done with care and good records. We started our own farm to learn it properly, and to show others what it really takes.',
+    why: 'We think cattle raising can be a steady business for Filipino families if it is run carefully and with good records. We started our own farm to learn how to do it properly, and to show others what it takes.',
     planTitle: 'What we are building',
     plan: [
-      ['🏗️', 'Pens and shade', 'A covered feedlot with clean floors, good drainage, and plenty of shade and fresh water.'],
-      ['🌾', 'Our own forage', 'Napier and other grasses planted beside the pens, so we can cut and carry fresh feed every day.'],
-      ['🐂', 'Brahman-cross feeders', 'Young, healthy animals bought from trusted sources, quarantined, dewormed, and weighed on arrival.'],
-      ['📒', 'Records for everything', 'Weights, feed, costs and sales, all recorded. This is how we will know if we are really making money.'],
+      ['Pens and shade', 'A covered feedlot with clean floors, good drainage, and plenty of shade and fresh water.'],
+      ['Our own forage', 'Napier and other grasses planted beside the pens, so we can cut and carry fresh feed every day.'],
+      ['Brahman-cross feeders', 'Young, healthy animals bought from trusted sources, quarantined, dewormed, and weighed on arrival.'],
+      ['Records for everything', 'Weights, feed, costs and sales, all recorded. This is how we will know if we are really making money.'],
     ],
     stepsTitle: 'Where we are',
     steps: [
@@ -31,18 +31,18 @@ const copy = {
       ['next', 'First harvest and sharing results', 'We will publish our real numbers here.'],
     ],
     followTitle: 'Follow along',
-    follow: 'Join Bakahan for free and we will share updates from the farm as it grows.',
+    follow: 'Members get updates from the farm as it is built and stocked.',
   },
   fil: {
-    lead: 'Nagsimula ang Bakahan sa sarili naming farm ng pagpapataba ng baka. Itinatayo na namin ito ngayon, at ibabahagi namin dito ang buong paglalakbay, nang tapat.',
+    lead: 'Nagsimula ang Bakahan sa sarili naming farm ng pagpapataba ng baka. Itinatayo na ito ngayon, at ipo-post namin dito ang progreso at ang totoong numero.',
     whyTitle: 'Bakit kami nagsimula',
     why: 'Naniniwala kami na ang pagbababaka ay puwedeng maging maganda at matatag na negosyo para sa pamilyang Pilipino, kung gagawin nang maingat at may maayos na rekord. Nagsimula kami ng sariling farm para matutunan ito nang tama, at para maipakita sa iba kung ano talaga ang kailangan.',
     planTitle: 'Ano ang itinatayo namin',
     plan: [
-      ['🏗️', 'Kural at silungan', 'Feedlot na may bubong, malinis na sahig, maayos na daluyan ng tubig, at maraming lilim at malinis na inumin.'],
-      ['🌾', 'Sariling pakain', 'Napier at iba pang damo na nakatanim sa tabi ng kural, para may sariwang pakain araw-araw.'],
-      ['🐂', 'Brahman-cross na feeder', 'Bata at malulusog na hayop mula sa mapagkakatiwalaang source, naka-quarantine, napurga, at tinimbang pagdating.'],
-      ['📒', 'Rekord ng lahat', 'Timbang, feeds, gastos at benta, lahat naka-record. Dito namin malalaman kung talagang kumikita kami.'],
+      ['Kural at silungan', 'Feedlot na may bubong, malinis na sahig, maayos na daluyan ng tubig, at maraming lilim at malinis na inumin.'],
+      ['Sariling pakain', 'Napier at iba pang damo na nakatanim sa tabi ng kural, para may sariwang pakain araw-araw.'],
+      ['Brahman-cross na feeder', 'Bata at malulusog na hayop mula sa mapagkakatiwalaang source, naka-quarantine, napurga, at tinimbang pagdating.'],
+      ['Rekord ng lahat', 'Timbang, feeds, gastos at benta, lahat naka-record. Dito namin malalaman kung talagang kumikita kami.'],
     ],
     stepsTitle: 'Nasaan na kami',
     steps: [
@@ -52,7 +52,7 @@ const copy = {
       ['next', 'Unang benta at pagbabahagi ng resulta', 'Ilalabas namin dito ang totoong numero.'],
     ],
     followTitle: 'Sumubaybay',
-    follow: 'Sumali nang libre sa Bakahan at magbabahagi kami ng balita mula sa farm habang lumalaki ito.',
+    follow: 'Makakatanggap ng balita mula sa farm ang mga miyembro habang itinatayo at nilalagyan ito ng baka.',
   },
 }[lang];
 ---
@@ -78,19 +78,16 @@ const copy = {
   <section class="section section--tint">
     <div class="container">
       <h2>{copy.planTitle}</h2>
-      <div class="grid">
+      <dl class="plan">
         {
-          copy.plan.map(([icon, title, body]) => (
-            <div class="card">
-              <div style="font-size:2rem" aria-hidden="true">
-                {icon}
-              </div>
-              <h3>{title}</h3>
-              <p class="muted">{body}</p>
+          copy.plan.map(([title, body]) => (
+            <div>
+              <dt>{title}</dt>
+              <dd>{body}</dd>
             </div>
           ))
         }
-      </div>
+      </dl>
     </div>
   </section>
 
@@ -112,9 +109,9 @@ const copy = {
 
   <section class="section">
     <div class="container">
-      <div class="card" style="text-align:center; padding:32px">
+      <div style="max-width:760px">
         <h2>{copy.followTitle}</h2>
-        <p class="lead" style="margin:0 auto 20px">{copy.follow}</p>
+        <p class="lead" style="margin-bottom:20px">{copy.follow}</p>
         <a class="btn btn--primary" href={href(lang, '/signup')}>{t('nav.signup')}</a>
       </div>
     </div>
@@ -122,6 +119,30 @@ const copy = {
 </Base>
 
 <style>
+  .plan {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    border-top: 1px solid var(--green-200);
+  }
+  .plan div {
+    display: grid;
+    gap: 4px 32px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--green-200);
+  }
+  @media (min-width: 760px) {
+    .plan div {
+      grid-template-columns: 240px 1fr;
+    }
+  }
+  .plan dt {
+    font-weight: 700;
+    color: var(--green-900);
+  }
+  .plan dd {
+    margin: 0;
+  }
   .farm-head {
     display: grid;
     gap: 24px;

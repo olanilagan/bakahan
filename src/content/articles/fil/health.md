@@ -92,7 +92,7 @@ Nangyayari ang kabag kapag na-trap ang hangin sa rumen (ang malaking unang sikmu
 
 Puwedeng mamatay ang baka sa kabag sa loob lang ng ilang oras, kaya **tumawag agad ng beterinaryo**. Para maiwasan, dahan-dahan ang pagpapalit ng pakain. Payo ng University of Nebraska: kung ililipat mula damo papuntang pakaing may butil, gawin ito nang unti-unti sa loob ng hindi bababa sa tatlong linggo.
 
-### Foot-and-mouth disease (FMD): ito ang hindi natin dapat papasukin
+### Foot-and-mouth disease (FMD)
 
 Mula Mayo 2015, napanatili ng Pilipinas ang pagiging **FMD-free nang walang bakuna**, ayon sa pagkilala ng WOAH. Malaking bagay ito: pinoprotektahan nito ang ating mga kawan at ang kalakalan.
 
@@ -100,7 +100,7 @@ Ayon sa WOAH, ang FMD ay nagdudulot ng lagnat, paltos sa dila, labi, ilong, pagi
 
 Kapag nakakita ka ng **paltos sa bibig o paa kasabay ng paglalaway at pagpipilay**, huwag ilipat ang kahit isang hayop. I-report agad sa municipal o provincial veterinarian, o sa Bureau of Animal Industry (BAI).
 
-## Pagpasok ng bagong baka: quarantine
+## Quarantine ng bagong baka
 
 Karamihan ng sakit, naglalakad papasok sa bakahan, nakasakay sa apat na paa. Bago magdagdag ng bagong baka:
 
@@ -114,7 +114,7 @@ Karamihan ng sakit, naglalakad papasok sa bakahan, nakasakay sa apat na paa. Bag
 
 Kailangan ng tamang papeles kapag inililipat ang baka sa ibang lugar, karaniwan ay **Veterinary Health Certificate** at **shipping permit**. Ang National Veterinary Quarantine Services Division ng BAI ang nagpo-proseso ng local shipping permit para sa buhay na hayop online, at sinusuri ang mga permit sa mga quarantine checkpoint ng BAI. May ganitong patakaran dahil ang walang kontrol na pagbiyahe ng hayop ang isa sa pinakamabilis na paraan ng pagkalat ng sakit tulad ng FMD. Itanong sa provincial o municipal veterinarian kung ano ang kailangan bago ka bumili o magbenta.
 
-## Biosecurity: mga basic na dapat gawin ng bawat bakahan
+## Biosecurity
 
 Ang biosecurity ay simpleng pagpigil sa pagpasok ng sakit, at pagpigil sa pagkalat nito kung sakaling nakapasok.
 
@@ -149,7 +149,7 @@ Tumawag agad kapag nakita mo ang:
 
 Kapag may duda, tumawag ka na. Mas mura ang bayad sa beterinaryo kaysa mawalan ng isang baka.
 
-## Mga dapat tandaan
+## Buod
 
 - Silipin ang baka dalawang beses isang araw; ang malusog ay alisto, malinaw ang mata, makinis ang balahibo at basa ang nguso.
 - Ang hemorrhagic septicemia, bulate, liver fluke, garapata at kabag ay karaniwang sanhi ng lugi; mas mura ang pag-iwas kaysa paggamot.

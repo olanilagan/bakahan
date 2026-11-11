@@ -36,7 +36,7 @@ Tatalakayin dito ang mga pangunahing uri ng pakain, paano gamitin nang ligtas, a
 
 Bilang pantantiya, ayon sa materyal ng DA na binanggit ng Edge Davao, kumakain ang baka ng mga **3% ng timbang niya** sa tuyong pakain bawat araw. Sa bakang 250 kilo, mga 7.5 kilong tuyong pakain iyan. Halos tubig ang sariwang damo, kaya ilang ulit na mas mabigat ang sariwang damong kailangan mong tabasin. Bantayan ang baka: kung laging ubos agad ang labangan at mukhang gutom pa, dagdagan; kung maraming natitira at nasasayang, bawasan.
 
-## Damo: ang pundasyon
+## Damo
 
 Damo dapat ang karamihan ng kinakain. Mga karaniwang damo para sa cut-and-carry o pastulan dito sa atin:
 
@@ -50,7 +50,7 @@ Mga tip:
 - Tadtarin ang mahahabang damo para hindi masayang.
 - Magtanim nang sapat para hindi kapusin sa tag-araw.
 
-## Legume: dagdag na protina
+## Legume
 
 Ang mga punong legume ay nagbibigay ng protinang madalas kulang sa damo. Dalawa sa pinakakaraniwan sa atin:
 
@@ -66,14 +66,14 @@ Madalas itanim bilang buhay na bakod. Ayon sa Feedipedia, pinakamainam itong gam
 - **Lantain muna ang dahon nang mga isang araw** para mas kainin.
 - Iwasan ang biglang pagbibigay ng maraming bata at malagong dahon.
 
-## Tira-tirang pananim: mura pero kulang sa sustansya
+## Tira-tirang pananim
 
 - **Dayami**: sagana pagkatapos ng anihan pero mababa sa protina at mahirap tunawin. Mas maganda kung may kasamang sariwang damo, legume o supplement. May mga pag-aaral sa Pilipinas na nag-treat ng dayami gamit ang urea o nag-spray ng urea-molasses para gumanda ito, pero magpa-training muna bago gawin dahil delikado ang urea (basahin sa ibaba).
 - **Corn stover**: tangkay at dahon ng mais pagkatapos anihin. Gaya ng dayami, mababa ang kalidad kung ito lang. Sa isang trial sa Tarlac, ang bakang puro corn stover lang ay nadagdagan lang ng mga 85 hanggang 130 gramo kada araw.
 - **Ulo o dahon ng tubo (cane tops)**: karaniwang gamit sa mga lugar ng tubuhan. Sa isang pag-aaral ng UPLB sa Negros Occidental, mga tatlong-kapat ng pakain ay roughage, karamihan ay cane tops na may sariwang ipil-ipil, at mga isang-kapat ay concentrate.
 - **Talbos ng kamote**: sa proyektong suportado ng PCARRD sa Paniqui, Tarlac, ang talbos at dahon ng kamote ang pangunahing pakain sa mas maayos na sistema ng pagpapataba, at mas lumaki ang dagdag-timbang kada araw kumpara sa dati.
 
-## Silage: imbak na pakain para sa tag-araw
+## Silage
 
 Ang silage ay tinadtad na sariwang pakain, kadalasan mais, na siniksik nang walang hangin para mag-ferment at tumagal nang ilang buwan. Malaking tulong ito kapag kulang ang damo.
 
@@ -92,7 +92,7 @@ Ang **molasses** (pulot mula sa tubo) ay matamis na pinagkukunan ng enerhiya. Pi
 
 Ang **urea-molasses mineral block** ay matigas na dilaan na gawa sa molasses, urea, mineral at pandikit. Ang urea ay nagbibigay ng nitrogen sa mga mikrobyo sa rumen para gumawa ng protina, kaya nakakatulong sa bakang mahina ang kinakaing roughage.
 
-### Ingat sa urea: basahin ito
+### Pag-iingat sa urea
 
 **Puwedeng mamatay ang baka** kapag nakakain ng sobrang urea nang sabay-sabay. Ayon sa gabay ng FAO:
 
@@ -138,7 +138,7 @@ Ang talaan sa ibaba ay **halimbawa lang** para makita kung paano nagtutugma ang 
 
 Regular na timbangin ang baka at i-adjust. Kung maganda ang dagdag-timbang at malusog sila, epektibo ang rasyon mo.
 
-## Mga dapat tandaan
+## Buod
 
 - Damo at legume mula sa sariling bakahan ang dapat na pundasyon; ang concentrate ay pandagdag, hindi kapalit ng damo.
 - Gawing dagdag lang ang ipil-ipil; ayon sa Feedipedia, may problema kapag lumampas sa mga 30% ng pakain nang matagal. Ipakilala nang dahan-dahan at lantain ang kakawate.

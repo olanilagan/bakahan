@@ -91,7 +91,7 @@ If your goal is milk rather than beef, the DA program used **Holstein** (the hig
 | Wagyu × Brahman | Medium | Good | Premium beef programs, needs longer and better feeding |
 | Holstein, Sahiwal and crosses | Varies | Sahiwal very good, Holstein lower | Dairy |
 
-## How to choose: fattening vs breeding
+## Choosing breeds for fattening or breeding
 
 ### For fattening
 
@@ -110,7 +110,7 @@ Remember that good feeding often matters more than breed.
 - Use a **good bull or artificial insemination** to improve your herd over time. Ask your Municipal or Provincial Agriculture Office about AI services and government breeding programs.
 - Buy from **trusted breeder farms**, as the DA advises.
 
-## Key takeaways
+## Summary
 
 - Tropical (zebu) breeds and their crosses suit Philippine heat, ticks, and feeds best.
 - Native cattle (Ilocos, Batangas, Iloilo, Batanes types) are small but hardy and a good base for upgrading.

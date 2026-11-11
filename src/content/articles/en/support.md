@@ -34,9 +34,9 @@ sources:
     url: "https://acpc.gov.ph/wp-content/uploads/PCIC-PROGRAM-PROFILE.pdf"
 ---
 
-You don't have to figure out cattle raising alone. The government has offices, programs, trainings, loans and insurance meant for farmers like you — many of them free or low-cost. The hard part is knowing where to start. This guide gives you a simple map. One reminder before we begin: **programs change every year**, so always check the latest details with the agency before you plan around them.
+You don't have to figure out cattle raising alone. The government has offices, programs, trainings, loans and insurance meant for farmers like you, many of them free or low-cost. The hard part is knowing where to start. This guide gives you a simple map. One reminder before we begin: **programs change every year**, so always check the latest details with the agency before you plan around them.
 
-## Step one: get listed in the RSBSA
+## Register in the RSBSA first
 
 Before anything else, make sure you are registered in the **RSBSA** (Registry System for Basic Sectors in Agriculture). Ask at your **Municipal Agriculture Office**.
 
@@ -64,7 +64,7 @@ Get to know these people. A good relationship with your local agriculture office
 
 The DA's National Livestock Program works through the regional field offices. A DA regional office describes services such as:
 
-- **Artificial insemination** under the Unified National Artificial Insemination Program, to upgrade cattle and carabao — including AI training, frozen semen and liquid nitrogen, and calf-drop incentives
+- **Artificial insemination** under the Unified National Artificial Insemination Program, to upgrade cattle and carabao, including AI training, frozen semen and liquid nitrogen, and calf-drop incentives
 - **Breeder loans,** where good bulls are lent to qualified farmers to improve their herds (one regional office lists insuring the animal with PCIC as a condition)
 - **Animal health** support: disease surveillance, vaccines, emergency drugs, and diagnostic laboratories
 - **Training** for farmers and extension workers
@@ -77,7 +77,7 @@ Some DA programs distribute cattle to **farmer associations and cooperatives** r
 
 ### A new law for the livestock sector
 
-In September 2025, **Republic Act 12308**, the Animal Industry Development and Competitiveness Act, was signed. According to the DA, it sets aside P200 billion over 10 years for livestock, poultry and dairy — including funds for herd build-up, animal health and slaughterhouses — and makes the Bureau of Animal Industry a line agency of the DA. How this money reaches cattle raisers will depend on the programs rolled out under the law, so watch for announcements from the DA and BAI.
+In September 2025, **Republic Act 12308**, the Animal Industry Development and Competitiveness Act, was signed. According to the DA, it sets aside P200 billion over 10 years for livestock, poultry and dairy (including funds for herd build-up, animal health and slaughterhouses) and makes the Bureau of Animal Industry a line agency of the DA. How this money reaches cattle raisers will depend on the programs rolled out under the law, so watch for announcements from the DA and BAI.
 
 ## Bureau of Animal Industry (BAI)
 
@@ -91,7 +91,7 @@ BAI is the national agency for animal health, breeding and livestock regulation.
 
 For most farmers, BAI services are reached through your provincial vet or DA regional office.
 
-## Training: ATI and free online courses
+## Training from ATI
 
 The **Agricultural Training Institute (ATI)** is the DA's training arm. Two ways to learn:
 
@@ -110,7 +110,7 @@ ATI's **e-Extension** portal (e-extension.gov.ph) offers:
 
 You just need to create an account to enroll.
 
-## Credit: loans for cattle raisers
+## Loans
 
 | Program | Agency | Key points (check latest) |
 |---|---|---|
@@ -123,20 +123,20 @@ How to apply for ANYO: sign up online through ACPC, attend a program briefing, a
 
 Before borrowing, write down a simple plan: how many head, cost of animals and feed, how long until you sell, and how you will repay. A loan is only good if the project can pay it back.
 
-## Insurance: PCIC livestock insurance
+## Livestock insurance from PCIC
 
 The **Philippine Crop Insurance Corporation (PCIC)** insures livestock, including **cattle**.
 
-- **Free for RSBSA-listed farmers.** PCIC says RSBSA-registered farmers can get premium-free coverage if they **enroll each time they raise new livestock**. Coverage is not automatic — you must apply.
+- **Free for RSBSA-listed farmers.** PCIC says RSBSA-registered farmers can get premium-free coverage if they **enroll each time they raise new livestock**. Coverage is not automatic, you must apply.
 - **Where to apply.** Usually through your Municipal Agriculture Office or vet office. Bring your RSBSA details, a valid ID and photos of the animals, and fill out the PCIC livestock form.
 - **What it covers.** PCIC's program profile lists cover for cattle against typhoon, flood, lightning, fire and certain diseases. The amounts insured and age limits are set by PCIC and change over time.
 - **Subsidy can run out.** Free coverage depends on government funds for the year, so enroll early.
 
-Insurance is especially important if you borrow money to buy animals — losing one head without cover can wipe out a season's profit.
+Insurance is especially important if you borrow money to buy animals, losing one head without cover can wipe out a season's profit.
 
 ## Cooperatives and associations
 
-Many programs — animal distributions, larger loans, shared equipment — go to **organized groups**. Joining or forming a cattle raisers' association or cooperative can help you:
+Many programs (animal distributions, larger loans, shared equipment) go to **organized groups**. Joining or forming a cattle raisers' association or cooperative can help you:
 
 - qualify for group grants and larger loans (ANYO and Landbank both lend to organized groups)
 - buy feed, vitamins and vaccines in bulk at lower cost
@@ -145,13 +145,13 @@ Many programs — animal distributions, larger loans, shared equipment — go to
 
 Associations are usually recognized by the LGU or DA, while cooperatives register with the **Cooperative Development Authority (CDA)**. Your MAO can tell you which groups already exist in your area.
 
-## Key takeaways
+## Summary
 
-- Register in the **RSBSA** at your Municipal Agriculture Office first — it opens doors to free insurance, loans and programs.
+- Register in the **RSBSA** at your Municipal Agriculture Office first, it opens doors to free insurance, loans and programs.
 - Your **MAO and local vet** are your first stop for AI, vaccinations, forms and news about programs.
 - The DA and BAI offer breeding, animal health and breeder-loan programs; many are coursed through regional offices and farmer groups.
 - **ATI** has hands-on trainings and **free online courses** at e-extension.gov.ph.
 - **ACPC (ANYO)** and **Landbank** offer low-interest loans for farmers and groups.
-- **PCIC** insures cattle, and RSBSA-listed farmers can get it free — but you must enroll.
+- **PCIC** insures cattle, and RSBSA-listed farmers can get it free, but you must enroll.
 - Join a **cooperative or association** to access more help.
-- Programs change often — **always check the latest with the agency** before you plan.
+- Programs change often, **always check the latest with the agency** before you plan.

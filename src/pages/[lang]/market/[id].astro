@@ -99,7 +99,7 @@ const price =
         <h2>{t('market.contact')}</h2>
         {
           user ? (
-            <p class="contact__value">📞 {listing.contact}</p>
+            <p class="contact__value">{listing.contact}</p>
           ) : (
             <>
               <p class="muted">{t('market.contactMembers')}</p>
@@ -109,7 +109,7 @@ const price =
             </>
           )
         }
-        <p class="small muted" style="margin-top:16px">🛡️ {t('market.safety')}</p>
+        <p class="small muted" style="margin-top:16px">{t('market.safety')}</p>
 
         {
           canManage && (

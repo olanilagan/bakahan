@@ -111,7 +111,7 @@ Check current local prices at your nearest livestock auction market and with you
 - **Not knowing your numbers.** Without records you cannot tell whether you are actually making money.
 - **Growing too fast** before you have the skills, feed supply, and market.
 
-## Key takeaways
+## Summary
 
 - Most Filipino cattle are raised on small farms, so starting small is normal and smart.
 - Choose a model that fits you: breeding is slow but long-term; fattening is faster but depends on feeder, feed, and selling prices; trading needs market skill.

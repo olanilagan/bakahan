@@ -28,7 +28,7 @@ sources:
 
 Raising a good animal is only half the job. The other half is selling it at a fair price, or buying the right animal without getting burned. In the Philippines, most cattle still change hands face to face: at livestock auction markets, through traders, and between neighbors. This guide explains how it works, what papers you need, and how to protect yourself.
 
-## Padre Garcia: the country's best-known cattle market
+## Padre Garcia, Batangas
 
 If you ask anyone in the cattle business where the trading happens, they will likely say **Padre Garcia, Batangas**. The town calls itself the "Cattle Trading Capital of the Philippines," and its livestock auction market is the reason.
 
@@ -58,9 +58,9 @@ Some markets are being revived. Batac City in Ilocos Norte reopened its traditio
 
 ## Traders and viajeros
 
-A big share of cattle is bought by **traders**, often called **viajeros** — buyers who travel between farms, towns and markets, then resell to other raisers, fatteners, or butchers.
+A big share of cattle is bought by **traders**, often called **viajeros**, buyers who travel between farms, towns and markets, then resell to other raisers, fatteners, or butchers.
 
-Traders are useful: they bring buyers to remote farms and save you hauling costs. They earn on the difference between what they pay you and what they sell for. That's fair — just know what your animal is worth first.
+Traders are useful: they bring buyers to remote farms and save you hauling costs. They earn on the difference between what they pay you and what they sell for. That's fair, just know what your animal is worth first.
 
 Under PD 533 (the Anti-Cattle Rustling Law), anyone in the **business** of buying and selling large cattle needs a permit, and BAI also requires livestock handlers who move animals between provinces to be licensed. A legitimate regular trader should not mind showing you their papers.
 
@@ -75,7 +75,7 @@ There are two common ways to price cattle:
 | **Liveweight (per kilo)** | Animal is weighed on a scale; price = weight × agreed price per kilo | Clear, easy to check, fair to both sides | Scale must be accurate; animal should not be overfed or watered just before weighing |
 | **Mata-mata (by eye)** | Buyer and seller agree on one price for the whole animal | Fast; common in busy markets | Experienced traders are usually much better at guessing than smallholders |
 
-If you are new, **liveweight is your friend**. When you sell by eye, the person who guesses better — usually the experienced viajero — wins.
+If you are new, **liveweight is your friend**. When you sell by eye, the person who guesses better (usually the experienced viajero) wins.
 
 ### Tips for getting a fair deal
 
@@ -94,7 +94,7 @@ Under PD 533, owners must **register large cattle with the city or municipal tre
 
 ### Certificate of transfer
 
-When an animal is sold, the transfer is recorded and a **certificate of transfer** is issued to the new owner, usually through the municipal treasurer's office. Accredited oksyon markets also prepare transfer certificates. Fees are set locally — check with your town hall.
+When an animal is sold, the transfer is recorded and a **certificate of transfer** is issued to the new owner, usually through the municipal treasurer's office. Accredited oksyon markets also prepare transfer certificates. Fees are set locally, check with your town hall.
 
 ### Veterinary health certificate (VHC)
 
@@ -120,11 +120,11 @@ Traders who move animals between provinces also need a **livestock handler's lic
 - **Look at the animal's health** before paying. Ask for the VHC. A sick animal brought into your farm can infect your whole herd.
 - **Agree on everything before loading:** price, weight method, who pays for hauling and permits, and when payment is made.
 
-## Key takeaways
+## Summary
 
 - Padre Garcia, Batangas is the best-known cattle market in the country; the town says trading is busiest on Thursdays and Fridays, but confirm the schedule before you go.
-- Many deals are made "mata-mata," by eye. If you're not experienced, insist on weighing — liveweight protects you.
+- Many deals are made "mata-mata," by eye. If you're not experienced, insist on weighing, liveweight protects you.
 - Check PSA farmgate prices and ask around locally so you know what your animal is worth.
 - Register your cattle with the municipal treasurer before six months of age and keep the certificate of ownership safe.
 - To move animals, you generally need a VHC, a shipping or transport permit, and for large animals a PNP clearance. Rules differ by place, so ask your LGU and provincial vet.
-- Never buy cattle without proper ownership papers — under the law, missing papers can be taken as a sign of theft.
+- Never buy cattle without proper ownership papers, under the law, missing papers can be taken as a sign of theft.

@@ -111,7 +111,7 @@ Alamin ang kasalukuyang presyo sa pinakamalapit na oksyunan at sa Municipal Agri
 - **Hindi alam ang sariling numero.** Kung walang record, hindi mo malalaman kung kumikita ka talaga.
 - **Sobrang bilis na pagpapalaki** bago pa handa ang kaalaman, pakain, at merkado.
 
-## Mga dapat tandaan
+## Buod
 
 - Karamihan ng baka sa Pilipinas ay nasa maliliit na farm, kaya normal at matalino ang magsimula nang maliit.
 - Pumili ng negosyong bagay sa iyo: mabagal pero pangmatagalan ang breeding; mas mabilis ang fattening pero nakadepende sa presyo ng feeder, feeds, at bentahan; kailangan ng galing sa merkado ang trading.

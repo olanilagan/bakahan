@@ -44,7 +44,7 @@ Iisang presyo ang pinagkakasunduan para sa buong baka, kadalasan ay tinatantiya 
 
 May mga buyer, lalo na ang mga katayan at negosyante ng karne, na nagbabayad batay sa timbang ng **carcass**: ang katawan pagkatapos katayin, tanggal na ang ulo, balat, paa at lamang-loob. Mas mataas ang presyo kada kilo kaysa liveweight, kasi karne at buto na lang ang binabayaran mo.
 
-## Dressing percentage: ang tulay ng liveweight at carcass
+## Dressing percentage
 
 Ang **dressing percentage** ang nagsasabi kung gaano kalaking bahagi ng buhay na baka ang nagiging carcass:
 
@@ -60,7 +60,7 @@ Gaano ito kataas kadalasan?
 
 Bakit mahalaga ito: kung carcass price ang alok ng buyer, i-convert mo muna sa liveweight bago ihambing sa ibang alok. Ang mataas na carcass price sa bakang mababa ang dressing ay puwedeng mas maliit pa kaysa sa patas na liveweight price.
 
-## Saan napupunta ang pera mo: mga pangunahing gastos
+## Mga pangunahing gastos
 
 | Gastos | Kasama rito |
 |---|---|
@@ -123,7 +123,7 @@ Ang aral: puwedeng manipis ang tubo kada ulo, **ang dagdag-timbang at ang pagita
 
 **Malaking tulong ang insurance.** May mortality insurance ang Philippine Crop Insurance Corporation (PCIC) para sa baka at kalabaw, para sa maliliit at commercial na nag-aalaga. Magtanong sa PCIC o sa agriculture office ninyo tungkol sa kasalukuyang terms at kung ano ang sakop.
 
-## Magtala: ito ang alaala ng negosyo mo
+## Pagtatala
 
 Kung walang tala, nanghuhula ka lang. Sa bawat baka, isulat ang:
 
@@ -147,7 +147,7 @@ Kung kailangan mo ng puhunan, heto ang ilang opsyon na konektado sa gobyerno na 
 
 Unang hakbang sa halos lahat ng ito: **magparehistro sa RSBSA** sa city o municipal agriculture office ninyo.
 
-## Mga dapat tandaan
+## Buod
 
 - Alamin kung paano ka babayaran: per kilo liveweight, per ulo, o per kilo carcass. Gawing per kilo liveweight ang lahat para maihambing.
 - Dressing % = timbang ng carcass ÷ liveweight × 100. 50% ang gamit ng PSA para sa baka sa pambansang estadistika; puwedeng mas mataas sa bakang pinakain ng butil.

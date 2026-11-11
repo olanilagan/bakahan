@@ -34,9 +34,9 @@ sources:
     url: "https://acpc.gov.ph/wp-content/uploads/PCIC-PROGRAM-PROFILE.pdf"
 ---
 
-Hindi mo kailangang mag-isa sa pag-aalaga ng baka. May mga opisina, programa, training, loan at insurance ang gobyerno para sa mga magsasakang tulad mo — marami rito ay libre o mura. Ang mahirap lang ay malaman kung saan magsisimula. Kaya ito ang simpleng mapa. Paalala lang bago tayo magsimula: **nagbabago ang mga programa taun-taon**, kaya laging alamin ang pinakabagong detalye sa ahensya bago ka magplano.
+Hindi mo kailangang mag-isa sa pag-aalaga ng baka. May mga opisina, programa, training, loan at insurance ang gobyerno para sa mga magsasakang tulad mo, marami rito ay libre o mura. Ang mahirap lang ay malaman kung saan magsisimula. Kaya ito ang simpleng mapa. Paalala lang bago tayo magsimula: **nagbabago ang mga programa taun-taon**, kaya laging alamin ang pinakabagong detalye sa ahensya bago ka magplano.
 
-## Unang hakbang: magpalista sa RSBSA
+## Magpalista muna sa RSBSA
 
 Bago ang lahat, siguraduhing nakarehistro ka sa **RSBSA** (Registry System for Basic Sectors in Agriculture). Magtanong sa inyong **Municipal Agriculture Office**.
 
@@ -64,7 +64,7 @@ Kilalanin sila. Isa sa pinakamahalagang puhunan ng maliit na raiser ang magandan
 
 Tumatakbo ang National Livestock Program ng DA sa pamamagitan ng mga regional field office. Ayon sa isang DA regional office, kasama sa mga serbisyo ang:
 
-- **Artificial insemination** sa ilalim ng Unified National Artificial Insemination Program para mapaganda ang lahi ng baka at kalabaw — kasama ang AI training, frozen semen at liquid nitrogen, at insentibo kapag nanganak ang inseminated na hayop (calf-drop incentive)
+- **Artificial insemination** sa ilalim ng Unified National Artificial Insemination Program para mapaganda ang lahi ng baka at kalabaw, kasama ang AI training, frozen semen at liquid nitrogen, at insentibo kapag nanganak ang inseminated na hayop (calf-drop incentive)
 - **Pagpapahiram ng breeder,** kung saan pinapahiram ang magandang toro sa mga kwalipikadong magsasaka (sa isang regional office, kondisyon ang pag-insure sa hayop sa PCIC)
 - Tulong sa **kalusugan ng hayop**: pagbabantay sa sakit, bakuna, gamot pang-emergency, at diagnostic laboratory
 - **Training** para sa mga magsasaka at extension worker
@@ -77,7 +77,7 @@ May mga programa ng DA na nagbibigay ng baka sa **mga asosasyon at kooperatiba**
 
 ### Bagong batas para sa livestock
 
-Noong Setyembre 2025, nilagdaan ang **Republic Act 12308**, ang Animal Industry Development and Competitiveness Act. Ayon sa DA, naglalaan ito ng P200 bilyon sa loob ng 10 taon para sa livestock, poultry at dairy — kasama ang pondo para sa pagpaparami ng hayop, kalusugan ng hayop at mga slaughterhouse — at ginagawang line agency ng DA ang Bureau of Animal Industry. Kung paano ito aabot sa mga nag-aalaga ng baka ay nakadepende sa mga programang ilalabas sa ilalim ng batas, kaya abangan ang mga anunsyo ng DA at BAI.
+Noong Setyembre 2025, nilagdaan ang **Republic Act 12308**, ang Animal Industry Development and Competitiveness Act. Ayon sa DA, naglalaan ito ng P200 bilyon sa loob ng 10 taon para sa livestock, poultry at dairy (kasama ang pondo para sa pagpaparami ng hayop, kalusugan ng hayop at mga slaughterhouse) at ginagawang line agency ng DA ang Bureau of Animal Industry. Kung paano ito aabot sa mga nag-aalaga ng baka ay nakadepende sa mga programang ilalabas sa ilalim ng batas, kaya abangan ang mga anunsyo ng DA at BAI.
 
 ## Bureau of Animal Industry (BAI)
 
@@ -91,7 +91,7 @@ Ang BAI ang pambansang ahensya para sa kalusugan, pagpaparami at regulasyon ng m
 
 Para sa karamihan ng magsasaka, naaabot ang serbisyo ng BAI sa pamamagitan ng provincial vet o DA regional office.
 
-## Training: ATI at libreng online course
+## Training mula sa ATI
 
 Ang **Agricultural Training Institute (ATI)** ang sangay ng DA para sa training. Dalawang paraan para matuto:
 
@@ -123,20 +123,20 @@ Paano mag-apply sa ANYO: mag-sign up online sa ACPC, umattend ng program briefin
 
 Bago umutang, isulat muna ang simpleng plano: ilang ulo, magkano ang hayop at pakain, gaano katagal bago maibenta, at paano babayaran. Maganda lang ang utang kung kaya itong bayaran ng proyekto.
 
-## Insurance: livestock insurance ng PCIC
+## Livestock insurance ng PCIC
 
 Ang **Philippine Crop Insurance Corporation (PCIC)** ay nag-i-insure ng livestock, kasama ang **baka**.
 
-- **Libre para sa nasa RSBSA.** Ayon sa PCIC, puwedeng makakuha ng insurance nang walang bayad sa premium ang mga RSBSA-registered na magsasaka kung **mag-e-enroll sila tuwing may bagong aalagaang hayop**. Hindi ito automatic — kailangan mong mag-apply.
+- **Libre para sa nasa RSBSA.** Ayon sa PCIC, puwedeng makakuha ng insurance nang walang bayad sa premium ang mga RSBSA-registered na magsasaka kung **mag-e-enroll sila tuwing may bagong aalagaang hayop**. Hindi ito automatic, kailangan mong mag-apply.
 - **Saan mag-a-apply.** Karaniwan sa Municipal Agriculture Office o vet office. Dalhin ang RSBSA details mo, valid ID at litrato ng mga hayop, at sagutan ang PCIC livestock form.
 - **Ano ang sakop.** Ayon sa program profile ng PCIC, sakop ng insurance sa baka ang bagyo, baha, kidlat, sunog at ilang sakit. Ang PCIC ang nagtatakda ng halagang insured at limitasyon sa edad, at nagbabago ito.
 - **Puwedeng maubos ang subsidy.** Nakadepende ang libreng insurance sa pondo ng gobyerno sa taon na iyon, kaya mag-enroll nang maaga.
 
-Lalong mahalaga ang insurance kung umutang ka pambili ng hayop — kapag namatay ang isang ulo nang walang insurance, puwedeng maubos ang kita mo sa buong season.
+Lalong mahalaga ang insurance kung umutang ka pambili ng hayop, kapag namatay ang isang ulo nang walang insurance, puwedeng maubos ang kita mo sa buong season.
 
 ## Kooperatiba at asosasyon
 
-Maraming programa — pamimigay ng hayop, mas malalaking loan, gamit na pinagsasaluhan — ay para sa **organisadong grupo**. Ang pagsali o pagbuo ng asosasyon o kooperatiba ng mga nag-aalaga ng baka ay makakatulong para:
+Maraming programa (pamimigay ng hayop, mas malalaking loan, gamit na pinagsasaluhan) ay para sa **organisadong grupo**. Ang pagsali o pagbuo ng asosasyon o kooperatiba ng mga nag-aalaga ng baka ay makakatulong para:
 
 - maging kwalipikado sa grant at mas malaking loan (parehong nagpapautang sa grupo ang ANYO at Landbank)
 - makabili ng pakain, bitamina at bakuna nang maramihan at mas mura
@@ -145,13 +145,13 @@ Maraming programa — pamimigay ng hayop, mas malalaking loan, gamit na pinagsas
 
 Karaniwang kinikilala ng LGU o DA ang mga asosasyon, habang nagpaparehistro naman ang mga kooperatiba sa **Cooperative Development Authority (CDA)**. Masasabi sa iyo ng MAO kung anong mga grupo na ang meron sa inyong lugar.
 
-## Mga dapat tandaan
+## Buod
 
-- Magparehistro muna sa **RSBSA** sa Municipal Agriculture Office — dito nagsisimula ang libreng insurance, loan at mga programa.
+- Magparehistro muna sa **RSBSA** sa Municipal Agriculture Office, dito nagsisimula ang libreng insurance, loan at mga programa.
 - Ang **MAO at beterinaryo ng bayan** ang unang lalapitan para sa AI, bakuna, mga form at balita tungkol sa programa.
 - May mga programa ang DA at BAI para sa pagpaparami, kalusugan ng hayop at pagpapahiram ng breeder; marami rito ay dumadaan sa regional office at mga grupo ng magsasaka.
 - May harapang training ang **ATI** at **libreng online course** sa e-extension.gov.ph.
 - May mababang-interes na loan ang **ACPC (ANYO)** at **Landbank** para sa magsasaka at grupo.
-- Nag-i-insure ng baka ang **PCIC**, at libre ito sa mga nasa RSBSA — pero kailangan mong mag-enroll.
+- Nag-i-insure ng baka ang **PCIC**, at libre ito sa mga nasa RSBSA, pero kailangan mong mag-enroll.
 - Sumali sa **kooperatiba o asosasyon** para mas maraming tulong ang maabot.
-- Madalas magbago ang mga programa — **laging alamin ang pinakabago sa ahensya** bago magplano.
+- Madalas magbago ang mga programa, **laging alamin ang pinakabago sa ahensya** bago magplano.

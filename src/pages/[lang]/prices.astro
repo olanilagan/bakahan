@@ -93,7 +93,7 @@ const regionRows = REGIONS.map((region) => ({
           <div class="card locked">
             <div class="locked__count">{recentCount}</div>
             <p class="muted">{t('prices.locked.count')}</p>
-            <h2>🔒 {t('prices.locked.title')}</h2>
+            <h2>{t('prices.locked.title')}</h2>
             <p class="lead" style="margin:0 auto 20px">{t('prices.locked.body')}</p>
             <div class="btn-row" style="justify-content:center">
               <a class="btn btn--primary" href={`${href(lang, '/signup')}?next=${encodeURIComponent(Astro.url.pathname)}`}>

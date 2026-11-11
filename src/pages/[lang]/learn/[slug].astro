@@ -68,7 +68,7 @@ const { Content } = await render(entry);
         {
           next && (
             <a class="card next" href={href(lang, `/learn/${next.id.split('/')[1]}`)}>
-              <span class="kicker">{t('learn.next')} →</span>
+              <span class="tag">{t('learn.next')} →</span>
               <h3>{next.data.title}</h3>
             </a>
           )

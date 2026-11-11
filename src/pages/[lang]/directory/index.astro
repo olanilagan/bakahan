@@ -38,17 +38,6 @@ const { results } = await env.DB.prepare(
   .bind(...binds)
   .all<Biz>();
 
-const icons: Record<string, string> = {
-  feeds: '🌾',
-  vet: '🩺',
-  trader: '🤝',
-  breeder: '🐂',
-  equipment: '🛠️',
-  transport: '🚚',
-  finance: '🏦',
-  agritech: '📱',
-  other: '📌',
-};
 ---
 
 <Base lang={lang} title={t('dir.title')} description={t('dir.lead')}>
@@ -69,7 +58,7 @@ const icons: Record<string, string> = {
         {
           BIZ_CATEGORIES.map((c) => (
             <a class:list={['chip', category === c && 'chip--on']} href={`${href(lang, '/directory')}?category=${c}`}>
-              {icons[c]} {t(`dircat.${c}` as UIKey)}
+              {t(`dircat.${c}` as UIKey)}
             </a>
           ))
         }
@@ -85,19 +74,19 @@ const icons: Record<string, string> = {
               return (
                 <div class="card biz">
                   <span class="tag">
-                    {icons[b.category]} {t(`dircat.${b.category}` as UIKey)}
+                    {t(`dircat.${b.category}` as UIKey)}
                   </span>
                   <h3>{b.name}</h3>
                   {b.description && <p class="muted">{b.description}</p>}
                   <p class="small">
-                    📍 {b.location ? `${b.location}, ` : ''}
+                    {b.location ? `${b.location}, ` : ''}
                     {b.region}
                   </p>
                   <p class="small biz__links">
-                    {b.phone && <a href={`tel:${b.phone.replace(/[^\d+]/g, '')}`}>📞 {b.phone}</a>}
+                    {b.phone && <a href={`tel:${b.phone.replace(/[^\d+]/g, '')}`}>{b.phone}</a>}
                     {site && (
                       <a href={site} rel="noopener nofollow ugc" target="_blank">
-                        🌐 {new URL(site).hostname}
+                        {new URL(site).hostname}
                       </a>
                     )}
                   </p>
@@ -120,8 +109,8 @@ const icons: Record<string, string> = {
   }
   .chip {
     flex-shrink: 0;
-    padding: 7px 14px;
-    border-radius: 999px;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
     border: 1.5px solid var(--border);
     background: var(--white);
     color: var(--text);
