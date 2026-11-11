@@ -1,0 +1,149 @@
+---
+// Farm management software: "coming soon" page with a waitlist form.
+import { notFound } from '../../lib/page';
+import { env } from 'cloudflare:workers';
+import Base from '../../layouts/Base.astro';
+import { isLang, useT } from '../../i18n/utils';
+import { REGIONS, oneOf } from '../../lib/options';
+import { isEmail, str } from '../../lib/form';
+
+export const prerender = false;
+
+const lang = Astro.params.lang;
+if (!isLang(lang)) return notFound();
+const t = useT(lang);
+
+let done = false;
+let error = '';
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const email = str(form, 'email', 254)?.toLowerCase() ?? null;
+  if (!isEmail(email)) {
+    error = t('auth.signup.badEmail');
+  } else {
+    await env.DB.prepare(
+      `INSERT INTO waitlist (email, name, herd_size, farm_type, region) VALUES (?, ?, ?, ?, ?)
+       ON CONFLICT(email) DO NOTHING`,
+    )
+      .bind(email, str(form, 'name', 100), str(form, 'herd_size', 20), str(form, 'farm_type', 40), oneOf(REGIONS, form.get('region')))
+      .run();
+    done = true;
+  }
+}
+
+const copy = {
+  en: {
+    lead: 'Simple software for Filipino cattle farms. Know every animal, every kilo gained and every peso spent, and see clearly whether your farm is making money.',
+    features: [
+      ['🐄', 'Herd records', 'Every animal with its ear tag, breed, source, purchase price and photos.'],
+      ['⚖️', 'Weights & daily gain', 'Record weighings and automatically see the average daily gain of each animal and group.'],
+      ['🌾', 'Feeds & costs', 'Log feed, vet and labor costs, and see your true cost per kilo gained.'],
+      ['💰', 'Sales & profit', 'Record sales and see profit per animal, per batch and per month.'],
+      ['📷', 'Weight from a photo', 'Planned: estimate an animal’s weight from a photo using AI, for when you have no scale.'],
+      ['📶', 'Works on any phone', 'Made for farms: simple screens, in Filipino or English, and light on mobile data.'],
+    ],
+    formTitle: 'Be the first to try it',
+    herd: ['1–5', '6–20', '21–100', '100+', 'None yet'],
+    types: ['Fattening', 'Breeding (cow-calf)', 'Both', 'Trading', 'Planning to start'],
+  },
+  fil: {
+    lead: 'Simpleng software para sa bakahang Pilipino. Kilalanin ang bawat hayop, bawat kilong nadagdag at bawat pisong nagastos, at malinaw na makita kung kumikita ang iyong farm.',
+    features: [
+      ['🐄', 'Rekord ng hayop', 'Bawat baka kasama ang ear tag, breed, pinagbilhan, presyo at litrato.'],
+      ['⚖️', 'Timbang at daily gain', 'I-record ang pagtimbang at awtomatikong makita ang average daily gain ng bawat hayop at grupo.'],
+      ['🌾', 'Feeds at gastos', 'Ilista ang gastos sa feeds, gamot at trabahador, at makita ang totoong gastos bawat kilong nadagdag.'],
+      ['💰', 'Benta at kita', 'I-record ang benta at makita ang kita bawat hayop, bawat batch at bawat buwan.'],
+      ['📷', 'Timbang mula sa litrato', 'Plano: tantyahin ang timbang ng baka mula sa litrato gamit ang AI, para sa walang timbangan.'],
+      ['📶', 'Gumagana sa kahit anong phone', 'Ginawa para sa farm: simpleng screen, Filipino o English, at tipid sa mobile data.'],
+    ],
+    formTitle: 'Mauna kang makasubok',
+    herd: ['1–5', '6–20', '21–100', '100+', 'Wala pa'],
+    types: ['Pagpapataba', 'Pagpapalahi (cow-calf)', 'Pareho', 'Trading', 'Balak pa lang magsimula'],
+  },
+}[lang];
+---
+
+<Base lang={lang} title={t('app.title')} description={copy.lead}>
+  <section class="page-head">
+    <div class="container">
+      <span class="kicker">{t('home.app.kicker')}</span>
+      <h1>{t('app.title')}</h1>
+      <p class="lead">{copy.lead}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        {
+          copy.features.map(([icon, title, body]) => (
+            <div class="card">
+              <div style="font-size:2rem" aria-hidden="true">
+                {icon}
+              </div>
+              <h3>{title}</h3>
+              <p class="muted">{body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="waitlist">
+    <div class="container">
+      <h2>{copy.formTitle}</h2>
+      {
+        done ? (
+          <p class="alert alert--ok">{t('waitlist.thanks')}</p>
+        ) : (
+          <form method="post" action="#waitlist" class="form">
+            {error && <p class="alert alert--error">{error}</p>}
+            <div class="form-row">
+              <label>
+                {t('form.name')} <span class="hint">({t('form.optional')})</span>
+                <input name="name" maxlength="100" autocomplete="name" />
+              </label>
+              <label>
+                {t('form.email')}
+                <input name="email" type="email" required maxlength="254" autocomplete="email" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                {t('form.herdSize')}
+                <select name="herd_size">
+                  {copy.herd.map((h) => (
+                    <option>{h}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                {t('form.farmType')}
+                <select name="farm_type">
+                  {copy.types.map((h) => (
+                    <option>{h}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <label>
+              {t('form.region')}
+              <select name="region">
+                <option value="">{t('form.chooseRegion')}</option>
+                {REGIONS.map((r) => (
+                  <option>{r}</option>
+                ))}
+              </select>
+            </label>
+            <div>
+              <button class="btn btn--straw" type="submit">
+                {t('waitlist.submit')}
+              </button>
+            </div>
+          </form>
+        )
+      }
+    </div>
+  </section>
+</Base>

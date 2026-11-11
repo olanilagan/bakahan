@@ -1,0 +1,30 @@
+{
+  "name": "bakahan",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && astro preview",
+    "check": "astro check",
+    "astro": "astro",
+    "cf-typegen": "wrangler types",
+    "db:migrate:local": "wrangler d1 migrations apply bakahan-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply bakahan-db --remote",
+    "deploy": "astro build && wrangler d1 migrations apply bakahan-db --remote && wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.4.7",
+    "astro": "^7.4.10"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^26.6.6",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.160.0"
+  }
+}

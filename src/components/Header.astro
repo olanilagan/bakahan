@@ -1,0 +1,231 @@
+---
+import Logo from './Logo.astro';
+import AccountMenu from './AccountMenu.astro';
+import { href, otherLang, switchLangPath, useT, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useT(lang);
+const other = otherLang(lang);
+const path = Astro.url.pathname;
+
+const links = [
+  { path: '/learn', label: t('nav.learn') },
+  { path: '/market', label: t('nav.market') },
+  { path: '/prices', label: t('nav.prices') },
+  { path: '/directory', label: t('nav.directory') },
+  { path: '/farm', label: t('nav.farm') },
+  { path: '/app', label: t('nav.software') },
+];
+const isActive = (p: string) => path.startsWith(`/${lang}${p}`);
+---
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href={href(lang, '/')} aria-label="Bakahan home">
+      <Logo size={38} />
+      <span class="brand__name">Bakahan</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Main">
+      {
+        links.map((l) => (
+          <a href={href(lang, l.path)} aria-current={isActive(l.path) ? 'page' : undefined}>
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="site-header__tools">
+      <a
+        class="lang-toggle"
+        href={switchLangPath(path, other)}
+        hreflang={other}
+        data-set-lang={other}
+        title={t('lang.switchLabel')}
+      >
+        <span aria-hidden="true">🌐</span>
+        {t('lang.switch')}
+      </a>
+      <div class="acct-slot">
+        <AccountMenu server:defer lang={lang}>
+          <a slot="fallback" class="btn btn--primary btn--small" href={href(lang, '/login')}>{t('nav.login')}</a>
+        </AccountMenu>
+      </div>
+
+      <!-- Mobile menu: a <details> element opens and closes without any JavaScript. -->
+      <details class="nav-mobile">
+        <summary aria-label={t('nav.menu')}>
+          <span class="burger" aria-hidden="true"></span>
+        </summary>
+        <nav aria-label="Main mobile">
+          {
+            links.map((l) => (
+              <a href={href(lang, l.path)} aria-current={isActive(l.path) ? 'page' : undefined}>
+                {l.label}
+              </a>
+            ))
+          }
+          <a href={href(lang, '/account')}>{t('nav.account')}</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Remember the language choice so bakahan.com/ opens in that language next time.
+  document.querySelectorAll<HTMLAnchorElement>('[data-set-lang]').forEach((a) => {
+    a.addEventListener('click', () => {
+      document.cookie = `lang=${a.dataset.setLang}; path=/; max-age=31536000; samesite=lax`;
+    });
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251, 248, 240, 0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-height: 66px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .brand__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.45rem;
+    color: var(--green-900);
+    letter-spacing: -0.02em;
+  }
+  .nav-desktop {
+    display: none;
+    gap: 4px;
+  }
+  .nav-desktop a {
+    padding: 8px 11px;
+    border-radius: 999px;
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-desktop a:hover {
+    background: var(--green-100);
+  }
+  .nav-desktop a[aria-current='page'] {
+    background: var(--green-100);
+    color: var(--green-800);
+  }
+  .site-header__tools {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--straw-100);
+    color: var(--soil-700);
+    white-space: nowrap;
+  }
+  .lang-toggle:hover {
+    background: var(--straw-300);
+    color: var(--green-950);
+  }
+  .acct-slot {
+    display: none;
+  }
+  .nav-mobile summary {
+    list-style: none;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+  }
+  .nav-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+  .burger,
+  .burger::before,
+  .burger::after {
+    display: block;
+    width: 22px;
+    height: 2.5px;
+    background: var(--green-900);
+    border-radius: 2px;
+    position: relative;
+  }
+  .burger::before,
+  .burger::after {
+    content: '';
+    position: absolute;
+  }
+  .burger::before {
+    top: -7px;
+  }
+  .burger::after {
+    top: 7px;
+  }
+  .nav-mobile nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 66px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    display: grid;
+    padding: 8px var(--gutter) 16px;
+  }
+  .nav-mobile nav a {
+    padding: 12px 4px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-mobile nav a[aria-current='page'] {
+    color: var(--green-700);
+  }
+
+  @media (min-width: 560px) {
+    .acct-slot {
+      display: block;
+    }
+  }
+  @media (min-width: 1060px) {
+    .nav-desktop {
+      display: flex;
+    }
+    .nav-mobile {
+      display: none;
+    }
+  }
+</style>

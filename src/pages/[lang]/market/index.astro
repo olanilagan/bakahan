@@ -1,0 +1,120 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../../layouts/Base.astro';
+import ListingCard, { type ListingRow } from '../../../components/ListingCard.astro';
+import { href, useT } from '../../../i18n/utils';
+import type { UIKey } from '../../../i18n/ui';
+import { ANIMAL_TYPES, REGIONS, oneOf } from '../../../lib/options';
+import { pageLang, notFound } from '../../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+
+// Filters come from the URL (?intent=sell&type=steer&region=...), so a filtered
+// view can be bookmarked or shared in Messenger.
+const q = Astro.url.searchParams;
+const intent = oneOf(['sell', 'buy'] as const, q.get('intent'));
+const type = oneOf(ANIMAL_TYPES, q.get('type'));
+const region = oneOf(REGIONS, q.get('region'));
+
+const where = ["status = 'active'", 'expires_at > ?'];
+const binds: unknown[] = [new Date().toISOString()];
+if (intent) (where.push('intent = ?'), binds.push(intent));
+if (type) (where.push('animal_type = ?'), binds.push(type));
+if (region) (where.push('region = ?'), binds.push(region));
+
+// Values are always passed as bound parameters (?), never pasted into the SQL
+// text. That is what prevents SQL injection.
+const { results } = await env.DB.prepare(
+  `SELECT id, intent, animal_type, breed, head_count, weight_kg, price, price_unit, title, region, location, status, created_at
+     FROM listings WHERE ${where.join(' AND ')} ORDER BY created_at DESC LIMIT 60`,
+)
+  .bind(...binds)
+  .all<ListingRow>();
+---
+
+<Base lang={lang} title={t('market.title')} description={t('market.lead')}>
+  <section class="page-head">
+    <div class="container page-head__row">
+      <div>
+        <h1>{t('market.title')}</h1>
+        <p class="lead">{t('market.lead')}</p>
+      </div>
+      <a class="btn btn--primary" href={href(lang, '/market/new')}>+ {t('market.post')}</a>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:28px">
+    <div class="container">
+      <form method="get" class="filters card">
+        <label>
+          <span class="visually-hidden">{t('form.intent')}</span>
+          <select name="intent">
+            <option value="">{t('market.all')}</option>
+            <option value="sell" selected={intent === 'sell'}>{t('market.intent.sell')}</option>
+            <option value="buy" selected={intent === 'buy'}>{t('market.intent.buy')}</option>
+          </select>
+        </label>
+        <label>
+          <span class="visually-hidden">{t('form.animalType')}</span>
+          <select name="type">
+            <option value="">{t('type.any')}</option>
+            {
+              ANIMAL_TYPES.map((a) => (
+                <option value={a} selected={type === a}>
+                  {t(`type.${a}` as UIKey)}
+                </option>
+              ))
+            }
+          </select>
+        </label>
+        <label>
+          <span class="visually-hidden">{t('form.region')}</span>
+          <select name="region">
+            <option value="">{t('market.allRegions')}</option>
+            {REGIONS.map((r) => <option selected={region === r}>{r}</option>)}
+          </select>
+        </label>
+        <button class="btn btn--ghost btn--small" type="submit">{t('market.filter')}</button>
+      </form>
+
+      {
+        results.length === 0 ? (
+          <p class="muted" style="margin-top:24px">{t('market.empty')}</p>
+        ) : (
+          <div class="grid" style="margin-top:24px">
+            {results.map((row) => (
+              <ListingCard lang={lang} row={row} />
+            ))}
+          </div>
+        )
+      }
+
+      <p class="alert alert--note small" style="margin-top:32px">🛡️ {t('market.safety')}</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .filters {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    padding: 14px;
+  }
+  .filters label:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 760px) {
+    .filters {
+      grid-template-columns: 1fr 1fr 1.5fr auto;
+      align-items: center;
+    }
+    .filters label:nth-child(3) {
+      grid-column: auto;
+    }
+  }
+</style>

@@ -1,0 +1,16 @@
+---
+// Brand mark: a salakot (traditional Filipino farmer's hat) over a green field.
+interface Props {
+  size?: number;
+}
+const { size = 36 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <circle cx="32" cy="32" r="31" fill="#22603a"></circle>
+  <path d="M6 44 Q32 34 58 44 L58 50 Q32 63 6 50 Z" fill="#3f9a5c"></path>
+  <path d="M10 33 L32 13 L54 33 Q32 39 10 33 Z" fill="#d4a03f"></path>
+  <path d="M10 33 Q32 39 54 33 Q32 42 10 33 Z" fill="#b5832a"></path>
+  <path d="M32 13 L25 33 M32 13 L39 33 M32 13 L32 36" stroke="#b5832a" stroke-width="1.4" fill="none"></path>
+  <circle cx="32" cy="12.5" r="2.2" fill="#b5832a"></circle>
+</svg>

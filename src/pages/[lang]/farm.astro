@@ -1,0 +1,169 @@
+---
+// Showcase of the owner's own cattle fattening farm.
+// TODO(owner): replace the placeholder story, add the farm's name, location and photos.
+import Base from '../../layouts/Base.astro';
+import HeroArt from '../../components/HeroArt.astro';
+import { href, langStaticPaths, useT, type Lang } from '../../i18n/utils';
+
+export const prerender = true;
+export const getStaticPaths = langStaticPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+
+const copy = {
+  en: {
+    lead: 'Bakahan began with our own cattle fattening farm. We are building it now, and we will share the whole journey here, honestly.',
+    whyTitle: 'Why we started',
+    why: 'We believe cattle raising can be a good, steady business for Filipino families, if it is done with care and good records. We started our own farm to learn it properly, and to show others what it really takes.',
+    planTitle: 'What we are building',
+    plan: [
+      ['🏗️', 'Pens and shade', 'A covered feedlot with clean floors, good drainage, and plenty of shade and fresh water.'],
+      ['🌾', 'Our own forage', 'Napier and other grasses planted beside the pens, so we can cut and carry fresh feed every day.'],
+      ['🐂', 'Brahman-cross feeders', 'Young, healthy animals bought from trusted sources, quarantined, dewormed, and weighed on arrival.'],
+      ['📒', 'Records for everything', 'Weights, feed, costs and sales, all recorded. This is how we will know if we are really making money.'],
+    ],
+    stepsTitle: 'Where we are',
+    steps: [
+      ['done', 'Planning and learning', 'Visiting farms and markets, and studying fattening and feeds.'],
+      ['now', 'Building the farm', 'Pens, water, forage area. Happening now.'],
+      ['next', 'First batch of cattle', 'Our first group of feeders arrives.'],
+      ['next', 'First harvest and sharing results', 'We will publish our real numbers here.'],
+    ],
+    followTitle: 'Follow along',
+    follow: 'Join Bakahan for free and we will share updates from the farm as it grows.',
+  },
+  fil: {
+    lead: 'Nagsimula ang Bakahan sa sarili naming farm ng pagpapataba ng baka. Itinatayo na namin ito ngayon, at ibabahagi namin dito ang buong paglalakbay, nang tapat.',
+    whyTitle: 'Bakit kami nagsimula',
+    why: 'Naniniwala kami na ang pagbababaka ay puwedeng maging maganda at matatag na negosyo para sa pamilyang Pilipino, kung gagawin nang maingat at may maayos na rekord. Nagsimula kami ng sariling farm para matutunan ito nang tama, at para maipakita sa iba kung ano talaga ang kailangan.',
+    planTitle: 'Ano ang itinatayo namin',
+    plan: [
+      ['🏗️', 'Kural at silungan', 'Feedlot na may bubong, malinis na sahig, maayos na daluyan ng tubig, at maraming lilim at malinis na inumin.'],
+      ['🌾', 'Sariling pakain', 'Napier at iba pang damo na nakatanim sa tabi ng kural, para may sariwang pakain araw-araw.'],
+      ['🐂', 'Brahman-cross na feeder', 'Bata at malulusog na hayop mula sa mapagkakatiwalaang source, naka-quarantine, napurga, at tinimbang pagdating.'],
+      ['📒', 'Rekord ng lahat', 'Timbang, feeds, gastos at benta, lahat naka-record. Dito namin malalaman kung talagang kumikita kami.'],
+    ],
+    stepsTitle: 'Nasaan na kami',
+    steps: [
+      ['done', 'Pagpaplano at pag-aaral', 'Pagbisita sa mga farm at palengke, at pag-aaral ng pagpapataba at feeds.'],
+      ['now', 'Pagtatayo ng farm', 'Kural, tubig, taniman ng damo. Ginagawa na ngayon.'],
+      ['next', 'Unang batch ng baka', 'Darating ang una naming grupo ng feeder.'],
+      ['next', 'Unang benta at pagbabahagi ng resulta', 'Ilalabas namin dito ang totoong numero.'],
+    ],
+    followTitle: 'Sumubaybay',
+    follow: 'Sumali nang libre sa Bakahan at magbabahagi kami ng balita mula sa farm habang lumalaki ito.',
+  },
+}[lang];
+---
+
+<Base lang={lang} title={t('farm.title')} description={copy.lead}>
+  <section class="page-head">
+    <div class="container farm-head">
+      <div>
+        <h1>{t('farm.title')}</h1>
+        <p class="lead">{copy.lead}</p>
+      </div>
+      <div class="farm-head__art"><HeroArt /></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>{copy.whyTitle}</h2>
+      <p>{copy.why}</p>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <h2>{copy.planTitle}</h2>
+      <div class="grid">
+        {
+          copy.plan.map(([icon, title, body]) => (
+            <div class="card">
+              <div style="font-size:2rem" aria-hidden="true">
+                {icon}
+              </div>
+              <h3>{title}</h3>
+              <p class="muted">{body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>{copy.stepsTitle}</h2>
+      <ol class="timeline">
+        {
+          copy.steps.map(([state, title, body]) => (
+            <li class={`timeline__item timeline__item--${state}`}>
+              <h3>{title}</h3>
+              <p class="muted">{body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card" style="text-align:center; padding:32px">
+        <h2>{copy.followTitle}</h2>
+        <p class="lead" style="margin:0 auto 20px">{copy.follow}</p>
+        <a class="btn btn--primary" href={href(lang, '/signup')}>{t('nav.signup')}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .farm-head {
+    display: grid;
+    gap: 24px;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .farm-head {
+      grid-template-columns: 1.1fr 1fr;
+    }
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 28px;
+    border-left: 3px solid var(--green-200);
+    max-width: 680px;
+  }
+  .timeline__item {
+    position: relative;
+    padding: 0 0 22px 8px;
+  }
+  .timeline__item::before {
+    content: '';
+    position: absolute;
+    left: -38px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--green-200);
+  }
+  .timeline__item--done::before {
+    background: var(--green-600);
+    border-color: var(--green-600);
+  }
+  .timeline__item--now::before {
+    background: var(--straw-500);
+    border-color: var(--straw-600);
+    box-shadow: 0 0 0 5px var(--straw-100);
+  }
+  .timeline__item h3 {
+    margin-bottom: 0.2em;
+  }
+</style>

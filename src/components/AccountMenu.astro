@@ -1,0 +1,47 @@
+---
+// A "server island": the page around it can be pre-built and cached, while
+// this small piece is rendered per visitor (it knows who is logged in).
+// Used with <AccountMenu server:defer /> in Header.astro.
+import { href, useT, isLang, type Lang } from '../i18n/utils';
+
+const lang: Lang = isLang(Astro.props.lang) ? Astro.props.lang : 'en';
+const t = useT(lang);
+const user = Astro.locals.user;
+---
+
+{
+  user ? (
+    <div class="acct">
+      {user.isAdmin && (
+        <a class="acct__link" href={href(lang, '/admin')}>
+          {t('nav.admin')}
+        </a>
+      )}
+      <a class="btn btn--ghost btn--small" href={href(lang, '/account')}>
+        <span aria-hidden="true">👤</span> {user.name.split(' ')[0]}
+      </a>
+    </div>
+  ) : (
+    <div class="acct">
+      <a class="acct__link" href={href(lang, '/login')}>
+        {t('nav.login')}
+      </a>
+      <a class="btn btn--primary btn--small" href={href(lang, '/signup')}>
+        {t('nav.signup')}
+      </a>
+    </div>
+  )
+}
+
+<style>
+  .acct {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .acct__link {
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+</style>

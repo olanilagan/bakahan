@@ -1,0 +1,161 @@
+---
+import Base from '../../layouts/Base.astro';
+import HeroArt from '../../components/HeroArt.astro';
+import LatestListings from '../../components/LatestListings.astro';
+import { href, langStaticPaths, useT, type Lang } from '../../i18n/utils';
+
+export const prerender = true;
+export const getStaticPaths = langStaticPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+
+const pillars = [
+  { icon: '📚', title: t('home.learn.title'), body: t('home.learn.body'), link: '/learn' },
+  { icon: '🐂', title: t('home.market.title'), body: t('home.market.body'), link: '/market' },
+  { icon: '📈', title: t('home.prices.title'), body: t('home.prices.body'), link: '/prices' },
+  { icon: '🤝', title: t('home.directory.title'), body: t('home.directory.body'), link: '/directory' },
+];
+---
+
+<Base lang={lang}>
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <span class="kicker">{t('home.hero.kicker')}</span>
+        <h1>{t('home.hero.title')}</h1>
+        <p class="lead">{t('home.hero.lead')}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href={href(lang, '/learn')}>{t('home.hero.cta1')}</a>
+          <a class="btn btn--ghost" href={href(lang, '/market')}>{t('home.hero.cta2')}</a>
+        </div>
+      </div>
+      <div class="hero__art">
+        <HeroArt />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>{t('home.pillars.title')}</h2>
+      <div class="grid pillars">
+        {
+          pillars.map((p) => (
+            <a class="card pillar" href={href(lang, p.link)}>
+              <span class="pillar__icon" aria-hidden="true">
+                {p.icon}
+              </span>
+              <h3>{p.title}</h3>
+              <p class="muted">{p.body}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="page-head__row" style="margin-bottom:18px">
+        <h2 style="margin:0">{t('home.latest.title')}</h2>
+        <a href={href(lang, '/market')}>{t('home.latest.all')} →</a>
+      </div>
+      <LatestListings server:defer lang={lang}>
+        <p slot="fallback" class="muted">…</p>
+      </LatestListings>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="card feature feature--farm">
+        <span class="kicker">{t('home.farm.kicker')}</span>
+        <h2>{t('home.farm.title')}</h2>
+        <p>{t('home.farm.body')}</p>
+        <a class="btn btn--primary" href={href(lang, '/farm')}>{t('home.farm.cta')}</a>
+      </div>
+      <div class="card feature feature--app">
+        <span class="kicker">{t('home.app.kicker')}</span>
+        <h2>{t('home.app.title')}</h2>
+        <p>{t('home.app.body')}</p>
+        <a class="btn btn--straw" href={href(lang, '/app')}>{t('home.app.cta')}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section join">
+    <div class="container join__inner">
+      <h2>{t('home.join.title')}</h2>
+      <p class="lead">{t('home.join.body')}</p>
+      <a class="btn btn--straw" href={href(lang, '/signup')}>{t('nav.signup')}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    background: linear-gradient(180deg, var(--green-50) 0%, var(--cream) 100%);
+    padding: 36px 0 48px;
+  }
+  .hero__grid {
+    display: grid;
+    gap: 32px;
+    align-items: center;
+  }
+  .hero h1 {
+    margin-bottom: 0.35em;
+  }
+  .hero .lead {
+    margin-bottom: 1.4em;
+  }
+  @media (min-width: 900px) {
+    .hero {
+      padding: 64px 0 72px;
+    }
+    .hero__grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 48px;
+    }
+  }
+  .pillar__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--green-100);
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+  .split {
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 820px) {
+    .split {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .feature {
+    padding: 28px;
+  }
+  .feature--farm {
+    background: linear-gradient(160deg, #ffffff, var(--green-50));
+  }
+  .feature--app {
+    background: linear-gradient(160deg, #ffffff, var(--straw-100));
+  }
+  .join {
+    background: var(--green-800);
+    color: #e6f2e8;
+    text-align: center;
+  }
+  .join h2 {
+    color: #fff;
+  }
+  .join .lead {
+    color: #cfe6d3;
+    margin: 0 auto 1.4em;
+  }
+</style>

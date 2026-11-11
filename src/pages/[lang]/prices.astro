@@ -1,0 +1,304 @@
+---
+// Member price reports. Anyone sees how many reports exist; only members see the data.
+import { env } from 'cloudflare:workers';
+import Base from '../../layouts/Base.astro';
+import { formatDate, formatPeso, href, useT } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
+import { daysAgoISO, median, num, str, todayPH } from '../../lib/form';
+import { PRICE_CLASSES, PRICE_KINDS, REGIONS, oneOf } from '../../lib/options';
+import { pageLang, notFound } from '../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const user = Astro.locals.user;
+
+let error = '';
+let thanks = Astro.url.searchParams.has('thanks');
+
+if (Astro.request.method === 'POST' && user) {
+  const form = await Astro.request.formData();
+  const kind = oneOf(PRICE_KINDS, form.get('kind'));
+  const cls = oneOf(PRICE_CLASSES, form.get('animal_class')) ?? 'any';
+  const region = oneOf(REGIONS, form.get('region'));
+  const price = num(form, 'price_per_kg', 10, 5_000);
+  const observed = str(form, 'observed_on', 10);
+  const validDate = observed && /^\d{4}-\d{2}-\d{2}$/.test(observed) && observed <= todayPH() && observed >= '2020-01-01';
+
+  if (!kind || !region || !price || !validDate) {
+    error = t('form.required');
+  } else {
+    await env.DB.prepare(
+      `INSERT INTO price_reports (user_id, observed_on, kind, animal_class, price_per_kg, region, location, notes)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    )
+      .bind(user.id, observed, kind, cls, price, region, str(form, 'location', 80), str(form, 'notes', 300))
+      .run();
+    // Redirect after POST so a page refresh doesn't submit the report twice.
+    return Astro.redirect(`${Astro.url.pathname}?thanks#top`, 303);
+  }
+}
+
+const since30 = daysAgoISO(30).slice(0, 10);
+const countRow = await env.DB.prepare('SELECT COUNT(*) AS n FROM price_reports WHERE observed_on >= ?').bind(since30).first<{ n: number }>();
+const recentCount = countRow?.n ?? 0;
+
+type Report = {
+  id: number;
+  observed_on: string;
+  kind: string;
+  animal_class: string;
+  price_per_kg: number;
+  region: string;
+  location: string | null;
+  notes: string | null;
+};
+let reports: Report[] = [];
+let last30: Report[] = [];
+if (user) {
+  const { results } = await env.DB.prepare(
+    `SELECT id, observed_on, kind, animal_class, price_per_kg, region, location, notes
+       FROM price_reports WHERE observed_on >= ? ORDER BY observed_on DESC, id DESC LIMIT 500`,
+  )
+    .bind(daysAgoISO(120).slice(0, 10))
+    .all<Report>();
+  reports = results;
+  last30 = results.filter((r) => r.observed_on >= since30);
+}
+
+const summary = PRICE_KINDS.map((kind) => {
+  const values = last30.filter((r) => r.kind === kind).map((r) => r.price_per_kg);
+  return { kind, median: median(values), count: values.length };
+});
+const regionRows = REGIONS.map((region) => ({
+  region,
+  cells: PRICE_KINDS.map((kind) => median(last30.filter((r) => r.region === region && r.kind === kind).map((r) => r.price_per_kg))),
+})).filter((r) => r.cells.some((c) => c !== null));
+---
+
+<Base lang={lang} title={t('prices.title')} description={t('prices.lead')}>
+  <section class="page-head" id="top">
+    <div class="container">
+      <h1>{t('prices.title')}</h1>
+      <p class="lead">{t('prices.lead')}</p>
+    </div>
+  </section>
+
+  {
+    !user ? (
+      <section class="section">
+        <div class="container">
+          <div class="card locked">
+            <div class="locked__count">{recentCount}</div>
+            <p class="muted">{t('prices.locked.count')}</p>
+            <h2>🔒 {t('prices.locked.title')}</h2>
+            <p class="lead" style="margin:0 auto 20px">{t('prices.locked.body')}</p>
+            <div class="btn-row" style="justify-content:center">
+              <a class="btn btn--primary" href={`${href(lang, '/signup')}?next=${encodeURIComponent(Astro.url.pathname)}`}>
+                {t('nav.signup')}
+              </a>
+              <a class="btn btn--ghost" href={`${href(lang, '/login')}?next=${encodeURIComponent(Astro.url.pathname)}`}>
+                {t('nav.login')}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section class="section" style="padding-top:28px">
+        <div class="container stack">
+          {thanks && <p class="alert alert--ok">{t('prices.thanks')}</p>}
+
+          <details class="card report" open={!!error || reports.length === 0}>
+            <summary>
+              <strong>+ {t('prices.report')}</strong>
+            </summary>
+            <form method="post" class="form form--wide" style="margin-top:16px">
+              {error && <p class="alert alert--error">{error}</p>}
+              <div class="form-row">
+                <label>
+                  {t('form.kind')}
+                  <select name="kind">
+                    {PRICE_KINDS.map((k) => (
+                      <option value={k}>{t(`kind.${k}` as UIKey)}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  {t('form.class')}
+                  <select name="animal_class">
+                    {PRICE_CLASSES.map((c) => (
+                      <option value={c}>{t(`type.${c}` as UIKey)}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  {t('form.price')}
+                  <input name="price_per_kg" type="number" inputmode="decimal" min="10" max="5000" step="any" required />
+                </label>
+              </div>
+              <div class="form-row">
+                <label>
+                  {t('form.date')}
+                  <input name="observed_on" type="date" required value={todayPH()} max={todayPH()} />
+                </label>
+                <label>
+                  {t('form.region')}
+                  <select name="region" required>
+                    {REGIONS.map((r) => (
+                      <option selected={user.region === r}>{r}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  {t('form.location')} <span class="hint">({t('form.optional')})</span>
+                  <input name="location" maxlength="80" />
+                </label>
+              </div>
+              <label>
+                {t('form.notes')} <span class="hint">({t('form.optional')})</span>
+                <input name="notes" maxlength="300" />
+              </label>
+              <div>
+                <button class="btn btn--primary" type="submit">
+                  {t('form.submit')}
+                </button>
+              </div>
+            </form>
+          </details>
+
+          <div>
+            <h2>{t('prices.summary')}</h2>
+            <div class="grid">
+              {summary.map((s) => (
+                <div class="card stat">
+                  <span class="stat__label">{t(`kind.${s.kind}` as UIKey)}</span>
+                  <span class="stat__value">{s.median !== null ? `${formatPeso(s.median)}/kg` : '—'}</span>
+                  <span class="small muted">
+                    {s.count > 0 ? `${t('prices.median')} · ${s.count} ${t('prices.reports')}` : t('prices.noData')}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {regionRows.length > 0 && (
+            <div>
+              <h2>{t('prices.byRegion')}</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>{t('form.region')}</th>
+                      {PRICE_KINDS.map((k) => (
+                        <th class="num">{t(`kind.${k}` as UIKey)}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {regionRows.map((r) => (
+                      <tr>
+                        <td>{r.region}</td>
+                        {r.cells.map((c) => (
+                          <td class="num">{c !== null ? formatPeso(c) : '—'}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          <div>
+            <h2>{t('prices.recent')}</h2>
+            {reports.length === 0 ? (
+              <p class="muted">{t('prices.empty')}</p>
+            ) : (
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>{t('form.date')}</th>
+                      <th>{t('form.kind')}</th>
+                      <th class="num">₱/kg</th>
+                      <th>{t('form.region')}</th>
+                      <th>{t('form.notes')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {reports.slice(0, 100).map((r) => (
+                      <tr>
+                        <td style="white-space:nowrap">{formatDate(lang, r.observed_on)}</td>
+                        <td>
+                          {t(`kind.${r.kind}` as UIKey)}
+                          {r.animal_class !== 'any' && <span class="muted"> · {t(`type.${r.animal_class}` as UIKey)}</span>}
+                        </td>
+                        <td class="num">
+                          <strong>{formatPeso(r.price_per_kg)}</strong>
+                        </td>
+                        <td>
+                          {r.location ? `${r.location}, ` : ''}
+                          {r.region}
+                        </td>
+                        <td class="muted">{r.notes}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <div class="container">
+    <p class="small muted">
+      {t('prices.disclaimer')}
+      <a href="https://psa.gov.ph/statistics/livestock-poultry-iprs" rel="noopener" target="_blank">psa.gov.ph</a>
+    </p>
+  </div>
+</Base>
+
+<style>
+  .stack {
+    display: grid;
+    gap: 36px;
+  }
+  .locked {
+    text-align: center;
+    padding: 36px 20px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .locked__count {
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    font-weight: 700;
+    color: var(--green-700);
+    line-height: 1;
+  }
+  .report summary {
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--green-700);
+  }
+  .stat {
+    display: grid;
+    gap: 4px;
+  }
+  .stat__label {
+    font-weight: 800;
+    color: var(--text-muted);
+  }
+  .stat__value {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--green-900);
+  }
+</style>

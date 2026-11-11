@@ -1,0 +1,8 @@
+---
+// bakahan.com/ → /en/ or /fil/, based on a saved choice or the browser language.
+import { negotiateLang } from '../i18n/utils';
+export const prerender = false;
+
+const lang = negotiateLang(Astro.cookies.get('lang')?.value, Astro.request.headers.get('accept-language'));
+return Astro.redirect(`/${lang}/`, 302);
+---

@@ -1,0 +1,117 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../../layouts/Base.astro';
+import { href, useT } from '../../../i18n/utils';
+import type { UIKey } from '../../../i18n/ui';
+import { safeUrl, str } from '../../../lib/form';
+import { BIZ_CATEGORIES, REGIONS, oneOf } from '../../../lib/options';
+import { loginUrl, pageLang, notFound } from '../../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const user = Astro.locals.user;
+if (!user) return Astro.redirect(loginUrl(lang, Astro));
+
+let error = '';
+let done = false;
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const name = str(form, 'name', 100);
+  const category = oneOf(BIZ_CATEGORIES, form.get('category'));
+  const region = oneOf(REGIONS, form.get('region'));
+  if (!name || !category || !region) {
+    error = t('form.required');
+  } else {
+    await env.DB.prepare(
+      `INSERT INTO businesses (user_id, name, category, description, region, location, phone, website)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    )
+      .bind(
+        user.id,
+        name,
+        category,
+        str(form, 'description', 600),
+        region,
+        str(form, 'location', 80),
+        str(form, 'phone', 30),
+        safeUrl(str(form, 'website', 200)),
+      )
+      .run();
+    done = true;
+  }
+}
+---
+
+<Base lang={lang} title={t('dir.new.title')} noindex>
+  <section class="page-head">
+    <div class="container">
+      <a class="small" href={href(lang, '/directory')}>← {t('dir.title')}</a>
+      <h1 style="margin-top:10px">{t('dir.new.title')}</h1>
+      <p class="lead">{t('dir.new.lead')}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      {
+        done ? (
+          <p class="alert alert--ok">{t('dir.new.thanks')}</p>
+        ) : (
+          <form method="post" class="form form--wide">
+            {error && <p class="alert alert--error">{error}</p>}
+            <div class="form-row">
+              <label>
+                {t('form.bizName')}
+                <input name="name" required maxlength="100" />
+              </label>
+              <label>
+                {t('form.category')}
+                <select name="category" required>
+                  {BIZ_CATEGORIES.map((c) => (
+                    <option value={c}>{t(`dircat.${c}` as UIKey)}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <label>
+              {t('form.description')}
+              <textarea name="description" maxlength="600" />
+            </label>
+            <div class="form-row">
+              <label>
+                {t('form.region')}
+                <select name="region" required>
+                  <option value="">{t('form.chooseRegion')}</option>
+                  {REGIONS.map((r) => (
+                    <option selected={user.region === r}>{r}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                {t('form.location')}
+                <input name="location" maxlength="80" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                {t('form.phone')}
+                <input name="phone" type="tel" maxlength="30" value={user.phone ?? ''} />
+              </label>
+              <label>
+                {t('form.website')} <span class="hint">({t('form.optional')})</span>
+                <input name="website" maxlength="200" placeholder="facebook.com/…" />
+              </label>
+            </div>
+            <div>
+              <button class="btn btn--primary" type="submit">
+                {t('dir.new.submit')}
+              </button>
+            </div>
+          </form>
+        )
+      }
+    </div>
+  </section>
+</Base>

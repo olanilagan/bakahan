@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { isLang, useT, href } from '../i18n/utils';
+
+// Rendered on demand (not pre-built) for unmatched URLs.
+export const prerender = false;
+Astro.response.status = 404;
+
+// Show the 404 in the language of the URL the visitor tried, if we can tell.
+const first = Astro.url.pathname.split('/')[1];
+const lang = isLang(first) ? first : 'en';
+const t = useT(lang);
+---
+
+<Base lang={lang} title={t('404.title')} noindex>
+  <section class="section">
+    <div class="container" style="text-align:center; max-width:640px">
+      <div style="font-size:4rem" aria-hidden="true">🐄❓</div>
+      <h1>{t('404.title')}</h1>
+      <p class="lead" style="margin:0 auto 24px">{t('404.body')}</p>
+      <a class="btn btn--primary" href={href(lang, '/')}>{t('404.home')}</a>
+    </div>
+  </section>
+</Base>

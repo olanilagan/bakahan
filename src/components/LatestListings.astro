@@ -1,0 +1,28 @@
+---
+// Server island: the home page is static, but this list is live from the database.
+import { env } from 'cloudflare:workers';
+import ListingCard, { type ListingRow } from './ListingCard.astro';
+import { isLang, useT, type Lang } from '../i18n/utils';
+
+const lang: Lang = isLang(Astro.props.lang) ? Astro.props.lang : 'en';
+const t = useT(lang);
+
+const { results } = await env.DB.prepare(
+  `SELECT id, intent, animal_type, breed, head_count, weight_kg, price, price_unit, title, region, location, status, created_at
+     FROM listings WHERE status = 'active' AND expires_at > ? ORDER BY created_at DESC LIMIT 3`,
+)
+  .bind(new Date().toISOString())
+  .all<ListingRow>();
+---
+
+{
+  results.length === 0 ? (
+    <p class="muted">{t('home.latest.empty')}</p>
+  ) : (
+    <div class="grid">
+      {results.map((row) => (
+        <ListingCard lang={lang} row={row} />
+      ))}
+    </div>
+  )
+}

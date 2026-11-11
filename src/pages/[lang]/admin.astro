@@ -1,0 +1,119 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../layouts/Base.astro';
+import { formatDate, useT } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
+import { pageLang, notFound } from '../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const user = Astro.locals.user;
+// Non-admins get a 404 rather than "forbidden", so the page's existence isn't advertised.
+if (!user?.isAdmin) return notFound();
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const id = Number(form.get('id'));
+  const action = form.get('action');
+  if (Number.isInteger(id) && (action === 'approve' || action === 'reject')) {
+    await env.DB.prepare('UPDATE businesses SET status = ? WHERE id = ?')
+      .bind(action === 'approve' ? 'approved' : 'rejected', id)
+      .run();
+  }
+  return Astro.redirect(Astro.url.pathname, 303);
+}
+
+// D1 batch: several queries in one round trip to the database.
+const now = new Date().toISOString();
+const [pending, users, listings, prices, waitlist] = await env.DB.batch([
+  env.DB.prepare(
+    `SELECT b.*, u.name AS submitted_by, u.email AS submitter_email FROM businesses b
+       LEFT JOIN users u ON u.id = b.user_id WHERE b.status = 'pending' ORDER BY b.created_at`,
+  ),
+  env.DB.prepare('SELECT COUNT(*) AS n FROM users'),
+  env.DB.prepare("SELECT COUNT(*) AS n FROM listings WHERE status = 'active' AND expires_at > ?").bind(now),
+  env.DB.prepare('SELECT COUNT(*) AS n FROM price_reports'),
+  env.DB.prepare('SELECT COUNT(*) AS n FROM waitlist'),
+]);
+
+type Pending = {
+  id: number;
+  name: string;
+  category: string;
+  description: string | null;
+  region: string;
+  location: string | null;
+  phone: string | null;
+  website: string | null;
+  created_at: string;
+  submitted_by: string | null;
+  submitter_email: string | null;
+};
+const pendingRows = (pending?.results ?? []) as Pending[];
+const count = (r: D1Result | undefined) => ((r?.results?.[0] as { n: number } | undefined)?.n ?? 0);
+const stats = [
+  [t('admin.users'), count(users)],
+  [t('admin.listings'), count(listings)],
+  [t('admin.prices'), count(prices)],
+  [t('admin.waitlist'), count(waitlist)],
+] as const;
+---
+
+<Base lang={lang} title={t('admin.title')} noindex>
+  <section class="page-head">
+    <div class="container"><h1>{t('admin.title')}</h1></div>
+  </section>
+  <section class="section">
+    <div class="container" style="display:grid; gap:36px">
+      <div>
+        <h2>{t('admin.stats')}</h2>
+        <div class="grid">
+          {
+            stats.map(([label, n]) => (
+              <div class="card">
+                <div class="muted">{label}</div>
+                <div style="font-family:var(--font-display); font-size:2.2rem; font-weight:700">{n}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div>
+        <h2>{t('admin.pending')}</h2>
+        {pendingRows.length === 0 && <p class="muted">{t('admin.none')}</p>}
+        <div class="grid">
+          {
+            pendingRows.map((b) => (
+              <div class="card">
+                <span class="tag">{t(`dircat.${b.category}` as UIKey)}</span>
+                <h3 style="margin-top:8px">{b.name}</h3>
+                {b.description && <p class="muted">{b.description}</p>}
+                <p class="small">
+                  📍 {b.location ? `${b.location}, ` : ''}
+                  {b.region}
+                  <br />
+                  {b.phone && <>📞 {b.phone}<br /></>}
+                  {b.website && <>🌐 {b.website}<br /></>}
+                  {formatDate(lang, b.created_at)} · {b.submitted_by} ({b.submitter_email})
+                </p>
+                <form method="post" class="btn-row">
+                  <input type="hidden" name="id" value={b.id} />
+                  <button class="btn btn--primary btn--small" name="action" value="approve">
+                    {t('admin.approve')}
+                  </button>
+                  <button class="btn btn--danger btn--small" name="action" value="reject">
+                    {t('admin.reject')}
+                  </button>
+                </form>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

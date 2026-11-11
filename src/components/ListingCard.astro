@@ -1,0 +1,73 @@
+---
+import { formatDate, formatPeso, href, useT, type Lang } from '../i18n/utils';
+import type { UIKey } from '../i18n/ui';
+
+export interface ListingRow {
+  id: number;
+  intent: 'sell' | 'buy';
+  animal_type: string;
+  breed: string | null;
+  head_count: number;
+  weight_kg: number | null;
+  price: number | null;
+  price_unit: 'head' | 'kg' | 'negotiable';
+  title: string;
+  region: string;
+  location: string | null;
+  status: string;
+  created_at: string;
+}
+
+interface Props {
+  lang: Lang;
+  row: ListingRow;
+}
+const { lang, row } = Astro.props;
+const t = useT(lang);
+
+const price =
+  row.price_unit === 'negotiable' || row.price == null
+    ? t('market.negotiable')
+    : `${formatPeso(row.price)} ${row.price_unit === 'kg' ? t('market.perKg') : t('market.perHead')}`;
+---
+
+<a class="card listing" href={href(lang, `/market/${row.id}`)}>
+  <div class="listing__top">
+    <span class:list={['tag', row.intent === 'buy' && 'tag--straw']}>
+      {row.intent === 'buy' ? t('market.intent.buy') : t('market.intent.sell')}
+    </span>
+    {row.status === 'sold' && <span class="tag tag--grey">{t('market.sold')}</span>}
+  </div>
+  <h3>{row.title}</h3>
+  <p class="listing__meta">
+    {row.head_count} {t('market.head')} · {t(`type.${row.animal_type}` as UIKey)}{row.breed && ` · ${row.breed}`}
+    {row.weight_kg && <> · ~{row.weight_kg} kg</>}
+  </p>
+  <p class="listing__price">{price}</p>
+  <p class="listing__where small muted">
+    📍 {row.location ? `${row.location}, ` : ''}{row.region} · {formatDate(lang, row.created_at)}
+  </p>
+</a>
+
+<style>
+  .listing__top {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .listing h3 {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+  .listing__meta {
+    margin-bottom: 6px;
+    color: var(--text-muted);
+  }
+  .listing__price {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--green-800);
+    margin-bottom: 6px;
+  }
+</style>

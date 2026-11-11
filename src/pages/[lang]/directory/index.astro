@@ -1,0 +1,149 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../../layouts/Base.astro';
+import { href, useT } from '../../../i18n/utils';
+import type { UIKey } from '../../../i18n/ui';
+import { safeUrl } from '../../../lib/form';
+import { BIZ_CATEGORIES, REGIONS, oneOf } from '../../../lib/options';
+import { pageLang, notFound } from '../../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+
+const category = oneOf(BIZ_CATEGORIES, Astro.url.searchParams.get('category'));
+const region = oneOf(REGIONS, Astro.url.searchParams.get('region'));
+
+const where = ["status = 'approved'"];
+const binds: unknown[] = [];
+if (category) (where.push('category = ?'), binds.push(category));
+if (region) (where.push('region = ?'), binds.push(region));
+
+type Biz = {
+  id: number;
+  name: string;
+  category: string;
+  description: string | null;
+  region: string;
+  location: string | null;
+  phone: string | null;
+  website: string | null;
+};
+const { results } = await env.DB.prepare(
+  `SELECT id, name, category, description, region, location, phone, website
+     FROM businesses WHERE ${where.join(' AND ')} ORDER BY name COLLATE NOCASE LIMIT 200`,
+)
+  .bind(...binds)
+  .all<Biz>();
+
+const icons: Record<string, string> = {
+  feeds: '🌾',
+  vet: '🩺',
+  trader: '🤝',
+  breeder: '🐂',
+  equipment: '🛠️',
+  transport: '🚚',
+  finance: '🏦',
+  agritech: '📱',
+  other: '📌',
+};
+---
+
+<Base lang={lang} title={t('dir.title')} description={t('dir.lead')}>
+  <section class="page-head">
+    <div class="container page-head__row">
+      <div>
+        <h1>{t('dir.title')}</h1>
+        <p class="lead">{t('dir.lead')}</p>
+      </div>
+      <a class="btn btn--primary" href={href(lang, '/directory/new')}>+ {t('dir.add')}</a>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:28px">
+    <div class="container">
+      <nav class="chips" aria-label={t('form.category')}>
+        <a class:list={['chip', !category && 'chip--on']} href={href(lang, '/directory')}>{t('market.all')}</a>
+        {
+          BIZ_CATEGORIES.map((c) => (
+            <a class:list={['chip', category === c && 'chip--on']} href={`${href(lang, '/directory')}?category=${c}`}>
+              {icons[c]} {t(`dircat.${c}` as UIKey)}
+            </a>
+          ))
+        }
+      </nav>
+
+      {
+        results.length === 0 ? (
+          <p class="muted" style="margin-top:24px">{t('dir.empty')}</p>
+        ) : (
+          <div class="grid" style="margin-top:24px">
+            {results.map((b) => {
+              const site = safeUrl(b.website);
+              return (
+                <div class="card biz">
+                  <span class="tag">
+                    {icons[b.category]} {t(`dircat.${b.category}` as UIKey)}
+                  </span>
+                  <h3>{b.name}</h3>
+                  {b.description && <p class="muted">{b.description}</p>}
+                  <p class="small">
+                    📍 {b.location ? `${b.location}, ` : ''}
+                    {b.region}
+                  </p>
+                  <p class="small biz__links">
+                    {b.phone && <a href={`tel:${b.phone.replace(/[^\d+]/g, '')}`}>📞 {b.phone}</a>}
+                    {site && (
+                      <a href={site} rel="noopener nofollow ugc" target="_blank">
+                        🌐 {new URL(site).hostname}
+                      </a>
+                    )}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+  .chip {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .chip--on {
+    background: var(--green-700);
+    border-color: var(--green-700);
+    color: #fff;
+  }
+  .biz h3 {
+    margin-top: 10px;
+    font-family: var(--font-body);
+    font-weight: 800;
+  }
+  .biz__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 0;
+  }
+</style>

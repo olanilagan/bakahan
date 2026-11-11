@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { formatDate, href, useT, type Lang } from '../../../i18n/utils';
+import type { UIKey } from '../../../i18n/ui';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const all = await getCollection('articles');
+  return all.map((entry) => {
+    const [lang, slug] = entry.id.split('/');
+    const siblings = all
+      .filter((a) => a.id.startsWith(`${lang}/`))
+      .sort((a, b) => a.data.order - b.data.order);
+    const next = siblings[siblings.findIndex((a) => a.id === entry.id) + 1];
+    return { params: { lang, slug }, props: { entry, next } };
+  });
+}
+
+const { entry, next } = Astro.props;
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+const { Content } = await render(entry);
+---
+
+<Base lang={lang} title={entry.data.title} description={entry.data.description}>
+  <article>
+    <header class="page-head">
+      <div class="container">
+        <a class="small" href={href(lang, '/learn')}>← {t('learn.back')}</a>
+        <p style="margin:12px 0 8px">
+          <span class="tag">{t(`cat.${entry.data.category}` as UIKey)}</span>
+        </p>
+        <h1>{entry.data.title}</h1>
+        <p class="lead">{entry.data.description}</p>
+        <p class="small muted">
+          {t('learn.updated')}
+          {formatDate(lang, entry.data.updated)}
+          {entry.data.readingMinutes && <> · {entry.data.readingMinutes} {t('learn.minutes')}</>}
+        </p>
+      </div>
+    </header>
+
+    <div class="container section">
+      <div class="prose">
+        <Content />
+
+        <p class="alert alert--note small" style="margin-top:2em">{t('learn.disclaimer')}</p>
+
+        {
+          entry.data.sources.length > 0 && (
+            <section class="sources">
+              <h2>{t('learn.sources')}</h2>
+              <ol>
+                {entry.data.sources.map((s) => (
+                  <li>
+                    <a href={s.url} rel="noopener nofollow" target="_blank">
+                      {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )
+        }
+
+        {
+          next && (
+            <a class="card next" href={href(lang, `/learn/${next.id.split('/')[1]}`)}>
+              <span class="kicker">{t('learn.next')} →</span>
+              <h3>{next.data.title}</h3>
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .sources {
+    font-size: 0.92rem;
+  }
+  .sources h2 {
+    font-size: 1.2rem;
+  }
+  .sources a {
+    word-break: break-word;
+  }
+  .next {
+    margin-top: 2em;
+  }
+  .next h3 {
+    margin: 0;
+  }
+</style>

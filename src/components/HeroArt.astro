@@ -1,0 +1,158 @@
+---
+// Hand-drawn SVG scene: a white Brahman, a farmer in a salakot, coconut palms
+// and rice-field hills. Inline SVG = no image download, sharp at any size.
+---
+
+<svg viewBox="0 0 600 420" role="img" aria-labelledby="hero-art-title" class="hero-art">
+  <title id="hero-art-title">A farmer in a salakot hat leading a white Brahman cow under coconut palms</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d6eee7"></stop>
+      <stop offset="1" stop-color="#f7f3e3"></stop>
+    </linearGradient>
+    <linearGradient id="cowShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"></stop>
+      <stop offset="1" stop-color="#e6e1d6"></stop>
+    </linearGradient>
+    <clipPath id="frame"><rect width="600" height="420" rx="28"></rect></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="600" height="420" fill="url(#sky)"></rect>
+    <!-- sun -->
+    <circle cx="470" cy="92" r="46" fill="#f3d27c" opacity="0.9"></circle>
+    <circle cx="470" cy="92" r="66" fill="#f3d27c" opacity="0.25"></circle>
+    <!-- far mountain -->
+    <path d="M0 250 L90 170 L150 205 L240 140 L330 215 L420 160 L520 220 L600 185 L600 300 L0 300 Z" fill="#a9cdb4"></path>
+    <!-- hills -->
+    <path d="M0 270 Q120 220 260 262 T600 248 L600 420 L0 420 Z" fill="#7fb36f"></path>
+    <path d="M0 312 Q160 276 330 306 T600 296 L600 420 L0 420 Z" fill="#5c9a4f"></path>
+    <!-- rice paddy lines -->
+    <g stroke="#4f8a44" stroke-width="2" fill="none" opacity="0.55">
+      <path d="M0 340 Q200 318 600 330"></path>
+      <path d="M0 362 Q220 342 600 356"></path>
+      <path d="M0 386 Q240 368 600 382"></path>
+    </g>
+
+    <!-- coconut palm, right -->
+    <g>
+      <path d="M548 330 C540 270 548 200 566 150" stroke="#8a6a45" stroke-width="11" fill="none" stroke-linecap="round"></path>
+      <g fill="#2f6b3a">
+        <path d="M566 150 C540 128 510 130 488 150 C514 140 540 142 566 152 Z"></path>
+        <path d="M566 150 C556 118 532 104 506 108 C532 116 552 130 566 152 Z"></path>
+        <path d="M566 150 C580 118 604 110 620 118 C600 124 584 136 568 152 Z"></path>
+        <path d="M566 150 C596 142 620 152 632 172 C612 160 590 156 568 152 Z"></path>
+        <path d="M566 150 C566 176 552 196 530 206 C546 188 556 170 564 150 Z"></path>
+      </g>
+      <circle cx="562" cy="158" r="6" fill="#6b4a2b"></circle>
+      <circle cx="572" cy="160" r="6" fill="#6b4a2b"></circle>
+    </g>
+    <!-- coconut palm, left (small, far) -->
+    <g opacity="0.85">
+      <path d="M44 284 C40 250 44 214 54 190" stroke="#8a6a45" stroke-width="7" fill="none" stroke-linecap="round"></path>
+      <g fill="#3b7a45">
+        <path d="M54 190 C38 176 20 178 8 190 C24 184 40 184 54 192 Z"></path>
+        <path d="M54 190 C50 170 36 160 20 162 C36 168 46 178 54 192 Z"></path>
+        <path d="M54 190 C64 170 80 166 92 172 C78 176 66 182 56 192 Z"></path>
+        <path d="M54 190 C72 186 88 194 94 206 C82 198 68 194 56 192 Z"></path>
+      </g>
+    </g>
+
+    <!-- ground shadow -->
+    <ellipse cx="330" cy="352" rx="190" ry="14" fill="#3f7a3a" opacity="0.35"></ellipse>
+
+    <!-- ── White Brahman (facing left) ── -->
+    <g>
+      <!-- tail -->
+      <path d="M470 222 C488 250 486 290 480 318" stroke="#d9d3c6" stroke-width="5" fill="none" stroke-linecap="round"></path>
+      <ellipse cx="480" cy="324" rx="6" ry="11" fill="#6f6a63"></ellipse>
+      <!-- back legs -->
+      <rect x="430" y="270" width="20" height="74" rx="8" fill="#e9e4d9"></rect>
+      <rect x="452" y="266" width="20" height="78" rx="8" fill="#f3f0e8"></rect>
+      <!-- front legs -->
+      <rect x="266" y="274" width="20" height="70" rx="8" fill="#e9e4d9"></rect>
+      <rect x="292" y="276" width="20" height="68" rx="8" fill="#f3f0e8"></rect>
+      <!-- hooves -->
+      <g fill="#4a4038">
+        <rect x="266" y="336" width="20" height="10" rx="3"></rect>
+        <rect x="292" y="336" width="20" height="10" rx="3"></rect>
+        <rect x="430" y="336" width="20" height="10" rx="3"></rect>
+        <rect x="452" y="336" width="20" height="10" rx="3"></rect>
+      </g>
+      <!-- body with hump -->
+      <path
+        d="M252 214 C258 186 286 160 312 166 C330 170 338 186 356 190 C392 196 438 190 466 204 C490 218 490 262 474 284 C446 304 312 306 270 292 C246 280 242 240 252 214 Z"
+        fill="url(#cowShade)" stroke="#d8d1c3" stroke-width="2"></path>
+      <!-- hump highlight -->
+      <path d="M286 176 C298 166 318 166 330 178 C316 176 300 178 286 186 Z" fill="#ffffff" opacity="0.9"></path>
+      <!-- dewlap + neck -->
+      <path d="M258 206 C238 204 218 206 204 214 L202 250 C214 278 240 296 270 294 C258 270 254 236 258 206 Z" fill="#f1ede4" stroke="#d8d1c3" stroke-width="2"></path>
+      <path d="M214 258 C226 276 244 288 262 292" stroke="#ddd6c8" stroke-width="2" fill="none"></path>
+      <!-- far ear (drooping) -->
+      <path d="M210 214 C232 218 244 240 238 266 C228 252 216 236 202 226 Z" fill="#e2dccf"></path>
+      <!-- head -->
+      <path d="M214 204 C200 196 180 198 172 210 L158 254 C154 270 168 280 182 276 L204 256 C214 240 220 218 214 204 Z" fill="#f8f6f0" stroke="#d8d1c3" stroke-width="2"></path>
+      <!-- muzzle -->
+      <path d="M160 250 C156 266 166 278 182 276 C190 274 194 266 190 258 C182 252 170 248 160 250 Z" fill="#8f8a84"></path>
+      <circle cx="168" cy="262" r="2.4" fill="#4a4038"></circle>
+      <!-- horns -->
+      <path d="M192 204 C188 192 192 184 200 180 C198 188 198 196 200 204 Z" fill="#c9b892"></path>
+      <path d="M206 206 C206 194 212 188 220 186 C216 194 214 200 214 208 Z" fill="#c9b892"></path>
+      <!-- near ear (drooping) -->
+      <path d="M186 214 C166 220 156 240 160 262 C168 248 176 234 192 224 Z" fill="#ece7dc" stroke="#d8d1c3" stroke-width="1.5"></path>
+      <!-- eye -->
+      <ellipse cx="194" cy="226" rx="3.2" ry="3.6" fill="#2b2420"></ellipse>
+      <path d="M188 221 Q194 217 200 221" stroke="#bdb5a6" stroke-width="1.5" fill="none"></path>
+    </g>
+
+    <!-- rope from farmer to cow -->
+    <path d="M128 262 C140 280 156 278 170 266" stroke="#a0773f" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+
+    <!-- ── Farmer with salakot ── -->
+    <g>
+      <!-- legs -->
+      <rect x="92" y="290" width="13" height="52" rx="5" fill="#465a6a"></rect>
+      <rect x="110" y="290" width="13" height="52" rx="5" fill="#3d4f5e"></rect>
+      <rect x="92" y="326" width="13" height="16" rx="4" fill="#9b6b45"></rect>
+      <rect x="110" y="326" width="13" height="16" rx="4" fill="#8e6140"></rect>
+      <ellipse cx="98" cy="344" rx="9" ry="4" fill="#3a2e25"></ellipse>
+      <ellipse cx="117" cy="344" rx="9" ry="4" fill="#3a2e25"></ellipse>
+      <!-- shirt -->
+      <path d="M86 232 C88 222 128 222 130 232 L132 296 L84 296 Z" fill="#f2ead7"></path>
+      <path d="M108 226 L108 296" stroke="#d9cfb7" stroke-width="2"></path>
+      <!-- towel on shoulder (bimpo) -->
+      <path d="M88 230 C96 226 102 230 104 238 L98 262 L90 258 Z" fill="#c8553d"></path>
+      <!-- arms -->
+      <path d="M128 236 C138 246 136 258 128 264" stroke="#f2ead7" stroke-width="12" fill="none" stroke-linecap="round"></path>
+      <circle cx="128" cy="264" r="6" fill="#a9734a"></circle>
+      <path d="M88 236 C80 252 82 268 86 280" stroke="#f2ead7" stroke-width="12" fill="none" stroke-linecap="round"></path>
+      <circle cx="86" cy="282" r="6" fill="#a9734a"></circle>
+      <!-- neck + head -->
+      <rect x="102" y="214" width="12" height="12" fill="#a9734a"></rect>
+      <ellipse cx="108" cy="206" rx="13" ry="14" fill="#b07a4f"></ellipse>
+      <!-- salakot -->
+      <path d="M62 202 L108 168 L154 202 Q108 214 62 202 Z" fill="#d4a03f"></path>
+      <path d="M62 202 Q108 214 154 202 Q108 222 62 202 Z" fill="#b5832a"></path>
+      <path d="M108 168 L92 205 M108 168 L124 205 M108 168 L108 208 M108 168 L77 203 M108 168 L139 203" stroke="#b5832a" stroke-width="1.5" fill="none"></path>
+      <circle cx="108" cy="167" r="3.5" fill="#b5832a"></circle>
+    </g>
+
+    <!-- grass tufts -->
+    <g fill="#3f7a3a">
+      <path d="M210 352 l4 -14 l3 14 l4 -10 l2 10 Z"></path>
+      <path d="M380 356 l4 -12 l3 12 l4 -9 l2 9 Z"></path>
+      <path d="M520 350 l4 -14 l3 14 l4 -10 l2 10 Z"></path>
+      <path d="M40 360 l4 -12 l3 12 l4 -9 l2 9 Z"></path>
+    </g>
+  </g>
+</svg>
+
+<style>
+  .hero-art {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 28px;
+    box-shadow: 0 18px 50px rgba(20, 56, 34, 0.18);
+  }
+</style>

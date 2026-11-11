@@ -1,0 +1,185 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../../layouts/Base.astro';
+import { formatDate, formatPeso, href, useT } from '../../../i18n/utils';
+import type { UIKey } from '../../../i18n/ui';
+import { loginUrl, pageLang, notFound } from '../../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const user = Astro.locals.user;
+
+const id = Number(Astro.params.id);
+if (!Number.isInteger(id) || id < 1) return notFound();
+
+type Row = {
+  id: number;
+  user_id: number;
+  intent: 'sell' | 'buy';
+  animal_type: string;
+  breed: string | null;
+  head_count: number;
+  weight_kg: number | null;
+  price: number | null;
+  price_unit: string;
+  title: string;
+  description: string | null;
+  region: string;
+  location: string | null;
+  contact: string;
+  status: string;
+  created_at: string;
+  seller_name: string;
+};
+
+const load = () =>
+  env.DB.prepare(
+    `SELECT l.*, u.name AS seller_name FROM listings l JOIN users u ON u.id = l.user_id
+      WHERE l.id = ? AND l.status != 'removed'`,
+  )
+    .bind(id)
+    .first<Row>();
+
+let listing = await load();
+if (!listing) return notFound();
+
+const canManage = !!user && (user.id === listing.user_id || user.isAdmin);
+
+// Owner (or admin) actions: mark sold / remove.
+if (Astro.request.method === 'POST' && canManage) {
+  const form = await Astro.request.formData();
+  const action = form.get('action');
+  if (action === 'sold' || action === 'remove') {
+    await env.DB.prepare('UPDATE listings SET status = ? WHERE id = ?')
+      .bind(action === 'sold' ? 'sold' : 'removed', id)
+      .run();
+    return Astro.redirect(action === 'remove' ? href(lang, '/account') : Astro.url.pathname, 303);
+  }
+}
+
+const price =
+  listing.price_unit === 'negotiable' || listing.price == null
+    ? t('market.negotiable')
+    : `${formatPeso(listing.price)} ${listing.price_unit === 'kg' ? t('market.perKg') : t('market.perHead')}`;
+---
+
+<Base lang={lang} title={listing.title} description={`${listing.title} · ${listing.region}`}>
+  <section class="page-head">
+    <div class="container">
+      <a class="small" href={href(lang, '/market')}>← {t('market.title')}</a>
+      <p style="margin:12px 0 8px; display:flex; gap:6px">
+        <span class:list={['tag', listing.intent === 'buy' && 'tag--straw']}>
+          {listing.intent === 'buy' ? t('market.intent.buy') : t('market.intent.sell')}
+        </span>
+        {listing.status === 'sold' && <span class="tag tag--grey">{t('market.sold')}</span>}
+      </p>
+      <h1>{listing.title}</h1>
+      <p class="price">{price}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail">
+      <div>
+        <dl class="facts card">
+          <div><dt>{t('form.animalType')}</dt><dd>{t(`type.${listing.animal_type}` as UIKey)}</dd></div>
+          {listing.breed && <div><dt>{t('form.breed')}</dt><dd>{listing.breed}</dd></div>}
+          <div><dt>{t('form.headCount')}</dt><dd>{listing.head_count}</dd></div>
+          {listing.weight_kg && <div><dt>{t('market.approxWeight')}</dt><dd>~{listing.weight_kg} kg</dd></div>}
+          <div><dt>{t('form.region')}</dt><dd>{listing.location ? `${listing.location}, ` : ''}{listing.region}</dd></div>
+          <div><dt>{t('market.posted')}</dt><dd>{formatDate(lang, listing.created_at)} · {listing.seller_name}</dd></div>
+        </dl>
+        {listing.description && <p class="desc">{listing.description}</p>}
+      </div>
+
+      <aside class="card contact">
+        <h2>{t('market.contact')}</h2>
+        {
+          user ? (
+            <p class="contact__value">📞 {listing.contact}</p>
+          ) : (
+            <>
+              <p class="muted">{t('market.contactMembers')}</p>
+              <a class="btn btn--primary" href={loginUrl(lang, Astro)}>
+                {t('nav.login')}
+              </a>
+            </>
+          )
+        }
+        <p class="small muted" style="margin-top:16px">🛡️ {t('market.safety')}</p>
+
+        {
+          canManage && (
+            <form method="post" class="btn-row" style="margin-top:16px">
+              {listing.status === 'active' && (
+                <button class="btn btn--ghost btn--small" name="action" value="sold">
+                  {t('market.markSold')}
+                </button>
+              )}
+              <button class="btn btn--danger btn--small" name="action" value="remove">
+                {t('market.remove')}
+              </button>
+            </form>
+          )
+        }
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .price {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--green-800);
+    margin: 0;
+  }
+  .detail {
+    display: grid;
+    gap: 24px;
+  }
+  @media (min-width: 860px) {
+    .detail {
+      grid-template-columns: 1.6fr 1fr;
+      align-items: start;
+    }
+  }
+  .facts {
+    display: grid;
+    gap: 0;
+    padding: 6px 20px;
+    margin: 0 0 20px;
+  }
+  .facts div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .facts div:last-child {
+    border-bottom: 0;
+  }
+  .facts dt {
+    color: var(--text-muted);
+  }
+  .facts dd {
+    margin: 0;
+    font-weight: 700;
+    text-align: right;
+  }
+  .desc {
+    white-space: pre-line;
+  }
+  .contact h2 {
+    font-size: 1.3rem;
+  }
+  .contact__value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    word-break: break-word;
+  }
+</style>

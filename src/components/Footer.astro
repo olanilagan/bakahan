@@ -1,0 +1,80 @@
+---
+import Logo from './Logo.astro';
+import { href, useT, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useT(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <div class="site-footer__brand"><Logo size={32} /> <strong>Bakahan</strong></div>
+      <p>{t('footer.about')}</p>
+      <p class="small">{t('footer.disclaimer')}</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href={href(lang, '/learn')}>{t('nav.learn')}</a>
+      <a href={href(lang, '/market')}>{t('nav.market')}</a>
+      <a href={href(lang, '/prices')}>{t('nav.prices')}</a>
+      <a href={href(lang, '/directory')}>{t('nav.directory')}</a>
+      <a href={href(lang, '/farm')}>{t('nav.farm')}</a>
+      <a href={href(lang, '/app')}>{t('nav.software')}</a>
+    </nav>
+  </div>
+  <div class="container site-footer__base small">
+    © {year} Bakahan · {t('footer.made')} 🇵🇭
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 64px;
+    background: var(--green-900);
+    color: #d7e6da;
+    padding: 44px 0 20px;
+  }
+  .site-footer__grid {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 1fr;
+  }
+  .site-footer__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .site-footer nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    align-content: start;
+  }
+  .site-footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .site-footer a:hover {
+    color: var(--straw-300);
+  }
+  .site-footer__base {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    color: #a9c3b0;
+  }
+  @media (min-width: 760px) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr;
+    }
+  }
+</style>

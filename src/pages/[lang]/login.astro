@@ -1,0 +1,80 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../layouts/Base.astro';
+import { href, useT } from '../../i18n/utils';
+import { allowAttempt, safeNext, startSession, verifyPassword } from '../../lib/auth';
+import { str } from '../../lib/form';
+import { pageLang, notFound } from '../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const next = safeNext(Astro.url.searchParams.get('next'), href(lang, '/account'));
+
+if (Astro.locals.user) return Astro.redirect(next);
+
+let error = '';
+let email = '';
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  email = str(form, 'email', 254)?.toLowerCase() ?? '';
+  const password = (form.get('password') as string | null) ?? '';
+
+  if (!(await allowAttempt(Astro.request, 'login'))) {
+    error = t('auth.tooMany');
+  } else {
+    const user = await env.DB.prepare('SELECT id, password_hash FROM users WHERE email = ?')
+      .bind(email)
+      .first<{ id: number; password_hash: string }>();
+    // Same message whether the email or the password was wrong, so the form
+    // can't be used to discover who is registered.
+    if (user && (await verifyPassword(password, user.password_hash))) {
+      await startSession(Astro.cookies, user.id);
+      return Astro.redirect(next);
+    }
+    error = t('auth.login.failed');
+  }
+}
+---
+
+<Base lang={lang} title={t('auth.login.title')} noindex>
+  <section class="section">
+    <div class="container auth">
+      <div class="card auth__card">
+        <h1>{t('auth.login.title')}</h1>
+        <p class="muted">{t('auth.login.lead')}</p>
+        <form method="post" class="form">
+          {error && <p class="alert alert--error" role="alert">{error}</p>}
+          <label>
+            {t('form.email')}
+            <input name="email" type="email" required autocomplete="email" value={email} maxlength="254" />
+          </label>
+          <label>
+            {t('form.password')}
+            <input name="password" type="password" required autocomplete="current-password" maxlength="200" />
+          </label>
+          <button class="btn btn--primary" type="submit">{t('auth.login.submit')}</button>
+        </form>
+        <p style="margin-top:20px">
+          {t('auth.login.noAccount')}
+          <a href={`${href(lang, '/signup')}?next=${encodeURIComponent(next)}`}>{t('nav.signup')}</a>
+        </p>
+        <p class="small muted">{t('auth.forgot')}</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .auth {
+    display: grid;
+    place-items: center;
+  }
+  .auth__card {
+    width: 100%;
+    max-width: 460px;
+    padding: 28px;
+  }
+</style>

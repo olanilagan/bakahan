@@ -1,0 +1,37 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "bakahan",
+	"compatibility_date": "2026-11-03",
+	"compatibility_flags": ["global_fetch_strictly_public"],
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	// Serve the site on bakahan.com (and www) instead of only *.workers.dev.
+	"routes": [
+		{ "pattern": "bakahan.com", "custom_domain": true },
+		{ "pattern": "www.bakahan.com", "custom_domain": true }
+	],
+	"workers_dev": true,
+	// D1 = Cloudflare's serverless SQLite database. Schema lives in ./migrations.
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "bakahan-db",
+			"database_id": "c6b63915-5514-46bc-b7ea-6aa27f411e3e",
+			"migrations_dir": "migrations"
+		}
+	],
+	// Simple per-key rate limiter, used to slow down password guessing.
+	"ratelimits": [
+		{
+			"name": "AUTH_LIMITER",
+			"namespace_id": "1001",
+			"simple": { "limit": 10, "period": 60 }
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}

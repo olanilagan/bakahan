@@ -1,0 +1,59 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../layouts/Base.astro';
+import ListingCard, { type ListingRow } from '../../components/ListingCard.astro';
+import { formatDate, href, useT } from '../../i18n/utils';
+import { loginUrl, pageLang, notFound } from '../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const user = Astro.locals.user;
+if (!user) return Astro.redirect(loginUrl(lang, Astro));
+
+const { results: listings } = await env.DB.prepare(
+  `SELECT id, intent, animal_type, breed, head_count, weight_kg, price, price_unit, title, region, location, status, created_at
+     FROM listings WHERE user_id = ? AND status != 'removed' ORDER BY created_at DESC LIMIT 50`,
+)
+  .bind(user.id)
+  .all<ListingRow>();
+---
+
+<Base lang={lang} title={t('account.title')} noindex>
+  <section class="page-head">
+    <div class="container page-head__row">
+      <div>
+        <h1>{user.name}</h1>
+        <p class="muted" style="margin:0">
+          {user.email} · {user.region} · {t('account.memberSince')}
+          {formatDate(lang, user.createdAt)}
+        </p>
+      </div>
+      <form method="post" action={href(lang, '/logout')}>
+        <button class="btn btn--ghost btn--small" type="submit">{t('nav.logout')}</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-head__row" style="margin-bottom:16px">
+        <h2 style="margin:0">{t('account.listings')}</h2>
+        <a class="btn btn--primary btn--small" href={href(lang, '/market/new')}>+ {t('market.post')}</a>
+      </div>
+      {
+        listings.length === 0 ? (
+          <p class="muted">{t('account.noListings')}</p>
+        ) : (
+          <div class="grid">
+            {listings.map((row) => (
+              <ListingCard lang={lang} row={row} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>

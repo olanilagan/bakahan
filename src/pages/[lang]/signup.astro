@@ -1,0 +1,121 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../layouts/Base.astro';
+import { href, useT } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
+import { allowAttempt, hashPassword, safeNext, startSession } from '../../lib/auth';
+import { isEmail, str } from '../../lib/form';
+import { REGIONS, ROLES, oneOf } from '../../lib/options';
+import { pageLang, notFound } from '../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const next = safeNext(Astro.url.searchParams.get('next'), href(lang, '/account'));
+
+if (Astro.locals.user) return Astro.redirect(next);
+
+let error = '';
+const values = { name: '', email: '', region: '', role: 'raiser', phone: '' };
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  values.name = str(form, 'name', 80) ?? '';
+  values.email = str(form, 'email', 254)?.toLowerCase() ?? '';
+  values.region = oneOf(REGIONS, form.get('region')) ?? '';
+  values.role = oneOf(ROLES, form.get('role')) ?? 'other';
+  values.phone = str(form, 'phone', 30) ?? '';
+  const password = (form.get('password') as string | null) ?? '';
+
+  if (!(await allowAttempt(Astro.request, 'signup'))) error = t('auth.tooMany');
+  else if (!values.name || !values.region) error = t('form.required');
+  else if (!isEmail(values.email)) error = t('auth.signup.badEmail');
+  else if (password.length < 8 || password.length > 200) error = t('auth.signup.weak');
+  else {
+    const exists = await env.DB.prepare('SELECT 1 FROM users WHERE email = ?').bind(values.email).first();
+    if (exists) {
+      error = t('auth.signup.exists');
+    } else {
+      const row = await env.DB.prepare(
+        `INSERT INTO users (email, name, password_hash, region, role, phone)
+         VALUES (?, ?, ?, ?, ?, ?) RETURNING id`,
+      )
+        .bind(values.email, values.name, await hashPassword(password), values.region, values.role, values.phone || null)
+        .first<{ id: number }>();
+      if (row) {
+        await startSession(Astro.cookies, row.id);
+        return Astro.redirect(next);
+      }
+      error = t('form.error');
+    }
+  }
+}
+---
+
+<Base lang={lang} title={t('auth.signup.title')} noindex>
+  <section class="section">
+    <div class="container auth">
+      <div class="card auth__card">
+        <h1>{t('auth.signup.title')}</h1>
+        <p class="muted">{t('auth.signup.lead')}</p>
+        <form method="post" class="form">
+          {error && <p class="alert alert--error" role="alert">{error}</p>}
+          <label>
+            {t('form.name')}
+            <input name="name" required maxlength="80" autocomplete="name" value={values.name} />
+          </label>
+          <label>
+            {t('form.email')}
+            <input name="email" type="email" required maxlength="254" autocomplete="email" value={values.email} />
+          </label>
+          <label>
+            {t('form.password')} <span class="hint">{t('form.passwordHint')}</span>
+            <input name="password" type="password" required minlength="8" maxlength="200" autocomplete="new-password" />
+          </label>
+          <div class="form-row">
+            <label>
+              {t('form.region')}
+              <select name="region" required>
+                <option value="">{t('form.chooseRegion')}</option>
+                {REGIONS.map((r) => <option selected={values.region === r}>{r}</option>)}
+              </select>
+            </label>
+            <label>
+              {t('form.role')}
+              <select name="role">
+                {ROLES.map((r) => (
+                  <option value={r} selected={values.role === r}>
+                    {t(`role.${r}` as UIKey)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <label>
+            {t('form.phone')} <span class="hint">({t('form.optional')})</span>
+            <input name="phone" type="tel" maxlength="30" autocomplete="tel" value={values.phone} />
+          </label>
+          <button class="btn btn--primary" type="submit">{t('auth.signup.submit')}</button>
+        </form>
+        <p style="margin-top:20px">
+          {t('auth.signup.haveAccount')}
+          <a href={`${href(lang, '/login')}?next=${encodeURIComponent(next)}`}>{t('nav.login')}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .auth {
+    display: grid;
+    place-items: center;
+  }
+  .auth__card {
+    width: 100%;
+    max-width: 520px;
+    padding: 28px;
+  }
+</style>

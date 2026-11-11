@@ -1,0 +1,177 @@
+---
+import { env } from 'cloudflare:workers';
+import Base from '../../../layouts/Base.astro';
+import { href, useT } from '../../../i18n/utils';
+import type { UIKey } from '../../../i18n/ui';
+import { num, str } from '../../../lib/form';
+import { ANIMAL_TYPES, PRICE_UNITS, REGIONS, oneOf } from '../../../lib/options';
+import { loginUrl, pageLang, notFound } from '../../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const user = Astro.locals.user;
+if (!user) return Astro.redirect(loginUrl(lang, Astro));
+
+const LISTING_DAYS = 60;
+let error = '';
+const v: Record<string, string> = {
+  intent: 'sell',
+  animal_type: 'steer',
+  breed: '',
+  head_count: '1',
+  weight_kg: '',
+  price: '',
+  price_unit: 'negotiable',
+  title: '',
+  description: '',
+  region: user.region ?? '',
+  location: '',
+  contact: user.phone ?? '',
+};
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  for (const k of Object.keys(v)) v[k] = str(form, k, k === 'description' ? 2000 : 120) ?? '';
+
+  const intent = oneOf(['sell', 'buy'] as const, v.intent);
+  const animalType = oneOf(ANIMAL_TYPES, v.animal_type);
+  const priceUnit = oneOf(PRICE_UNITS, v.price_unit) ?? 'negotiable';
+  const region = oneOf(REGIONS, v.region);
+  const headCount = num(form, 'head_count', 1, 10_000);
+  const weight = num(form, 'weight_kg', 20, 2_000);
+  const price = priceUnit === 'negotiable' ? null : num(form, 'price', 1, 100_000_000);
+
+  if (!intent || !animalType || !region || !headCount || !v.title || !v.contact) {
+    error = t('form.required');
+  } else {
+    const expires = new Date(Date.now() + LISTING_DAYS * 86_400_000).toISOString();
+    const row = await env.DB.prepare(
+      `INSERT INTO listings (user_id, intent, animal_type, breed, head_count, weight_kg, price, price_unit,
+                             title, description, region, location, contact, expires_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
+    )
+      .bind(
+        user.id,
+        intent,
+        animalType,
+        v.breed || null,
+        headCount,
+        weight,
+        price,
+        price == null ? 'negotiable' : priceUnit,
+        v.title,
+        v.description || null,
+        region,
+        v.location || null,
+        v.contact,
+        expires,
+      )
+      .first<{ id: number }>();
+    if (row) return Astro.redirect(href(lang, `/market/${row.id}`), 303);
+    error = t('form.error');
+  }
+}
+---
+
+<Base lang={lang} title={t('market.new.title')} noindex>
+  <section class="page-head">
+    <div class="container">
+      <a class="small" href={href(lang, '/market')}>← {t('market.title')}</a>
+      <h1 style="margin-top:10px">{t('market.new.title')}</h1>
+      <p class="lead">{t('market.new.lead')}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <form method="post" class="form form--wide">
+        {error && <p class="alert alert--error" role="alert">{error}</p>}
+        <div class="form-row">
+          <label>
+            {t('form.intent')}
+            <select name="intent">
+              <option value="sell" selected={v.intent === 'sell'}>{t('form.intent.sell')}</option>
+              <option value="buy" selected={v.intent === 'buy'}>{t('form.intent.buy')}</option>
+            </select>
+          </label>
+          <label>
+            {t('form.animalType')}
+            <select name="animal_type">
+              {
+                ANIMAL_TYPES.map((a) => (
+                  <option value={a} selected={v.animal_type === a}>
+                    {t(`type.${a}` as UIKey)}
+                  </option>
+                ))
+              }
+            </select>
+          </label>
+        </div>
+        <label>
+          {t('form.listingTitle')}
+          <input name="title" required maxlength="120" placeholder={t('form.listingTitleHint')} value={v.title} />
+        </label>
+        <div class="form-row">
+          <label>
+            {t('form.breed')} <span class="hint">({t('form.optional')})</span>
+            <input name="breed" maxlength="60" list="breeds" value={v.breed} />
+            <datalist id="breeds">
+              <option>Brahman</option><option>Brahman cross</option><option>Native</option>
+              <option>Batangas</option><option>Simmental cross</option><option>Indu-Brazil</option>
+            </datalist>
+          </label>
+          <label>
+            {t('form.headCount')}
+            <input name="head_count" type="number" inputmode="numeric" min="1" max="10000" required value={v.head_count} />
+          </label>
+        </div>
+        <label>
+          {t('form.weight')} <span class="hint">({t('form.optional')})</span>
+          <input name="weight_kg" type="number" inputmode="decimal" min="20" max="2000" step="any" value={v.weight_kg} />
+          <span class="hint">✨ {t('market.new.ai')}</span>
+        </label>
+        <div class="form-row">
+          <label>
+            {t('form.priceUnit')}
+            <select name="price_unit">
+              <option value="negotiable" selected={v.price_unit === 'negotiable'}>{t('market.negotiable')}</option>
+              <option value="head" selected={v.price_unit === 'head'}>{t('market.perHead')}</option>
+              <option value="kg" selected={v.price_unit === 'kg'}>{t('market.perKg')}</option>
+            </select>
+          </label>
+          <label>
+            {t('form.price2')}
+            <input name="price" type="number" inputmode="decimal" min="1" step="any" value={v.price} />
+          </label>
+        </div>
+        <div class="form-row">
+          <label>
+            {t('form.region')}
+            <select name="region" required>
+              <option value="">{t('form.chooseRegion')}</option>
+              {REGIONS.map((r) => <option selected={v.region === r}>{r}</option>)}
+            </select>
+          </label>
+          <label>
+            {t('form.location')}
+            <input name="location" maxlength="80" value={v.location} />
+          </label>
+        </div>
+        <label>
+          {t('form.description')} <span class="hint">({t('form.optional')})</span>
+          <textarea name="description" maxlength="2000">{v.description}</textarea>
+        </label>
+        <label>
+          {t('form.contact')}
+          <input name="contact" required maxlength="120" value={v.contact} />
+          <span class="hint">{t('form.contactHint')}</span>
+        </label>
+        <div>
+          <button class="btn btn--primary" type="submit">{t('market.new.submit')}</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</Base>
