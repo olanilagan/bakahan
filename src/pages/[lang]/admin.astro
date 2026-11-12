@@ -51,7 +51,7 @@ if (Astro.request.method === 'POST') {
 
 // D1 batch: several queries in one round trip to the database.
 const now = new Date().toISOString();
-const [pending, users, listings, prices, waitlist, members] = await env.DB.batch([
+const [pending, users, listings, prices, waitlist, members, messages] = await env.DB.batch([
   env.DB.prepare(
     `SELECT b.*, u.name AS submitted_by, u.email AS submitter_email FROM businesses b
        LEFT JOIN users u ON u.id = b.user_id WHERE b.status = 'pending' ORDER BY b.created_at`,
@@ -61,7 +61,10 @@ const [pending, users, listings, prices, waitlist, members] = await env.DB.batch
   env.DB.prepare('SELECT COUNT(*) AS n FROM price_reports'),
   env.DB.prepare('SELECT COUNT(*) AS n FROM waitlist'),
   env.DB.prepare('SELECT id, name, email, region, role, phone, created_at FROM users ORDER BY created_at DESC LIMIT 200'),
+  env.DB.prepare('SELECT id, topic, name, email, phone, message, emailed, created_at FROM contact_messages ORDER BY created_at DESC LIMIT 50'),
 ]);
+type Message = { id: number; topic: string; name: string; email: string; phone: string | null; message: string; emailed: number; created_at: string };
+const messageRows = (messages?.results ?? []) as Message[];
 type Member = { id: number; name: string; email: string; region: string | null; role: string; phone: string | null; created_at: string };
 const memberRows = (members?.results ?? []) as Member[];
 
@@ -150,6 +153,24 @@ const stats = [
         </div>
       </div>
 
+      <div>
+        <h2>{t('admin.messages')}</h2>
+        {messageRows.length === 0 && <p class="muted">{t('admin.none')}</p>}
+        <ul class="rule-list">
+          {
+            messageRows.map((m) => (
+              <li>
+                <span class="tag">{t(`contact.topic.${m.topic}` as UIKey)}</span>
+                <p>
+                  <strong>{m.name}</strong> · <a href={`mailto:${m.email}`}>{m.email}</a>
+                  {m.phone && <> · {m.phone}</>} · <span class="muted small">{formatDate(lang, m.created_at)}{m.emailed ? '' : ' · not emailed'}</span>
+                </p>
+                <p style="white-space:pre-line; margin-top:6px">{m.message}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
       <div>
         <h2>{t('admin.users')}</h2>
         <div class="table-wrap">

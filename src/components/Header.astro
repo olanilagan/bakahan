@@ -18,6 +18,7 @@ const links = [
   { path: '/directory', label: t('nav.directory') },
   { path: '/farm', label: t('nav.farm') },
   { path: '/app', label: t('nav.software') },
+  { path: '/contact', label: t('nav.contact') },
 ];
 const isActive = (p: string) => path.startsWith(`/${lang}${p}`);
 ---
@@ -116,7 +117,7 @@ const isActive = (p: string) => path.startsWith(`/${lang}${p}`);
     gap: 4px;
   }
   .nav-desktop a {
-    padding: 22px 10px 19px;
+    padding: 22px 8px 19px;
     border-bottom: 3px solid transparent;
     color: var(--text);
     font-weight: 700;

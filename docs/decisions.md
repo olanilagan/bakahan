@@ -47,3 +47,15 @@ The site is used outdoors on phones, so it uses a high-contrast light theme. Aft
 
 ### 11. Weight estimation from photos: planned, not built
 This will likely use Workers AI. It needs photos (R2) first, and a dataset of real weighed animals to check its accuracy before farmers rely on it.
+
+### 12. Photos from Wikimedia Commons, colour-graded
+Stock photo sites (Unsplash, Pexels) block automated search, and their Philippine cattle coverage is thin. Wikimedia Commons provides each file's license and author through its API, so every photo can be checked and credited. The photos used are CC0, public domain, CC BY or CC BY-SA.
+
+Each photo gets the same gentle grade: green-tinted shadows and warm highlights, so they look like one set and match the palette. Because the photos are modified, the CC BY-SA ones remain under CC BY-SA. They are credited under each photo and on `/credits/`.
+
+Photos are served as 800px and 1600px WebP files via `srcset`, so phones download the smaller one.
+
+### 13. Email: Cloudflare Email Routing plus a contact form
+Email Routing only forwards mail; it does not host mailboxes. `inquiries@` and `invest@` forward to the owner's Gmail. Replying "as" those addresses (Gmail "Send mail as", Zoho or Google Workspace) is deferred.
+
+The contact form saves each message in D1 first, then emails it through the `send_email` binding. On the free plan the binding can only send to verified destination addresses, and that's exactly the owner's inbox. The address is kept in the `CONTACT_TO` Worker secret, not in this public repo. Spam protection for now is a hidden "honeypot" field plus the rate limiter; Turnstile is the next step.

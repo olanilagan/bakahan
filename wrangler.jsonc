@@ -23,6 +23,9 @@
 			"migrations_dir": "migrations"
 		}
 	],
+	// Email sending. On the free plan this can only send to verified destination
+	// addresses (the owner's inbox); the address itself is the CONTACT_TO secret.
+	"send_email": [{ "name": "EMAIL" }],
 	// Simple per-key rate limiter, used to slow down password guessing.
 	"ratelimits": [
 		{

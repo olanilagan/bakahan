@@ -1,0 +1,201 @@
+---
+// Contact page: public email addresses plus a form. Each message is saved in
+// D1 first (so nothing is lost), then emailed to the owner's inbox.
+import { env } from 'cloudflare:workers';
+import Base from '../../layouts/Base.astro';
+import { useT } from '../../i18n/utils';
+import type { UIKey } from '../../i18n/ui';
+import { allowAttempt } from '../../lib/auth';
+import { isEmail, str } from '../../lib/form';
+import { oneOf } from '../../lib/options';
+import { notFound, pageLang } from '../../lib/page';
+
+export const prerender = false;
+
+const lang = pageLang(Astro);
+if (!lang) return notFound();
+const t = useT(lang);
+const user = Astro.locals.user;
+
+const TOPICS = ['general', 'invest', 'advertise', 'marketplace'] as const;
+const preset = oneOf(TOPICS, Astro.url.searchParams.get('topic')) ?? 'general';
+
+let sent = false;
+let error = '';
+const v = { topic: preset as string, name: user?.name ?? '', email: user?.email ?? '', phone: user?.phone ?? '', message: '' };
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  v.topic = oneOf(TOPICS, form.get('topic')) ?? 'general';
+  v.name = str(form, 'name', 100) ?? '';
+  v.email = str(form, 'email', 254)?.toLowerCase() ?? '';
+  v.phone = str(form, 'phone', 30) ?? '';
+  v.message = str(form, 'message', 4000) ?? '';
+
+  // "website" is a hidden field people never see. Bots that fill every field
+  // fill it too; we pretend to accept their message and quietly drop it.
+  if (str(form, 'website', 200)) {
+    sent = true;
+  } else if (!(await allowAttempt(Astro.request, 'contact'))) {
+    error = t('auth.tooMany');
+  } else if (!v.name || !v.message) {
+    error = t('form.required');
+  } else if (!isEmail(v.email)) {
+    error = t('auth.signup.badEmail');
+  } else {
+    const row = await env.DB.prepare(
+      `INSERT INTO contact_messages (topic, name, email, phone, message, lang) VALUES (?, ?, ?, ?, ?, ?) RETURNING id`,
+    )
+      .bind(v.topic, v.name, v.email, v.phone || null, v.message, lang)
+      .first<{ id: number }>();
+
+    const topicLabel = t(`contact.topic.${v.topic}` as UIKey);
+    try {
+      await env.EMAIL.send({
+        to: env.CONTACT_TO,
+        from: { email: 'website@bakahan.com', name: 'Bakahan website' },
+        replyTo: { email: v.email, name: v.name }, // pressing Reply answers the visitor directly
+        subject: `[Bakahan] ${topicLabel}: ${v.name}`,
+        text: [
+          `Topic: ${topicLabel}`,
+          `Name: ${v.name}`,
+          `Email: ${v.email}`,
+          `Phone: ${v.phone || '-'}`,
+          `Language: ${lang}`,
+          '',
+          v.message,
+          '',
+          `Message #${row?.id} sent from the bakahan.com contact form.`,
+        ].join('\n'),
+      });
+      if (row) await env.DB.prepare('UPDATE contact_messages SET emailed = 1 WHERE id = ?').bind(row.id).run();
+    } catch (e) {
+      // The message is already saved in D1 and visible on the admin page.
+      console.error('contact email failed', (e as { code?: string }).code, (e as Error).message);
+    }
+    sent = true;
+  }
+}
+
+const addresses = [
+  { email: 'inquiries@bakahan.com', label: t('contact.inquiries') },
+  { email: 'invest@bakahan.com', label: t('contact.invest') },
+];
+---
+
+<Base lang={lang} title={t('contact.title')} description={t('contact.lead')}>
+  <section class="page-head">
+    <div class="container">
+      <h1>{t('contact.title')}</h1>
+      <p class="lead">{t('contact.lead')}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact">
+      <div>
+        <h2>{t('contact.email')}</h2>
+        <dl class="addresses">
+          {
+            addresses.map((a) => (
+              <div>
+                <dt>{a.label}</dt>
+                <dd>
+                  <a href={`mailto:${a.email}`}>{a.email}</a>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="small muted">{t('contact.listingNote')}</p>
+      </div>
+
+      <div id="form">
+        <h2>{t('contact.formTitle')}</h2>
+        {
+          sent ? (
+            <p class="alert alert--ok">{t('contact.sent')}</p>
+          ) : (
+            <form method="post" action="#form" class="form">
+              {error && <p class="alert alert--error">{error}</p>}
+              <label>
+                {t('contact.topic')}
+                <select name="topic">
+                  {TOPICS.map((tp) => (
+                    <option value={tp} selected={v.topic === tp}>
+                      {t(`contact.topic.${tp}` as UIKey)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <div class="form-row">
+                <label>
+                  {t('form.name')}
+                  <input name="name" required maxlength="100" autocomplete="name" value={v.name} />
+                </label>
+                <label>
+                  {t('form.email')}
+                  <input name="email" type="email" required maxlength="254" autocomplete="email" value={v.email} />
+                </label>
+              </div>
+              <label>
+                {t('form.phone')} <span class="hint">({t('form.optional')})</span>
+                <input name="phone" type="tel" maxlength="30" autocomplete="tel" value={v.phone} />
+              </label>
+              <label>
+                {t('contact.message')}
+                <textarea name="message" required maxlength="4000" rows="6">{v.message}</textarea>
+              </label>
+              <label class="hp" aria-hidden="true">
+                Website
+                <input name="website" tabindex="-1" autocomplete="off" />
+              </label>
+              <div>
+                <button class="btn btn--primary" type="submit">
+                  {t('contact.send')}
+                </button>
+              </div>
+            </form>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact {
+    display: grid;
+    gap: 40px;
+  }
+  @media (min-width: 900px) {
+    .contact {
+      grid-template-columns: 1fr 1.3fr;
+      gap: 64px;
+    }
+  }
+  .addresses {
+    margin: 0 0 16px;
+    border-top: 1px solid var(--border);
+  }
+  .addresses div {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .addresses dt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .addresses dd {
+    margin: 2px 0 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>

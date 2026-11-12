@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { langStaticPaths, useT, type Lang } from '../../i18n/utils';
-import { PHOTOS, photoSrc, type PhotoKey } from '../../lib/photos';
+import { PHOTOS, photoSrc, type Photo, type PhotoKey } from '../../lib/photos';
 
 export const prerender = true;
 export const getStaticPaths = langStaticPaths;
@@ -12,7 +12,7 @@ const intro =
   lang === 'fil'
     ? 'Ang mga litrato sa site na ito ay mula sa Wikimedia Commons, sa ilalim ng mga lisensyang nakalista sa ibaba. Inayos namin ang kulay ng bawat litrato para tumugma sa itsura ng site. Ang mga binagong litrato na may lisensyang CC BY-SA ay ibinabahagi rin sa ilalim ng parehong lisensya.'
     : 'Photos on this site come from Wikimedia Commons, under the licenses listed below. We adjusted the colours of each photo to match the site. Modified photos under CC BY-SA licenses are shared under the same license.';
-const entries = Object.entries(PHOTOS) as [PhotoKey, (typeof PHOTOS)[PhotoKey]][];
+const entries = Object.entries(PHOTOS) as [PhotoKey, Photo][];
 ---
 
 <Base lang={lang} title={t('credits.title')}>
