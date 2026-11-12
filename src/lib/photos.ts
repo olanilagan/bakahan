@@ -131,6 +131,11 @@ export const GUIDE_COVERS: Record<string, PhotoKey> = {
   business: 'brahman-bulls-paddock',
   markets: 'kabakahan-arch',
   support: 'farmer-bohol',
+  paiwi: 'native-cow',
+  housing: 'brahman-grey-bull',
+  weighing: 'hero-brahman-lipa',
+  silage: 'maize-silage',
+  'heat-stress': 'cow-catanduanes',
 };
 
 export function photoSrc(key: PhotoKey, width: 800 | 1600 = 800): string {

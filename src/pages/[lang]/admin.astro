@@ -6,6 +6,7 @@ import type { UIKey } from '../../i18n/ui';
 import { pageLang, notFound } from '../../lib/page';
 import { hashPassword } from '../../lib/auth';
 import { safeUrl, str, todayPH } from '../../lib/form';
+import { dateKey, scheduledGuides, slugOf } from '../../lib/guides';
 
 export const prerender = false;
 
@@ -99,6 +100,7 @@ const bizRows = (approvedBiz?.results ?? []) as ApprovedBiz[];
 type SponsorRow = { id: number; name: string; url: string | null; message_en: string; placement: string; starts_on: string; ends_on: string; active: number; notes: string | null };
 const sponsorRows = (sponsorList?.results ?? []) as SponsorRow[];
 const today = todayPH();
+const upcoming = await scheduledGuides();
 type Message = { id: number; topic: string; name: string; email: string; phone: string | null; message: string; emailed: number; created_at: string };
 const messageRows = (messages?.results ?? []) as Message[];
 type Member = { id: number; name: string; email: string; region: string | null; role: string; phone: string | null; created_at: string };
@@ -187,6 +189,32 @@ const stats = [
             ))
           }
         </div>
+      </div>
+
+      <div id="schedule">
+        <h2>Guide publishing calendar</h2>
+        <p class="muted small">Scheduled guides go live automatically on their date (Philippine time). Nothing to do here; this is for reference.</p>
+        {upcoming.length === 0 && <p class="muted">No guides scheduled. Time to write the next batch.</p>}
+        {
+          upcoming.length > 0 && (
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Date</th><th>Guide</th><th>Slug</th></tr>
+                </thead>
+                <tbody>
+                  {upcoming.map((g) => (
+                    <tr>
+                      <td style="white-space:nowrap">{dateKey(g.data.publishDate)}</td>
+                      <td>{g.data.title}</td>
+                      <td class="muted small">{slugOf(g)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )
+        }
       </div>
 
       <div id="sponsors">

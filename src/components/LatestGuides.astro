@@ -1,0 +1,60 @@
+---
+// Server island on the static home page: newest published guides first, so
+// each scheduled guide shows up here on its publish day.
+import { href, isLang, useT, type Lang } from '../i18n/utils';
+import type { UIKey } from '../i18n/ui';
+import { GUIDE_COVERS, photoSrc } from '../lib/photos';
+import { isNew, latestGuides, slugOf } from '../lib/guides';
+
+const lang: Lang = isLang(Astro.props.lang) ? Astro.props.lang : 'en';
+const t = useT(lang);
+const guides = await latestGuides(lang, 5);
+---
+
+<ul class="rule-list">
+  {
+    guides.map((g) => {
+      const slug = slugOf(g);
+      const cover = GUIDE_COVERS[slug];
+      return (
+        <li class="guide-row">
+          <div>
+            <span class="tag">{t(`cat.${g.data.category}` as UIKey)}</span>
+            {isNew(g) && <span class="tag tag--straw"> · {t('learn.new')}</span>}
+            <h3>
+              <a href={href(lang, `/learn/${slug}`)}>{g.data.title}</a>
+            </h3>
+            <p class="muted">{g.data.description}</p>
+          </div>
+          {cover && <img src={photoSrc(cover, 800)} alt="" width="160" height="107" loading="lazy" />}
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .guide-row {
+    display: grid;
+    grid-template-columns: 1fr 112px;
+    gap: 16px;
+    align-items: start;
+  }
+  .guide-row img {
+    width: 112px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-top: 4px;
+  }
+  @media (min-width: 560px) {
+    .guide-row {
+      grid-template-columns: 1fr 160px;
+      gap: 24px;
+    }
+    .guide-row img {
+      width: 160px;
+      height: 107px;
+    }
+  }
+</style>

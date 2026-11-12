@@ -3,6 +3,7 @@ title: "Cattle breeds in the Philippines"
 description: "Get to know the cattle you will meet in the Philippines, from native Batangas, Ilocos and Iloilo types to Brahman and its crosses, and learn how to choose animals for fattening or breeding in our hot, humid climate."
 category: "breeds"
 order: 2
+publishDate: 2026-11-11
 updated: 2026-11-11
 readingMinutes: 7
 sources:
@@ -24,67 +25,66 @@ sources:
     url: "https://www.thecattlesite.com/news/34585/nda-works-with-us-to-assist-local-dairy-farmers"
 ---
 
-Walk through any livestock auction market in the Philippines and you will see cattle of many shapes and colors: small brown native cattle, tall white animals with a hump and long ears, and reddish crossbreds. Knowing what you are looking at helps you buy the right animal for your goal and pay a fair price. Here is a plain guide to the breeds that matter most for Filipino farmers.
+Walk through any livestock auction here and you'll see cattle of all shapes and colors: small brown natives, tall white animals with a hump and long ears, and reddish crossbreds. If you know what you're looking at, you can pick the right animal for what you want to do and avoid overpaying. Here are the breeds that matter most for Filipino raisers.
 
-## Why breed matters in the Philippines
+## Why breed matters here
 
-Our climate is hot and humid, with ticks, flies, and long dry seasons in many places. The Department of Agriculture (DA) Region III guide puts it simply: **tropical breeds adapt faster to our climate and feeds than temperate breeds** from cold countries. That is why most cattle raised here have zebu (humped, tropical) blood.
+It's hot and humid, there are ticks and flies, and many places have a long dry season. The Department of Agriculture (DA) Region III guide puts it simply: tropical breeds adapt faster to our climate and feeds than temperate breeds from cold countries. That's why most cattle raised here have zebu blood. Zebu are the humped cattle of the tropics.
 
 ## Philippine native cattle
 
 ![A reddish-brown Philippine native cow lying on grass](/images/photos/native-cow-800.webp)
 *Photo: pinay06, CC BY 2.5, via Wikimedia Commons. Colour adjusted.*
 
-Philippine native cattle are the old local cattle that have lived on our islands for centuries. Several local types are reported to the FAO's livestock breed database, DAD-IS, including:
+Native cattle are the old local cattle that have been on our islands for centuries. Several local types are listed in the FAO's livestock breed database, DAD-IS, including:
 
-- **Ilocos** – from northwestern Luzon (listed in small and large types)
-- **Batangas** – from southwestern Luzon
-- **Iloilo** – from Panay
-- **Batanes Black** – from the Batanes Islands
+- Ilocos, from northwestern Luzon (listed in small and large types)
+- Batangas, from southwestern Luzon
+- Iloilo, from Panay
+- Batanes Black, from the Batanes Islands
 
-Native cattle are **small**. Breed references put mature cows at roughly 280 to 300 kg and bulls at about 400 kg. Coat colors range from grey to brown to fawn, sometimes with white spots. They have been used for draft work, milk, and beef.
+Native cattle are small. Breed references put mature cows at roughly 280 to 300 kg and bulls at about 400 kg. Coats go from grey to brown to fawn, sometimes with white spots. They've been used for farm work, milk and beef.
 
-**Strengths:** hardy, used to local conditions and simple feeding, and easy for small farmers to handle.
-**Weaknesses:** small size and slower growth, so they reach a lower final weight than bigger breeds.
+They're hardy, used to local conditions and simple feeding, and easy for a small farmer to handle. The downside is size. They grow slower and finish at a lower weight than the bigger breeds.
 
-### A note on "Batangas beef"
+### About "Batangas beef"
 
-"Batangas beef" is famous, but the DA Region III guide explains that many cattle sold through Batangas actually come from Mindoro, Masbate, and other provinces. The name became popular because of the good quality of cattle finished in Batangas using a traditional feeding practice called *supak*. So "Batangas beef" is as much about how the animals are fed as about a single breed.
+"Batangas beef" is famous, but the DA Region III guide explains that many cattle sold through Batangas actually come from Mindoro, Masbate and other provinces. The name caught on because of the quality of cattle finished in Batangas with a traditional feeding practice called *supak*. So "Batangas beef" is as much about how the animals are fed as about one breed.
 
 ## Brahman
 
 ![A grey Brahman bull with a large hump](/images/photos/brahman-grey-bull-800.webp)
 *Photo: CSIRO, CC BY 3.0, via Wikimedia Commons. Colour adjusted.*
 
-The **American Brahman** is the backbone of Philippine beef cattle breeding. In 1994 the DA chose it as one of the starting breeds of its national crossbreeding and upgrading program, describing it as valued for:
+The American Brahman is the backbone of beef cattle breeding in the Philippines. In 1994 the DA picked it as one of the starting breeds of its national crossbreeding and upgrading program. The DA valued it for:
 
-- adaptability to tropical conditions and hardiness,
-- excellent foraging ability (does well on grass),
-- good mothering and long productive life, and
-- **tolerance to heat and insects.**
+- adapting well to the tropics and being hardy,
+- foraging well (it does fine on grass),
+- good mothering and a long productive life, and
+- tolerating heat and insects.
 
-The DA Region III guide also recommends Brahman for fattening because it is resistant to many diseases and to hot weather. Brahman cattle are easy to recognize: a hump over the shoulders, loose skin, a hanging dewlap under the neck, and long drooping ears. In the Philippines you often see light grey to white Brahman, which many farmers like for their clean look; the DA guide describes the color as grayish with some red.
+The DA Region III guide also recommends Brahman for fattening because it resists many diseases and handles hot weather. Brahman are easy to spot: a hump over the shoulders, loose skin, a hanging dewlap under the neck, and long drooping ears. Here you often see light grey to white Brahman, and many raisers like that clean look. The DA guide describes the color as grayish with some red.
 
-A University of the Philippines Los Baños synthesis by Dr. Orville Bondoc (2008) reviews decades of Brahman importation, performance recording, upgrading, crossbreeding, and artificial insemination in the country. It also describes **"Bull 99,"** a community-based breeding program that brought American Brahman bulls to smallholder farmers.
+A University of the Philippines Los Baños review by Dr. Orville Bondoc (2008) covers decades of Brahman importation, performance recording, upgrading, crossbreeding and artificial insemination (AI) in the country. It also describes "Bull 99," a community-based breeding program that brought American Brahman bulls to smallholder farmers.
 
-## Other zebu breeds mentioned by the DA
+## Other zebu breeds the DA mentions
 
-The DA Region III guide also lists these tropical breeds as recommended for fattening:
+The DA Region III guide also recommends these tropical breeds for fattening:
 
-- **Ongole or Nellore** – white; males have a grey head and neck and dark knees.
-- **Indu-Brazil** – usually grey, brown, or red.
+- Ongole or Nellore: white. Males have a grey head and neck and dark knees.
+- Indu-Brazil: usually grey, brown or red.
 
 ## Crossbreeds
 
-Crossing combines strengths: the heat and tick tolerance of zebu with the faster growth or better meat of other breeds.
+A cross can give you the heat and tick tolerance of zebu together with the faster growth or better meat of another breed.
 
-- **Native × Brahman (upgrading):** Using Brahman bulls or semen on native cows produces bigger calves that still handle local conditions. This upgrading approach has long been part of government programs.
-- **Simmental and Simbrah:** The DA's 1994 breeding program included **Simmental**, saying it complements Brahman with earlier maturity, fertility, milking ability, fast growth, and good beef qualities. *Simbrah* is a Simmental × Brahman cross. In a DA feedlot trial at Malaybalay Stock Farm, Bukidnon, Simbrah steers gained about 0.61 kg per day versus about 0.55 kg for Brahman. The difference was not statistically significant; **the feed made a bigger difference than the breed.**
-- **Wagyu × Brahman:** These crosses have been studied in Philippine feedlots for marbled, premium beef. One study suggested good results with feeders at least 24 months old, entering under 250 kg, and fed for up to six months.
+- Native × Brahman (upgrading). A Brahman bull or Brahman semen on a native cow gives a bigger calf that still handles local conditions. Government programs have used this upgrading for a long time.
+- Simmental and Simbrah. The DA's 1994 breeding program included Simmental, saying it complements Brahman with earlier maturity, fertility, milking ability, fast growth and good beef. Simbrah is a Simmental × Brahman cross. In a DA feedlot trial at Malaybalay Stock Farm in Bukidnon, Simbrah steers gained about 0.61 kg a day and Brahman about 0.55 kg. The difference wasn't statistically significant. The feed made a bigger difference than the breed.
+- Wagyu × Brahman. These have been studied in Philippine feedlots for marbled, premium beef. One study suggested good results with feeders at least 24 months old, coming in under 250 kg, and fed for up to six months.
 
 ## Dairy breeds
 
-If your goal is milk rather than beef, the DA program used **Holstein** (the highest milk producer, but needs good management) and **Sahiwal** (a tick-resistant, heat-tolerant zebu dairy breed) and their crosses. The National Dairy Authority has imported Friesian-Sahiwal crossbreds for local dairy herds. Dairy is a different business, so talk to the National Dairy Authority if milk is your plan.
+If you want milk instead of beef, the DA program used Holstein (the highest milk producer, but it needs good management), Sahiwal (a zebu dairy breed that handles heat and ticks) and their crosses. The National Dairy Authority has imported Friesian-Sahiwal crossbreds for local dairy herds. Dairy is a different business, so talk to the National Dairy Authority if milk is your plan.
 
 ## Quick comparison
 
@@ -97,30 +97,30 @@ If your goal is milk rather than beef, the DA program used **Holstein** (the hig
 | Wagyu × Brahman | Medium | Good | Premium beef programs, needs longer and better feeding |
 | Holstein, Sahiwal and crosses | Varies | Sahiwal very good, Holstein lower | Dairy |
 
-## Choosing breeds for fattening or breeding
+## Choosing for fattening or breeding
 
 ### For fattening
 
-The DA Region III guide gives practical advice when picking feeder cattle:
+The DA Region III guide has practical advice for picking feeder cattle:
 
-- **Breed:** choose tropical breeds or crosses that handle heat well.
-- **Sex:** **steers** (castrated males) are easier to manage and gain weight faster than heifers.
-- **Age:** two- to three-year-old cattle use feed efficiently; younger, lighter animals are cheaper but need a longer feeding period and better feeds.
-- **Health:** pick animals that are active and alert, with bright eyes and smooth skin; avoid rough-coated or injured animals, and make sure they are vaccinated.
+- Breed: tropical breeds or crosses that handle heat well.
+- Sex: steers (castrated males) are easier to manage and gain faster than heifers.
+- Age: two- to three-year-olds use feed efficiently. Younger, lighter animals are cheaper but need a longer feeding period and better feeds.
+- Health: pick animals that are active and alert, with bright eyes and smooth skin. Skip rough-coated or injured animals, and make sure they're vaccinated.
 
-Remember that good feeding often matters more than breed.
+Good feeding often matters more than breed.
 
 ### For breeding
 
-- Choose cows with **good mothering ability, fertility, and heat tolerance**. Brahman and native × Brahman cows are proven choices for our conditions.
-- Use a **good bull or artificial insemination** to improve your herd over time. Ask your Municipal or Provincial Agriculture Office about AI services and government breeding programs.
-- Buy from **trusted breeder farms**, as the DA advises.
+- Pick cows that are good mothers, get pregnant easily and handle heat. Brahman and native × Brahman cows have proven themselves in our conditions.
+- Use a good bull or AI to improve your herd over time. Ask your Municipal Agriculture Office (MAO) or Provincial Agriculture Office about AI services and government breeding programs.
+- Buy from breeder farms you can trust, as the DA advises.
 
 ## Summary
 
-- Tropical (zebu) breeds and their crosses suit Philippine heat, ticks, and feeds best.
-- Native cattle (Ilocos, Batangas, Iloilo, Batanes types) are small but hardy and a good base for upgrading.
+- Tropical (zebu) breeds and their crosses handle our heat, ticks and feeds best.
+- Native cattle (Ilocos, Batangas, Iloilo, Batanes types) are small but hardy, and a good base for upgrading.
 - Brahman is the main improved beef breed here, valued for heat and insect tolerance and good foraging.
-- Crosses like native × Brahman, Simbrah, and Wagyu × Brahman add size or meat quality, but feeding still matters most.
-- For fattening, pick healthy two- to three-year-old steers of tropical breeding; for breeding, focus on fertile, good-mothering cows and a good bull or AI.
-- Ask your local Agriculture Office or veterinarian for help choosing and sourcing animals.
+- Crosses like native × Brahman, Simbrah and Wagyu × Brahman add size or meat quality, but feeding still matters most.
+- For fattening, pick healthy two- to three-year-old steers with tropical blood. For breeding, pick fertile cows that are good mothers, and use a good bull or AI.
+- Ask your MAO or a vet to help you choose and find animals.

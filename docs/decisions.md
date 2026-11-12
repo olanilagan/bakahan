@@ -82,3 +82,8 @@ Each guide shows the date it was actually written or last updated. Backdating wo
 
 ### Lesson: always deploy with `npm run deploy`
 On 2026-11-12 a production migration failed (Cloudflare API error), but a separately-run `wrangler deploy` went ahead. The new code expected a missing column, and the directory page returned errors for about a minute. `npm run deploy` chains build → migrate → deploy with `&&`, so a failed step stops the deploy.
+
+### 17. Scheduled publishing without rebuilds
+Each guide has a `publishDate`. The guide list, guide pages, home page "latest guides" (a server island) and sitemap are rendered on request and hide anything dated later than today in Philippine time (`src/lib/guides.ts`). A queued guide therefore goes live on its morning without a rebuild or deploy. The trade-off is that guide pages run in the Worker instead of being pre-built files. That's cheap here, since the Markdown is already compiled into the bundle.
+
+The admin page shows the upcoming calendar. All guides follow one voice, defined in `docs/style-guide.md`. Each new batch is edited against it before it is queued.

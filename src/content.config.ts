@@ -11,9 +11,11 @@ const articles = defineCollection({
     description: z.string(),
     category: z.enum(['basics', 'breeds', 'fattening', 'feeding', 'health', 'business', 'market']),
     order: z.number(),
+    // The guide stays hidden until this date (Philippine time). See src/lib/guides.ts.
+    publishDate: z.coerce.date(),
     updated: z.coerce.date(),
     readingMinutes: z.number().optional(),
-    sources: z.array(z.object({ title: z.string(), url: z.string().url() })).default([]),
+    sources: z.array(z.object({ title: z.string(), url: z.url() })).default([]),
   }),
 });
 

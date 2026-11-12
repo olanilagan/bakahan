@@ -3,6 +3,7 @@ title: "Cattle fattening (pagpapataba) step by step"
 description: "A practical walk-through of fattening cattle in the Philippines, from choosing healthy feeder stock to tracking weight gain, keeping records and deciding when to sell."
 category: "fattening"
 order: 3
+publishDate: 2026-11-11
 updated: 2026-11-11
 readingMinutes: 7
 sources:
@@ -14,40 +15,40 @@ sources:
     url: "https://agris.fao.org/search/en/records/64723779e17b74d2224edddf"
 ---
 
-Fattening, or *pagpapataba*, is one of the simplest ways to earn from cattle. You buy a thin but healthy animal, feed it well for a few months, and sell it heavier. The Department of Agriculture (DA) describes it as buying healthy stock, feeding and fattening them for about 120 to 180 days, and selling them at any time of the year. It sounds easy, but the profit is made or lost in the details: which animal you buy, how you feed it, and whether you keep track of its progress.
+Fattening, or *pagpapataba*, is one of the simplest ways to earn from cattle. You buy a thin but healthy animal, feed it well for a few months, and sell it heavier. The Department of Agriculture (DA) describes it as buying healthy stock, feeding them for about 120 to 180 days, and selling at any time of the year. It sounds easy, but you make or lose your money on the details: which animal you buy, how you feed it, and whether you keep track of how it's doing.
 
-## Step 1: Choose the right feeder cattle
+## Choosing feeder cattle
 
-The animal you buy sets the limit on how much it can gain. A sick or very old animal will eat your feeds without paying you back.
+The animal you buy sets the limit on how much it can gain. A sick or very old animal will eat your feeds and never pay you back.
 
 ### Age
 
-- The DA, as cited by Edge Davao, recommends feeder animals around **2 to 3 years old**.
-- Older stock (around 4 years and up) can still make sense if all you have is roughage and crop by-products. They need less time to finish and eat a wider range of rough feed.
+- The DA, as cited by Edge Davao, recommends feeder animals around 2 to 3 years old.
+- Older stock, around 4 years and up, can still make sense if all you have is grass and crop leftovers. They finish in less time and will eat rougher feed.
 - If you have plenty of good feed, younger animals are usually the better buy.
 
 ### Sex and breed
 
-- **Steers** (castrated males) are generally preferred over heifers. They are easier to find, easier to handle and tend to gain faster.
-- Improved breeds and crossbreds usually gain faster than native cattle. Tropical breeds like Brahman, Nellore and their crosses handle Philippine heat well.
+- Steers (castrated males) are usually preferred over heifers. They're easier to find, easier to handle and tend to gain faster.
+- Improved breeds and crossbreds usually gain faster than native cattle. Tropical breeds like Brahman, Nellore and their crosses handle our heat well.
 
 ### Signs of a healthy animal
 
-Look the animal over before you pay. A healthy feeder is:
+Look the animal over before you pay. A healthy feeder:
 
-- Alert and active, with bright eyes
-- Has a smooth, shiny haircoat and a moist muzzle (nose)
-- Walks normally, with no limping
+- is alert and active, with bright eyes,
+- has a smooth, shiny coat and a moist nose, and
+- walks normally, with no limp.
 
-Avoid animals with rough or patchy skin, cloudy or blind eyes, lameness, diarrhea, coughing or a very sunken belly. Ask the seller if the animal has been vaccinated and dewormed.
+Pass on animals with rough or patchy skin, cloudy or blind eyes, a limp, diarrhea, a cough or a very sunken belly. Ask the seller if the animal has been vaccinated and dewormed.
 
 ### When to buy
 
-Feeder stock is often cheaper in the **dry season (around January to April)**, when roads are easier to travel and animals are easier to move from ranches and auction markets.
+Feeder stock is often cheaper in the dry season, around January to April. Roads are easier then, and animals are easier to move from farms and auction markets.
 
-## Step 2: Prepare housing
+## Preparing the housing
 
-There are three common ways to keep fattening cattle in the Philippines:
+There are three common ways to keep fattening cattle here:
 
 | System | How it works | Good for |
 |---|---|---|
@@ -55,86 +56,86 @@ There are three common ways to keep fattening cattle in the Philippines:
 | Semi-confinement | Grazes part of the day, then fed in a shed or kural | Farms with some pasture plus cut-and-carry feeds |
 | Feedlot / full confinement | Animal stays in a pen; all feed and water are brought to it | Faster, more controlled fattening |
 
-Tethering is the cheapest, but it can be slow. In a PCARRD-supported project in Paniqui, Tarlac, traditional fattening, where cattle were tethered 5 to 8 hours a day on fields and roadsides with little feed, took about **6 to 18 months**. When farmers improved feeding, the target fattening period dropped to about 4 months.
+Tethering is the cheapest, but it can be slow. In a PCARRD-supported project in Paniqui, Tarlac, traditional fattening took about 6 to 18 months. There the cattle were tethered 5 to 8 hours a day on fields and roadsides with little feed. When farmers improved the feeding, the target fattening period dropped to about 4 months.
 
-For confinement, the DA guidance cited by Edge Davao suggests roughly:
+If you keep them confined, the DA guidance cited by Edge Davao suggests roughly:
 
-- **1.5 to 2 square meters per head** of sheltered feeding area
-- **About 5 square meters per head** of fenced loafing (resting) area
+- 1.5 to 2 square meters per head of roofed feeding area, and
+- about 5 square meters per head of fenced resting area.
 
-Give a roof against sun and rain, good drainage, a sturdy feed trough and a clean water container. Keep the floor dry and clean out manure regularly.
+Put up a roof against sun and rain, make sure water drains away, and have a sturdy feed trough and a clean water container. Keep the floor dry and clean out manure regularly.
 
-## Step 3: Arrival care
+## The first two weeks
 
-The first two weeks matter a lot. The animal is stressed from travel and a new place.
+The first two weeks matter a lot. The animal is stressed from the trip and the new place.
 
-- **Rest first.** Give water and good grass. Do not suddenly feed a lot of concentrates.
-- **Isolate new arrivals** from your other animals for a while so you can watch for sickness.
-- **Deworm properly.** The DA advice cited by Edge Davao is to have a **fecal examination** first so the right dewormer is used, rather than guessing.
-- **Control external parasites** such as ticks, lice and flies with an appropriate spray.
-- **Vaccinate if needed.** DA guidance mentions vaccinating unvaccinated animals against hemorrhagic septicemia; your veterinarian will tell you which vaccines are needed in your area. The Bureau of Animal Industry (BAI) office or your Municipal or Provincial Veterinary Office can advise you.
-- **Vitamins.** Many farmers give vitamins at arrival to help with stress. Ask your veterinarian which product and dose fits your animals.
+- Let it rest first. Give water and good grass. Don't suddenly give it a lot of concentrates.
+- Keep new arrivals away from your other animals for a while so you can watch for sickness.
+- Deworm properly. The DA advice cited by Edge Davao is to get a fecal exam first so you use the right dewormer instead of guessing.
+- Control ticks, lice and flies with a suitable spray.
+- Vaccinate if needed. DA guidance mentions vaccinating unvaccinated animals against hemorrhagic septicemia. Your vet will tell you which vaccines your area needs. The Bureau of Animal Industry (BAI) office or your Municipal or Provincial Veterinary Office can also advise you.
+- Vitamins. Many raisers give vitamins on arrival to help with stress. Ask your vet which product and dose to use.
 
-Always follow your local veterinarian or Municipal Agriculture Office on health programs, since diseases and requirements differ by area.
+Follow your local vet or Municipal Agriculture Office (MAO) on health programs, because diseases and requirements differ from place to place.
 
-## Step 4: Feed and daily routine
+## Feeding and the daily routine
 
-Feeding is the biggest part of fattening. (See our separate article on feeds and forage for details.) A simple daily routine might look like this:
+Feeding is the biggest part of fattening. (Our separate guide on feeds and forage has the details.) A simple day might go like this:
 
-- **Morning:** Check every animal: is it eating, alert, standing normally? Clean the trough and give fresh water and the first feeding.
-- **Midday:** Refill water. Give cut grass or legumes.
-- **Afternoon:** Second feeding of forage and any concentrate. Clean the pen.
-- **Weekly:** Bathe or wash the cattle at least once a week, as the DA recommends, and check for ticks and wounds.
+- Morning: check every animal. Is it eating, alert, standing normally? Clean the trough and give fresh water and the first feeding.
+- Midday: refill the water. Give cut grass or legumes.
+- Afternoon: second feeding of forage and any concentrate. Clean the pen.
+- Once a week: bathe the cattle at least once a week, as the DA recommends, and check for ticks and wounds.
 
-Start mostly on roughage (grass, legumes) with a small amount of concentrate, then increase concentrate gradually so the rumen can adjust. Clean drinking water should always be available.
+Start them on mostly roughage (grass and legumes) with a little concentrate. Then raise the concentrate slowly so the rumen can adjust. Clean drinking water should always be there.
 
-### The Batangas backyard system (*supak*)
+### Supak, the Batangas way
 
-Batangas is famous for its backyard-fattened cattle. Note that "Batangas cattle" is not really a separate breed; many animals fattened there come from other provinces. A known traditional practice is **supak**, a form of force-feeding. As described in DA-based guidance, the animal is given a mix of about 15 to 20 kilos of fresh, finely chopped and pounded ipil-ipil leaves, about half a kerosene can of clean water and a little salt, on top of its regular roughage. Supak takes a lot of work and is done with tame, well-handled animals. If you want to try it, learn it hands-on from an experienced Batangas raiser, because force-feeding done wrong can hurt the animal.
+Batangas is known for backyard-fattened cattle. But "Batangas cattle" isn't really a separate breed, and many animals fattened there come from other provinces. One known traditional practice is supak, a kind of force-feeding. As described in DA-based guidance, the animal gets a mix of about 15 to 20 kilos of fresh ipil-ipil leaves, finely chopped and pounded, about half a kerosene can of clean water and a little salt, on top of its regular roughage. Supak is a lot of work and is only done with tame animals used to being handled. If you want to try it, learn it in person from an experienced Batangas raiser. Done wrong, force-feeding can hurt the animal.
 
-## Step 5: Weigh and track average daily gain
+## Weighing and average daily gain
 
-You cannot manage what you do not measure. Weigh each animal at arrival and then on a regular schedule, for example every 2 to 4 weeks. Use a livestock scale if you can; a weigh tape gives a rough estimate.
+If you don't weigh, you're only guessing. Weigh each animal when it arrives, then on a schedule, for example every 2 to 4 weeks. Use a livestock scale if you can. A weigh tape only gives a rough estimate.
 
-**Average daily gain (ADG)** is the weight gained divided by the number of days:
+Average daily gain (ADG) is the weight gained divided by the number of days:
 
 > ADG = (current weight − starting weight) ÷ number of days
 
-Example: an animal that went from 200 kg to 245 kg in 60 days gained 45 kg ÷ 60 = 0.75 kg per day.
+For example, an animal that went from 200 kg to 245 kg in 60 days gained 45 kg ÷ 60 = 0.75 kg a day.
 
-What is realistic? It depends heavily on feed. Some Philippine on-farm figures, all approximate:
+What gain can you expect? It depends a lot on feed. Some figures from Philippine farms, all approximate:
 
-- In the Paniqui, Tarlac project, farmers previously saw gains as low as about **300 grams per day**. With improved feeding (sweet potato vines and roots), gains ranged from about **367 grams to 1.57 kg per day**.
-- In a Tarlac trial, cattle fed only corn stover gained about **85 to 130 grams per day**, while those fed corn stover-swine waste silage gained roughly **310 to 720 grams per day**.
+- In the Paniqui, Tarlac project, farmers used to see gains as low as about 300 grams a day. With better feeding (sweet potato vines and roots), gains ranged from about 367 grams to 1.57 kg a day.
+- In a Tarlac trial, cattle fed only corn stover gained about 85 to 130 grams a day. Those fed corn stover-swine waste silage gained roughly 310 to 720 grams a day.
 
-If an animal's gain is low or stops, check its health, its feed intake and its teeth, and talk to your veterinarian.
+If an animal's gain is low or stops, check its health, how much it's eating and its teeth, and talk to your vet.
 
-## Step 6: Decide when to sell
+## When to sell
 
-According to DA guidance cited by Edge Davao, fattened cattle are ready for slaughter at roughly **275 to 325 kg** after about 120 to 180 days. In practice, sell when:
+According to DA guidance cited by Edge Davao, fattened cattle are ready for slaughter at roughly 275 to 325 kg after about 120 to 180 days. In practice, sell when:
 
-- The animal has reached your target weight and good body condition, and
-- Its daily gain starts slowing down, so each extra day of feed earns you less.
+- the animal has reached your target weight and looks in good condition, and
+- its daily gain starts to slow, so every extra day of feed earns you less.
 
-Check prices with several traders and the nearest livestock auction market (*oksyon*) before selling; your weight records help you bargain.
+Before you sell, ask several viajeros (cattle traders) and check the nearest livestock auction (*oksyon*). Bring your weight records. They help when you bargain.
 
-## Step 7: Keep records
+## Keeping records
 
-Good records turn guesses into decisions. For each animal, write down:
+With records, you decide based on numbers instead of guesses. For each animal, write down:
 
-- Date bought, price, source and starting weight
-- Vaccines, dewormers and vitamins given (date, product, dose)
-- Each weighing (date and weight)
-- Feed used and its cost
-- Sickness and treatment
-- Date sold, final weight and selling price
+- date bought, price, where it came from and starting weight,
+- vaccines, dewormers and vitamins given (date, product, dose),
+- each weighing (date and weight),
+- feed used and what it cost,
+- any sickness and treatment, and
+- date sold, final weight and selling price.
 
-A notebook works. After each batch, compare total costs with sales to know your real profit per head.
+A notebook is enough. After each batch, compare total costs with sales so you know your real profit per head.
 
 ## Summary
 
-- Buy healthy, alert feeder stock, ideally around 2 to 3 years old; steers are generally preferred.
-- Rest, isolate and check new animals; deworm based on a fecal exam and vaccinate with advice from your vet or agriculture office.
-- Better feeding shortens fattening time. Traditional tethering can take 6 to 18 months; improved feeding has brought it down to around 4 months in Philippine projects.
+- Buy healthy, alert feeder stock, ideally around 2 to 3 years old. Steers are usually preferred.
+- Rest, isolate and watch new animals. Deworm based on a fecal exam, and vaccinate on the advice of your vet or MAO.
+- Better feeding shortens fattening. Traditional tethering can take 6 to 18 months, and improved feeding brought it down to around 4 months in a Philippine project.
 - Weigh regularly and compute average daily gain so you know which animals and feeds are working.
-- Sell when the animal reaches target weight and gains begin to slow, and keep records of every peso and kilo.
+- Sell when the animal hits target weight and its gain starts to slow, and record every peso and kilo.

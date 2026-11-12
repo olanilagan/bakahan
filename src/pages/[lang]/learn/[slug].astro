@@ -1,32 +1,31 @@
 ---
-import { getCollection, render } from 'astro:content';
+// A single guide. Rendered on request so a scheduled guide only becomes
+// reachable on its publish date (before that this URL is a 404).
+import { getEntry, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import { formatDate, href, useT, type Lang } from '../../../i18n/utils';
-import type { UIKey } from '../../../i18n/ui';
 import Photo from '../../../components/Photo.astro';
-import { GUIDE_COVERS } from '../../../lib/photos';
 import SponsorSlot from '../../../components/SponsorSlot.astro';
 import AdSlot from '../../../components/AdSlot.astro';
+import { formatDate, href, useT } from '../../../i18n/utils';
+import type { UIKey } from '../../../i18n/ui';
+import { GUIDE_COVERS } from '../../../lib/photos';
+import { dateKey, isPublished, publishedGuides, slugOf } from '../../../lib/guides';
+import { notFound, pageLang } from '../../../lib/page';
 
-export const prerender = true;
+export const prerender = false;
 
-export async function getStaticPaths() {
-  const all = await getCollection('articles');
-  return all.map((entry) => {
-    const [lang, slug] = entry.id.split('/');
-    const siblings = all
-      .filter((a) => a.id.startsWith(`${lang}/`))
-      .sort((a, b) => a.data.order - b.data.order);
-    const next = siblings[siblings.findIndex((a) => a.id === entry.id) + 1];
-    return { params: { lang, slug }, props: { entry, next } };
-  });
-}
-
-const { entry, next } = Astro.props;
-const lang = Astro.params.lang as Lang;
+const lang = pageLang(Astro);
+if (!lang) return notFound();
 const t = useT(lang);
+const slug = String(Astro.params.slug ?? '');
+const entry = /^[a-z0-9-]+$/.test(slug) ? await getEntry('articles', `${lang}/${slug}`) : undefined;
+if (!entry || !isPublished(entry)) return notFound();
+
+const siblings = await publishedGuides(lang);
+const next = siblings[siblings.findIndex((a) => a.id === entry.id) + 1];
 const { Content } = await render(entry);
-const cover = GUIDE_COVERS[Astro.params.slug as string];
+const cover = GUIDE_COVERS[slug];
+const wasUpdated = dateKey(entry.data.updated) > dateKey(entry.data.publishDate);
 ---
 
 <Base lang={lang} title={entry.data.title} description={entry.data.description}>
@@ -40,8 +39,8 @@ const cover = GUIDE_COVERS[Astro.params.slug as string];
         <h1>{entry.data.title}</h1>
         <p class="lead">{entry.data.description}</p>
         <p class="small muted">
-          {t('learn.updated')}
-          {formatDate(lang, entry.data.updated)}
+          {t('learn.published')}{' '}{formatDate(lang, entry.data.publishDate)}
+          {wasUpdated && <> · {t('learn.updated')} {formatDate(lang, entry.data.updated)}</>}
           {entry.data.readingMinutes && <> · {entry.data.readingMinutes} {t('learn.minutes')}</>}
         </p>
       </div>
@@ -54,7 +53,7 @@ const cover = GUIDE_COVERS[Astro.params.slug as string];
 
         <p class="alert alert--note small" style="margin-top:2em">{t('learn.disclaimer')}</p>
 
-        <SponsorSlot server:defer lang={lang} placement="guides" />
+        <SponsorSlot lang={lang} placement="guides" />
         <AdSlot slot="article" />
 
         {
@@ -76,7 +75,7 @@ const cover = GUIDE_COVERS[Astro.params.slug as string];
 
         {
           next && (
-            <a class="card next" href={href(lang, `/learn/${next.id.split('/')[1]}`)}>
+            <a class="card next" href={href(lang, `/learn/${slugOf(next)}`)}>
               <span class="tag">{t('learn.next')} →</span>
               <h3>{next.data.title}</h3>
             </a>
@@ -91,14 +90,6 @@ const cover = GUIDE_COVERS[Astro.params.slug as string];
   .sources {
     font-size: 0.92rem;
   }
-  .prose :global(.cover) {
-    margin-bottom: 2em;
-  }
-  .prose :global(img) {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--radius);
-  }
   .sources h2 {
     font-size: 1.2rem;
   }
@@ -110,5 +101,13 @@ const cover = GUIDE_COVERS[Astro.params.slug as string];
   }
   .next h3 {
     margin: 0;
+  }
+  .prose :global(.cover) {
+    margin-bottom: 2em;
+  }
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
   }
 </style>

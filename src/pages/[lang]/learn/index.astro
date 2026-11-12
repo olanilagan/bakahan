@@ -1,19 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
+// Rendered on request (not pre-built) so scheduled guides appear on their
+// publish date without a redeploy. See src/lib/guides.ts.
 import Base from '../../../layouts/Base.astro';
-import { href, langStaticPaths, useT, type Lang } from '../../../i18n/utils';
+import { href, useT } from '../../../i18n/utils';
 import type { UIKey } from '../../../i18n/ui';
 import { GUIDE_COVERS, PHOTOS, photoSrc } from '../../../lib/photos';
+import { isNew, publishedGuides, slugOf } from '../../../lib/guides';
+import { notFound, pageLang } from '../../../lib/page';
 
-export const prerender = true;
-export const getStaticPaths = langStaticPaths;
+export const prerender = false;
 
-const lang = Astro.params.lang as Lang;
+const lang = pageLang(Astro);
+if (!lang) return notFound();
 const t = useT(lang);
-
-const articles = (await getCollection('articles', (a) => a.id.startsWith(`${lang}/`))).sort(
-  (a, b) => a.data.order - b.data.order,
-);
+const articles = await publishedGuides(lang);
 ---
 
 <Base lang={lang} title={t('learn.title')} description={t('learn.lead')}>
@@ -27,31 +27,28 @@ const articles = (await getCollection('articles', (a) => a.id.startsWith(`${lang
     <div class="container">
       <ul class="rule-list guides">
         {
-          articles.map((a) => (
-            <li class="guide-row">
-              <div>
-              <span class="tag">{t(`cat.${a.data.category}` as UIKey)}</span>
-              <h3>
-                <a href={href(lang, `/learn/${a.id.split('/')[1]}`)}>{a.data.title}</a>
-              </h3>
-              <p class="muted">{a.data.description}</p>
-              {a.data.readingMinutes && (
-                <p class="small muted" style="margin-top:6px">
-                  {a.data.readingMinutes} {t('learn.minutes')}
-                </p>
-              )}
-              </div>
-              {GUIDE_COVERS[a.id.split('/')[1]!] && (
-                <img
-                  src={photoSrc(GUIDE_COVERS[a.id.split('/')[1]!]!, 800)}
-                  alt={PHOTOS[GUIDE_COVERS[a.id.split('/')[1]!]!].alt[lang]}
-                  width="220"
-                  height="147"
-                  loading="lazy"
-                />
-              )}
-            </li>
-          ))
+          articles.map((a) => {
+            const slug = slugOf(a);
+            const cover = GUIDE_COVERS[slug];
+            return (
+              <li class="guide-row">
+                <div>
+                  <span class="tag">{t(`cat.${a.data.category}` as UIKey)}</span>
+                  {isNew(a) && <span class="tag tag--straw"> · {t('learn.new')}</span>}
+                  <h3>
+                    <a href={href(lang, `/learn/${slug}`)}>{a.data.title}</a>
+                  </h3>
+                  <p class="muted">{a.data.description}</p>
+                  {a.data.readingMinutes && (
+                    <p class="small muted" style="margin-top:6px">
+                      {a.data.readingMinutes} {t('learn.minutes')}
+                    </p>
+                  )}
+                </div>
+                {cover && <img src={photoSrc(cover, 800)} alt={PHOTOS[cover].alt[lang]} width="220" height="147" loading="lazy" />}
+              </li>
+            );
+          })
         }
       </ul>
     </div>

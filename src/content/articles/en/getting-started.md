@@ -3,6 +3,7 @@ title: "Starting a cattle business in the Philippines"
 description: "A practical first look at raising cattle for income in the Philippines: backyard vs commercial scale, the three main business models, land and feed needs, capital, and the mistakes beginners most often make."
 category: "basics"
 order: 1
+publishDate: 2026-11-11
 updated: 2026-11-11
 readingMinutes: 7
 sources:
@@ -22,99 +23,99 @@ sources:
     url: "https://ati2.da.gov.ph/ati-3/content/article/CattleFatteningTraining"
 ---
 
-Many Filipinos dream of having their own *bakahan*. Cattle can be a good source of income, a form of savings "on four legs," and a way to use farm by-products like rice straw and corn stalks. But cattle are also a big investment, and mistakes are expensive. This guide walks you through the basics so you can start with your eyes open.
+A lot of us dream of having our own *bakahan*. Cattle can bring in money, they work like savings "on four legs," and they eat what the farm leaves behind, like rice straw and corn stalks. But cattle cost a lot, and so do mistakes. Read through the basics first so you know what you're getting into.
 
-## Most Philippine cattle are raised by small farmers
+## Most cattle here are raised by small farmers
 
-You do not need a huge ranch to begin. According to the Philippine Statistics Authority (PSA), the country has roughly 2.5 to 2.6 million head of cattle in recent years, and most of them are on small farms. In the PSA's April–June 2023 report, about **81% of cattle were on smallhold farms**, about 15% on semi-commercial farms, and only about 4% on commercial farms.
+You don't need a big farm to start. According to the Philippine Statistics Authority (PSA), the country has had roughly 2.5 to 2.6 million head of cattle in recent years, and most are on small farms. In the PSA's April to June 2023 report, about 81% of cattle were on smallhold farms, about 15% on semi-commercial farms, and only about 4% on commercial farms.
 
-In other words, the typical Filipino cattle raiser has a few head tied in the backyard or grazing along the rice paddies. That is a perfectly good place to start.
+So the typical raiser here has a few head tied out in the backyard or grazing along the rice paddies. That's a perfectly good way to start.
 
-## Backyard vs commercial scale
+## Backyard or commercial
 
 | | Backyard / smallhold | Commercial |
 |---|---|---|
 | Number of animals | A few head | Dozens to hundreds |
 | Feeding | Tethered grazing, cut grass, farm by-products | Pasture plus planned rations, silage, concentrates |
-| Housing | Simple shed or corral near the house | Pens, feeding troughs, water system, loading ramp |
+| Housing | Simple shed or kural (corral) near the house | Pens, feeding troughs, water system, loading ramp |
 | Labor | Family | Hired workers |
 | Main risk | One sick or lost animal is a big loss | Feed costs, market prices, disease spreading in a large herd |
 
-Many successful farmers start backyard, learn the work, keep good records, and only then grow.
+Plenty of raisers start in the backyard, learn the work, keep good records, and only grow after that.
 
-## The three main business models
+## Three ways to make money from cattle
 
-### 1. Cow-calf (breeding)
+### Cow-calf (breeding)
 
-You keep breeding cows (and a bull, or use artificial insemination) and sell the calves or raise them up. This is a **long-term** business: a cow carries her calf for about nine months, and it takes more time before that calf can be sold. Cash flow is slow, but a good herd keeps producing for years. You need more land or a steady forage supply, and you need to learn about heat detection, calving, and calf care.
+You keep breeding cows, with a bull or artificial insemination (AI), and sell the calves or raise them. This is a long-term business. A cow carries her calf for about nine months, and it takes more time before that calf can be sold. Money comes in slowly, but a good herd keeps producing for years. You'll need more land or a steady supply of forage. You'll also need to learn heat detection, calving and calf care.
 
-### 2. Fattening (feedlot)
+### Fattening
 
-You buy thinner "feeder" cattle, feed them well for a few months, and sell them heavier. The Department of Agriculture (DA) Region III guide describes backyard fattening as buying healthy stock, feeding them for **about 120 to 180 days**, and selling them, with a target liveweight of **around 275 to 325 kg** after about six months. This model turns money around faster, but your profit depends heavily on:
+You buy thinner "feeder" cattle, feed them well for a few months, and sell them heavier. The Department of Agriculture (DA) Region III guide describes backyard fattening as buying healthy stock, feeding for about 120 to 180 days, then selling, with a target liveweight of around 275 to 325 kg after about six months. Your money turns around faster here. But your profit depends a lot on three prices:
 
-- the price you pay for feeder cattle,
-- the cost of feeds, and
-- the selling price per kilo liveweight when you sell.
+- what you paid for the feeder,
+- what you spend on feeds, and
+- the price per kilo liveweight when you sell.
 
-Weight gain varies a lot by animal, breed, and feed. As one example, a Department of Agriculture trial in Bukidnon reported in PCARRD Highlights found Brahman and Simbrah steers gaining roughly **0.55 to 0.61 kg per day** on silage-based rations. Treat figures like these as a rough guide, not a promise.
+How fast an animal gains depends on the animal, the breed and the feed. As one example, a DA trial in Bukidnon reported in PCARRD Highlights had Brahman and Simbrah steers gaining roughly 0.55 to 0.61 kg a day on silage-based rations. Use numbers like these as a rough guide, not a promise.
 
-### 3. Trading
+### Trading
 
-You buy animals (often at livestock auction markets or directly from farmers) and resell them, sometimes after only a short time. Trading needs less land but more market knowledge, a reliable network of buyers and sellers, and good skill in judging an animal's weight and health by eye. It also carries risk if prices drop while you are holding animals.
+You buy animals, often at the livestock auction or straight from farmers, and resell them, sometimes after only a short time. People who do this are called *viajero*. You need less land, but you need to know the market, have buyers and sellers you can rely on, and be good at judging an animal's weight and health by eye. If prices drop while you're still holding animals, you can lose money.
 
-Many farmers combine models, for example keeping a few breeding cows while fattening a batch of steers.
+Many raisers mix these. For example, they keep a few breeding cows and fatten a batch of steers on the side.
 
 ## Land and forage
 
-Cattle are grass eaters. The DA Region III guide notes that cattle eat roughly **2.5% of their body weight** in feed (dry matter) every day, so a 300 kg animal needs about 7 to 8 kg of dry feed daily, which is much more when it is fresh, wet grass.
+Cattle eat grass. The DA Region III guide says cattle eat roughly 2.5% of their body weight in dry matter every day. So a 300 kg animal needs about 7 to 8 kg of dry feed a day, and a lot more than that if it's fresh, wet grass.
 
-How many animals a hectare can carry depends on the quality of the pasture. A Philippine study summarized by SEARCA found farms carrying anywhere from about **0.7 to 3.3 animal units per hectare**, with improved pastures carrying more. If you have little land, you can still raise cattle by:
+How many head a hectare can carry depends on the pasture. A Philippine study summarized by SEARCA found farms carrying about 0.7 to 3.3 animal units per hectare, with improved pastures carrying more. If you don't have much land, you can still raise cattle:
 
-- planting improved grasses (such as Napier) for **cut-and-carry** feeding,
-- using farm by-products like rice straw, corn stover, and copra meal, which the DA guide recommends, and
-- keeping animals in a shed and bringing feed to them.
+- Plant improved grass like Napier and cut it for them (cut-and-carry).
+- Use farm by-products like rice straw (*dayami*), corn stover and copra meal, as the DA guide recommends.
+- Keep the animals in a shed and bring the feed to them.
 
-Make sure you also have a **reliable source of clean water** all year.
+You also need clean water all year, including in the dry months.
 
-## Thinking about capital (puhunan)
+## Your puhunan
 
-Prices change by region and by season, so we do not give fixed peso amounts here. Instead, list and price out these items in your area before you buy a single animal:
+Prices change by region and by season, so we don't put fixed peso amounts here. Before you buy a single animal, list these out and get prices in your area:
 
-- **Animals:** purchase price of feeder or breeder cattle (DA notes cattle are often cheaper in the dry season, January to April).
-- **Housing:** shed, roofing, feed and water troughs, fencing.
-- **Feeds:** forage (planted or bought), concentrates, salt and minerals.
-- **Health:** deworming, vaccines, vitamins, and vet visits.
-- **Transport:** hauling animals to your farm and to market.
-- **Labor:** your own time or paid helpers.
-- **A cushion:** money set aside in case an animal gets sick or prices drop.
+- Animals: the price of feeder or breeder cattle. The DA notes cattle are often cheaper in the dry season, January to April.
+- Housing: shed, roofing, feed and water troughs, fencing.
+- Feeds: forage (planted or bought), concentrates, salt and minerals.
+- Health: deworming, vaccines, vitamins and vet visits.
+- Transport: hauling animals to your farm and later to market.
+- Labor: your own time, or paid help.
+- Reserve money in case an animal gets sick or prices drop.
 
-Check current local prices at your nearest livestock auction market and with your Municipal Agriculture Office. Ask other raisers what they actually spend; real numbers from neighbors are worth more than numbers online.
+Check current prices at the nearest livestock auction and with your Municipal Agriculture Office (MAO). Ask other raisers what they really spend. Real numbers from neighbours are worth more than anything you read online.
 
 ## Your first steps
 
-1. **Visit your Municipal or Provincial Agriculture Office.** Ask about training, livestock programs, and the local veterinarian. The Agricultural Training Institute (ATI) also runs cattle fattening trainings that cover breed selection, housing, feeding, forage, health, record keeping, and profitability.
-2. **Visit working farms.** Talk to raisers near you. See how they feed, house, and sell.
-3. **Decide your model** (breeding, fattening, or trading) based on your land, cash, and time.
-4. **Prepare feed and water first** before buying animals.
-5. **Start small**, maybe two to five head, and learn.
-6. **Buy healthy animals from trusted sources.** Look for animals that are active and alert, with bright eyes and smooth skin, and ask about vaccination.
-7. **Keep records** from day one: purchase weight and price, feed costs, treatments, and selling weight and price.
+1. Go to your MAO or Provincial Agriculture Office. Ask about training, livestock programs and the local vet. The Agricultural Training Institute (ATI) also runs cattle fattening trainings covering breed selection, housing, feeding, forage, health, record keeping and profitability.
+2. Visit farms near you. Talk to the raisers and see how they feed, house and sell.
+3. Pick your model (breeding, fattening or trading) based on your land, cash and time.
+4. Get the feed and water ready before you buy any animals.
+5. Start small, maybe two to five head, and learn.
+6. Buy healthy animals from people you trust. Look for animals that are active and alert, with bright eyes and smooth skin, and ask about vaccination.
+7. Keep records from day one: purchase weight and price, feed costs, treatments, and selling weight and price.
 
 ## Common beginner mistakes
 
-- **Buying sick or stressed animals** to save money. A cheap animal that gets sick or dies costs more in the end.
-- **Mixing new arrivals with your existing animals right away.** The DA guide advises keeping newcomers separate first to avoid spreading disease.
-- **Not having enough feed**, especially during the dry season.
-- **Skipping deworming and tick control.** The DA recommends fecal examination to choose the right dewormer, and spraying against parasites.
-- **Overfilling the feed trough**, which lets feed spoil, and leaving manure uncleaned, both of which can reduce appetite and weight gain.
-- **Rough handling and transport**, which causes stress, injury, and weight loss.
-- **Not knowing your numbers.** Without records you cannot tell whether you are actually making money.
-- **Growing too fast** before you have the skills, feed supply, and market.
+- Buying sick or stressed animals because they're cheap. If it gets sick or dies, it ends up costing more.
+- Putting new arrivals in with your other animals right away. The DA guide says to keep newcomers separate first so disease doesn't spread.
+- Running out of feed, especially in the dry season.
+- Skipping deworming and tick control. The DA recommends a fecal exam to pick the right dewormer, and spraying against parasites.
+- Overfilling the feed trough so feed spoils, and leaving manure uncleaned. Both can cut appetite and weight gain.
+- Rough handling and transport, which cause stress, injuries and weight loss.
+- Not knowing your numbers. Without records you can't tell if you're actually making money.
+- Growing too fast, before you have the skills, the feed supply and a market.
 
 ## Summary
 
-- Most Filipino cattle are raised on small farms, so starting small is normal and smart.
-- Choose a model that fits you: breeding is slow but long-term; fattening is faster but depends on feeder, feed, and selling prices; trading needs market skill.
-- Secure feed and water before buying animals. Cattle eat about 2.5% of their body weight in dry feed per day.
-- Prices change, so always check current local prices and build a cash cushion.
-- Work with your Municipal Agriculture Office and a veterinarian, buy healthy animals, and keep records from day one.
+- Most cattle in the Philippines are on small farms, so starting small is normal.
+- Breeding is slow but long-term. Fattening is faster but depends on feeder, feed and selling prices. Trading needs market skill.
+- Get feed and water ready before you buy. Cattle eat about 2.5% of their body weight in dry feed a day, according to the DA.
+- Prices change, so check current local prices and keep money in reserve.
+- Work with your MAO and a vet, buy healthy animals, and keep records from day one.

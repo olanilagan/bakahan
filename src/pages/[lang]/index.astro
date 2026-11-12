@@ -1,12 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Photo from '../../components/Photo.astro';
-import { GUIDE_COVERS, photoSrc } from '../../lib/photos';
+import LatestGuides from '../../components/LatestGuides.astro';
 import SponsorSlot from '../../components/SponsorSlot.astro';
 import LatestListings from '../../components/LatestListings.astro';
 import { href, langStaticPaths, useT, type Lang } from '../../i18n/utils';
-import type { UIKey } from '../../i18n/ui';
 
 export const prerender = true;
 export const getStaticPaths = langStaticPaths;
@@ -14,9 +12,6 @@ export const getStaticPaths = langStaticPaths;
 const lang = Astro.params.lang as Lang;
 const t = useT(lang);
 
-const guides = (await getCollection('articles', (a) => a.id.startsWith(`${lang}/`)))
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 5);
 
 const more = [
   { title: t('home.prices.title'), body: t('home.prices.body'), link: '/prices', label: t('nav.prices') },
@@ -49,26 +44,9 @@ const more = [
           <h2>{t('learn.title')}</h2>
           <a class="more" href={href(lang, '/learn')}>{t('learn.back')} →</a>
         </div>
-        <ul class="rule-list">
-          {
-            guides.map((g) => {
-              const slug = g.id.split('/')[1]!;
-              const cover = GUIDE_COVERS[slug];
-              return (
-                <li class="guide-row">
-                  <div>
-                    <span class="tag">{t(`cat.${g.data.category}` as UIKey)}</span>
-                    <h3>
-                      <a href={href(lang, `/learn/${slug}`)}>{g.data.title}</a>
-                    </h3>
-                    <p class="muted">{g.data.description}</p>
-                  </div>
-                  {cover && <img src={photoSrc(cover, 800)} alt="" width="160" height="107" loading="lazy" />}
-                </li>
-              );
-            })
-          }
-        </ul>
+        <LatestGuides server:defer lang={lang}>
+          <p slot="fallback" class="muted">…</p>
+        </LatestGuides>
       </div>
 
       <div>
@@ -202,29 +180,6 @@ const more = [
     .farm {
       grid-template-columns: 1fr 1fr;
       gap: 48px;
-    }
-  }
-  .guide-row {
-    display: grid;
-    grid-template-columns: 1fr 112px;
-    gap: 16px;
-    align-items: start;
-  }
-  .guide-row img {
-    width: 112px;
-    height: 75px;
-    object-fit: cover;
-    border-radius: var(--radius-sm);
-    margin-top: 4px;
-  }
-  @media (min-width: 560px) {
-    .guide-row {
-      grid-template-columns: 1fr 160px;
-      gap: 24px;
-    }
-    .guide-row img {
-      width: 160px;
-      height: 107px;
     }
   }
   .join {

@@ -59,6 +59,8 @@ export const ui = {
     'learn.minutes': 'min read',
     'learn.sources': 'Sources',
     'learn.updated': 'Updated',
+    'learn.published': 'Published',
+    'learn.new': 'New',
     'learn.disclaimer':
       'This guide is general information. Prices, rules and programs change, and every farm is different. Check with your Municipal Agriculture Office or a licensed veterinarian before making big decisions.',
     'learn.next': 'Next guide',
@@ -327,6 +329,8 @@ export const ui = {
     'learn.minutes': 'minutong basa',
     'learn.sources': 'Mga pinagkunan',
     'learn.updated': 'Huling update',
+    'learn.published': 'Inilathala',
+    'learn.new': 'Bago',
     'learn.disclaimer':
       'Pangkalahatang impormasyon lamang ang gabay na ito. Nagbabago ang presyo, patakaran at programa, at iba-iba ang bawat farm. Kumonsulta sa inyong Municipal Agriculture Office o lisensyadong beterinaryo bago gumawa ng malaking desisyon.',
     'learn.next': 'Susunod na gabay',

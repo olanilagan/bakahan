@@ -1,10 +1,11 @@
 // sitemap.xml: tells search engines which public pages exist, in both languages.
-// Built once at deploy time (prerendered), so it costs nothing per request.
+// Built on request so guides appear here on their publish date.
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { dateKey, isPublished } from '../lib/guides';
 import { LANGS } from '../i18n/utils';
 
-export const prerender = true;
+export const prerender = false;
 
 const SECTIONS = ['/', '/learn/', '/market/', '/prices/', '/directory/', '/farm/', '/app/', '/contact/', '/credits/', '/about/', '/advertise/', '/privacy/', '/terms/'];
 
@@ -19,8 +20,8 @@ export const GET: APIRoute = async ({ site }) => {
   };
 
   SECTIONS.forEach((p) => add(p));
-  for (const a of articles.filter((a) => a.id.startsWith('en/'))) {
-    add(`/learn/${a.id.split('/')[1]}/`, a.data.updated.toISOString().slice(0, 10));
+  for (const a of articles.filter((a) => a.id.startsWith('en/') && isPublished(a))) {
+    add(`/learn/${a.id.split('/')[1]}/`, dateKey(a.data.updated));
   }
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
@@ -37,5 +38,5 @@ ${Object.entries(u.alternates)
   .join('\n')}
 </urlset>
 `;
-  return new Response(body, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
+  return new Response(body, { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } });
 };
