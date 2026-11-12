@@ -59,3 +59,12 @@ Photos are served as 800px and 1600px WebP files via `srcset`, so phones downloa
 Email Routing only forwards mail; it does not host mailboxes. `inquiries@` and `invest@` forward to the owner's Gmail. Replying "as" those addresses (Gmail "Send mail as", Zoho or Google Workspace) is deferred.
 
 The contact form saves each message in D1 first, then emails it through the `send_email` binding. On the free plan the binding can only send to verified destination addresses, and that's exactly the owner's inbox. The address is kept in the `CONTACT_TO` Worker secret, not in this public repo. Spam protection for now is a hidden "honeypot" field plus the rate limiter; Turnstile is the next step.
+
+### 14. Turnstile bot check on public forms
+Signup, contact and the app waitlist are open to anyone, so they're what bots target. Each of these forms embeds a Cloudflare Turnstile widget. It's invisible for most visitors, so there are no image puzzles. The server verifies the token with Cloudflare (`src/lib/turnstile.ts`) and requires three things: success, the right form (`action`), and our own hostname.
+
+- The site key is public and lives in `wrangler.jsonc`.
+- The secret is the `TURNSTILE_SECRET` Worker secret.
+- Local development uses Cloudflare's official always-pass test keys from `.dev.vars`.
+
+Member-only forms (listings, directory) are not checked; login and rate limiting already protect them.

@@ -9,6 +9,8 @@ import { allowAttempt } from '../../lib/auth';
 import { isEmail, str } from '../../lib/form';
 import { oneOf } from '../../lib/options';
 import { notFound, pageLang } from '../../lib/page';
+import { verifyTurnstile } from '../../lib/turnstile';
+import Turnstile from '../../components/Turnstile.astro';
 
 export const prerender = false;
 
@@ -38,6 +40,8 @@ if (Astro.request.method === 'POST') {
     sent = true;
   } else if (!(await allowAttempt(Astro.request, 'contact'))) {
     error = t('auth.tooMany');
+  } else if (!(await verifyTurnstile(form, Astro.request, 'contact'))) {
+    error = t('form.botCheck');
   } else if (!v.name || !v.message) {
     error = t('form.required');
   } else if (!isEmail(v.email)) {
@@ -150,6 +154,7 @@ const addresses = [
                 Website
                 <input name="website" tabindex="-1" autocomplete="off" />
               </label>
+              <Turnstile action="contact" lang={lang} />
               <div>
                 <button class="btn btn--primary" type="submit">
                   {t('contact.send')}

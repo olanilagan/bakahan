@@ -1,0 +1,24 @@
+---
+// Cloudflare Turnstile widget. Usually invisible: most visitors are checked in
+// the background and never see a puzzle. Adds a hidden "cf-turnstile-response"
+// field to the form, which the server verifies (src/lib/turnstile.ts).
+import { env } from 'cloudflare:workers';
+import type { Lang } from '../i18n/utils';
+
+interface Props {
+  action: 'signup' | 'contact' | 'waitlist';
+  lang: Lang;
+}
+const { action, lang } = Astro.props;
+---
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<div
+  class="cf-turnstile"
+  data-sitekey={env.TURNSTILE_SITEKEY}
+  data-action={action}
+  data-language={lang === 'fil' ? 'tl' : 'en'}
+  data-theme="light"
+  data-size="flexible"
+>
+</div>

@@ -7,6 +7,8 @@ import { allowAttempt, hashPassword, safeNext, startSession } from '../../lib/au
 import { isEmail, str } from '../../lib/form';
 import { REGIONS, ROLES, oneOf } from '../../lib/options';
 import { pageLang, notFound } from '../../lib/page';
+import { verifyTurnstile } from '../../lib/turnstile';
+import Turnstile from '../../components/Turnstile.astro';
 
 export const prerender = false;
 
@@ -30,6 +32,7 @@ if (Astro.request.method === 'POST') {
   const password = (form.get('password') as string | null) ?? '';
 
   if (!(await allowAttempt(Astro.request, 'signup'))) error = t('auth.tooMany');
+  else if (!(await verifyTurnstile(form, Astro.request, 'signup'))) error = t('form.botCheck');
   else if (!values.name || !values.region) error = t('form.required');
   else if (!isEmail(values.email)) error = t('auth.signup.badEmail');
   else if (password.length < 8 || password.length > 200) error = t('auth.signup.weak');
@@ -97,6 +100,7 @@ if (Astro.request.method === 'POST') {
             {t('form.phone')} <span class="hint">({t('form.optional')})</span>
             <input name="phone" type="tel" maxlength="30" autocomplete="tel" value={values.phone} />
           </label>
+          <Turnstile action="signup" lang={lang} />
           <button class="btn btn--primary" type="submit">{t('auth.signup.submit')}</button>
         </form>
         <p style="margin-top:20px">

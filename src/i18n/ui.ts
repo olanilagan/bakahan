@@ -186,6 +186,7 @@ export const ui = {
     'form.submit': 'Submit',
     'form.required': 'Please fill in all required fields.',
     'form.error': 'Something went wrong. Please try again.',
+    'form.botCheck': 'We could not confirm you are not a robot. Please wait for the check to finish, then try again.',
 
     'role.raiser': 'Raiser / farmer',
     'role.trader': 'Trader / viajero',
@@ -445,6 +446,7 @@ export const ui = {
     'form.submit': 'Ipasa',
     'form.required': 'Pakisagutan ang lahat ng kailangang field.',
     'form.error': 'May nangyaring mali. Pakisubukan ulit.',
+    'form.botCheck': 'Hindi namin makumpirmang hindi ka robot. Hintaying matapos ang check, tapos subukan ulit.',
 
     'role.raiser': 'Nag-aalaga / magsasaka',
     'role.trader': 'Viajero / trader',

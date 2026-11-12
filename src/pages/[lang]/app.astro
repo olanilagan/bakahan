@@ -6,6 +6,8 @@ import Base from '../../layouts/Base.astro';
 import { isLang, useT } from '../../i18n/utils';
 import { REGIONS, oneOf } from '../../lib/options';
 import { isEmail, str } from '../../lib/form';
+import { verifyTurnstile } from '../../lib/turnstile';
+import Turnstile from '../../components/Turnstile.astro';
 
 export const prerender = false;
 
@@ -20,6 +22,8 @@ if (Astro.request.method === 'POST') {
   const email = str(form, 'email', 254)?.toLowerCase() ?? null;
   if (!isEmail(email)) {
     error = t('auth.signup.badEmail');
+  } else if (!(await verifyTurnstile(form, Astro.request, 'waitlist'))) {
+    error = t('form.botCheck');
   } else {
     await env.DB.prepare(
       `INSERT INTO waitlist (email, name, herd_size, farm_type, region) VALUES (?, ?, ?, ?, ?)
@@ -132,6 +136,7 @@ const copy = {
                 ))}
               </select>
             </label>
+            <Turnstile action="waitlist" lang={lang} />
             <div>
               <button class="btn btn--straw" type="submit">
                 {t('waitlist.submit')}

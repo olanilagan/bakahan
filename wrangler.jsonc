@@ -26,6 +26,14 @@
 	// Email sending. On the free plan this can only send to verified destination
 	// addresses (the owner's inbox); the address itself is the CONTACT_TO secret.
 	"send_email": [{ "name": "EMAIL" }],
+	// Public settings. Secrets (CONTACT_TO, TURNSTILE_SECRET) are set with
+	// `wrangler secret put` and never stored in this file.
+	"vars": {
+		// Turnstile bot check: the site key is public by design.
+		"TURNSTILE_SITEKEY": "0x4AAAAAAF9iUg_bbyxk4ACV",
+		// Hostnames whose tokens the live site accepts (no localhost in production).
+		"TURNSTILE_HOSTNAMES": "bakahan.com,www.bakahan.com"
+	},
 	// Simple per-key rate limiter, used to slow down password guessing.
 	"ratelimits": [
 		{
