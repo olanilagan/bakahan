@@ -32,6 +32,9 @@ Mainit at maalinsangan ang klima natin, maraming garapata at langaw, at mahaba a
 
 ## Native na baka ng Pilipinas
 
+![Isang mapulang-kayumangging katutubong baka na nakahiga sa damo](/images/photos/native-cow-800.webp)
+*Litrato: pinay06, CC BY 2.5, mula sa Wikimedia Commons. Inayos ang kulay.*
+
 Ang native na baka ay ang mga lumang lokal na baka na ilang siglo nang nasa ating mga isla. May ilang lokal na uri na nakalista sa breed database ng FAO (DAD-IS), kabilang ang:
 
 - **Ilocos** – mula hilagang-kanlurang Luzon (may maliit at malaking uri)
@@ -49,6 +52,9 @@ Ang native na baka ay ang mga lumang lokal na baka na ilang siglo nang nasa atin
 Sikat ang "Batangas beef," pero paliwanag ng gabay ng DA Region III na maraming bakang ibinebenta sa Batangas ay galing talaga sa Mindoro, Masbate, at iba pang probinsya. Sumikat ang pangalan dahil sa magandang kalidad ng bakang pinataba sa Batangas gamit ang tradisyonal na paraan ng pagpapakain na tinatawag na *supak*. Kaya ang "Batangas beef" ay tungkol din sa paraan ng pagpapakain, hindi lang sa iisang breed.
 
 ## Brahman
+
+![Isang kulay-abong Brahman na toro na may malaking umbok](/images/photos/brahman-grey-bull-800.webp)
+*Litrato: CSIRO, CC BY 3.0, mula sa Wikimedia Commons. Inayos ang kulay.*
 
 Ang **American Brahman** ang gulugod ng beef cattle breeding sa Pilipinas. Noong 1994, pinili ito ng DA bilang isa sa mga unang breed ng pambansang crossbreeding at upgrading program, dahil:
 

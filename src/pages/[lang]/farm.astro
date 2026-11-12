@@ -2,7 +2,7 @@
 // Showcase of the owner's own cattle fattening farm.
 // TODO(owner): replace the placeholder story, add the farm's name, location and photos.
 import Base from '../../layouts/Base.astro';
-import HeroArt from '../../components/HeroArt.astro';
+import Photo from '../../components/Photo.astro';
 import { href, langStaticPaths, useT, type Lang } from '../../i18n/utils';
 
 export const prerender = true;
@@ -64,7 +64,7 @@ const copy = {
         <h1>{t('farm.title')}</h1>
         <p class="lead">{copy.lead}</p>
       </div>
-      <div class="farm-head__art"><HeroArt /></div>
+      <div class="farm-head__art"><Photo name="farm-borongan" lang={lang} eager sizes="(min-width: 860px) 520px, 100vw" /></div>
     </div>
   </section>
 

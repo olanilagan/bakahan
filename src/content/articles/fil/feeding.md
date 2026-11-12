@@ -75,6 +75,9 @@ Madalas itanim bilang buhay na bakod. Ayon sa Feedipedia, pinakamainam itong gam
 
 ## Silage
 
+![Isang dakot ng tinadtad na corn silage](/images/photos/maize-silage-800.webp)
+*Litrato: Tractorboy60, public domain, mula sa Wikimedia Commons. Inayos ang kulay.*
+
 Ang silage ay tinadtad na sariwang pakain, kadalasan mais, na siniksik nang walang hangin para mag-ferment at tumagal nang ilang buwan. Malaking tulong ito kapag kulang ang damo.
 
 Batay sa mga materyal ng PCC at PCAARRD tungkol sa corn silage:

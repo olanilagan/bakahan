@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import { href, langStaticPaths, useT, type Lang } from '../../../i18n/utils';
 import type { UIKey } from '../../../i18n/ui';
+import { GUIDE_COVERS, PHOTOS, photoSrc } from '../../../lib/photos';
 
 export const prerender = true;
 export const getStaticPaths = langStaticPaths;
@@ -27,7 +28,8 @@ const articles = (await getCollection('articles', (a) => a.id.startsWith(`${lang
       <ul class="rule-list guides">
         {
           articles.map((a) => (
-            <li>
+            <li class="guide-row">
+              <div>
               <span class="tag">{t(`cat.${a.data.category}` as UIKey)}</span>
               <h3>
                 <a href={href(lang, `/learn/${a.id.split('/')[1]}`)}>{a.data.title}</a>
@@ -37,6 +39,16 @@ const articles = (await getCollection('articles', (a) => a.id.startsWith(`${lang
                 <p class="small muted" style="margin-top:6px">
                   {a.data.readingMinutes} {t('learn.minutes')}
                 </p>
+              )}
+              </div>
+              {GUIDE_COVERS[a.id.split('/')[1]!] && (
+                <img
+                  src={photoSrc(GUIDE_COVERS[a.id.split('/')[1]!]!, 800)}
+                  alt={PHOTOS[GUIDE_COVERS[a.id.split('/')[1]!]!].alt[lang]}
+                  width="220"
+                  height="147"
+                  loading="lazy"
+                />
               )}
             </li>
           ))
@@ -48,6 +60,29 @@ const articles = (await getCollection('articles', (a) => a.id.startsWith(`${lang
 
 <style>
   .guides {
-    max-width: 820px;
+    max-width: 900px;
+  }
+  .guide-row {
+    display: grid;
+    grid-template-columns: 1fr 112px;
+    gap: 16px;
+    align-items: start;
+  }
+  .guide-row img {
+    width: 112px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-top: 4px;
+  }
+  @media (min-width: 640px) {
+    .guide-row {
+      grid-template-columns: 1fr 220px;
+      gap: 28px;
+    }
+    .guide-row img {
+      width: 220px;
+      height: 147px;
+    }
   }
 </style>

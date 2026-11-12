@@ -32,6 +32,9 @@ Our climate is hot and humid, with ticks, flies, and long dry seasons in many pl
 
 ## Philippine native cattle
 
+![A reddish-brown Philippine native cow lying on grass](/images/photos/native-cow-800.webp)
+*Photo: pinay06, CC BY 2.5, via Wikimedia Commons. Colour adjusted.*
+
 Philippine native cattle are the old local cattle that have lived on our islands for centuries. Several local types are reported to the FAO's livestock breed database, DAD-IS, including:
 
 - **Ilocos** – from northwestern Luzon (listed in small and large types)
@@ -49,6 +52,9 @@ Native cattle are **small**. Breed references put mature cows at roughly 280 to 
 "Batangas beef" is famous, but the DA Region III guide explains that many cattle sold through Batangas actually come from Mindoro, Masbate, and other provinces. The name became popular because of the good quality of cattle finished in Batangas using a traditional feeding practice called *supak*. So "Batangas beef" is as much about how the animals are fed as about a single breed.
 
 ## Brahman
+
+![A grey Brahman bull with a large hump](/images/photos/brahman-grey-bull-800.webp)
+*Photo: CSIRO, CC BY 3.0, via Wikimedia Commons. Colour adjusted.*
 
 The **American Brahman** is the backbone of Philippine beef cattle breeding. In 1994 the DA chose it as one of the starting breeds of its national crossbreeding and upgrading program, describing it as valued for:
 

@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import { formatDate, href, useT, type Lang } from '../../../i18n/utils';
 import type { UIKey } from '../../../i18n/ui';
+import Photo from '../../../components/Photo.astro';
+import { GUIDE_COVERS } from '../../../lib/photos';
 
 export const prerender = true;
 
@@ -22,6 +24,7 @@ const { entry, next } = Astro.props;
 const lang = Astro.params.lang as Lang;
 const t = useT(lang);
 const { Content } = await render(entry);
+const cover = GUIDE_COVERS[Astro.params.slug as string];
 ---
 
 <Base lang={lang} title={entry.data.title} description={entry.data.description}>
@@ -44,6 +47,7 @@ const { Content } = await render(entry);
 
     <div class="container section">
       <div class="prose">
+        {cover && <Photo name={cover} lang={lang} eager sizes="(min-width: 760px) 700px, 100vw" class="cover" />}
         <Content />
 
         <p class="alert alert--note small" style="margin-top:2em">{t('learn.disclaimer')}</p>
@@ -81,6 +85,14 @@ const { Content } = await render(entry);
 <style>
   .sources {
     font-size: 0.92rem;
+  }
+  .prose :global(.cover) {
+    margin-bottom: 2em;
+  }
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
   }
   .sources h2 {
     font-size: 1.2rem;

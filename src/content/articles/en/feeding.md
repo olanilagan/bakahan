@@ -69,6 +69,9 @@ Often planted as a living fence. Feedipedia describes it as best used as a **pro
 
 ## Silage
 
+![A handful of chopped corn silage](/images/photos/maize-silage-800.webp)
+*Photo: Tractorboy60, public domain, via Wikimedia Commons. Colour adjusted.*
+
 Silage is chopped green forage, often corn, packed tightly without air so it ferments and keeps for months. It helps you feed well when grass is scarce.
 
 Based on PCC and PCAARRD material on corn silage:

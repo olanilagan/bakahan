@@ -236,6 +236,8 @@ export const ui = {
 
     'footer.about': 'Guides, a marketplace and price reports for cattle raisers in the Philippines.',
     'footer.made': 'Made in the Philippines',
+    'footer.credits': 'Photo credits',
+    'credits.title': 'Photo credits',
     'footer.disclaimer': 'Information on this site is for general guidance only.',
 
     '404.title': 'Page not found',
@@ -476,6 +478,8 @@ export const ui = {
 
     'footer.about': 'Tahanan ng mga Pilipinong nag-aalaga, nagbebenta at nag-aaral tungkol sa baka.',
     'footer.made': 'Gawa sa Pilipinas',
+    'footer.credits': 'Pinagkunan ng litrato',
+    'credits.title': 'Pinagkunan ng mga litrato',
     'footer.disclaimer': 'Pangkalahatang gabay lamang ang impormasyon sa site na ito.',
 
     '404.title': 'Hindi makita ang pahina',

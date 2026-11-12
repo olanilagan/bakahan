@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import HeroArt from '../../components/HeroArt.astro';
+import Photo from '../../components/Photo.astro';
+import { GUIDE_COVERS, photoSrc } from '../../lib/photos';
 import LatestListings from '../../components/LatestListings.astro';
 import { href, langStaticPaths, useT, type Lang } from '../../i18n/utils';
 import type { UIKey } from '../../i18n/ui';
@@ -35,7 +36,7 @@ const more = [
         </div>
       </div>
       <div class="hero__art">
-        <HeroArt />
+        <Photo name="hero-brahman-lipa" lang={lang} eager sizes="(min-width: 900px) 540px, 100vw" />
       </div>
     </div>
   </section>
@@ -49,15 +50,22 @@ const more = [
         </div>
         <ul class="rule-list">
           {
-            guides.map((g) => (
-              <li>
-                <span class="tag">{t(`cat.${g.data.category}` as UIKey)}</span>
-                <h3>
-                  <a href={href(lang, `/learn/${g.id.split('/')[1]}`)}>{g.data.title}</a>
-                </h3>
-                <p class="muted">{g.data.description}</p>
-              </li>
-            ))
+            guides.map((g) => {
+              const slug = g.id.split('/')[1]!;
+              const cover = GUIDE_COVERS[slug];
+              return (
+                <li class="guide-row">
+                  <div>
+                    <span class="tag">{t(`cat.${g.data.category}` as UIKey)}</span>
+                    <h3>
+                      <a href={href(lang, `/learn/${slug}`)}>{g.data.title}</a>
+                    </h3>
+                    <p class="muted">{g.data.description}</p>
+                  </div>
+                  {cover && <img src={photoSrc(cover, 800)} alt="" width="160" height="107" loading="lazy" />}
+                </li>
+              );
+            })
           }
         </ul>
       </div>
@@ -95,6 +103,7 @@ const more = [
 
   <section class="section">
     <div class="container farm">
+      <Photo name="farm-borongan" lang={lang} sizes="(min-width: 860px) 540px, 100vw" />
       <div>
         <h2>{t('home.farm.title')}</h2>
         <p class="lead">{t('home.farm.body')}</p>
@@ -183,12 +192,46 @@ const more = [
     }
   }
   .farm {
-    max-width: 760px;
+    display: grid;
+    gap: 28px;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .farm {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+  .guide-row {
+    display: grid;
+    grid-template-columns: 1fr 112px;
+    gap: 16px;
+    align-items: start;
+  }
+  .guide-row img {
+    width: 112px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-top: 4px;
+  }
+  @media (min-width: 560px) {
+    .guide-row {
+      grid-template-columns: 1fr 160px;
+      gap: 24px;
+    }
+    .guide-row img {
+      width: 160px;
+      height: 107px;
+    }
   }
   .join {
-    background: var(--green-800);
+    /* Photo behind a dark green overlay keeps the white text readable. */
+    background:
+      linear-gradient(rgba(20, 56, 34, 0.86), rgba(20, 56, 34, 0.86)),
+      url('/images/photos/cow-catanduanes-1600.webp') center 60% / cover;
     color: #dcebdf;
-    padding: 36px 0;
+    padding: 56px 0;
   }
   .join__inner {
     display: flex;

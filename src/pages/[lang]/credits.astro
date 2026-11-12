@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import { langStaticPaths, useT, type Lang } from '../../i18n/utils';
+import { PHOTOS, photoSrc, type PhotoKey } from '../../lib/photos';
+
+export const prerender = true;
+export const getStaticPaths = langStaticPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+const intro =
+  lang === 'fil'
+    ? 'Ang mga litrato sa site na ito ay mula sa Wikimedia Commons, sa ilalim ng mga lisensyang nakalista sa ibaba. Inayos namin ang kulay ng bawat litrato para tumugma sa itsura ng site. Ang mga binagong litrato na may lisensyang CC BY-SA ay ibinabahagi rin sa ilalim ng parehong lisensya.'
+    : 'Photos on this site come from Wikimedia Commons, under the licenses listed below. We adjusted the colours of each photo to match the site. Modified photos under CC BY-SA licenses are shared under the same license.';
+const entries = Object.entries(PHOTOS) as [PhotoKey, (typeof PHOTOS)[PhotoKey]][];
+---
+
+<Base lang={lang} title={t('credits.title')}>
+  <section class="page-head">
+    <div class="container">
+      <h1>{t('credits.title')}</h1>
+      <p class="lead">{intro}</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:20px">
+    <div class="container">
+      <ul class="rule-list credits">
+        {
+          entries.map(([key, p]) => (
+            <li>
+              <img src={photoSrc(key, 800)} alt="" width="120" height="80" loading="lazy" />
+              <div>
+                <strong>{p.alt[lang]}</strong>
+                <p class="small muted">
+                  {p.place} · {p.author} ·{' '}
+                  {p.licenseUrl ? (
+                    <a href={p.licenseUrl} rel="noopener" target="_blank">
+                      {p.license}
+                    </a>
+                  ) : (
+                    p.license
+                  )}{' '}
+                  · <a href={p.source} rel="noopener" target="_blank">Wikimedia Commons</a>
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .credits {
+    max-width: 860px;
+  }
+  .credits li {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .credits img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+</style>
