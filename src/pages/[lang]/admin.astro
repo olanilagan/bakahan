@@ -5,6 +5,7 @@ import { formatDate, useT } from '../../i18n/utils';
 import type { UIKey } from '../../i18n/ui';
 import { pageLang, notFound } from '../../lib/page';
 import { hashPassword } from '../../lib/auth';
+import { safeUrl, str, todayPH } from '../../lib/form';
 
 export const prerender = false;
 
@@ -34,6 +35,34 @@ if (Astro.request.method === 'POST') {
       .run();
     return Astro.redirect(Astro.url.pathname, 303);
   }
+  if (Number.isInteger(id) && (action === 'feature' || action === 'unfeature')) {
+    // Featured for 30 days from today (Philippine time); "unfeature" ends it now.
+    const until = new Date(Date.now() + 8 * 3_600_000 + 30 * 86_400_000).toISOString().slice(0, 10);
+    await env.DB.prepare('UPDATE businesses SET featured_until = ? WHERE id = ?')
+      .bind(action === 'feature' ? until : null, id)
+      .run();
+    return Astro.redirect(Astro.url.pathname + '#directory', 303);
+  }
+  if (action === 'sponsor-add') {
+    const name = str(form, 'name', 80);
+    const message = str(form, 'message_en', 160);
+    const placement = ['all', 'home', 'guides', 'market'].includes(String(form.get('placement'))) ? String(form.get('placement')) : 'all';
+    const starts = str(form, 'starts_on', 10) ?? todayPH();
+    const ends = str(form, 'ends_on', 10);
+    const isDate = (d: string | null) => !!d && /^\d{4}-\d{2}-\d{2}$/.test(d);
+    if (name && message && isDate(starts) && isDate(ends)) {
+      await env.DB.prepare(
+        `INSERT INTO sponsors (name, url, message_en, message_fil, placement, starts_on, ends_on, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      )
+        .bind(name, safeUrl(str(form, 'url', 200)), message, str(form, 'message_fil', 160), placement, starts, ends, str(form, 'notes', 300))
+        .run();
+    }
+    return Astro.redirect(Astro.url.pathname + '#sponsors', 303);
+  }
+  if (Number.isInteger(id) && action === 'sponsor-toggle') {
+    await env.DB.prepare('UPDATE sponsors SET active = 1 - active WHERE id = ?').bind(id).run();
+    return Astro.redirect(Astro.url.pathname + '#sponsors', 303);
+  }
   if (Number.isInteger(id) && action === 'reset-password') {
     // No email on the free plan, so the admin resets the password and tells the member directly.
     const member = await env.DB.prepare('SELECT name, email FROM users WHERE id = ?').bind(id).first<{ name: string; email: string }>();
@@ -51,7 +80,7 @@ if (Astro.request.method === 'POST') {
 
 // D1 batch: several queries in one round trip to the database.
 const now = new Date().toISOString();
-const [pending, users, listings, prices, waitlist, members, messages] = await env.DB.batch([
+const [pending, users, listings, prices, waitlist, members, messages, approvedBiz, sponsorList] = await env.DB.batch([
   env.DB.prepare(
     `SELECT b.*, u.name AS submitted_by, u.email AS submitter_email FROM businesses b
        LEFT JOIN users u ON u.id = b.user_id WHERE b.status = 'pending' ORDER BY b.created_at`,
@@ -62,7 +91,14 @@ const [pending, users, listings, prices, waitlist, members, messages] = await en
   env.DB.prepare('SELECT COUNT(*) AS n FROM waitlist'),
   env.DB.prepare('SELECT id, name, email, region, role, phone, created_at FROM users ORDER BY created_at DESC LIMIT 200'),
   env.DB.prepare('SELECT id, topic, name, email, phone, message, emailed, created_at FROM contact_messages ORDER BY created_at DESC LIMIT 50'),
+  env.DB.prepare("SELECT id, name, category, region, featured_until FROM businesses WHERE status = 'approved' ORDER BY name COLLATE NOCASE"),
+  env.DB.prepare('SELECT id, name, url, message_en, placement, starts_on, ends_on, active, notes FROM sponsors ORDER BY ends_on DESC'),
 ]);
+type ApprovedBiz = { id: number; name: string; category: string; region: string; featured_until: string | null };
+const bizRows = (approvedBiz?.results ?? []) as ApprovedBiz[];
+type SponsorRow = { id: number; name: string; url: string | null; message_en: string; placement: string; starts_on: string; ends_on: string; active: number; notes: string | null };
+const sponsorRows = (sponsorList?.results ?? []) as SponsorRow[];
+const today = todayPH();
 type Message = { id: number; topic: string; name: string; email: string; phone: string | null; message: string; emailed: number; created_at: string };
 const messageRows = (messages?.results ?? []) as Message[];
 type Member = { id: number; name: string; email: string; region: string | null; role: string; phone: string | null; created_at: string };
@@ -151,6 +187,110 @@ const stats = [
             ))
           }
         </div>
+      </div>
+
+      <div id="sponsors">
+        <h2>Sponsors</h2>
+        <p class="muted small">"Sponsored by" lines on the home page, guides and marketplace. Shown only between the start and end dates while active. Several sponsors in the same spot take turns.</p>
+        {
+          sponsorRows.length > 0 && (
+            <div class="table-wrap" style="margin-bottom:20px">
+              <table>
+                <thead>
+                  <tr><th>Sponsor</th><th>Where</th><th>Dates</th><th>Status</th><th></th></tr>
+                </thead>
+                <tbody>
+                  {sponsorRows.map((sp) => {
+                    const live = sp.active === 1 && sp.starts_on <= today && sp.ends_on >= today;
+                    return (
+                      <tr>
+                        <td>
+                          <strong>{sp.name}</strong>
+                          <br />
+                          <span class="small muted">{sp.message_en}</span>
+                          {sp.notes && <><br /><span class="small muted">Note: {sp.notes}</span></>}
+                        </td>
+                        <td>{sp.placement}</td>
+                        <td style="white-space:nowrap">{sp.starts_on} to {sp.ends_on}</td>
+                        <td>{live ? 'Live' : sp.active ? (sp.ends_on < today ? 'Ended' : 'Scheduled') : 'Paused'}</td>
+                        <td>
+                          <form method="post">
+                            <input type="hidden" name="id" value={sp.id} />
+                            <button class="btn btn--ghost btn--small" name="action" value="sponsor-toggle">{sp.active ? 'Pause' : 'Resume'}</button>
+                          </form>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )
+        }
+        <details class="card">
+          <summary><strong>+ Add a sponsor</strong></summary>
+          <form method="post" class="form form--wide" style="margin-top:16px">
+            <input type="hidden" name="action" value="sponsor-add" />
+            <div class="form-row">
+              <label>Business name<input name="name" required maxlength="80" /></label>
+              <label>Link (website or Facebook)<input name="url" maxlength="200" /></label>
+            </div>
+            <label>Message in English (one short sentence)<input name="message_en" required maxlength="160" placeholder="Quality feeds for fattening, delivered in Batangas." /></label>
+            <label>Message in Filipino (optional)<input name="message_fil" maxlength="160" /></label>
+            <div class="form-row">
+              <label>Where
+                <select name="placement">
+                  <option value="all">Everywhere</option>
+                  <option value="home">Home page</option>
+                  <option value="guides">Guides</option>
+                  <option value="market">Marketplace</option>
+                </select>
+              </label>
+              <label>Starts<input name="starts_on" type="date" required value={today} /></label>
+              <label>Ends<input name="ends_on" type="date" required /></label>
+            </div>
+            <label>Private note (price, contact person; not shown on the site)<input name="notes" maxlength="300" /></label>
+            <div><button class="btn btn--primary" type="submit">Add sponsor</button></div>
+          </form>
+        </details>
+      </div>
+
+      <div id="directory">
+        <h2>Directory: featured listings</h2>
+        {bizRows.length === 0 && <p class="muted">No approved businesses yet.</p>}
+        {
+          bizRows.length > 0 && (
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Business</th><th>Category</th><th>Featured</th><th></th></tr>
+                </thead>
+                <tbody>
+                  {bizRows.map((b) => {
+                    const featured = !!b.featured_until && b.featured_until >= today;
+                    return (
+                      <tr>
+                        <td>{b.name}<br /><span class="small muted">{b.region}</span></td>
+                        <td>{t(`dircat.${b.category}` as UIKey)}</td>
+                        <td>{featured ? `Until ${b.featured_until}` : '-'}</td>
+                        <td>
+                          <form method="post">
+                            <input type="hidden" name="id" value={b.id} />
+                            {featured ? (
+                              <button class="btn btn--ghost btn--small" name="action" value="unfeature">Stop featuring</button>
+                            ) : (
+                              <button class="btn btn--primary btn--small" name="action" value="feature">Feature 30 days</button>
+                            )}
+                          </form>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )
+        }
       </div>
 
       <div>

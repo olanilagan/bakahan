@@ -1,0 +1,46 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+import Photo from '../../components/Photo.astro';
+import { href, langStaticPaths, type Lang } from '../../i18n/utils';
+import { CONTACT_EMAIL, INVEST_EMAIL } from '../../lib/site';
+
+export const prerender = true;
+export const getStaticPaths = langStaticPaths;
+const lang = Astro.params.lang as Lang;
+---
+
+{
+  lang === 'fil' ? (
+    <InfoPage lang={lang} title="Tungkol sa Bakahan" lead="Isang website para sa mga Pilipinong nag-aalaga, bumibili, nagbebenta at nag-aaral tungkol sa baka.">
+      <Photo name="farm-borongan" lang={lang} sizes="(min-width: 760px) 700px, 100vw" />
+      <p>Ang "bakahan" ay lugar ng mga baka. Sinimulan namin ang site na ito habang itinatayo ang sarili naming farm ng pagpapataba ng baka. Napansin naming nakakalat ang impormasyon tungkol sa pagbababaka sa Pilipinas: sa mga lumang PDF ng gobyerno, sa mga Facebook group, at sa kaalamang naipapasa lang mula sa beterano papunta sa baguhan.</p>
+      <h2>Ano ang nasa site</h2>
+      <ul>
+        <li><a href={href(lang, '/learn')}>Mga gabay</a> sa breed, pagpapataba, pagpapakain, kalusugan, negosyo at merkado, na may nakalistang pinagkunan.</li>
+        <li><a href={href(lang, '/market')}>Palengke</a> kung saan puwedeng mag-post ang mga miyembro ng bakang ibinebenta o hinahanap.</li>
+        <li><a href={href(lang, '/prices')}>Ulat ng presyo</a> mula sa mga miyembro, para may mas malinaw na tingin sa presyo ng liveweight at karne.</li>
+        <li><a href={href(lang, '/directory')}>Direktoryo</a> ng mga negosyong nagsisilbi sa magbabaka.</li>
+      </ul>
+      <h2>Sino kami</h2>
+      <p>Ang Bakahan ay pinapatakbo ng isang maliit na pamilyang negosyo sa pagbababaka. Hindi kami ahensya ng gobyerno at hindi kami beterinaryo. Pangkalahatang gabay ang mga artikulo; para sa mga desisyong may kinalaman sa kalusugan ng hayop o sa batas, kumonsulta sa inyong Municipal Agriculture Office o lisensyadong beterinaryo.</p>
+      <h2>Makipag-ugnayan</h2>
+      <p>Mga tanong at advertising: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><br />Investment at partnership: <a href={`mailto:${INVEST_EMAIL}`}>{INVEST_EMAIL}</a><br />O gamitin ang <a href={href(lang, '/contact')}>contact form</a>.</p>
+    </InfoPage>
+  ) : (
+    <InfoPage lang={lang} title="About Bakahan" lead="A website for Filipinos who raise, buy, sell or are learning about cattle.">
+      <Photo name="farm-borongan" lang={lang} sizes="(min-width: 760px) 700px, 100vw" />
+      <p>"Bakahan" means a place of cattle. We started this site while building our own cattle fattening farm. We found that information about raising cattle in the Philippines is scattered: in old government PDFs, in Facebook groups, and in knowledge passed from experienced raisers to newcomers by word of mouth.</p>
+      <h2>What is on the site</h2>
+      <ul>
+        <li><a href={href(lang, '/learn')}>Guides</a> on breeds, fattening, feeding, health, business and markets, each with its sources listed.</li>
+        <li>A <a href={href(lang, '/market')}>marketplace</a> where members post cattle for sale or cattle they want to buy.</li>
+        <li><a href={href(lang, '/prices')}>Price reports</a> from members, for a clearer view of liveweight and beef prices.</li>
+        <li>A <a href={href(lang, '/directory')}>directory</a> of businesses that serve cattle raisers.</li>
+      </ul>
+      <h2>Who we are</h2>
+      <p>Bakahan is run by a small family cattle business. We are not a government agency and we are not veterinarians. The guides are general information; for decisions about animal health or the law, consult your Municipal Agriculture Office or a licensed veterinarian.</p>
+      <h2>Contact</h2>
+      <p>Questions and advertising: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><br />Investment and partnerships: <a href={`mailto:${INVEST_EMAIL}`}>{INVEST_EMAIL}</a><br />Or use the <a href={href(lang, '/contact')}>contact form</a>.</p>
+    </InfoPage>
+  )
+}

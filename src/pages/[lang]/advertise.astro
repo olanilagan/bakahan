@@ -1,0 +1,42 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+import { href, langStaticPaths, type Lang } from '../../i18n/utils';
+import { CONTACT_EMAIL } from '../../lib/site';
+
+export const prerender = true;
+export const getStaticPaths = langStaticPaths;
+const lang = Astro.params.lang as Lang;
+const contact = `${href(lang, '/contact')}?topic=advertise`;
+---
+
+{
+  lang === 'fil' ? (
+    <InfoPage lang={lang} title="Mag-advertise sa Bakahan" lead="Abutin ang mga nag-aalaga, viajero at bumibili ng baka sa buong Pilipinas.">
+      <p>Ang mga bumibisita sa Bakahan ay mga taong aktibong nag-aalaga, nagbebenta o nagbabalak magsimula ng bakahan. Kung nagbebenta ka ng feeds, gamot, kagamitan, serbisyo sa trucking, breeder stock, pautang o insurance, nandito ang mga customer mo.</p>
+      <h2>Mga opsyon</h2>
+      <ul>
+        <li><strong>Tampok sa direktoryo.</strong> Nasa itaas ng kategorya mo ang negosyo mo, may label na "Tampok".</li>
+        <li><strong>Sponsor ng mga gabay.</strong> Isang maikling linya na "Sponsored by" sa ibaba ng mga artikulo.</li>
+        <li><strong>Sponsor ng palengke.</strong> Isang maikling linya na "Sponsored by" sa pahina ng palengke.</li>
+        <li><strong>Sponsor ng home page.</strong> Sa unang pahina ng site.</li>
+      </ul>
+      <p>Malinaw na may label na "Sponsored" ang lahat ng bayad na anunsyo. Tumatanggap lang kami ng anunsyong may kinalaman sa pagbababaka at agrikultura.</p>
+      <h2>Presyo at availability</h2>
+      <p>Buwanan ang mga placement. <a href={contact}>Magpadala ng mensahe</a> o mag-email sa <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> para sa presyo at bakanteng slot.</p>
+    </InfoPage>
+  ) : (
+    <InfoPage lang={lang} title="Advertise on Bakahan" lead="Reach cattle raisers, traders and buyers across the Philippines.">
+      <p>People who visit Bakahan are actively raising, selling or planning to start raising cattle. If you sell feeds, veterinary products, equipment, trucking, breeder stock, loans or insurance, your customers are here.</p>
+      <h2>Options</h2>
+      <ul>
+        <li><strong>Featured directory listing.</strong> Your business appears at the top of its category, labelled "Featured".</li>
+        <li><strong>Guide sponsor.</strong> A short "Sponsored by" line below the guides.</li>
+        <li><strong>Marketplace sponsor.</strong> A short "Sponsored by" line on the marketplace page.</li>
+        <li><strong>Home page sponsor.</strong> On the site's front page.</li>
+      </ul>
+      <p>All paid placements are clearly labelled "Sponsored". We only accept advertising related to cattle and agriculture.</p>
+      <h2>Rates and availability</h2>
+      <p>Placements are monthly. <a href={contact}>Send us a message</a> or email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> for rates and open slots.</p>
+    </InfoPage>
+  )
+}

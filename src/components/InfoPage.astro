@@ -1,0 +1,28 @@
+---
+// Shared layout for text pages (About, Privacy, Terms, Advertise).
+import Base from '../layouts/Base.astro';
+import type { Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  lead?: string;
+  updated?: string;
+}
+const { lang, title, lead, updated } = Astro.props;
+---
+
+<Base lang={lang} title={title} description={lead}>
+  <section class="page-head">
+    <div class="container">
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      {updated && <p class="small muted" style="margin:8px 0 0">{updated}</p>}
+    </div>
+  </section>
+  <section class="section">
+    <div class="container prose">
+      <slot />
+    </div>
+  </section>
+</Base>

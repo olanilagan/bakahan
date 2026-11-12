@@ -1,0 +1,55 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+import { href, langStaticPaths, type Lang } from '../../i18n/utils';
+import { CONTACT_EMAIL } from '../../lib/site';
+
+export const prerender = true;
+export const getStaticPaths = langStaticPaths;
+const lang = Astro.params.lang as Lang;
+---
+
+{
+  lang === 'fil' ? (
+    <InfoPage lang={lang} title="Mga tuntunin ng paggamit" updated="Huling binago: Nobyembre 12, 2026">
+      <p>Sa paggamit ng bakahan.com, sumasang-ayon ka sa mga tuntuning ito.</p>
+      <h2>Ang palengke</h2>
+      <ul>
+        <li>Lugar lang ang Bakahan para magkita ang bumibili at nagbebenta. Hindi kami bahagi ng bentahan, hindi kami humahawak ng bayad, at hindi namin ginagarantiya ang anumang hayop, presyo o tao.</li>
+        <li>Mag-post lang ng hayop na pag-aari mo o may pahintulot kang ibenta, na may tamang papeles (certificate of ownership at transfer).</li>
+        <li>Bawal ang listing na peke, nakaliligaw, ninakaw, o labag sa batas. Tatanggalin namin ito at puwede naming isara ang account.</li>
+        <li>Tingnan nang personal ang hayop at ang papeles bago magbayad. Huwag magpadala ng paunang bayad sa taong hindi mo pa nakikilala.</li>
+      </ul>
+      <h2>Ulat ng presyo at direktoryo</h2>
+      <p>Iulat lang ang presyong talagang nakita mo. Galing sa mga miyembro ang mga ulat at hindi opisyal na presyo. Sinusuri namin ang mga entry sa direktoryo bago ilabas, pero hindi ito pag-endorso sa negosyo.</p>
+      <h2>Mga gabay</h2>
+      <p>Pangkalahatang impormasyon lang ang mga artikulo. Hindi ito kapalit ng payo ng beterinaryo, abogado o ahensya ng gobyerno. Ikaw ang may pananagutan sa mga desisyon mo sa farm.</p>
+      <h2>Ang account mo</h2>
+      <p>Ingatan ang password mo. Ikaw ang may pananagutan sa lahat ng ginagawa gamit ang account mo. Puwede naming suspindihin ang account na lumalabag sa mga tuntuning ito.</p>
+      <h2>Advertising at sponsor</h2>
+      <p>May mga bahagi ng site na may label na "Sponsored" o "Advertisement". Bayad na anunsyo ang mga ito ng ibang negosyo.</p>
+      <h2>Mga pagbabago</h2>
+      <p>Puwede naming baguhin ang mga tuntuning ito. Ilalagay namin dito ang petsa ng huling pagbabago. Mga tanong: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. <a href={href(lang, '/privacy')}>Patakaran sa privacy</a>.</p>
+    </InfoPage>
+  ) : (
+    <InfoPage lang={lang} title="Terms of use" updated="Last updated: November 12, 2026">
+      <p>By using bakahan.com you agree to these terms.</p>
+      <h2>The marketplace</h2>
+      <ul>
+        <li>Bakahan is only a place for buyers and sellers to find each other. We are not part of any sale, we do not handle payments, and we do not guarantee any animal, price or person.</li>
+        <li>Only post animals you own or are authorised to sell, with proper papers (certificate of ownership and transfer).</li>
+        <li>Fake, misleading, stolen or illegal listings are not allowed. We will remove them and may close the account.</li>
+        <li>See the animal and the papers in person before paying. Never send a deposit to someone you have not met.</li>
+      </ul>
+      <h2>Price reports and directory</h2>
+      <p>Only report prices you actually saw. Reports come from members and are not official prices. We review directory entries before they appear, but a listing is not an endorsement.</p>
+      <h2>Guides</h2>
+      <p>Articles are general information. They are not a substitute for advice from a veterinarian, lawyer or government agency. You are responsible for decisions on your farm.</p>
+      <h2>Your account</h2>
+      <p>Keep your password safe. You are responsible for what is done with your account. We may suspend accounts that break these terms.</p>
+      <h2>Advertising and sponsors</h2>
+      <p>Some parts of the site are labelled "Sponsored" or "Advertisement". These are paid notices from other businesses.</p>
+      <h2>Changes</h2>
+      <p>We may change these terms and will show the date of the last change here. Questions: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. <a href={href(lang, '/privacy')}>Privacy policy</a>.</p>
+    </InfoPage>
+  )
+}

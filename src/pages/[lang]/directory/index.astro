@@ -5,6 +5,7 @@ import { href, useT } from '../../../i18n/utils';
 import type { UIKey } from '../../../i18n/ui';
 import { safeUrl } from '../../../lib/form';
 import { BIZ_CATEGORIES, REGIONS, oneOf } from '../../../lib/options';
+import { todayPH } from '../../../lib/form';
 import { pageLang, notFound } from '../../../lib/page';
 
 export const prerender = false;
@@ -30,12 +31,15 @@ type Biz = {
   location: string | null;
   phone: string | null;
   website: string | null;
+  featured: number;
 };
 const { results } = await env.DB.prepare(
-  `SELECT id, name, category, description, region, location, phone, website
-     FROM businesses WHERE ${where.join(' AND ')} ORDER BY name COLLATE NOCASE LIMIT 200`,
+  `SELECT id, name, category, description, region, location, phone, website,
+          (featured_until IS NOT NULL AND featured_until >= ?) AS featured
+     FROM businesses WHERE ${where.join(' AND ')}
+    ORDER BY featured DESC, name COLLATE NOCASE LIMIT 200`,
 )
-  .bind(...binds)
+  .bind(todayPH(), ...binds)
   .all<Biz>();
 
 ---
@@ -72,7 +76,8 @@ const { results } = await env.DB.prepare(
             {results.map((b) => {
               const site = safeUrl(b.website);
               return (
-                <div class="card biz">
+                <div class:list={['card biz', b.featured && 'biz--featured']}>
+                  {b.featured ? <span class="tag tag--straw">{t('dir.featured')} · </span> : null}
                   <span class="tag">
                     {t(`dircat.${b.category}` as UIKey)}
                   </span>
@@ -123,6 +128,10 @@ const { results } = await env.DB.prepare(
     background: var(--green-700);
     border-color: var(--green-700);
     color: #fff;
+  }
+  .biz--featured {
+    border-color: var(--straw-500);
+    border-width: 2px;
   }
   .biz h3 {
     margin-top: 10px;

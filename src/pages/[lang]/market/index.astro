@@ -6,6 +6,8 @@ import { href, useT } from '../../../i18n/utils';
 import type { UIKey } from '../../../i18n/ui';
 import { ANIMAL_TYPES, REGIONS, oneOf } from '../../../lib/options';
 import { pageLang, notFound } from '../../../lib/page';
+import SponsorSlot from '../../../components/SponsorSlot.astro';
+import AdSlot from '../../../components/AdSlot.astro';
 
 export const prerender = false;
 
@@ -93,6 +95,8 @@ const { results } = await env.DB.prepare(
         )
       }
 
+      <SponsorSlot lang={lang} placement="market" />
+      <AdSlot slot="list" />
       <p class="alert alert--note small" style="margin-top:32px">{t('market.safety')}</p>
     </div>
   </section>

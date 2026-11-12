@@ -101,6 +101,10 @@ if (Astro.request.method === 'POST') {
             <input name="phone" type="tel" maxlength="30" autocomplete="tel" value={values.phone} />
           </label>
           <Turnstile action="signup" lang={lang} />
+          <p class="small muted" style="margin:0">
+            {t('auth.signup.agree')} <a href={href(lang, '/terms')}>{t('nav.terms').toLowerCase()}</a>
+            {t('auth.signup.and')} <a href={href(lang, '/privacy')}>{t('nav.privacy').toLowerCase()}</a>.
+          </p>
           <button class="btn btn--primary" type="submit">{t('auth.signup.submit')}</button>
         </form>
         <p style="margin-top:20px">

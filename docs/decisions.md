@@ -68,3 +68,17 @@ Signup, contact and the app waitlist are open to anyone, so they're what bots ta
 - Local development uses Cloudflare's official always-pass test keys from `.dev.vars`.
 
 Member-only forms (listings, directory) are not checked; login and rate limiting already protect them.
+
+### 15. Earning: direct sponsorships first, AdSense ready but off
+Selling placements directly to agri businesses (feeds, vets, trucking, breeders) pays more per visitor than AdSense in the Philippines, and the ads are useful to the audience. Three kinds of placement are managed on the admin page, all clearly labelled:
+- featured directory listings, which show first for 30 days (`businesses.featured_until`)
+- "Sponsored by" lines on the home page, guides and marketplace (`sponsors` table)
+- the sponsor line on static guide pages is a server island, so a new sponsor appears without a redeploy
+
+AdSense needs a publisher ID after Google approves the site. Until then `ADSENSE_CLIENT` in `src/lib/site.ts` is empty, ad slots render nothing, and `/ads.txt` says no ads are sold. The About, Privacy (Data Privacy Act, RA 10173) and Terms pages exist partly because AdSense expects them, and partly because a marketplace needs them anyway.
+
+### 16. Article dates stay honest
+Each guide shows the date it was actually written or last updated. Backdating would mislead readers and search engines. New guides are dated when they are published, and revisions update the date.
+
+### Lesson: always deploy with `npm run deploy`
+On 2026-11-12 a production migration failed (Cloudflare API error), but a separately-run `wrangler deploy` went ahead. The new code expected a missing column, and the directory page returned errors for about a minute. `npm run deploy` chains build → migrate → deploy with `&&`, so a failed step stops the deploy.

@@ -6,7 +6,7 @@ import { LANGS } from '../i18n/utils';
 
 export const prerender = true;
 
-const SECTIONS = ['/', '/learn/', '/market/', '/prices/', '/directory/', '/farm/', '/app/', '/contact/', '/credits/'];
+const SECTIONS = ['/', '/learn/', '/market/', '/prices/', '/directory/', '/farm/', '/app/', '/contact/', '/credits/', '/about/', '/advertise/', '/privacy/', '/terms/'];
 
 export const GET: APIRoute = async ({ site }) => {
   const base = (site ?? new URL('https://bakahan.com')).origin;

@@ -5,6 +5,8 @@ import { formatDate, href, useT, type Lang } from '../../../i18n/utils';
 import type { UIKey } from '../../../i18n/ui';
 import Photo from '../../../components/Photo.astro';
 import { GUIDE_COVERS } from '../../../lib/photos';
+import SponsorSlot from '../../../components/SponsorSlot.astro';
+import AdSlot from '../../../components/AdSlot.astro';
 
 export const prerender = true;
 
@@ -51,6 +53,9 @@ const cover = GUIDE_COVERS[Astro.params.slug as string];
         <Content />
 
         <p class="alert alert--note small" style="margin-top:2em">{t('learn.disclaimer')}</p>
+
+        <SponsorSlot server:defer lang={lang} placement="guides" />
+        <AdSlot slot="article" />
 
         {
           entry.data.sources.length > 0 && (

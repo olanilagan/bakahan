@@ -29,7 +29,14 @@ const year = new Date().getFullYear();
     </nav>
   </div>
   <div class="container site-footer__base small">
-    © {year} Bakahan · {t('footer.made')} · <a href={href(lang, '/credits')}>{t('footer.credits')}</a>
+    © {year} Bakahan · {t('footer.made')}
+    <span class="site-footer__legal">
+      <a href={href(lang, '/about')}>{t('nav.about')}</a>
+      <a href={href(lang, '/advertise')}>{t('nav.advertise')}</a>
+      <a href={href(lang, '/privacy')}>{t('nav.privacy')}</a>
+      <a href={href(lang, '/terms')}>{t('nav.terms')}</a>
+      <a href={href(lang, '/credits')}>{t('footer.credits')}</a>
+    </span>
   </div>
 </footer>
 
@@ -67,6 +74,16 @@ const year = new Date().getFullYear();
   }
   .site-footer a:hover {
     color: var(--straw-300);
+  }
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 10px;
+  }
+  .site-footer__legal a {
+    font-weight: 600;
+    color: #cfe0d3;
   }
   .site-footer__base {
     margin-top: 28px;

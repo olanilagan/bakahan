@@ -1,0 +1,69 @@
+---
+// "Sponsored by" line, sold directly to businesses and managed on the admin page.
+// Used as a server island on static pages, so a new sponsor shows up without a
+// redeploy. Renders nothing when there is no live sponsor for this placement.
+import { env } from 'cloudflare:workers';
+import { isLang, useT, type Lang } from '../i18n/utils';
+import { safeUrl, todayPH } from '../lib/form';
+
+const lang: Lang = isLang(Astro.props.lang) ? Astro.props.lang : 'en';
+const placement: string = ['home', 'guides', 'market'].includes(Astro.props.placement) ? Astro.props.placement : 'home';
+const t = useT(lang);
+const today = todayPH();
+
+type Sponsor = { id: number; name: string; url: string | null; message_en: string; message_fil: string | null };
+const { results } = await env.DB.prepare(
+  `SELECT id, name, url, message_en, message_fil FROM sponsors
+    WHERE active = 1 AND placement IN (?, 'all') AND starts_on <= ? AND ends_on >= ?`,
+)
+  .bind(placement, today, today)
+  .all<Sponsor>();
+
+// Rotate fairly between several sponsors of the same placement.
+const sponsor = results.length ? results[Math.floor(Math.random() * results.length)] : null;
+const link = sponsor ? safeUrl(sponsor.url) : null;
+const message = sponsor ? (lang === 'fil' && sponsor.message_fil ? sponsor.message_fil : sponsor.message_en) : '';
+---
+
+{
+  sponsor && (
+    <aside class="sponsor" aria-label={t('sponsor.label')}>
+      <span class="sponsor__label">{t('sponsor.label')}</span>
+      <p>
+        {link ? (
+          <a href={link} rel="sponsored noopener" target="_blank">
+            <strong>{sponsor.name}</strong>
+          </a>
+        ) : (
+          <strong>{sponsor.name}</strong>
+        )}
+        {message && <span> · {message}</span>}
+      </p>
+    </aside>
+  )
+}
+
+<style>
+  .sponsor {
+    border: 1px solid var(--straw-300);
+    background: var(--straw-100);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin: 24px 0;
+  }
+  .sponsor__label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--soil-700);
+    margin-bottom: 2px;
+  }
+  .sponsor p {
+    margin: 0;
+  }
+  .sponsor a {
+    color: var(--green-800);
+  }
+</style>

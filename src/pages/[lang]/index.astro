@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Photo from '../../components/Photo.astro';
 import { GUIDE_COVERS, photoSrc } from '../../lib/photos';
+import SponsorSlot from '../../components/SponsorSlot.astro';
 import LatestListings from '../../components/LatestListings.astro';
 import { href, langStaticPaths, useT, type Lang } from '../../i18n/utils';
 import type { UIKey } from '../../i18n/ui';
@@ -81,6 +82,7 @@ const more = [
         <p style="margin-top:16px">
           <a class="btn btn--primary btn--small" href={href(lang, '/market/new')}>{t('market.post')}</a>
         </p>
+        <SponsorSlot server:defer lang={lang} placement="home" />
       </div>
     </div>
   </section>

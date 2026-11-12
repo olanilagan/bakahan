@@ -1,0 +1,85 @@
+---
+// Privacy notice under the Philippine Data Privacy Act of 2012 (RA 10173).
+// Keep this in sync with what the code actually collects. If AdSense is
+// switched on (src/lib/site.ts), the "Advertising" section applies.
+import InfoPage from '../../components/InfoPage.astro';
+import { href, langStaticPaths, type Lang } from '../../i18n/utils';
+import { CONTACT_EMAIL, ADSENSE_CLIENT } from '../../lib/site';
+
+export const prerender = true;
+export const getStaticPaths = langStaticPaths;
+const lang = Astro.params.lang as Lang;
+const ads = ADSENSE_CLIENT !== '';
+---
+
+{
+  lang === 'fil' ? (
+    <InfoPage lang={lang} title="Patakaran sa privacy" updated="Huling binago: Nobyembre 12, 2026">
+      <p>Ipinapaliwanag dito kung anong personal na impormasyon ang kinokolekta ng bakahan.com, bakit, at ano ang mga karapatan mo sa ilalim ng Data Privacy Act of 2012 (Republic Act 10173).</p>
+      <h2>Ano ang kinokolekta namin</h2>
+      <ul>
+        <li><strong>Account:</strong> pangalan, email, password (naka-hash, hindi namin nakikita), rehiyon, papel (hal. raiser o trader), at mobile number kung ibibigay mo.</li>
+        <li><strong>Mga ipinost mo:</strong> listing sa palengke (kasama ang kontak na ibinigay mo), ulat ng presyo, at entry sa direktoryo.</li>
+        <li><strong>Mensahe:</strong> pangalan, email, phone at mensaheng ipinadala sa contact form.</li>
+        <li><strong>Waitlist:</strong> email at mga sagot sa form ng Farm App.</li>
+        <li><strong>Teknikal:</strong> IP address at impormasyon ng browser na kailangan para tumakbo at maprotektahan ang site.</li>
+      </ul>
+      <h2>Bakit namin ito ginagamit</h2>
+      <ul>
+        <li>Para gumana ang account mo at ang mga feature ng site.</li>
+        <li>Para maipakita sa ibang miyembro ang listing at kontak na pinili mong i-post. Ang kontak sa listing ay nakikita lang ng mga naka-log in na miyembro.</li>
+        <li>Para sagutin ang mga mensahe mo at ipaalam sa iyo kapag handa na ang Farm App.</li>
+        <li>Para pigilan ang spam, panloloko at pang-aabuso.</li>
+      </ul>
+      <p>Ang mga ulat ng presyo ay ipinapakita nang walang pangalan. Hindi namin ibinebenta ang personal mong impormasyon.</p>
+      <h2>Cookies</h2>
+      <ul>
+        <li><strong>bk_session:</strong> pinapanatili kang naka-log in. Kailangan ito.</li>
+        <li><strong>lang:</strong> naaalala ang napili mong wika.</li>
+        <li><strong>Cloudflare Turnstile:</strong> sinusuri kung tao ang nagpapadala ng form.</li>
+      </ul>
+      {ads && <p><strong>Advertising:</strong> Gumagamit ang site ng Google AdSense. Maaaring gumamit ang Google ng cookies para magpakita ng ads batay sa pagbisita mo sa site na ito at sa iba pa. Puwede mo itong i-off sa Google Ads Settings.</p>}
+      <h2>Kanino namin ibinabahagi</h2>
+      <p>Sa mga serbisyong tumutulong sa pagpapatakbo ng site: Cloudflare (hosting, database, email at proteksyon laban sa bot) at Google Fonts (mga font ng site){ads ? ', at Google AdSense (ads)' : ''}. Maaaring nasa labas ng Pilipinas ang mga server nila. Ibabahagi rin namin ang impormasyon kung hinihingi ng batas.</p>
+      <h2>Gaano katagal namin itinatago</h2>
+      <p>Habang aktibo ang account mo. Nawawala sa palengke ang listing pagkatapos ng 60 araw. Kapag binura ang account mo, binubura rin namin ang personal mong impormasyon, maliban sa kailangang itago ayon sa batas.</p>
+      <h2>Ang mga karapatan mo</h2>
+      <p>Sa ilalim ng Data Privacy Act, may karapatan kang malaman, ma-access, maitama, at mapabura ang personal mong impormasyon, at tumutol sa paggamit nito. Para gawin ito, mag-email sa <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Kung may reklamo ka, puwede kang lumapit sa National Privacy Commission (privacy.gov.ph).</p>
+      <p><a href={href(lang, '/terms')}>Basahin din ang mga tuntunin ng paggamit.</a></p>
+    </InfoPage>
+  ) : (
+    <InfoPage lang={lang} title="Privacy policy" updated="Last updated: November 12, 2026">
+      <p>This page explains what personal information bakahan.com collects, why, and your rights under the Philippine Data Privacy Act of 2012 (Republic Act 10173).</p>
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Account:</strong> name, email, password (stored hashed; we cannot see it), region, role (for example raiser or trader), and mobile number if you give it.</li>
+        <li><strong>What you post:</strong> marketplace listings (including the contact details you enter), price reports and directory entries.</li>
+        <li><strong>Messages:</strong> name, email, phone and message sent through the contact form.</li>
+        <li><strong>Waitlist:</strong> email and answers on the Farm App form.</li>
+        <li><strong>Technical:</strong> IP address and browser information needed to run and protect the site.</li>
+      </ul>
+      <h2>Why we use it</h2>
+      <ul>
+        <li>To run your account and the site's features.</li>
+        <li>To show other members the listings and contact details you choose to post. Listing contact details are visible only to logged-in members.</li>
+        <li>To reply to your messages and tell you when the Farm App is ready.</li>
+        <li>To prevent spam, fraud and abuse.</li>
+      </ul>
+      <p>Price reports are shown without names. We do not sell your personal information.</p>
+      <h2>Cookies</h2>
+      <ul>
+        <li><strong>bk_session:</strong> keeps you logged in. Required.</li>
+        <li><strong>lang:</strong> remembers your language choice.</li>
+        <li><strong>Cloudflare Turnstile:</strong> checks that forms are sent by a person.</li>
+      </ul>
+      {ads && <p><strong>Advertising:</strong> This site uses Google AdSense. Google may use cookies to show ads based on your visits to this and other sites. You can turn this off in Google Ads Settings.</p>}
+      <h2>Who we share it with</h2>
+      <p>Services that help run the site: Cloudflare (hosting, database, email and bot protection) and Google Fonts (the site's fonts){ads ? ', and Google AdSense (advertising)' : ''}. Their servers may be outside the Philippines. We will also share information when the law requires it.</p>
+      <h2>How long we keep it</h2>
+      <p>For as long as your account is active. Marketplace listings stop showing after 60 days. If your account is deleted, we delete your personal information, except what the law requires us to keep.</p>
+      <h2>Your rights</h2>
+      <p>Under the Data Privacy Act you have the right to be informed, to access, correct and erase your personal information, and to object to its use. To do any of these, email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. If you have a complaint, you may contact the National Privacy Commission (privacy.gov.ph).</p>
+      <p><a href={href(lang, '/terms')}>See also the terms of use.</a></p>
+    </InfoPage>
+  )
+}
