@@ -22,6 +22,10 @@ npx wrangler dev              # serves the built site at http://localhost:8787
 
 ## Deploy
 
+Pushing to `main` deploys automatically (Cloudflare Workers Builds): it builds, applies database migrations, then deploys. A failed migration stops the deploy.
+
+To deploy from your own machine instead:
+
 ```bash
 npx wrangler login            # once
 npm run deploy                # build, apply DB migrations, upload
