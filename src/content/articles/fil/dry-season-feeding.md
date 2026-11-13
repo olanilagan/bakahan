@@ -7,21 +7,27 @@ publishDate: 2027-01-05
 updated: 2027-01-05
 readingMinutes: 6
 sources:
-  - title: "FAO: Feed resources for ruminants in the Philippines (Caluya poster)"
-    url: "https://www.fao.org/4/x8486e/x8486e0m.htm"
-  - title: "FAO: Feed resources in the Philippines (x8486e0b)"
-    url: "https://www.fao.org/4/x8486e/x8486e0b.htm"
-  - title: "JIRCAS: Utilization of local feed resources for smallholder ruminant producers (TARS 25)"
+  - title: "Argañosa and Bato (PCARRD): Utilization of Feed Resources in Relation to Nutrition and Physiology of Ruminants in the Philippines (JIRCAS)"
     url: "https://www.jircas.go.jp/sites/default/files/publication/tars/tars25-_46-55.pdf"
-  - title: "PressReader: Supak system for cattle (Agriculture, 2018)"
+  - title: "FAO: Use of silage in a year-round feeding system, Sarangani Agricultural Company"
+    url: "https://www.fao.org/4/x8486e/x8486e0b.htm"
+  - title: "FAO: Tomato pomace and rice straw silage as feed for growing cattle (Caluya, MMSU)"
+    url: "https://www.fao.org/4/x8486e/x8486e0m.htm"
+  - title: "DA Caraga Technoguide No. 34: Giya sa Pagpamuhi ug Pagpamuhunan sa Baka"
+    url: "https://caraga.da.gov.ph/wp-content/uploads/Publication/Livestock/cy2022/Giya-sa-Pagpamuhi-ug-Pagpamuhunan-sa-Baka.pdf"
+  - title: "DA RFO 3: Pag-aalaga ng Baka (Backyard Cattle Fattening)"
+    url: "https://rfo3.da.gov.ph/wp-content/uploads/elibrary/km/Baka.pdf"
+  - title: "Edge Davao: Fattening cattle for profit (2016)"
+    url: "https://edgedavao.net/agri-trends/2016/02/fattening-cattle-for-profit"
+  - title: "Agriculture magazine: Supak system for cattle (August 2018, via PressReader)"
     url: "https://www.pressreader.com/philippines/agriculture-9ggr/20180801/281547996695140"
 ---
 
-Sagana ang damo kapag tag-ulan, pero kapos pagdating ng tag-init. Ayon sa isang review ng pakain ng ruminant sa Pilipinas, sapat ang feed tuwing umuulan pero nagkukulang pagdating ng tuyong buwan, lalo na sa kalidad. Huli na kapag hinintay pang maging kayumanggi ang damo bago mag-isip ng pakain, kaya tungkol sa pagpaplano nang maaga ang gabay na ito.
+Sagana ang damo kapag tag-ulan, pero kapos pagdating ng tag-init. Ayon sa isang review ng PCARRD tungkol sa pakain ng ruminant sa Pilipinas, isinulat nina Argañosa at Bato, medyo sapat ang feed tuwing tag-ulan pero kumakapos pagdating ng tag-init, lalo na sa kalidad. Huli na kapag hinintay pang maging kayumanggi ang damo bago mag-isip ng pakain, kaya tungkol sa pagpaplano nang maaga ang gabay na ito.
 
 ## Alamin ang kulang
 
-Magsimula sa simpleng bilang. Ilan ang baka mo, gaano kabigat, at ilang buwan nananatiling berde ang sarili mong damo? Ang kinakain ng baka kada araw na dry matter ay ilang porsyento ng timbang niya. Matutulungan ka ng MAO o ng livestock technician ng DA na kuwentahin ito para sa kawan mo, dahil depende ito sa hayop at sa pakain.
+Magsimula sa simpleng bilang. Ilan ang baka mo, gaano kabigat, at ilang buwan nananatiling berde ang sarili mong damo? Ayon sa mga gabay ng DA sa pagpapataba, mga 2.5 hanggang 3% ng timbang ng baka ang dry matter na kinakain niya kada araw, kaya ang 250 kg na baka ay kumakain ng mga 6 hanggang 7.5 kg na dry matter isang araw. Halos tubig ang sariwang damo, kaya mas marami pa ang damo kapag tinimbang. Matutulungan ka ng MAO o ng livestock technician ng DA na kuwentahin ito para sa kawan mo, dahil depende ito sa hayop at sa pakain.
 
 Tapos libutin ang pastulan at ang taniman ng cut-and-carry sa huling bahagi ng tag-ulan at itanong: kung tumigil ang ulan ngayon, hanggang kailan ito tatagal? Isulat ang sagot. Iyon ang kulang mo.
 
@@ -33,16 +39,17 @@ Ang pinakamurang pakain sa tag-init ay ang sobrang naipon mo noong basang buwan.
 - Hay. Putulin ang damo at patuyuin sa araw. Mahirap ito sa Pilipinas dahil madalas ang ulan, kaya mas bagay kung puputol ka sa simula ng tuyong panahon, kapag maaasahan na ang araw.
 - Magtanim nang maaga. Kailangan ng panahon bago lumakas ang Napier, Guinea grass at mga legume. Kapag itinanim sa simula ng ulan, puwede nang putulin pagdating ng tuyong buwan. May detalye sa gabay namin tungkol sa pagtatanim ng forage.
 
-Sa materyal ng FAO, ang isang malaking feedlot sa Sarangani ay maize silage ang pangunahing pakain, at mas maikli ang itinatagal ng imbak kapag tag-init dahil mabilis maubos. Komersyal iyon na operasyon. Puwedeng gawin ng maliit na raiser ang parehong ideya sa mas maliit na hukay o sa mga sako.
+May papel ang Sarangani Agricultural Company, na inilahad sa isang pulong ng FAO, na nagpapakita kung paano ito ginagawa ng malaking bukid. Inaabot ng 90 hanggang 100 araw ang imbak nilang maize silage kapag tag-ulan, pero noong matinding tagtuyot, minsan naubos ito sa loob lang ng 18 araw, at kinailangan nilang bumili ng tinadtad na sariwang mais para may maipakain. Komersyal iyon na operasyon. Puwedeng gawin ng maliit na raiser ang parehong ideya sa mas maliit na hukay o sa mga sako.
 
 ## Gamitin ang tira ng ani
 
 Dumarating ang mga tira ng ani sa panahong humihina ang pastulan, at mura o libre pa.
 
-- Dayami. Ito ang pinakamaraming pinag-aralan dahil napakarami nito. Ayon sa FAO at sa pag-aaral sa Ilocos Norte, magaspang ito at mababa ang kalidad, kaya kakaunti ang kinakain ng baka kapag mag-isa. Mas maayos kung may kasamang berdeng damo, legume o supplement. Napag-aralan na rin ang pagtrato ng dayami gamit ang urea, pero nakamamatay sa baka ang urea kapag mali ang gamit, kaya magpa-training muna sa MAO o sa ATI.
-- Tangkay at balat ng mais. Karaniwan sa mga lugar na maraming mais. Tadtarin para mas madaling kainin.
-- Dahon ng tubo, copra meal at rice bran. Ilang source ang naglilista ng mga ito bilang by-product ng bukid na ginagamit ng maliliit na raiser. Nagbabago ang presyo at dami depende sa panahon, kaya magtanong-tanong.
-- Palayan pagkatapos ng ani. Sa maraming lugar, nagiging pastulan ng lahat ang palayan pagkatapos anihin. Ayon sa isang source, mga 75 araw lang ito sa irrigated na palayan. Magtanong sa barangay at sa mga kapitbahay bago umasa rito.
+- Dayami. Sabi ng review ng PCARRD, ito ang pinakamaraming pinag-aralan dahil napakarami nito. Sa isang pag-aaral ng Mariano Marcos State University sa Ilocos Norte, mababang klase raw itong roughage, magaspang kapag tuyo, at kakaunti ang kinakain ng baka kapag ito lang. Ayon sa DA Caraga, 3 hanggang 4% lang ang protina nito, at puwedeng hanggang 40% ng rasyon sa pagpapataba ang tinadtad na dayami. Mas maayos kung may kasamang berdeng damo, legume o supplement. Napag-aralan na rin ang pagtrato ng dayami gamit ang urea, at maganda ang resulta ayon sa review ng PCARRD, pero nakamamatay sa baka ang urea kapag mali ang gamit, kaya magpa-training muna sa MAO o sa ATI.
+- Tangkay at busal ng mais. Karaniwan sa mga lugar na maraming mais. Tadtarin o durugin para mas madaling kainin. May pag-aaral na binanggit ang review ng PCARRD kung saan umabot sa 60% ng rasyon sa pagpapataba ang tangkay ng mais, at sabi ng DA Caraga, puwedeng hanggang 45% ang dinurog na busal.
+- Dahon ng tubo. Kasama ang sinilage na dahon ng tubo sa mga by-product na sinubukan sa baka, ayon sa review ng PCARRD.
+- Copra meal at darak. Ito ang pinaka-base ng simpleng concentrate mix sa mga gabay ng DA. Nagbabago ang presyo at dami depende sa panahon, kaya magtanong-tanong.
+- Palayan pagkatapos ng ani. Sa maraming lugar, pinapastol ang baka sa pinag-anihan. Depende ang itatagal nito sa kung kailan ulit magtatanim, kaya magtanong sa barangay at sa mga kapitbahay bago umasa rito.
 
 Hindi papataba ng fattener ang tira ng ani lang. Isipin ito na bulk para gumana ang tiyan ng baka. Kailangan pa rin niya ng protina at mineral, kaya doon papasok ang dahon ng ipil-ipil at iba pang fodder tree, mga legume o kaunting concentrate. Itanong sa livestock technician kung ano ang ligtas na ipakain sa lugar ninyo.
 
@@ -59,7 +66,7 @@ Ito ang panahon para tingnan ang record. Kung nagtatala ka ng timbang at gastos 
 
 ## Supak at sapilitang pagpapakain
 
-May ilang raiser sa Batangas na gumagamit ng supak, isang paraan ng sapilitang pagpapakain, para hindi maantala ang pagpapataba sa tuyo o El Niño na panahon. Ayon sa artikulong naglalarawan nito, mabigat ito sa trabaho at para lang sa sanay at maamong baka, at kailangang may alam ang raiser sa pagpapa-deworm at sa kontrol ng parasite. Kailangan din ng oras at husay, kaya matuto muna sa may karanasang raiser o sa Provincial Veterinary Office bago subukan.
+Kilala ang mga raiser sa Batangas sa supak, isang paraan ng sapilitang pagpapakain. Ayon sa isang artikulo ng Edge Davao, tinadtad at binayong sariwang dahon ng ipil-ipil ito na hinaluan ng tubig at kaunting asin, at ibinibigay bukod pa sa karaniwang damo. Sa mga gabay ng DA, ito raw ang dahilan kung bakit sumikat ang Batangas beef. Sa isang artikulo ng Agriculture magazine noong 2018, paraan daw ito para hindi maantala ang pagpapataba kapag tagtuyot o El Niño, pero mabigat ito sa trabaho at para lang sa sanay at maamong baka. Puwedeng masaktan ang hayop kapag mali ang pagsupak, kaya matuto muna sa may karanasang raiser o magtanong sa Provincial Veterinary Office bago subukan.
 
 ## Tubig muna
 

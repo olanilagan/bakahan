@@ -7,21 +7,27 @@ publishDate: 2027-01-05
 updated: 2027-01-05
 readingMinutes: 6
 sources:
-  - title: "FAO: Feed resources for ruminants in the Philippines (Caluya poster)"
-    url: "https://www.fao.org/4/x8486e/x8486e0m.htm"
-  - title: "FAO: Feed resources in the Philippines (x8486e0b)"
-    url: "https://www.fao.org/4/x8486e/x8486e0b.htm"
-  - title: "JIRCAS: Utilization of local feed resources for smallholder ruminant producers (TARS 25)"
+  - title: "Argañosa and Bato (PCARRD): Utilization of Feed Resources in Relation to Nutrition and Physiology of Ruminants in the Philippines (JIRCAS)"
     url: "https://www.jircas.go.jp/sites/default/files/publication/tars/tars25-_46-55.pdf"
-  - title: "PressReader: Supak system for cattle (Agriculture, 2018)"
+  - title: "FAO: Use of silage in a year-round feeding system, Sarangani Agricultural Company"
+    url: "https://www.fao.org/4/x8486e/x8486e0b.htm"
+  - title: "FAO: Tomato pomace and rice straw silage as feed for growing cattle (Caluya, MMSU)"
+    url: "https://www.fao.org/4/x8486e/x8486e0m.htm"
+  - title: "DA Caraga Technoguide No. 34: Giya sa Pagpamuhi ug Pagpamuhunan sa Baka"
+    url: "https://caraga.da.gov.ph/wp-content/uploads/Publication/Livestock/cy2022/Giya-sa-Pagpamuhi-ug-Pagpamuhunan-sa-Baka.pdf"
+  - title: "DA RFO 3: Pag-aalaga ng Baka (Backyard Cattle Fattening)"
+    url: "https://rfo3.da.gov.ph/wp-content/uploads/elibrary/km/Baka.pdf"
+  - title: "Edge Davao: Fattening cattle for profit (2016)"
+    url: "https://edgedavao.net/agri-trends/2016/02/fattening-cattle-for-profit"
+  - title: "Agriculture magazine: Supak system for cattle (August 2018, via PressReader)"
     url: "https://www.pressreader.com/philippines/agriculture-9ggr/20180801/281547996695140"
 ---
 
-Grass is plentiful in the rainy season and scarce when tag-init comes. A review of ruminant feeds in the Philippines says feed is adequate during the rains but gets scarce once the dry months arrive, mostly in quality. Raisers who wait until the grass turns brown to think about feed are already late, so this guide is about planning ahead.
+Grass is plentiful in the rainy season and scarce when tag-init comes. A PCARRD review of ruminant feeding in the Philippines, by Argañosa and Bato, says feed is relatively adequate during the rains but becomes scarce once the dry season sets in, especially in quality. Raisers who wait until the grass turns brown to think about feed are already late, so this guide is about planning ahead.
 
 ## Know your gap
 
-Start with a simple count. How many animals do you have, how much do they weigh, and how many months does your own grass stay green? An animal eats a daily amount of dry matter that is a few percent of its body weight. Your MAO or a DA livestock technician can help you work out the number for your herd, since it depends on the animal and the feed.
+Start with a simple count. How many animals do you have, how much do they weigh, and how many months does your own grass stay green? The DA fattening guides put daily dry matter intake at about 2.5 to 3% of body weight, so a 250 kg animal eats roughly 6 to 7.5 kg of dry matter a day. Fresh grass is mostly water, so that means a lot more grass by weight. Your MAO or a DA livestock technician can help you work out the number for your herd, since it depends on the animal and the feed.
 
 Then walk your pasture and your cut-and-carry plot in the second half of the rainy season and ask a plain question: if the rain stopped today, how long would this last? Write the answer down. That is your gap.
 
@@ -33,16 +39,17 @@ The cheapest dry-season feed is the surplus you save during the wet months.
 - Hay. Cut grass and dry it in the sun. In the Philippines the rainy weather makes this hard, so hay works best if you can cut at the start of the dry weather, when the sun is reliable.
 - More forage planted early. Napier, Guinea grass and legumes need time to establish. If you plant them at the start of the rains, they are ready to cut by the dry months. The forage planting guide has details.
 
-Note that a large Sarangani feedlot described in the FAO material makes maize silage its main ration, with storage times shorter in the dry season because animals eat it faster. That is a commercial operation. A smallholder can do the same idea in a smaller pit or bags.
+A paper from Sarangani Agricultural Company, presented at an FAO meeting, shows how a large farm does this. Its maize silage was stored 90 to 100 days in the rainy season, but in a severe drought it was sometimes used up within 18 days, and the farm had to buy green-chopped maize to cover the shortage. That is a commercial operation. A smallholder can do the same idea in a smaller pit or bags.
 
 ## Use crop residues
 
 Crop residues are available just when pasture fails, and they are cheap or free.
 
-- Rice straw (*dayami*). The most studied residue because there is so much of it. FAO and Ilocos Norte research describe it as coarse and low in quality, so cattle eat little of it when it is fed alone. It works better when mixed with green forage, a legume or a supplement. Treating it with urea has been studied, but urea can kill cattle if misused, so get training from your MAO or ATI first.
-- Corn stover and corn husks. Common in corn areas. Chop them to make them easier to eat.
-- Sugarcane tops, copra meal and rice bran. Several sources list these as farm by-products used by smallholders. Prices and availability change with the season, so ask around.
-- Rice fields after harvest. In many areas, paddies become communal grazing after harvest. One source says this lasts only about 75 days in irrigated fields. Ask your barangay and your neighbors before you rely on it.
+- Rice straw (*dayami*). The PCARRD review calls it the most studied residue because there is so much of it. A Mariano Marcos State University study in Ilocos Norte describes it as poor-quality roughage, coarse when dry, with very low intake when fed as it is. DA Caraga puts its protein at only 3 to 4% and says chopped straw can make up to 40% of a fattening ration. It works better when mixed with green forage, a legume or a supplement. Treating it with urea has been studied and looked promising in the PCARRD review, but urea can kill cattle if misused, so get training from your MAO or ATI first.
+- Corn stover and corn cobs. Common in corn areas. Chop or grind them to make them easier to eat. The PCARRD review cites a study where corn stover made up as much as 60% of a fattening ration, and DA Caraga says ground corn cobs can be up to 45%.
+- Sugarcane tops. The PCARRD review lists ensiled sugarcane tops among the by-products tested for cattle.
+- Copra meal and rice bran (*darak*). The DA guides use these two as the base of a simple concentrate mix. Prices and availability change with the season, so ask around.
+- Rice fields after harvest. In many areas, cattle graze the stubble after harvest. How long it lasts depends on when the next crop goes in, so ask your barangay and your neighbors before you rely on it.
 
 Residues alone will not make a fattener gain. Think of them as bulk to keep the rumen working. Animals still need protein and minerals, and that is where leaves from ipil-ipil and other fodder trees, legumes or a small amount of concentrate come in. Ask your livestock technician what is safe to feed in your area.
 
@@ -59,7 +66,7 @@ This is the time to check your records. If you keep weights and costs (see the r
 
 ## Supak and forced feeding
 
-Some Batangas raisers use a forced-feeding method called *supak* to keep fattening on schedule during dry or El Niño conditions. The article describing it says it is labor-intensive and suits only trained and tame animals, and that the raiser needs knowledge of deworming and parasite control. It also takes time and skill, so learn from an experienced raiser or the Provincial Veterinary Office before you try it.
+Batangas raisers are known for a forced-feeding method called *supak*. An Edge Davao article describes it as chopped and pounded fresh ipil-ipil leaves mixed with water and a little salt, given on top of the regular roughage, and the DA guides credit it for the name Batangas beef. A 2018 article in Agriculture magazine describes supak as a way to keep fattening on schedule during dry spells and El Niño, but notes that it is labor-intensive and suits only trained and tame animals. Done wrong, forcing feed into an animal can hurt it, so learn from an experienced raiser or ask the Provincial Veterinary Office before you try it.
 
 ## Water comes first
 

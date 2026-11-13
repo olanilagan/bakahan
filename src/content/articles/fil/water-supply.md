@@ -7,6 +7,10 @@ publishDate: 2027-01-01
 updated: 2027-01-01
 readingMinutes: 6
 sources:
+  - title: "DA RFO 3: Pag-aalaga ng Baka (Backyard Cattle Fattening)"
+    url: "https://rfo3.da.gov.ph/wp-content/uploads/elibrary/km/Baka.pdf"
+  - title: "Teagasc: Water requirements for beef cattle (2022)"
+    url: "https://teagasc.ie/news--events/daily/water-requirements-for-beef-cattle/"
   - title: "University of Georgia Extension: Water Requirements and Quality Issues for Cattle (SB56)"
     url: "https://fieldreport.caes.uga.edu/publications/SB56/water-requirements-and-quality-issues-for-cattle/"
   - title: "Mississippi State University Extension: Water for beef cattle (P2490)"
@@ -21,30 +25,30 @@ Madalas nating isipin ang damo at feeds, pero bihirang isipin ang tubig. Kapag k
 
 ## Gaano karami ang iniinom nila
 
-Walang iisang numero, dahil depende ito sa timbang, sa init, sa pakain, at kung buntis o nagpapadede ang inahin. Galing sa ibang bansa ang mga numero sa ibaba, kaya gamitin lang na gabay.
+Walang iisang numero, dahil depende ito sa timbang, sa init, sa pakain, at kung buntis o nagpapadede ang inahin. Simple ang sabi ng gabay sa pagpapataba ng DA Region 3: depende ang inom ng baka sa temperatura at sa kung basa o tuyo ang kinakain niya, at mas napapainom siya kapag may asin ang pakain. Wala kaming nakitang talaan sa Pilipinas ng ilang litro kada araw, kaya galing sa ibang bansa ang mga numero sa ibaba. Gamitin lang na gabay.
 
-Sabi ng Colorado State Extension, mga 2 galon kada 100 pounds ng timbang kapag lampas 90°F (mga 32°C) ang init. Mga 17 litro iyon kada 100 kg. Ayon naman sa Teagasc ng Ireland, hanggang mga 15 litro kada 100 kg ang puwedeng inumin ng baka kapag mainit. Kaya ang 300 kg na baka sa mainit na araw ay puwedeng uminom ng 45 litro o higit pa.
+Sabi ng Colorado State Extension, na kumuha nito sa University of Georgia, 2 galon kada 100 pounds ng timbang kapag lampas 90°F (mga 32°C) ang init. Mga 17 litro iyon kada 100 kg. Ayon naman sa Teagasc, ang ahensya ng pagsasaka sa Ireland, hanggang 15 litro kada 100 kg ang puwedeng inumin ng baka sa isang araw, at puwede pa itong tumaas nang malaki kapag mainit. Kaya ang 300 kg na baka sa mainit na araw ay puwedeng uminom ng 45 hanggang 50 litro o higit pa.
 
 Ayon sa Mississippi State Extension, gamit ang mga talahanayan mula sa US, mga 5.8 galon isang araw ang kailangan ng 400 pound na guya sa 70°F, at mga 9.5 galon sa 90°F. Sa litro, mga 22 na umaabot sa mga 36 para sa guyang mga 180 kg. Iisa ang aral: habang umiinit, dumadami ang kailangang tubig, at mas mabilis ang dagdag kaysa inaakala ng karamihan.
 
-May epekto rin ang pakain. Mas malakas uminom ang baka na tuyo ang kinakain gaya ng dayami o hay kaysa sa kumakain ng sariwang damo, na halos tubig na rin. Malakas din uminom ang mga pinapataba sa maraming concentrate.
+May epekto rin ang pakain. Mas malakas uminom ang baka na tuyo ang kinakain gaya ng dayami o hay kaysa sa kumakain ng sariwang damo. Ayon sa University of Georgia, mga 75% tubig ang malagong damo, pero mga 10% lang ang hay. Malakas din uminom ang mga pinapataba sa maraming concentrate.
 
 ## Bakit nakakaapekto sa timbang
 
-Kapag kulang ang tubig, bumababa ang kain, at bumababa rin ang dagdag na timbang. Kung nawalan ng ilang linggong gain ang isang fattener dahil naubusan ng tubig ang labangan, may nawalang pera sa iyo kahit walang nakapansin.
+Kapag kulang ang tubig, bumababa ang kain, at bumababa rin ang dagdag na timbang. Binanggit ng North Dakota State University ang mga pag-aaral sa Canada na nagpapakitang nakatali sa kalidad ng tubig ang dami ng damong kinakain ng baka, at mas bumigat ang mga guya at yearling na binigyan ng mas malinis na tubig. Kung nawalan ng ilang linggong gain ang isang fattener dahil naubusan ng tubig ang labangan, may nawalang pera sa iyo kahit walang nakapansin.
 
-Mas lumalala pa ito sa init. Sa mga buwang mainit bago dumating ang ulan, tingnan ang labangan nang higit sa isang beses sa isang araw. (May hiwalay kaming gabay tungkol sa heat stress.)
+Mas lumalala pa ito sa init. Sabi rin ng NDSU, puwedeng dumoble ang kailangang tubig kapag mainit. Sa mga buwang mainit bago dumating ang ulan, tingnan ang labangan nang higit sa isang beses sa isang araw. (May hiwalay kaming gabay tungkol sa heat stress.)
 
 ## Tingnan ang kalidad
 
-Hindi lang malinaw na tubig ang malinis na tubig. Ayon sa University of Georgia, ang total dissolved solids (TDS, sukat ng asin sa tubig) na mas mababa sa 3,000 ppm ay hindi nakakabawas sa gain o sa kain, pero ang lampas 5,000 ppm ay hindi dapat ipainom sa baka. Numero iyan sa US, pero totoo rin dito na problema ang maalat na tubig.
+Hindi lang malinaw na tubig ang malinis na tubig. Ayon sa University of Georgia, ang total dissolved solids (TDS, sukat ng asin sa tubig) na mas mababa sa 3,000 ppm ay hindi nakakabawas sa gain o sa kain, na may mga pag-aaral na nag-uugnay sa 4,000 hanggang 5,000 ppm sa mas mabagal na paglaki, at na ang lampas 5,000 ppm ay hindi dapat ipainom sa baka. Numero iyan sa US, pero totoo rin dito na problema ang maalat na tubig.
 
-Kung malapit sa dagat ang poso ninyo, o parang maalat ang lasa, huwag manghula. Magtanong sa MAO o sa pinakamalapit na state university o laboratoryo ng DA kung paano ipasuri ang tubig.
+Kung malapit sa dagat ang poso ninyo, o parang maalat ang lasa, huwag manghula. Magtanong sa MAO kung saan puwedeng ipasuri ang tubig sa probinsya ninyo.
 
 Iba pang dapat bantayan:
 
-- Lumot at lagkit. Puwedeng makasama ang berdeng lumot sa poso o labangan. Ang blue-green algae ay nakakalason sa hayop, lalo na sa mainit at hindi gumagalaw na tubig, kaya magtanong sa beterinaryo bago hayaang uminom ang baka sa berdeng sapa.
-- Dumi at putik. Kapag nakatayo ang baka sa tubig na iniinom niya, nadudumihan ito ng dumi at kumakalat ang parasite at sakit. May kaugnayan sa basa at lubog na lugar ang liver fluke, kaya ilayo ang baka sa nakatiwangwang na tubig.
+- Lumot at lagkit. Puwedeng makasama ang berdeng lumot sa pond o labangan. Paliwanag ng UGA, bacteria talaga ang blue-green algae at puwede itong gumawa ng lason na nakamamatay sa baka, kadalasan pagkatapos ng biglang pagdami nito kapag mainit. Magtanong sa beterinaryo bago hayaang uminom ang baka sa berdeng pond.
+- Dumi at putik. Kapag nakatayo ang baka sa tubig na iniinom niya, nadudumihan ito ng dumi at kumakalat ang parasite at sakit. Kumakalat ang liver fluke sa pamamagitan ng maliliit na suso na nakatira sa basa at lubog na lupa at sa palayan, kaya ilayo ang baka sa tubig na hindi umaagos.
 - Kemikal. Ang tubig na galing sa lugar na may pinag-spray, abono o pond na may kemikal ay puwedeng may residue. Huwag ipainom sa baka.
 - Mainit na tubig. Ayon sa UGA, umiinit sa araw ang mababaw na pond at maliliit na labangan, at mas kaunti ang inom ng baka sa maligamgam na tubig. Ilagay ang labangan sa lilim.
 
@@ -54,7 +58,7 @@ Hindi kailangang magarbo. Ito ang epektibo:
 
 - Labangan na sapat ang laki para dalawang baka ang sabay makainom nang hindi nag-aaway. Tinataboy ng mas malakas ang iba sa maliit na labangan.
 - Nasa ilalim ng bubong o puno, malayo sa pakainan, para hindi malagyan ng pakain at dumi.
-- May mataas na gilid o semento sa paligid para hindi maging putikan.
+- May mataas na gilid o sementadong sahig sa paligid para hindi maging putikan. Ito ang payo ng Mississippi State Extension para mabawasan ang lubak at putik.
 - Float valve o drum na may hose kung may linya ka ng tubig, para steady ang lebel nang hindi nagbubuhat palagi.
 - May tapunan para madaling ubusin at kuskusin.
 
@@ -74,7 +78,7 @@ Huwag mag-iwan ng urea, abono o kemikal kung saan puwedeng mahalo sa iniinom ng 
 
 ## Buod
 
-- Sa mainit na araw, puwedeng umabot sa 15 hanggang 17 litro kada 100 kg ang kailangan ng baka ayon sa mga extension sa ibang bansa, kaya tingnan ang labangan nang dalawang beses isang araw.
+- Ayon sa isang panukat sa US, mga 17 litro kada 100 kg ng timbang ang kailangan ng baka sa mainit na araw, kaya tingnan ang labangan nang dalawang beses man lang isang araw.
 - Kapag kulang ang tubig, kumukonti ang kain at ang dagdag na timbang.
 - Nagpapasakit ang maalat, may lumot o may dumi na tubig. Ipasuri ang kahina-hinala.
 - Gumamit ng malinis na labangan sa lilim na kasya ang ilang baka.
