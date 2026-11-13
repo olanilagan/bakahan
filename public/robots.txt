@@ -1,5 +1,7 @@
 # Search engines may index the public pages; member-only pages are excluded.
 User-agent: *
+# Per-visitor page fragments (login menu, latest listings); nothing to index.
+Disallow: /_server-islands/
 Disallow: /en/account/
 Disallow: /fil/account/
 Disallow: /en/admin/
